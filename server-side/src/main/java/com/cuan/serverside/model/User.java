@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_pelanggan")
-    private Long idPelanggan;
+    @Column(name = "userId")
+    private Long userId;
 
     //this is commment
 }
