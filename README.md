@@ -5,17 +5,25 @@
 
 
 # Mobile-Side
+
 For use stack navigation, install
+
 ```
 @react-navigation/native
 ```
+
 and
+
 ```
 @react-navigation/native-stack
 ```
-# Website-Side
+
 i install this library because This library provides native components for gesture handling in React Native applications, improving the performance and responsiveness of touch interactions such as swiping, pinching, and rotating.
+
 ```
 px expo install react-native-gesture-handler
 ```
+
+# Website-Side
+
 
