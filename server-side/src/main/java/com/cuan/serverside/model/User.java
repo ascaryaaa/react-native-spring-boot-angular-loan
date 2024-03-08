@@ -14,4 +14,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_pelanggan")
     private Long idPelanggan;
+
+    //this is commment
 }
