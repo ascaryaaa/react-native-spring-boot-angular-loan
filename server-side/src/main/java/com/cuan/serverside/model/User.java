@@ -15,5 +15,11 @@ public class User {
     @Column(name = "userId")
     private Long userId;
 
+    @Column
+    private String namaUser;
+
+    @Column
+    private String nikUser;
+
     //this is commment
 }
