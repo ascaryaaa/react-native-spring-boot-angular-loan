@@ -148,16 +148,14 @@ To enable navigation between different components in your Angular application, y
 
 In your app.component.ts, ensure you import necessary modules:
 
-```
+```ruby
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Router } from '@angular/router';
-//
-
 imports: [RouterOutlet, RouterModule, CommonModule],
-//
+
 export class AppComponent {
-//
+
   constructor(private router: Router) {}
   
   goHome() {
@@ -173,10 +171,9 @@ export class AppComponent {
 
 In your app.routes.ts, define the routes for your application:
 
-```
+```ruby
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-//
     { path: 'login', component: LoginComponent },
     { path: 'home', component: HomeComponent },
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -186,7 +183,7 @@ import { HomeComponent } from './home/home.component';
 
 In your app.component.html, implement navigation using router links:
 
-```
+```ruby
 <nav>
   <button (click)="goHome()">Go to Home</button>
   <button (click)="goLogin()">Go to Login</button>
