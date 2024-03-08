@@ -2,15 +2,16 @@ package com.cuan.serverside.service;
 
 import com.cuan.serverside.model.User;
 
+// Service Layer pattern
+// Service Interface of User
+// To Promote Modularity And Testability
 public interface UserService {
     // Define GET users function in service
-    Iterable<User> getUsers();
+    public Iterable<User> getAllUser();
 
     // Define GET users by id in service
-    User getUserById(Long id);
+    public User getUserId(Long id);
 
-    // Define GET users by name in service
-    User getUserByName(String name);
-
-    User insertUser(User user);
+    // Define POST user in service
+    public User saveUser(User user);
 }
