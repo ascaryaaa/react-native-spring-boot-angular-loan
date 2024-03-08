@@ -19,7 +19,7 @@ public class UserController {
     }
 
     // GET Function of API, Reads data from 'pengajuan' database
-    @GetMapping
+    @GetMapping("/getUsers")
     public Iterable<User> getAllUser(){
         return userService.getAllUser();
     }
@@ -31,7 +31,7 @@ public class UserController {
     }
 
     // POST Function of API, Creates data into 'pengajuan' database
-    @PostMapping
+    @PostMapping("/postUser")
     public User saveUser(@RequestBody User user){
         return userService.saveUser(user);
     }
