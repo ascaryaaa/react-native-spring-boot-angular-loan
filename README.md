@@ -123,6 +123,7 @@ public class User {
 3. Define the repository
    This is used to store and make functions of the databse
 
+
 ```ruby
 import com.cuan.serverside.model.User;
 import org.springframework.data.repository.CrudRepository;
@@ -132,6 +133,60 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
 
+}
+```
+
+4. Define the interface of service and implementations
+
+   Interface of service, this is esnure Service Layer Patter and promotes modularity and testability
+```ruby
+import com.cuan.serverside.model.User;
+
+public interface UserService {
+    // Define GET users function in service
+    public Iterable<User> getAllUser();
+
+    // Define GET users by id in service
+    public User getUserId(Long id);
+
+    // Define POST user in service
+    public User saveUser(User user);
+
+}
+```
+
+   This is the implementations of interface, we override the fucntions here 
+```ruby
+import com.cuan.serverside.model.User;
+import com.cuan.serverside.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service // Define Service Implementation
+public class UserServiceImpl implements UserService {
+
+    // Dependency Injection to prevent coupling
+    @Autowired
+    private UserRepository userRepository;
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    // Function overriding from interface
+    @Override
+    public Iterable<User> getAllUser(){
+        return userRepository.findAll();
+    }
+
+    @Override
+    public User getUserId(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public User saveUser(User user) {
+        return userRepository.save(user);
+    }
 }
 ```
 
