@@ -68,6 +68,20 @@ Finally, push the merged changes to the remote main branch, completing the integ
 git push -u origin main
 ```
 
+### 4. Before working again!/Sebelum ngerjain lagi
+
+navigate again to your branch
+
+```
+git checkout <your branch name>
+```
+
+git pull!, make sure your branch is up to date to the main!
+
+```
+git pull origin main
+```
+
 
 #  Server-Side
 1. Initialize Spring-Boot
