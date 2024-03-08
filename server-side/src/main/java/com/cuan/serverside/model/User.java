@@ -16,13 +16,13 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_user", updatable = false, nullable = false) // Can't be updated or null
-    private Long idUser;
+    private Long id_user;
 
     // User's full name
     @Column(name = "name_user")
-    private String namaUser;
+    private String name_user;
 
     // User's nik number
     @Column(name = "nik_user")
-    private String nikUser;
+    private String nik_user;
 }
