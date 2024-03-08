@@ -26,4 +26,28 @@ px expo install react-native-gesture-handler
 
 # Website-Side
 
+### Reminder
+
+Make sure to setup the `ng` by:
+- installing:
+
+```
+npm install -g @angular/cli
+```
+
+- Then setup the path to the Enviorment Variables.
+
+References: https://stackoverflow.com/questions/37991556/ng-is-not-recognized-as-an-internal-or-external-command
+
+### Step by step
+
+1. Create Login and Dashboard Component
+
+```
+ng generate component login
+ng generate component home
+```
+
+2. 
+
 
