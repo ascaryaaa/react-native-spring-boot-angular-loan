@@ -1,12 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SandboxService } from './sandbox.service';
 
 @Component({
   selector: 'app-sandbox',
-  standalone: true,
-  imports: [],
   templateUrl: './sandbox.component.html',
-  styleUrl: './sandbox.component.css'
+  styleUrls: ['./sandbox.component.css'],
 })
-export class SANDBOXComponent {
+export class SandboxComponent implements OnInit {
+  users: any[] = [];
 
+  constructor(private sandboxService: SandboxService) {}
+
+  ngOnInit(): void {
+    this.sandboxService.getUsers().subscribe({
+      next: (data) => {
+        this.users = data;
+      },
+      error: (error) => console.error('There was an error!', error),
+    });
+  }
 }

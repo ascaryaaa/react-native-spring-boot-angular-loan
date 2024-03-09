@@ -20,4 +20,7 @@ export class AppComponent {
   goLogin() {
     this.router.navigate(['/login']);
   }
+  goSandbox() {
+    this.router.navigate(['/sandbox']);
+  }
 }
