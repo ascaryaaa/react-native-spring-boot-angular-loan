@@ -120,9 +120,22 @@ For instance, if the initial URL is:
 http://localhost:8081/loan/v1/user/postUser
 ```
 
-You would modify it to:
+You would modify it to your ip address connection:
+
 ```
 http://192.168.234.54:8081/loan/v1/user/getUsers
+```
+
+For easier changing the connection ip address in the url for the mobile-side, you can go to `utils/Constant.js` and change the `CONNECTION`, for example:
+
+```
+const CONNECTION = 'localhost';
+```
+
+You would modify it to your ip address connection:
+
+```
+const CONNECTION = '192.168.234.54';
 ```
 
 #### Read user by name / Membaca user dari nama
