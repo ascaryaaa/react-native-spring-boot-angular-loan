@@ -7,6 +7,11 @@ import Login from './src/screens/Login';
 import DataDebitur from './src/screens/DataDebitur';
 import SimulasiPinjaman from './src/screens/SimulasiPinjaman';
 import SANDBOX from './src/screens/SANDBOX';
+import DigitalLoan from './src/screens/DigitalLoan';
+import PengajuanPinjaman from './src/screens/PengajuanPinjaman';
+import DataPemohon from './src/screens/DataPemohon';
+import ProfileKeuangan from './src/screens/ProfileKeuangan';
+import SyaratKetentuan from './src/screens/SyaratKetentuan';
 
 const Stack = createStackNavigator();
 
@@ -14,15 +19,15 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator 
-        initialRouteName='SANDBOX'
+        initialRouteName='Login'
       >
         <Stack.Screen name="Home" 
           component={Home}
           options={{ 
-            headerTintColor: 'white',
+            headerTintColor: 'black',
             headerShown: false,
             headerStyle: {
-              backgroundColor: '#39B54A',
+              backgroundColor: '#FFFFFF',
               shadowOpacity: 0,
               elevation: 0,
             }
@@ -31,20 +36,20 @@ export default function App() {
         <Stack.Screen name="Login" 
           component={Login}  
           options={{ 
-            headerTintColor: 'white',
+            headerTintColor: 'black',
             headerStyle: {
-              backgroundColor: '#39B54A',
+              backgroundColor: '#FFFFFF',
               shadowOpacity: 0,
               elevation: 0,
-            }
+            },
           }}  
         />
         <Stack.Screen name="SimulasiPinjaman" 
           component={SimulasiPinjaman}  
           options={{ 
-            headerTintColor: 'white',
+            headerTintColor: 'black',
             headerStyle: {
-              backgroundColor: '#39B54A',
+              backgroundColor: '#FFFFFF',
               shadowOpacity: 0,
               elevation: 0,
             }
@@ -53,9 +58,9 @@ export default function App() {
         <Stack.Screen name="DataDebitur" 
           component={DataDebitur}  
           options={{ 
-            headerTintColor: 'white',
+            headerTintColor: 'black',
             headerStyle: {
-              backgroundColor: '#39B54A',
+              backgroundColor: '#FFFFFF',
               shadowOpacity: 0,
               elevation: 0,
             }
@@ -64,12 +69,68 @@ export default function App() {
         <Stack.Screen name="SANDBOX" 
           component={SANDBOX}  
           options={{ 
-            headerTintColor: 'white',
+            headerTintColor: 'black',
             headerStyle: {
-              backgroundColor: '#39B54A',
+              backgroundColor: '#FFFFFF',
               shadowOpacity: 0,
               elevation: 0,
             }
+          }}  
+        />
+        <Stack.Screen name="DigitalLoan" 
+          component={DigitalLoan}
+          options={{ 
+            headerTintColor: 'black',
+            headerShown: false,
+            headerStyle: {
+              backgroundColor: '#FFFFFF',
+              shadowOpacity: 0,
+              elevation: 0,
+            }
+          }}  
+        />
+        <Stack.Screen name="PengajuanPinjaman" 
+          component={PengajuanPinjaman}  
+          options={{ 
+            headerTintColor: 'black',
+            headerStyle: {
+              backgroundColor: '#FFFFFF',
+              shadowOpacity: 0,
+              elevation: 0,
+            },
+          }}  
+        />
+        <Stack.Screen name="DataPemohon" 
+          component={DataPemohon}  
+          options={{ 
+            headerTintColor: 'black',
+            headerStyle: {
+              backgroundColor: '#FFFFFF',
+              shadowOpacity: 0,
+              elevation: 0,
+            },
+          }}  
+        />
+        <Stack.Screen name="ProfileKeuangan" 
+          component={ProfileKeuangan}  
+          options={{ 
+            headerTintColor: 'black',
+            headerStyle: {
+              backgroundColor: '#FFFFFF',
+              shadowOpacity: 0,
+              elevation: 0,
+            },
+          }}  
+        />
+        <Stack.Screen name="SyaratKetentuan" 
+          component={SyaratKetentuan}  
+          options={{ 
+            headerTintColor: 'black',
+            headerStyle: {
+              backgroundColor: '#FFFFFF',
+              shadowOpacity: 0,
+              elevation: 0,
+            },
           }}  
         />
       </Stack.Navigator>
