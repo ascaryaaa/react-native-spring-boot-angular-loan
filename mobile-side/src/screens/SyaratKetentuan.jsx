@@ -1,17 +1,17 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
-const Login = ({navigation}) => {
+const SyaratKetentuan = ({navigation}) => {
     return (
       <View style={styles.container}>
-        <Text>Login</Text>
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('DigitalLoan')}>
-                <Text>Login</Text>
-            </TouchableOpacity>
+        <Text>SyaratKetentuan</Text>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('DigitalLoan')}>
+            <Text>Selanjutnya</Text>
+          </TouchableOpacity>
       </View>
     );
 };
-export default Login;
+export default SyaratKetentuan;
 
 const styles = StyleSheet.create({
 container: {
