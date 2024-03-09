@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import Constant from '../utils/Constant';
 
 const SANDBOX = () => {
   const [data, setData] = useState([]);
-  const url = 'http://192.168.234.54:8081/loan/v1/user/getUsers';
 
   const fetchInfo = async () => {
     try {
-      const response = await fetch(url);
+      const response = await fetch(Constant.getUsers);
       const jsonData = await response.json();
       setData(jsonData);
     } catch (error) {
