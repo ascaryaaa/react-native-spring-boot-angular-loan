@@ -111,6 +111,20 @@ http://localhost:8081/loan/v1/user/{number of user id}
 http://localhost:8081/loan/v1/user/2
 ```
 
+### Establishing Connection between Endpoint and External Devices
+
+When you're trying to link up the API endpoint from server-side with other devices such as mobile app, it's really important to make sure all the devices involved use the same connection. To do that, you just have to change the URL from `localhost` to the connection ip address `IP address`.
+
+For instance, if the initial URL is:
+```
+http://localhost:8081/loan/v1/user/postUser
+```
+
+You would modify it to:
+```
+http://192.168.234.54:8081/loan/v1/user/getUsers
+```
+
 #### Read user by name / Membaca user dari nama
 coming soon
 
