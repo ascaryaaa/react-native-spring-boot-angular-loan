@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput} from 'react-native';
 
 const ProfileKeuangan = ({navigation}) => {
+
   const [inputData, setInputData] = useState({
     penjualan: " ", 
     labaBersih: " ", 
     piutang: " ", 
     persediaan: " ",
   });
-
 
   return (
     <View style={styles.container}>
@@ -54,10 +54,10 @@ export default ProfileKeuangan;
 
 const styles = StyleSheet.create({
 container: {
-    flex: 1,
-    top: 30,
+    flex:1,
+    top: 20,
     // justifyContent: 'center',
-    // alignItems: 'center',
+    // alignItems: 'center'
 },
 button: {
     backgroundColor:'lightgrey',
