@@ -37,6 +37,10 @@ export class SandboxComponent implements OnInit{
 
   //ngOnInit -> kalau component nya first time dimount, function ngOnInit bakal dirun
   async ngOnInit(){
+    this.refreshUserList()
+  }
+
+  async refreshUserList(){
     try {
       this.users = await this.fetchUserDataAsync(this.apiUrl);
       console.log(this.users); // Process your users here
