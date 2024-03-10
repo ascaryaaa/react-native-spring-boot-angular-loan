@@ -15,7 +15,7 @@ const SyaratKetentuan = ({navigation}) => {
         <Text>e. Memberikan secara terbatas dan/atau tidak terbatas data yang telah saya sampaikan dalam pengajuan ini kepada pihak ketiga dalam rangka kepentingan pemrosesan pengajuan pinjaman</Text>
         <Text>3. Saya memahami dan mengerti bahwa Bank tidak berkewajiban untuk memberikan fasilitas kredit kepada saya hingga saya memenuhi semua persyaratan yang berlaku pada Bank dan telah menandatangani dokumen yang diperlukan Bank dalam pemberian kredit.</Text>
         <Text>4. Apabila ternyata data dan informasi, serta pernyataan yang saya berikan/buat tidak sesuai dengan keadaan yang sebenarnya, maka segala risiko dan konsekuensi yang diakibatkannya menjadi sepenuhnya tanggung jawab saya.</Text>
-          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('DigitalLoan')}>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('DataDebitur')}>
             <Text>Selanjutnya</Text>
           </TouchableOpacity>
       </View>
