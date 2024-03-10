@@ -12,22 +12,26 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
     public UserServiceImpl(UserRepository userRepository) {
+
         this.userRepository = userRepository;
     }
 
     // Function overriding from interface
     @Override
     public Iterable<User> getAllUser(){
+
         return userRepository.findAll();
     }
 
     @Override
     public User getUserId(Long id) {
+
         return userRepository.findById(id).orElse(null);
     }
 
     @Override
     public User saveUser(User user) {
+
         return userRepository.save(user);
     }
 }
