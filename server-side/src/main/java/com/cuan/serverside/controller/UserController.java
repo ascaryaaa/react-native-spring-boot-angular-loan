@@ -37,4 +37,11 @@ public class UserController {
         return userService.saveUser(user);
     }
 
+    // New endpoint to find user by name
+    @GetMapping("/findByName/{name}")
+    public User findUserByName(@PathVariable String name) {
+        return userService.findUserByName(name)
+                .orElseThrow(() -> new RuntimeException("User not found with name: " + name));
+    }
+
 }

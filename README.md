@@ -247,6 +247,27 @@ public class UserServiceImpl implements UserService {
 }
 ```
 
+5. Overcoming CORS Issues
+
+CORS (Cross-Origin Resource Sharing) is a security measure implemented in web browsers to prevent requests to a server from scripts hosted on a different origin. This is relevant when you're developing applications locally, for example, where your frontend (running on localhost:4200) attempts to fetch data from your backend (running on localhost:8081). Without proper handling, CORS policies block such requests for security reasons, to prevent malicious scripts from accessing sensitive information on another domain.
+
+To enable cross-origin requests in a Spring Boot application, you can use the `@CrossOrigin` annotation in your `controller`. This annotation allows you to specify which origins are permitted to access your backend. For development purposes, you might want to allow requests from your frontend development server.
+
+Here's how you can apply it:
+
+```
+    @CrossOrigin(origins = "http://localhost:<port>")
+```
+
+Replace <port> with the port number your frontend is running on. For instance, if your frontend is on port 4200, the annotation should look like this:
+
+```
+    @CrossOrigin(origins = "http://localhost:4200")
+```
+
+This configuration explicitly allows cross-origin requests from localhost:4200, facilitating the communication between your frontend and backend during development.
+
+
 # Mobile-Side
 
 For use stack navigation, install

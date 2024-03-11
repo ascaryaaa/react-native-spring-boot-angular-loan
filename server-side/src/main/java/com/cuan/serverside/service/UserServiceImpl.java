@@ -5,6 +5,8 @@ import com.cuan.serverside.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service // Define Service Implementation
 public class UserServiceImpl implements UserService {
 
@@ -33,5 +35,10 @@ public class UserServiceImpl implements UserService {
     public User saveUser(User user) {
 
         return userRepository.save(user);
+    }
+
+    @Override
+    public Optional<User> findUserByName(String name) {
+        return userRepository.findByNameUser(name);
     }
 }
