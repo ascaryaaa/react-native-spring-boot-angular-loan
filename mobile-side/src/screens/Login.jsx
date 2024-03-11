@@ -1,10 +1,14 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
 const Login = ({navigation}) => {
+    
     return (
       <View style={styles.container}>
-        <Text>Login</Text>
+        <Image
+        source={require("../../../mobile-side/src/assets/bgawal.png")}
+        style={styles.background}
+      />
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('DigitalLoan')}>
                 <Text>Login</Text>
             </TouchableOpacity>
@@ -14,6 +18,11 @@ const Login = ({navigation}) => {
 export default Login;
 
 const styles = StyleSheet.create({
+    background: {
+        position: "absolute",
+        width: "100%",
+        height:"100%"
+      },
 container: {
     flex:1,
     justifyContent: 'center',
