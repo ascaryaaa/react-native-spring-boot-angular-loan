@@ -12,6 +12,7 @@ import PengajuanPinjaman from './src/screens/PengajuanPinjaman';
 import DataPemohon from './src/screens/DataPemohon';
 import ProfileKeuangan from './src/screens/ProfileKeuangan';
 import SyaratKetentuan from './src/screens/SyaratKetentuan';
+import Riwayat from './src/screens/Riwayat';
 
 const Stack = createStackNavigator();
 
@@ -132,6 +133,17 @@ export default function App() {
               elevation: 0,
             },
           }}  
+        />
+        <Stack.Screen name="Riwayat"
+          component={Riwayat}
+          options={{
+            headerTintColor: 'black',
+            headerStyle: {
+              backgroundColor: "#FFFFFF",
+              shadowOpacity: 0,
+              elevation: 0,
+            },
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>
