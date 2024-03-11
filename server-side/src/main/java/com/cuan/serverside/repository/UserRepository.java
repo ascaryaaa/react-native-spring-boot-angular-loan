@@ -9,5 +9,5 @@ import java.util.Optional;
 // Initialize repository by extending functions to CrudRepository
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
-    public Optional<User> findUserByName(String name);
+    public Optional<User> findByNameUser(String name);
 }
