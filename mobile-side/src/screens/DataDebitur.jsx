@@ -15,7 +15,6 @@ const DataDebitur = () => {
       <View style={styles.table}>
         {viewsData.map(view => (
           <View key={view.id} style={styles.row}>
-            <Text>//</Text>
             <Text style={{flex: 1, textAlign: 'auto'}}>{view.title}</Text>
             <Text style={{flex: 1, textAlign: 'center'}}>:</Text>
             <Text style={{flex: 1, textAlign: 'left'}}>{view.content}</Text>
