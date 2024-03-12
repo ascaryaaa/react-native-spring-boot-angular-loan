@@ -25,4 +25,7 @@ export class AppComponent implements OnInit {
   goLogin() {
     this.router.navigate(['/login']);
   }
+  goSandbox() {
+    this.router.navigate(['/sandbox']);
+  }
 }
