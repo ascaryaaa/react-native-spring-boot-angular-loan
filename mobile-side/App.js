@@ -100,6 +100,7 @@ export default function App() {
           component={PengajuanPinjaman}
           options={{
             headerTintColor: "black",
+            headerShown: false,
             headerStyle: {
               backgroundColor: "#FFFFFF",
               shadowOpacity: 0,

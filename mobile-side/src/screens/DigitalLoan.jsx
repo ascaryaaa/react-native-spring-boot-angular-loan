@@ -2,7 +2,17 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, FlatList} from 'react-native';
 
 const DigitalLoan = ({navigation}) => {
-    
+
+  const list = [
+    require('../../../mobile-side/src/assets/bannertest.png'),
+    require('../../../mobile-side/src/assets/image_kejutan2.png'),
+]
+const renderItem = ({ item }) => (
+    <Image
+        style={styles.bannerImage}
+        source={item}
+    />
+);
 
     return (
       <View style={styles.container}>
@@ -12,7 +22,7 @@ const DigitalLoan = ({navigation}) => {
                 
         <Image
         source={require("../../../mobile-side/src/assets/Icon_leftarrow.png")}
-        onPress={() => navigation.navigate('Login')}
+       
       />
             </TouchableOpacity>
       <Text>Digital Loan</Text>
@@ -41,18 +51,14 @@ const DigitalLoan = ({navigation}) => {
 {/* container bawah */}
         <View style = {styles.containerBawah}>
         <Text style = {styles.kejutan}>Kejutan Bulan ini</Text>
-        {/* <ScrollView horizontal = {true}>
-        <FlatList>
-        data= {data}
-      renderItem={renderItem}
-      keyExtractor={(item) => item.id}
+        <ScrollView horizontal={true} >
+        <FlatList
+            data={list} 
+            numColumns={2}
+            renderItem={renderItem}>
         </FlatList>
-        </ScrollView> */}
-
+        </ScrollView>
         </View>
-
-
-
       </View>
     );}
 export default DigitalLoan;
@@ -63,7 +69,7 @@ container: {
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    marginTop: 40
+    marginTop: 280
 },
 containerTengah:{
     justifyContent: 'center',
@@ -79,6 +85,8 @@ containerBawah:{
     marginTop: 60,
     marginLeft: 30,
     marginRight: 30,
+    padding: 0,
+    paddingTop: -10
 },
 kejutan:{
     fontWeight:'600',
@@ -106,7 +114,8 @@ amico: {
 ajukan: {
     color: 'white',
     textAlign: 'center',
-    paddingTop:5
+    paddingTop:5,
+    fontWeight:'700'
 },
 navbar:{
     flexDirection: "row",
@@ -116,6 +125,7 @@ navbar:{
     verticalAlign: "top",
     paddingLeft: 20,
     paddingRight: 20,
+    height:48
 },
 texttitle:{
     fontSize:18,
@@ -129,13 +139,15 @@ textbody:{
     paddingBottom:25
     
 },
-bannerItem: {
-    marginRight: 10, // Add margin between banners
-  },
   bannerImage: {
-    width: 300,
-    height: 150, // Adjust image dimensions as needed
-    borderRadius: 5,
+    marginTop:15,
+    height: 180,
+        marginHorizontal: 5,
+        borderRadius: 10,
+        width:300,
+        height:110,
+        resizeMode:'cover'
+        
   },
   bannerText: {
     position: 'absolute',
