@@ -2,6 +2,8 @@ package com.cuan.serverside.service;
 
 import com.cuan.serverside.model.User;
 
+import java.util.Optional;
+
 // Service Layer pattern
 // Service Interface of User
 // To Promote Modularity And Testability
@@ -14,4 +16,6 @@ public interface UserService {
 
     // Define POST user in service
     public User saveUser(User user);
+
+    public Optional<User> findUserByName(String name);
 }

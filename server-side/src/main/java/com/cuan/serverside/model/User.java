@@ -20,9 +20,9 @@ public class User {
 
     // User's full name
     @Column(name = "name_user")
-    private String name_user;
+    private String nameUser;
 
     // User's nik number
     @Column(name = "nik_user")
-    private String nik_user;
+    private String nikUser;
 }
