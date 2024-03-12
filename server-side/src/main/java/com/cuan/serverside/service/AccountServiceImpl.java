@@ -6,16 +6,18 @@ import com.cuan.serverside.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service // Define Service Implementation
 public class AccountServiceImpl implements AccountService{
+
+    // Dependency Injection to prevent coupling
     @Autowired
     private AccountRepository accountRepository;
-
     public AccountServiceImpl(AccountRepository accountRepository) {
 
         this.accountRepository = accountRepository;
     }
 
+    // Function overriding from interface
     @Override
     public Iterable<Account> getAllAccount() {
         return accountRepository.findAll();
