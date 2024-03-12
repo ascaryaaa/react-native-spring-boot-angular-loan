@@ -1,6 +1,7 @@
 package com.cuan.serverside.controller;
 
 import com.cuan.serverside.model.JenisPinjaman;
+import com.cuan.serverside.service.AdminService;
 import com.cuan.serverside.service.JenisPinjamanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,10 +13,11 @@ import org.springframework.web.bind.annotation.*;
 public class JenisPinjamanController {
     // Dependency Injection, prevents coupling
     @Autowired
-    private com.cuan.serverside.service.JenisPinjamanService JenisPinjamanService;
-    public JenisPinjamanController(JenisPinjamanService JenisPinjamanService) {
+    private JenisPinjamanService JenisPinjamanService;
+    public JenisPinjamanController(AdminService AdminService) {
         this.JenisPinjamanService = JenisPinjamanService;
     }
+
 
     // GET Function of API, Reads data from 'pengajuan' database
     @CrossOrigin(origins = "http://localhost:4200")
