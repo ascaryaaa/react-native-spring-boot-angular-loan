@@ -16,7 +16,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_user", updatable = false, nullable = false) // Can't be updated or null
-    private Long id_user;
+    private Long idUser;
 
     // User's full name
     @Column(name = "name_user")
