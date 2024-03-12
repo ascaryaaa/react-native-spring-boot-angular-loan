@@ -19,9 +19,9 @@ public class JenisPinjaman {
     @Column(name = "name_jenis_pinjaman")
     private String nameJenisPinjaman;
 
-    @Column(name = "gambar_pinjaman")
-    private String gambarPinjaman;
+    @Column(name = "gambar_jenis_pinjaman")
+    private String gambarJenisPinjaman;
 
-    @Column(name = "icon_pinjaman")
-    private String iconPinjaman;
+    @Column(name = "icon_jenis_pinjaman")
+    private String iconJenisPinjaman;
 }
