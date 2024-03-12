@@ -1,6 +1,8 @@
 package com.cuan.serverside.controller;
 
+import com.cuan.serverside.model.Account;
 import com.cuan.serverside.model.User;
+import com.cuan.serverside.service.AccountService;
 import com.cuan.serverside.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,26 +20,26 @@ public class UserController {
         this.userService = userService;
     }
 
-    // GET Function of API, Reads data from 'pengajuan' database
+    // Endpoint to GET Function of API, Reads data from 'pengajuan' database
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/getUsers")
     public Iterable<User> getAllUser(){
         return userService.getAllUser();
     }
 
-    // GET Function of API, Reads data from 'pengajuan' database by id
+    // Endpoint to GET Function of API, Reads data from 'pengajuan' database by id
     @GetMapping("/{id}")
     public User getUserById(@PathVariable Long id){
         return userService.getUserId(id);
     }
 
-    // POST Function of API, Creates data into 'pengajuan' database
+    // Endpoint to POST Function of API, Creates data into 'pengajuan' database
     @PostMapping("/postUser")
     public User saveUser(@RequestBody User user){
         return userService.saveUser(user);
     }
 
-    // New endpoint to find user by name
+    // Endpoint to GET Function of API, Reads data from 'pengajuan' database by name
     @GetMapping("/findByName/{name}")
     public User findUserByName(@PathVariable String name) {
         return userService.findUserByName(name)

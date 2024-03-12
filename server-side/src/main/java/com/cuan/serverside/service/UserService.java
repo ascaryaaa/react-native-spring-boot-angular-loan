@@ -17,5 +17,6 @@ public interface UserService {
     // Define POST user in service
     public User saveUser(User user);
 
+    // Define GET users by name in service
     public Optional<User> findUserByName(String name);
 }
