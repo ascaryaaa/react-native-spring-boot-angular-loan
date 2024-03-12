@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 12 Mar 2024 pada 10.09
+-- Waktu pembuatan: 12 Mar 2024 pada 10.37
 -- Versi server: 10.4.21-MariaDB
 -- Versi PHP: 8.0.10
 
@@ -79,6 +79,26 @@ INSERT INTO `jenis_pinjaman` (`id_jenis_pinjaman`, `gambar_jenis_pinjaman`, `ico
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `promo`
+--
+
+CREATE TABLE `promo` (
+  `id_promo` bigint(20) NOT NULL,
+  `gambar_promo` varchar(255) DEFAULT NULL,
+  `name_promo` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `promo`
+--
+
+INSERT INTO `promo` (`id_promo`, `gambar_promo`, `name_promo`) VALUES
+(1, 'blob:https://imgur.com/c70d655a-a7d9-47af-a1d0-a2d827d4e307', 'Promo Fleksi 1'),
+(2, 'https://i.imgur.com/yjK6mpi.png', 'Promo Griya 1');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `user`
 --
 
@@ -124,6 +144,12 @@ ALTER TABLE `jenis_pinjaman`
   ADD PRIMARY KEY (`id_jenis_pinjaman`);
 
 --
+-- Indeks untuk tabel `promo`
+--
+ALTER TABLE `promo`
+  ADD PRIMARY KEY (`id_promo`);
+
+--
 -- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
@@ -150,6 +176,12 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `jenis_pinjaman`
   MODIFY `id_jenis_pinjaman` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT untuk tabel `promo`
+--
+ALTER TABLE `promo`
+  MODIFY `id_promo` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
