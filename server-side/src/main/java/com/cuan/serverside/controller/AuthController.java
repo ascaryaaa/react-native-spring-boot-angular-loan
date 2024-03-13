@@ -34,11 +34,11 @@ public class AuthController {
 
         try {
             Authentication authentication =
-                    authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginReq.getName(), loginReq.getPassword()));
-            String name = authentication.getName();
-            Admin admin = new Admin(name, loginReq.getPassword());
+                    authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginReq.getUsername(), loginReq.getPassword()));
+            String username = authentication.getName();
+            Admin admin = new Admin(username, loginReq.getPassword());
             String token = jwtUtil.createToken(admin);
-            LoginRes loginRes = new LoginRes(name,token);
+            LoginRes loginRes = new LoginRes(username,token);
 
             return ResponseEntity.ok(loginRes);
 

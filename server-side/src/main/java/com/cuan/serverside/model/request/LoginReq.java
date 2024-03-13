@@ -1,19 +1,19 @@
 package com.cuan.serverside.model.request;
 public class LoginReq {
-    private String name;
+    private String username;
     private String password;
 
-    public LoginReq(String name, String password) {
-        this.name = name;
+    public LoginReq(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String email) {
-        this.name = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

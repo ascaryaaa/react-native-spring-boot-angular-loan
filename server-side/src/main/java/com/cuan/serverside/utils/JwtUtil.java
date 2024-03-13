@@ -27,7 +27,7 @@ public class JwtUtil {
     }
 
     public String createToken(Admin admin) {
-        Claims claims = Jwts.claims().setSubject(admin.getNameAdmin());
+        Claims claims = Jwts.claims().setSubject(admin.getUsernameAdmin());
         Date tokenCreateTime = new Date();
         Date tokenValidity = new Date(tokenCreateTime.getTime() + TimeUnit.MINUTES.toMillis(accessTokenValidity));
         return Jwts.builder()
@@ -74,7 +74,7 @@ public class JwtUtil {
         }
     }
 
-    public String getNameAdmin(Claims claims) {
+    public String getUsernameAdmin(Claims claims) {
         return claims.getSubject();
     }
 

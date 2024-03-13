@@ -20,13 +20,13 @@ public class CustomAdminDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-        Admin admin = adminRepository.findByNameAdmin(name);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Admin admin = adminRepository.findByUsernameAdmin(username);
         List<String> roles = new ArrayList<>();
         roles.add("USER");
         UserDetails userDetails =
                 org.springframework.security.core.userdetails.User.builder()
-                        .username(admin.getNameAdmin())
+                        .username(admin.getUsernameAdmin())
                         .password(admin.getPasswordAdmin())
                         .roles(roles.toArray(new String[0]))
                         .build();

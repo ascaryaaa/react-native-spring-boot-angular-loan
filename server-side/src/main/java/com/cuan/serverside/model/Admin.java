@@ -21,29 +21,21 @@ public class Admin {
     // Admins full name
     @Column(name = "name_admin")
     private String nameAdmin;
+    // Admins full name
+
+    @Column(name = "npp_admin")
+    private String nppAdmin;
+
+    // Admins full name
+    @Column(name = "username_admin")
+    private String usernameAdmin;
 
     // Admins nik number
     @Column(name = "password_admin")
     private String passwordAdmin;
 
-    public Admin(String nameAdmin, String passwordAdmin) {
-        this.nameAdmin = nameAdmin;
-        this.passwordAdmin = passwordAdmin;
-    }
-
-    public String getNameAdmin() {
-        return nameAdmin;
-    }
-
-    public String getPasswordAdmin() {
-        return passwordAdmin;
-    }
-
-    public void setNameAdmin(String nameAdmin) {
-        this.nameAdmin = nameAdmin;
-    }
-
-    public void setPasswordAdmin(String passwordAdmin) {
+    public Admin(String usernameAdmin, String passwordAdmin) {
+        this.usernameAdmin = usernameAdmin;
         this.passwordAdmin = passwordAdmin;
     }
 }
