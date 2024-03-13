@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 12 Mar 2024 pada 10.37
+-- Waktu pembuatan: 13 Mar 2024 pada 07.02
 -- Versi server: 10.4.21-MariaDB
 -- Versi PHP: 8.0.10
 
@@ -44,15 +44,17 @@ CREATE TABLE `account` (
 CREATE TABLE `admin` (
   `id_admin` bigint(20) NOT NULL,
   `name_admin` varchar(255) DEFAULT NULL,
-  `password_admin` varchar(255) DEFAULT NULL
+  `password_admin` varchar(255) DEFAULT NULL,
+  `npp_admin` varchar(255) DEFAULT NULL,
+  `username_admin` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `admin`
 --
 
-INSERT INTO `admin` (`id_admin`, `name_admin`, `password_admin`) VALUES
-(1, 'admin', '123456');
+INSERT INTO `admin` (`id_admin`, `name_admin`, `password_admin`, `npp_admin`, `username_admin`) VALUES
+(1, 'Wahyu Khumairoh', '123456', 'T0672XX', 'admin');
 
 -- --------------------------------------------------------
 
