@@ -20,7 +20,7 @@ public class AdminController {
 
     // GET Function of API, Reads admin data from 'pengajuan' database
     @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping("/getAdmins")
+    @GetMapping("/get-admins")
     public Iterable<Admin> getAllAdmin(){
         return AdminService.getAllAdmin();
     }
@@ -32,7 +32,7 @@ public class AdminController {
     }
 
     // POST Function of API, Creates admin data into 'pengajuan' database
-    @PostMapping("/postAdmin")
+    @PostMapping("/post-admin")
     public Admin saveAdmin(@RequestBody Admin Admin){
         return AdminService.saveAdmin(Admin);
     }

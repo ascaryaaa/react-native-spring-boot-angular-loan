@@ -19,7 +19,7 @@ public class FormPengajuanController {
 
     // GET Function of API, Reads form pengajuan data from 'pengajuan' database
     @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping("/getForm")
+    @GetMapping("/get-form")
     public Iterable<FormPengajuan> getAllForm(){
         return formPengajuanService.getAllForm();
     }
@@ -31,7 +31,7 @@ public class FormPengajuanController {
     }
 
     // POST Function of API, Creates form pengajuan data into 'pengajuan' database
-    @PostMapping("/postForm")
+    @PostMapping("/post-form")
     public FormPengajuan saveForm(@RequestBody FormPengajuan formPengajuan){
 //        User savedUser = userService.saveUser(account.getUser());
 //        account.setUser(savedUser);
@@ -46,7 +46,7 @@ public class FormPengajuanController {
     }
 
     // DELETE Function of API, Deletes form pengajuan data into 'pengajuan' database
-    @DeleteMapping("/deleteFormId/{id}")
+    @DeleteMapping("/delete-form-id/{id}")
     public void deleteForm(@PathVariable Long id) {
         formPengajuanService.deleteFormById(id);
     }

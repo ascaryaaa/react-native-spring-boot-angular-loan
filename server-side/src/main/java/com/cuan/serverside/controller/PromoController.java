@@ -18,7 +18,7 @@ public class PromoController {
 
     // GET Function of API, Reads promo data from 'pengajuan' database
     @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping("/getPromos")
+    @GetMapping("/get-promos")
     public Iterable<Promo> getAllPromo(){
         return PromoService.getAllPromo();
     }
@@ -30,7 +30,7 @@ public class PromoController {
     }
 
     // POST Function of API, Creates promo data into 'pengajuan' database
-    @PostMapping("/postPromo")
+    @PostMapping("/post-promo")
     public Promo savePromo(@RequestBody Promo Promo){
         return PromoService.savePromo(Promo);
     }
