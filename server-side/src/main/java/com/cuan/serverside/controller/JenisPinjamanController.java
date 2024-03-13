@@ -21,7 +21,7 @@ public class JenisPinjamanController {
 
     // GET Function of API, Reads data from 'pengajuan' database
     @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping("/getJenisPinjamans")
+    @GetMapping("/get-jenis-pinjamans")
     public Iterable<JenisPinjaman> getAllJenisPinjaman(){
         return JenisPinjamanService.getAllJenisPinjaman();
     }
@@ -33,7 +33,7 @@ public class JenisPinjamanController {
     }
 
     // POST Function of API, Creates data into 'pengajuan' database
-    @PostMapping("/postJenisPinjaman")
+    @PostMapping("/post-jenis-pinjaman")
     public JenisPinjaman saveJenisPinjaman(@RequestBody JenisPinjaman JenisPinjaman){
         return JenisPinjamanService.saveJenisPinjaman(JenisPinjaman);
     }
