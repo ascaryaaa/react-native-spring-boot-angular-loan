@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { initFlowbite } from 'flowbite';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterModule, CommonModule, HomeComponent],
+  imports: [RouterOutlet, RouterModule, CommonModule, HomeComponent, LoginComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
