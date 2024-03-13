@@ -1,5 +1,6 @@
 package com.cuan.serverside.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,8 +27,11 @@ public class User {
     @Column(name = "nik_user")
     private String nikUser;
 
-    // Foreign key from Id User
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "account_Id", referencedColumnName = "account_Id")
-    private Account account;
+    @JsonIgnore
+    @OneToOne(mappedBy = "accountToUser")
+    private Account userToAccount;
+
+//    @JsonIgnore
+//    @ManyToOne
+//    private FormPengajuan userToForm;
 }

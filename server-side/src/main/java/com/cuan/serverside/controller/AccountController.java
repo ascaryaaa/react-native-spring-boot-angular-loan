@@ -19,8 +19,8 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @Autowired
-    private UserService userService;
+//    @Autowired
+//    private UserService userService;
 
     // GET Function of API, Reads account data from 'pengajuan' database
     @CrossOrigin(origins = "http://localhost:4200")
@@ -38,8 +38,8 @@ public class AccountController {
     // POST Function of API, Creates account data into 'pengajuan' database
     @PostMapping("/postAccount")
     public Account saveAccount(@RequestBody Account account){
-        User savedUser = userService.saveUser(account.getUser());
-        account.setUser(savedUser);
+//        User savedUser = userService.saveUser(account.getUser());
+//        account.setUser(savedUser);
         return accountService.saveAccount(account);
     }
 

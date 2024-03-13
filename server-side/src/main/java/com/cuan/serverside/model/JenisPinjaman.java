@@ -1,5 +1,6 @@
 package com.cuan.serverside.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,4 +25,8 @@ public class JenisPinjaman {
 
     @Column(name = "icon_jenis_pinjaman")
     private String iconJenisPinjaman;
+
+//    @JsonIgnore
+//    @ManyToOne
+//    private FormPengajuan jenisToForm;
 }
