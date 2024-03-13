@@ -22,7 +22,7 @@ public class CabangController {
 
     // GET Function of API, Reads cabang data from 'pengajuan' database
     @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping("/getCabangs")
+    @GetMapping("/get-cabangs")
     public Iterable<Cabang> getAllCabang(){
         return CabangService.getAllCabang();
     }
@@ -34,11 +34,11 @@ public class CabangController {
     }
 
     // POST Function of API, Creates cabang data into 'pengajuan' database
-    @PostMapping("/postCabang")
+    @PostMapping("/post-cabang")
     public Cabang saveCabang(@RequestBody Cabang Cabang){
         return CabangService.saveCabang(Cabang);
     }
-    @PostMapping("/postCabangs")
+    @PostMapping("/post-cabangs")
     public List<Cabang> saveCabangs(@RequestBody List<Cabang> cabangs){
         return CabangService.saveCabangs(cabangs);
     }
