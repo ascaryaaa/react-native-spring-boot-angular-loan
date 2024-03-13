@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/loan/v1/promo") // Pathing
 public class PromoController {
     @Autowired
-    private com.cuan.serverside.service.PromoService PromoService;
+    private PromoService PromoService;
     public PromoController(PromoService PromoService) {
         this.PromoService = PromoService;
     }
