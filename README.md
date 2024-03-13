@@ -140,13 +140,13 @@ When you're trying to link up the API endpoint from server-side with other devic
 
 For instance, if the initial URL is:
 ```
-http://localhost:8081/loan/v1/user/postUser
+http://localhost:8081/loan/v1/user/post-user
 ```
 
 You would modify it to your ip address connection:
 
 ```
-http://192.168.234.54:8081/loan/v1/user/getUsers
+http://192.168.234.54:8081/loan/v1/user/get-users
 ```
 
 For easier changing the connection ip address in the url for the mobile-side, you can go to `utils/Constant.js` and change the `CONNECTION`, for example:
@@ -174,12 +174,12 @@ If it working, the you are done!
 
 #### Read All Users / Membaca semua User
 ```
-http://localhost:8081/loan/v1/user/getUsers
+http://localhost:8081/loan/v1/user/get-users
 ```
 
 #### Post User to database / Posting User ke databse
 ```
-http://localhost:8081/loan/v1/user/postUser
+http://localhost:8081/loan/v1/user/post-user
 ```
 
 #### Read user by Id / Membaca user dari Id
