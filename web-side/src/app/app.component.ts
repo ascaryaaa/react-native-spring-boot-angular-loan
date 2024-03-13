@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { initFlowbite } from 'flowbite';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -15,18 +16,26 @@ import { LoginComponent } from './login/login.component';
 })
 export class AppComponent implements OnInit {
   title = 'web-side';
+  
   ngOnInit(): void {
     initFlowbite();
   }
-  constructor(private router: Router) {}
 
-  goHome() {
-    this.router.navigate(['/home']);
+  isLogin: boolean = false;
+  constructor(private service: AuthService) {
+    this.isLogin = !!this.service.getAuth();
   }
-  goLogin() {
-    this.router.navigate(['/login']);
-  }
-  goSandbox() {
-    this.router.navigate(['/sandbox']);
-  }
+  // constructor(private router: Router) {}
+
+  // goHome() {
+  //   this.router.navigate(['/home']);
+  // }
+  // goLogin() {
+  //   this.router.navigate(['/login']);
+  // }
+  // goSandbox() {
+  //   this.router.navigate(['/sandbox']);
+  // }
+  
+  
 }
