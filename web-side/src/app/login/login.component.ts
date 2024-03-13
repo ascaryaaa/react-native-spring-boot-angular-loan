@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 export class LoginComponent {
   constructor(private service: AuthService) {}
   onSubmit(form: NgForm) {
+    alert(form.value?.username + form.value?.password);
     if (!form.valid) {
       alert("Please complete the form!");
       return;
