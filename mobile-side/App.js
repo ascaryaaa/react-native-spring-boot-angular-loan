@@ -15,6 +15,7 @@ import DataPemohon from "./src/screens/DataPemohon";
 import ProfileKeuangan from "./src/screens/ProfileKeuangan";
 import SyaratKetentuan from "./src/screens/SyaratKetentuan";
 import Riwayat from "./src/screens/Riwayat";
+import NotificationFailed from "./src/screens/NotificationFailed";
 
 const Stack = createStackNavigator();
 
@@ -151,6 +152,18 @@ export default function App() {
           <Stack.Screen
             name="Riwayat"
             component={Riwayat}
+            options={{
+              headerTintColor: "black",
+              headerStyle: {
+                backgroundColor: "#FFFFFF",
+                shadowOpacity: 0,
+                elevation: 0,
+              },
+            }}
+          />
+          <Stack.Screen
+            name="NotificationFailed"
+            component={NotificationFailed}
             options={{
               headerTintColor: "black",
               headerStyle: {
