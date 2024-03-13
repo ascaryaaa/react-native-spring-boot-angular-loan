@@ -40,6 +40,11 @@ public class SecurityConfig  {
         http.csrf().disable()
                 .authorizeRequests()
                 .requestMatchers("/rest/auth/**").permitAll()
+                .requestMatchers("/loan/v1/promo/getPromos").permitAll() //Tambah path yang mau di permit
+                .requestMatchers("/loan/v1/cabang/getCabangs").permitAll() //Tambah path yang mau di permit
+                .requestMatchers("loan/v1/jenis-pinjaman/getJenisPinjamans").permitAll()
+                .requestMatchers("/loan/v1/admin/getAdmins").permitAll()
+                .requestMatchers("/loan/v1/user/getUsers").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
