@@ -14,7 +14,7 @@ public class JenisPinjamanController {
     // Dependency Injection, prevents coupling
     @Autowired
     private JenisPinjamanService JenisPinjamanService;
-    public JenisPinjamanController(AdminService AdminService) {
+    public JenisPinjamanController(JenisPinjamanService JenisPinjamanService) {
         this.JenisPinjamanService = JenisPinjamanService;
     }
 

@@ -4,8 +4,8 @@ import { User, UserForm } from './auth';
 import { Route, Router } from '@angular/router';
 
 const users: Array<User> = [
-  { username: 'Rifqiw', password: 'rifqi160', name: 'Rifqi Wiliatama' },
-  { username: 'Yoshuy', password: 'batmobile', name: 'Bruce Wayne' },
+  { username: 'Rifqiw', password: 'rifqi160' },
+  { username: 'Yoshuy', password: 'batmobile' },
 ];
 
 @Injectable({
@@ -38,6 +38,13 @@ export class AuthService {
     } else {
       return JSON.parse(response);
     }
+  }
+  logout() {
+    // Hapus data pengguna dari localStorage atau lakukan operasi logout lainnya
+    localStorage.removeItem('user');
+
+    // Setelah itu, arahkan pengguna ke halaman login
+    this.router.navigate(['/login']);
   }
 
   private matchUser(user: User, form: UserForm): boolean {

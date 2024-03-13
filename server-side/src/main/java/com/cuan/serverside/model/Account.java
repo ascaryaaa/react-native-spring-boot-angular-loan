@@ -23,7 +23,7 @@ public class Account {
     private String mpin;
 
     // Foreign key from Id User
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "id_user", referencedColumnName = "id_user")
-    private User user;
+    private User accountToUser;
 }
