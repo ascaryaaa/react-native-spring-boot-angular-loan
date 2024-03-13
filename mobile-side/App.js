@@ -16,6 +16,7 @@ import ProfileKeuangan from "./src/screens/ProfileKeuangan";
 import SyaratKetentuan from "./src/screens/SyaratKetentuan";
 import Riwayat from "./src/screens/Riwayat";
 import NotificationFailed from "./src/screens/NotificationFailed";
+import NotificationSuccess from "./src/screens/NotificationSuccess";
 
 const Stack = createStackNavigator();
 
@@ -164,6 +165,18 @@ export default function App() {
           <Stack.Screen
             name="NotificationFailed"
             component={NotificationFailed}
+            options={{
+              headerTintColor: "black",
+              headerStyle: {
+                backgroundColor: "#FFFFFF",
+                shadowOpacity: 0,
+                elevation: 0,
+              },
+            }}
+          />
+          <Stack.Screen
+            name="NotificationSuccess"
+            component={NotificationSuccess}
             options={{
               headerTintColor: "black",
               headerStyle: {
