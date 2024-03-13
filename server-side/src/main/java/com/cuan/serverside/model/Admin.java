@@ -16,13 +16,13 @@ public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_admin", updatable = false, nullable = false) // Can't be updated or null
-    private Long id_admin;
+    private Long idAdmin;
 
     // Admins full name
     @Column(name = "name_admin")
-    private String name_admin;
+    private String nameAdmin;
 
     // Admins nik number
     @Column(name = "password_admin")
-    private String password_admin;
+    private String passwordAdmin;
 }

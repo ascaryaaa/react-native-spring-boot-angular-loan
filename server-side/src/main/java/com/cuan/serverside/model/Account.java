@@ -18,11 +18,12 @@ public class Account {
     @Column(name = "account_Id", updatable = false, nullable = false) // Can't be updated or null
     private Long account_Id;
 
-    // Username of account
-    @Column(name = "account_name")
-    private String account_name;
-
     // PIN of account
-    @Column(name = "account_pin")
-    private String account_pin;
+    @Column(name = "mpin")
+    private String mpin;
+
+    // Foreign key from Id User
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_user", referencedColumnName = "id_user")
+    private User user;
 }
