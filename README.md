@@ -84,36 +84,59 @@ git pull origin main
 
 
 #  Server-Side
-## Implementing User API / Penggunaan User API
+## How to use API-Endpoint / Cara Penggunaan API-Endpoint
 
-### Make sure you have created a database in your preferred database program i.e. PhpMyAdmin, SSMS, DBeaver called "pengajuan"
-### Pastikan Anda telah membuat database di program database pilihan Anda yaitu PhpMyAdmin, SSMS, DBeaver yang disebut "pengajuan"
+### 1. Download open-source web server
 
-#### In this case, we are using PhpMyAdmin
-#### Di kasus ini, kita menggunakan PhpMyAdmin
-The main pathing of the API edpoint is http://localhost:8081/loan/v1/user
+You can download XAMPP from the following link:
+https://www.apachefriends.org/download.html
 
-#### Read All Users / Membaca semua User
+### 2. Turn on the Apache and MySQL
+
+After downloading XAMPP, start both Apache and MySQL services.
+
+![image](https://github.com/ascaryaaa/react-native-spring-boot-angular-loan/assets/73589875/1ebfd479-da60-47cf-894a-c2a0199a867b)
+
+Ensure MySQL Port Configuration: **Check the port number assigned to MySQL!** In this example, the MySQL port is `3306`. Take note of this port number as it will be **needed** for configuration.
+
+### 3. Configure databasesource.url
+Navigate to `src/main/resources/application.properties` and verify that the `spring.datasource.url` matches your **MySQL port**.
+
 ```
-http://localhost:8081/loan/v1/user/getUsers
-```
-
-#### Post User to database / Posting User ke databse
-```
-http://localhost:8081/loan/v1/user/postUser
-```
-
-#### Read user by Id / Membaca user dari Id
-```
-http://localhost:8081/loan/v1/user/{number of user id}
-
-# Example
-http://localhost:8081/loan/v1/user/2
+spring.datasource.url=jdbc:mysql://localhost:<your MySQL port>/pengajuan
 ```
 
-### Establishing Connection between Endpoint and External Devices
+Replace <your MySQL port> with the port number obtained earlier (usually 3306). For example:
 
-When you're trying to link up the API endpoint from server-side with other devices such as mobile app, it's really important to make sure all the devices involved use the same connection. To do that, you just have to change the URL from `localhost` to the connection ip address `IP address`.
+```
+spring.datasource.url=jdbc:mysql://localhost:3306/pengajuan
+```
+
+Ensure that the username and password match your MySQL credentials. If you're using XAMPP, the default username is root (`username:root`) and usually, there's no password set (`password: `).
+
+### 4. Import Database
+
+Access phpMyAdmin by visiting:
+
+```
+http://localhost/phpmyadmin/
+```
+
+Log in to phpMyAdmin using your credentials. If you're using XAMPP, the default username is root (`username:root`) and usually, there's no password set (`password: `).
+
+Navigate to the "Import" section as shown in the image:
+
+![image](https://github.com/ascaryaaa/react-native-spring-boot-angular-loan/assets/73589875/7ce0333f-8d6b-445a-9604-a2427408619e)
+
+Choose the file to import, and select the `pengajuan.sql` database file located in the `database/pengajuan.sql` repository.
+
+### 5. Run the Server-Side
+
+Navigate to the server-side directory and execute the ServerSideApplication to start the server-side application.
+
+### 6. Establishing Connection between Endpoint and External Devices (koneksi ke mobile-side)
+
+When you're trying to link up the API endpoint from server-side with other devices such as mobile app, it's really important to make sure all the devices involved use the same connection. To do that, you just have to change the URL from `localhost` to the connection ip address `IP address` in the `mobile-side`.
 
 For instance, if the initial URL is:
 ```
@@ -136,10 +159,41 @@ You would modify it to your ip address connection:
 
 ```
 const CONNECTION = '192.168.234.54';
+``` 
+
+If you want to check wether the API-Endpoint can be accessed in you device just go to your browser and type `http://<your ip connection>:8081/loan/v1/user/getUsers`
+
+![apijson](https://github.com/ascaryaaa/react-native-spring-boot-angular-loan/assets/73589875/52eb6006-5e1f-42d8-8b26-0c26abb5e3fb)
+
+
+If it working, the you are done!
+
+## API Documentation
+
+### The main pathing of the API edpoint is http://localhost:8081/loan/v1/user
+
+#### Read All Users / Membaca semua User
+```
+http://localhost:8081/loan/v1/user/getUsers
+```
+
+#### Post User to database / Posting User ke databse
+```
+http://localhost:8081/loan/v1/user/postUser
+```
+
+#### Read user by Id / Membaca user dari Id
+```
+http://localhost:8081/loan/v1/user/{number of user id}
+
+# Example
+http://localhost:8081/loan/v1/user/2
 ```
 
 #### Read user by name / Membaca user dari nama
 coming soon
+
+## Server-Side Documentation
 
 1. Initialize Spring-Boot
    
@@ -267,6 +321,28 @@ Replace <port> with the port number your frontend is running on. For instance, i
 
 This configuration explicitly allows cross-origin requests from localhost:4200, facilitating the communication between your frontend and backend during development.
 
+6. APi endpoint for images
+
+for images, we upload the image using Imagur, its the image hosting service. then we use the link to put it to the database.
+
+![image](https://github.com/ascaryaaa/react-native-spring-boot-angular-loan/assets/73589875/8899263a-4dd8-4763-8cc0-0b4b1b8f6e1f)
+
+This is the example of the Promo API-Endpoint
+
+```ruby
+[
+    {
+        "idPromo": 1,
+        "namePromo": "Promo Fleksi 1",
+        "gambarPromo": "blob:https://imgur.com/c70d655a-a7d9-47af-a1d0-a2d827d4e307"
+    },
+    {
+        "idPromo": 2,
+        "namePromo": "Promo Griya 1",
+        "gambarPromo": "https://i.imgur.com/yjK6mpi.png"
+    }
+]
+```
 
 # Mobile-Side
 

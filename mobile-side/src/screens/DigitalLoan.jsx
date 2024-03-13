@@ -4,8 +4,8 @@ import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, FlatList} 
 const DigitalLoan = ({navigation}) => {
 
   const list = [
-    require('../../../mobile-side/src/assets/bannertest.png'),
-    require('../../../mobile-side/src/assets/image_kejutan2.png'),
+    require('../../../mobile-side/src/assets/ban_kejutan1.png'),
+    require('../../../mobile-side/src/assets/ban_kejutan2.png'),
 ]
 const renderItem = ({ item }) => (
     <Image
@@ -28,7 +28,7 @@ const renderItem = ({ item }) => (
       <Text>Digital Loan</Text>
       <Image
         source={require("../../../mobile-side/src/assets/Icon_homeorg.png")}
-        // style={styles.amico}
+       
       />
         </View>
 
@@ -36,7 +36,7 @@ const renderItem = ({ item }) => (
 {/* container tengah */}
         <View style={styles.containerTengah}>
         <Image
-        source={require("../../../mobile-side/src/assets/test.png")}
+        source={require("../../../mobile-side/src/assets/illu_DL.png")}
         style={styles.amico}
       />
         <Text style={styles.texttitle} >Selamat datang di Digital Loan !</Text>
@@ -68,7 +68,7 @@ container: {
     flex:1,
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'absolute',
+    // position: 'absolute',
     marginTop: 280
 },
 containerTengah:{

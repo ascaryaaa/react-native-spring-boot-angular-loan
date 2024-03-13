@@ -18,16 +18,26 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Iterable<Admin> getAllAdmin() {
+
         return adminRepository.findAll();
     }
 
     @Override
     public Admin getAdminId(Long id) {
+
         return adminRepository.findById(id).orElse(null);
     }
 
     @Override
     public Admin saveAdmin(Admin admin) {
+
         return adminRepository.save(admin);
     }
+
+    @Override
+    public Admin findByUsernameAdmin(String username) {
+
+        return adminRepository.findByUsernameAdmin(username);
+    }
+
 }

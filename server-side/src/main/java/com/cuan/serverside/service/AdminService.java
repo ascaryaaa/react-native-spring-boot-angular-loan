@@ -10,4 +10,6 @@ public interface AdminService {
 
     // Define POST user in service
     public Admin saveAdmin(Admin admin);
+
+    public Admin findByUsernameAdmin(String username);
 }
