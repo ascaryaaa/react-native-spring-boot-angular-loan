@@ -2,8 +2,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import { Provider } from 'react-redux';
-import store from './src/reducers/Index';
+import { Provider } from "react-redux";
+import store from "./src/reducers/Index";
 import Home from "./src/screens/Home";
 import Login from "./src/screens/Login";
 import DataDebitur from "./src/screens/DataDebitur";
@@ -54,6 +54,7 @@ export default function App() {
             component={SimulasiPinjaman}
             options={{
               headerTintColor: "black",
+              headerShown: false,
               headerStyle: {
                 backgroundColor: "#FFFFFF",
                 shadowOpacity: 0,
