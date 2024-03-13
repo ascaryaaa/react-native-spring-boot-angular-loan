@@ -37,10 +37,10 @@ public class AccountController {
 
     // POST Function of API, Creates account data into 'pengajuan' database
     @PostMapping("/postAccount")
-    public Account saveAccount(@RequestBody Account user){
-        User savedUser = userService.saveUser(user.getUser());
-        user.setUser(savedUser);
-        return accountService.saveAccount(user);
+    public Account saveAccount(@RequestBody Account account){
+        User savedUser = userService.saveUser(account.getUser());
+        account.setUser(savedUser);
+        return accountService.saveAccount(account);
     }
 
     // PUT Function of API, Updates admin account from 'pengajuan' database by id

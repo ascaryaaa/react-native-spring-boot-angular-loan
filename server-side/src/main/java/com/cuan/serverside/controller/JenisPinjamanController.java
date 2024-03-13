@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class JenisPinjamanController {
     // Dependency Injection, prevents coupling
     @Autowired
-    private com.cuan.serverside.service.JenisPinjamanService JenisPinjamanService;
+    private JenisPinjamanService JenisPinjamanService;
     public JenisPinjamanController(JenisPinjamanService JenisPinjamanService) {
         this.JenisPinjamanService = JenisPinjamanService;
     }

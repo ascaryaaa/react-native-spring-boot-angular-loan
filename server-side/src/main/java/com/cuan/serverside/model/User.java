@@ -25,4 +25,9 @@ public class User {
     // User's nik number
     @Column(name = "nik_user")
     private String nikUser;
+
+    // Foreign key from Id User
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_Id", referencedColumnName = "account_Id")
+    private Account account;
 }
