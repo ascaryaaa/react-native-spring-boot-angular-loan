@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, Button} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, onSelect} from 'react-native';
 
 const PengajuanPinjaman = ({navigation}) => {
     return (
@@ -14,71 +14,76 @@ const PengajuanPinjaman = ({navigation}) => {
       <Text>Digital Loan</Text>
       <Image
         source={require("../../../mobile-side/src/assets/Icon_homeorg.png")}
-        // style={styles.amico}
+
       />
         </View>
-
-
-        
         <View style={styles.headertxt}>
         <Text style={styles.texttitle}>Pengajuan Pinjaman</Text>
         <Text style={styles.textbody}>BNI memiliki berbagai macam produk pinjaman yang dapat disesuaikan dengan kebutuhan</Text>
         </View>
 
-        <View style ={styles.jeniscontainer}>
-            <View style ={styles.jenisbody}>
-                <Image source={require("../../../mobile-side/src/assets/icon_housecf.png")}/>
-                <Text style ={styles.textJenisPinjaman}>BNI Griya</Text>
-                <TouchableOpacity style={styles.buttonJenis} onPress={() => navigation.navigate('SimulasiPinjaman')}>
-                <Text style={styles.textPilih}>Pilih</Text>
-            </TouchableOpacity>
-            </View>
 
-            <View style ={styles.jenisbody}>
-                <Image source={require("../../../mobile-side/src/assets/icon_shopping.png")}/>
-                <Text style ={styles.textJenisPinjaman}>BNI Flexi Aktif</Text>
-                <TouchableOpacity style={styles.buttonJenis} onPress={() => navigation.navigate('SimulasiPinjaman')}>
-                <Text style={styles.textPilih}>Pilih</Text>
-            </TouchableOpacity>
-            </View>
 
-            <View style ={styles.jenisbody}>
-                <Image source={require("../../../mobile-side/src/assets/icon_oldman.png")}/>
-                <Text style ={styles.textJenisPinjaman}>BNI Fleksi Pensiun</Text>
-                <TouchableOpacity style={styles.buttonJenis} onPress={() => navigation.navigate('SimulasiPinjaman')}>
-                <Text style={styles.textPilih}>Pilih</Text>
-            </TouchableOpacity>
-            </View>
 
-            <View style ={styles.jenisbody}>
-                <Image source={require("../../../mobile-side/src/assets/icon_shop.png")}/>
-                <Text style ={styles.textJenisPinjaman}>Kredit Usaha Rakyat BNI</Text>
-                <TouchableOpacity style={styles.buttonJenis} onPress={() => navigation.navigate('SimulasiPinjaman')}>
-                <Text style={styles.textPilih}>Pilih</Text>
-            </TouchableOpacity>
-            </View>
-
-            <View style ={styles.jenisbody}>
-                <Image source={require("../../../mobile-side/src/assets/icon_calcudocu.png")}/>
-                <Text style ={styles.textJenisPinjaman}>Kredit Wirausaha</Text>
-                <TouchableOpacity style={styles.buttonJenis} onPress={() => navigation.navigate('SimulasiPinjaman')}>
-                <Text style={styles.textPilih}>Pilih</Text>
-            </TouchableOpacity>
-            </View>
-
-            <View style ={styles.jenisbody}>
-                <Image source={require("../../../mobile-side/src/assets/icon_office.png")}/>
-                <Text style ={styles.textJenisPinjaman}> Kredit Produktif {'>'} 1 M</Text>
-                <TouchableOpacity style={styles.buttonJenis} onPress={() => navigation.navigate('SimulasiPinjaman')}>
-                <Text style={styles.textPilih}>Pilih</Text>
-            </TouchableOpacity>
-            </View>
+        <View style={styles.cardContainer}>
+      <View style={styles.cardContent}>
+        <Image source={require("../../../mobile-side/src/assets/icon_housecf.png")} style={styles.productImage} />
+        <View style={styles.titleContainer}>
+          <Text style={styles.titleText}>BNI Griya</Text>
+        </View>
+      </View>
+      <TouchableOpacity onPress={() => navigation.navigate('SimulasiPinjaman')} style={styles.selectButton} >
+        <Text style={styles.selectButtonText}>Pilih</Text>
+      </TouchableOpacity>
+        </View>
+        <View style={styles.cardContainer}>
+      <View style={styles.cardContent}>
+        <Image source={require("../../../mobile-side/src/assets/icon_housecf.png")} style={styles.productImage} />
+        <View style={styles.titleContainer}>
+          <Text style={styles.titleText}>BNI Griya</Text>
+        </View>
+      </View>
+      <TouchableOpacity onPress={() => navigation.navigate('SimulasiPinjaman')} style={styles.selectButton}>
+        <Text style={styles.selectButtonText}>Pilih</Text>
+      </TouchableOpacity>
+        </View>
+        <View style={styles.cardContainer}>
+      <View style={styles.cardContent}>
+        <Image source={require("../../../mobile-side/src/assets/icon_housecf.png")} style={styles.productImage} />
+        <View style={styles.titleContainer}>
+          <Text style={styles.titleText}>BNI Griya</Text>
+        </View>
+      </View>
+      <TouchableOpacity onPress={() => navigation.navigate('SimulasiPinjaman')} style={styles.selectButton}>
+        <Text style={styles.selectButtonText}>Pilih</Text>
+      </TouchableOpacity>
+        </View>
+        <View style={styles.cardContainer}>
+      <View style={styles.cardContent}>
+        <Image source={require("../../../mobile-side/src/assets/icon_housecf.png")} style={styles.productImage} />
+        <View style={styles.titleContainer}>
+          <Text style={styles.titleText}>BNI Griya</Text>
+        </View>
+      </View>
+      <TouchableOpacity onPress={() => navigation.navigate('SimulasiPinjaman')} style={styles.selectButton}>
+        <Text style={styles.selectButtonText}>Pilih</Text>
+      </TouchableOpacity>
+        </View>
+        <View style={styles.cardContainer}>
+      <View style={styles.cardContent}>
+        <Image source={require("../../../mobile-side/src/assets/icon_housecf.png")} style={styles.productImage} />
+        <View style={styles.titleContainer}>
+          <Text style={styles.titleText}>BNI Griya</Text>
+        </View>
+      </View>
+      <TouchableOpacity onPress={() => navigation.navigate('SimulasiPinjaman')} style={styles.selectButton}>
+        <Text style={styles.selectButtonText}>Pilih</Text>
+      </TouchableOpacity>
         </View>
 
 
         </View>
         
-      
     );
 };
 export default PengajuanPinjaman;
@@ -105,7 +110,12 @@ navbar:{
     verticalAlign: "top",
     paddingLeft: 20,
     paddingRight: 20,
-    height: 48
+    height: 48,
+    // backgroundColor:'#fff',
+    // shadowColor: '#000',
+    // shadowOffset: { width: 0, height: 2 },
+    // shadowOpacity: 0.5,
+    // shadowRadius: 2,
 },
 headertxt:{
     paddingLeft: 15,
@@ -125,9 +135,15 @@ textbody:{
     
 },
 jeniscontainer:{
-    paddingLeft:15,
-    paddingRight:15,
-    width:'100%'
+    flex:1,
+paddingLeft:8,
+paddingTop: 12,
+paddingRight: 17,
+paddingBottom: 10,
+
+// alignItems: "center",
+// gap: 158.975,
+    
 },
 jenisbody:{
     flexDirection: "row",
@@ -148,13 +164,63 @@ textJenisPinjaman:{
 buttonJenis:{
     backgroundColor:'white',
     borderRadius:8,
-    width:70,
+    width:60,
     height:26
 },
 textPilih:{
     color:'#F68310',
     textAlign:'center',
-    fontSize: 14,
-    fontWeight:'500'
-}
+    fontSize: 13,
+    fontWeight:'600'
+},
+iconContainerRight: {
+    position: 'absolute',
+    right: 20,
+  },
+  cardContainer: {
+    alignItems: "stretch",
+    borderRadius: 8,
+    elevation: 10, // Updated for shadow in Android
+    backgroundColor: "#1394AD",
+    display: "flex",
+    flexDirection: "row", // Ensures child elements are side by side
+    justifyContent: "space-between",
+    marginTop: 22,
+    width: "100%",
+    maxWidth: 358,
+    paddingVertical: 11,
+    paddingHorizontal: 8,
+  },
+  cardContent: {
+    flexDirection: "row", // Ensures image and text are side by side
+    gap: 12,
+    alignItems: "center", // Align items in center for better visual alignment
+  },
+  productImage: {
+    width: 32,
+    height: 32, // Explicit height for consistent sizing
+  },
+  titleContainer: {
+    justifyContent: "center",
+  },
+  titleText: {
+    color: "#FFF",
+    fontFamily: "Montserrat, sans-serif",
+    fontSize: 12,
+    fontWeight: "700",
+  },
+  selectButton: {
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 8,
+    backgroundColor: "#FFF",
+    paddingHorizontal: 21,
+    paddingVertical: 4,
+  },
+  selectButtonText: {
+    color: "#F68310",
+    fontFamily: "Montserrat, sans-serif",
+    fontSize: 12,
+    fontWeight: "700",
+  },
 })

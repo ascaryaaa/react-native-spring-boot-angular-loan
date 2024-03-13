@@ -6,7 +6,7 @@ const Login = ({navigation}) => {
     return (
       <View style={styles.container}>
         <Image
-        source={require("../../../mobile-side/src/assets/bgawal.png")}
+        source={require("../../../mobile-side/src/assets/bg_login.png")}
         style={styles.background}
       />
             {/* <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('DigitalLoan')}> */}
