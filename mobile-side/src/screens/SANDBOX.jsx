@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image, ActivityIndicator, TouchableOpacity } from 'react-native';
 import Constant from '../utils/Constant';
 import { ScrollView } from 'react-native-gesture-handler';
+import { getJenisPinjamans } from '../reducers/JenisPinjaman';
+import { useDispatch, useSelector } from "react-redux";
 
 const SANDBOX = () => {
   const [data, setData] = useState([]);
   const [dataJenisPinjaman, setDataJenisPinjaman] = useState([]);
+  const jenisPinjamanState = useSelector((state) => state.jenisPinjaman)
+  const dispatch = useDispatch()
 
   const fetchInfo = async () => {
     try {
@@ -23,7 +27,8 @@ const SANDBOX = () => {
 
   useEffect(() => {
     fetchInfo();
-  }, []);
+    dispatch(getJenisPinjamans())
+  }, [dispatch]);
 
   const renderItem = ({ item }) => (
     <View style={{ flex: 1, flexDirection: 'row', marginVertical: 10 }}>
@@ -38,6 +43,21 @@ const SANDBOX = () => {
   return (
     <View style={styles.container}>
       <ScrollView>
+        <Text style={styles.heading}>Jenis Pinjaman List pake redux</Text>
+        <View style={styles.row}>
+          {
+              jenisPinjamanState.loading 
+              ? <ActivityIndicator/>
+              : jenisPinjamanState?.data?.map(jenisPinjaman => (
+                  <TouchableOpacity style={styles.imagecontainer}>
+                      <Image 
+                          style={styles.image}
+                          source={{uri: jenisPinjaman.gambarJenisPinjaman}}
+                      />
+                  </TouchableOpacity>
+              ))
+          }
+        </View>
         <Text style={styles.heading}>Jenis Pinjaman List</Text>
         <View style={styles.dataPinjamanContainer}>
           <FlatList
@@ -91,6 +111,17 @@ const styles = StyleSheet.create({
     color: 'white',
     marginBottom: 5,
   },
+  image: {
+    width: 115,
+    height: 160,
+    alignSelf:'flex-Start',
+},  
+row: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems:'center',
+    backgroundColor: 'green'
+}
 });
 
 export default SANDBOX;
