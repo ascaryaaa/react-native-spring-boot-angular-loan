@@ -68,7 +68,7 @@ container: {
     flex:1,
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'absolute',
+    // position: 'absolute',
     marginTop: 280
 },
 containerTengah:{
