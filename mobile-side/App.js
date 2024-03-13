@@ -22,7 +22,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="SANDBOX">
+        <Stack.Navigator initialRouteName="Login">
           <Stack.Screen
             name="Home"
             component={Home}
