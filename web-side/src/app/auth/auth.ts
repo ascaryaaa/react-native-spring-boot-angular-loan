@@ -1,11 +1,10 @@
 export interface User {
-    email: String
-    password: string
-    name: string
+  username: String;
+  password: string;
+  name: string;
 }
 
-
 export interface UserForm {
-    email: String
-    password: string
+  username: String;
+  password: string;
 }
