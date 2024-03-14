@@ -4,9 +4,9 @@ import { Component, OnInit } from '@angular/core';
 export type UsersResponse = User[]
 
 export interface User {
-  id_user: number
-  name_user: string
-  nik_user: string
+  idUser: number
+  nameUser: string
+  nikUser: string
 }
 
 @Component({
@@ -33,7 +33,7 @@ export class SandboxComponent implements OnInit{
     }
   }
 
-  apiUrl = 'http://localhost:8081/loan/v1/user/getUsers';
+  apiUrl = 'http://localhost:8081/loan/v1/user/get-users';
 
   //ngOnInit -> kalau component nya first time dimount, function ngOnInit bakal dirun
   async ngOnInit(){
