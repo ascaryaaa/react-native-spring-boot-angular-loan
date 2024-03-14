@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/loan/v1/promo") // Pathing
 public class PromoController {
     @Autowired
-    private com.cuan.serverside.service.PromoService PromoService;
+    private PromoService PromoService;
     public PromoController(PromoService PromoService) {
         this.PromoService = PromoService;
     }
 
     // GET Function of API, Reads promo data from 'pengajuan' database
     @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping("/getPromos")
+    @GetMapping("/get-promos")
     public Iterable<Promo> getAllPromo(){
         return PromoService.getAllPromo();
     }
@@ -30,7 +30,7 @@ public class PromoController {
     }
 
     // POST Function of API, Creates promo data into 'pengajuan' database
-    @PostMapping("/postPromo")
+    @PostMapping("/post-promo")
     public Promo savePromo(@RequestBody Promo Promo){
         return PromoService.savePromo(Promo);
     }

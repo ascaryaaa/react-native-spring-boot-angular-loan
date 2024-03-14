@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class JenisPinjamanServiceImpl implements JenisPinjamanService {
 
+    // Dependency Injection to prevent coupling
     @Autowired
     private JenisPinjamanRepository jenisPinjamanRepository;
 
@@ -16,6 +17,7 @@ public class JenisPinjamanServiceImpl implements JenisPinjamanService {
         this.jenisPinjamanRepository = jenisPinjamanRepository;
     }
 
+    // Function overriding from interface
     @Override
     public Iterable<JenisPinjaman> getAllJenisPinjaman() {
 

@@ -140,13 +140,13 @@ When you're trying to link up the API endpoint from server-side with other devic
 
 For instance, if the initial URL is:
 ```
-http://localhost:8081/loan/v1/user/postUser
+http://localhost:8081/loan/v1/user/post-user
 ```
 
 You would modify it to your ip address connection:
 
 ```
-http://192.168.234.54:8081/loan/v1/user/getUsers
+http://192.168.234.54:8081/loan/v1/user/get-users
 ```
 
 For easier changing the connection ip address in the url for the mobile-side, you can go to `utils/Constant.js` and change the `CONNECTION`, for example:
@@ -174,12 +174,12 @@ If it working, the you are done!
 
 #### Read All Users / Membaca semua User
 ```
-http://localhost:8081/loan/v1/user/getUsers
+http://localhost:8081/loan/v1/user/get-users
 ```
 
 #### Post User to database / Posting User ke databse
 ```
-http://localhost:8081/loan/v1/user/postUser
+http://localhost:8081/loan/v1/user/post-user
 ```
 
 #### Read user by Id / Membaca user dari Id
@@ -444,5 +444,27 @@ In your app.component.html, implement navigation using router links:
 <router-outlet></router-outlet>
 ```
 
+### 3. Implemented Authentication and Login
 
+Install axios to fetch the data
+```
+npm i axios
+```
 
+To fetch the data from the API-Endpoint
+
+```ruby
+    const response = await axios.post("http://localhost:8081/rest/auth/login",{username: form.username, password: form.password});
+```
+
+Add CrossOrigin for the `AuthController`
+
+```
+@CrossOrigin(origins = "http://localhost:4200")
+```
+
+Because using `await`, then we need to add `async` to the `login` function
+
+```ruby
+ async login(form: UserForm) {
+```

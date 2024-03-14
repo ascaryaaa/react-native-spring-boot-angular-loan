@@ -19,11 +19,20 @@ public class Account {
     private Long account_Id;
 
     // PIN of account
-    @Column(name = "mpin")
-    private String mpin;
+    @Column(name = "mpin_account")
+    private String passwordAccount;
+
+    // Username of account
+    @Column(name = "username_account")
+    private String usernameAccount;
 
     // Foreign key from Id User
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "id_user", referencedColumnName = "id_user")
-    private User user;
+    private User accountToUser;
+
+    public Account(String passwordAccount, String usernameAccount) {
+        this.passwordAccount = passwordAccount;
+        this.usernameAccount = usernameAccount;
+    }
 }

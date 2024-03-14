@@ -19,12 +19,12 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @Autowired
-    private UserService userService;
+//    @Autowired
+//    private UserService userService;
 
     // GET Function of API, Reads account data from 'pengajuan' database
     @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping("/getAccounts")
+    @GetMapping("/get-accounts")
     public Iterable<Account> getAllAccount(){
         return accountService.getAllAccount();
     }
@@ -36,11 +36,11 @@ public class AccountController {
     }
 
     // POST Function of API, Creates account data into 'pengajuan' database
-    @PostMapping("/postAccount")
-    public Account saveAccount(@RequestBody Account user){
-        User savedUser = userService.saveUser(user.getUser());
-        user.setUser(savedUser);
-        return accountService.saveAccount(user);
+    @PostMapping("/post-account")
+    public Account saveAccount(@RequestBody Account account){
+//        User savedUser = userService.saveUser(account.getUser());
+//        account.setUser(savedUser);
+        return accountService.saveAccount(account);
     }
 
     // PUT Function of API, Updates admin account from 'pengajuan' database by id
@@ -51,7 +51,7 @@ public class AccountController {
     }
 
     // DELETE Function of API, Deletes account data into 'pengajuan' database
-    @DeleteMapping("/deleteAccountId/{id}")
+    @DeleteMapping("/delete-account-id/{id}")
     public void deleteAccount(@PathVariable Long id) {
         accountService.deleteAccountById(id);
     }

@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User, UserForm } from './auth';
 import { Route, Router } from '@angular/router';
+import axios from 'axios';
 
-const users: Array<User> = [
-  { username: 'Rifqiw', password: 'rifqi160', name: 'Rifqi Wiliatama' },
-  { username: 'Yoshuy', password: 'batmobile', name: 'Bruce Wayne' },
-];
+// const users: Array<User> = [
+//   { username: 'Rifqiw', password: 'rifqi160' },
+//   { username: 'Yoshuy', password: 'batmobile' },
+// ];
 
 @Injectable({
   providedIn: 'root',
@@ -15,13 +16,26 @@ export class AuthService {
   user: User | undefined;
   constructor(private router: Router) {}
 
-  login(form: UserForm) {
-    console.log('Form username:', form.username);
-    console.log('Form password:', form.password);
+  async login(form: UserForm) {
+    // console.log('Form username:', form.username);
+    // console.log('Form password:', form.password);
 
-    const response = users.find((user) => this.matchUser(user, form));
+    //npm i axios
+    const response = await axios.post('http://localhost:8081/rest/auth/login', {
+      username: form.username,
+      password: form.password,
+    });
 
-    console.log('Response:', response);
+    // const response = users.find((user) => this.matchUser(user, form));
+
+    // console.log('Response:', response);
+
+    if (!response) {
+      alert('User is not found!');
+    } else {
+      localStorage.setItem('user', JSON.stringify(response));
+      this.router.navigate(['home']);
+    }
 
     if (!response) {
       alert('User is not found!');
@@ -38,6 +52,13 @@ export class AuthService {
     } else {
       return JSON.parse(response);
     }
+  }
+  logout() {
+    // Hapus data pengguna dari localStorage atau lakukan operasi logout lainnya
+    localStorage.removeItem('user');
+
+    // Setelah itu, arahkan pengguna ke halaman login
+    this.router.navigate(['/login']);
   }
 
   private matchUser(user: User, form: UserForm): boolean {

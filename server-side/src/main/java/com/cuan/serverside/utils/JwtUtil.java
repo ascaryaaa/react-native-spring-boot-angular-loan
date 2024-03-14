@@ -1,5 +1,6 @@
 package com.cuan.serverside.utils;
 
+import com.cuan.serverside.model.Account;
 import com.cuan.serverside.model.Admin;
 import io.jsonwebtoken.*;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,8 +27,18 @@ public class JwtUtil {
         this.jwtParser = Jwts.parser().setSigningKey(secret_key);
     }
 
-    public String createToken(Admin admin) {
+    public String createTokenAdmin(Admin admin) {
         Claims claims = Jwts.claims().setSubject(admin.getUsernameAdmin());
+        Date tokenCreateTime = new Date();
+        Date tokenValidity = new Date(tokenCreateTime.getTime() + TimeUnit.MINUTES.toMillis(accessTokenValidity));
+        return Jwts.builder()
+                .setClaims(claims)
+                .setExpiration(tokenValidity)
+                .signWith(SignatureAlgorithm.HS256, secret_key)
+                .compact();
+    }
+    public String createTokenAccount(Account account) {
+        Claims claims = Jwts.claims().setSubject(account.getUsernameAccount());
         Date tokenCreateTime = new Date();
         Date tokenValidity = new Date(tokenCreateTime.getTime() + TimeUnit.MINUTES.toMillis(accessTokenValidity));
         return Jwts.builder()
@@ -75,6 +86,9 @@ public class JwtUtil {
     }
 
     public String getUsernameAdmin(Claims claims) {
+        return claims.getSubject();
+    }
+    public String getUsernameAccount(Claims claims) {
         return claims.getSubject();
     }
 

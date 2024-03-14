@@ -20,9 +20,12 @@ public class UserController {
         this.userService = userService;
     }
 
+//    @Autowired
+//    private AccountService accountService;
+
     // Endpoint to GET Function of API, Reads data from 'pengajuan' database
     @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping("/getUsers")
+    @GetMapping("/get-users")
     public Iterable<User> getAllUser(){
         return userService.getAllUser();
     }
@@ -34,13 +37,15 @@ public class UserController {
     }
 
     // Endpoint to POST Function of API, Creates data into 'pengajuan' database
-    @PostMapping("/postUser")
+    @PostMapping("/post-user")
     public User saveUser(@RequestBody User user){
+//        Account savedAccount = accountService.saveAccount(user.getAccount());
+//        user.setAccount(savedAccount);
         return userService.saveUser(user);
     }
 
     // Endpoint to GET Function of API, Reads data from 'pengajuan' database by name
-    @GetMapping("/findByName/{name}")
+    @GetMapping("/find-by-name/{name}")
     public User findUserByName(@PathVariable String name) {
         return userService.findUserByName(name)
                 .orElseThrow(() -> new RuntimeException("User not found with name: " + name));

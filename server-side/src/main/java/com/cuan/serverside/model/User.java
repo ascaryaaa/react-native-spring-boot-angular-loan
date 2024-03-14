@@ -1,5 +1,6 @@
 package com.cuan.serverside.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,4 +26,9 @@ public class User {
     // User's nik number
     @Column(name = "nik_user")
     private String nikUser;
+
+    // Introduce Json Ignore to prevent recursion
+    @JsonIgnore
+    @OneToOne(mappedBy = "accountToUser")
+    private Account userToAccount;
 }
