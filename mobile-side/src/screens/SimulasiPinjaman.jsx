@@ -93,7 +93,7 @@ const SimulasiPinjaman = ({ navigation }) => {
             </Text>
             <TouchableOpacity
               style={styles.button}
-              onPress={() => navigation.navigate("ProfileKeuanganFleksiPensiun")}
+              onPress={() => navigation.navigate("ProfileKeuanganGriya")}
             >
               <Text style={styles.simulasikan}> Selanjutnya</Text>
             </TouchableOpacity>
