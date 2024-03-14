@@ -12,11 +12,13 @@ import SANDBOX from "./src/screens/SANDBOX";
 import DigitalLoan from "./src/screens/DigitalLoan";
 import PengajuanPinjaman from "./src/screens/PengajuanPinjaman";
 import DataPemohon from "./src/screens/DataPemohon";
-import ProfileKeuangan from "./src/screens/ProfileKeuangan";
 import SyaratKetentuan from "./src/screens/SyaratKetentuan";
 import Riwayat from "./src/screens/Riwayat";
 import NotificationFailed from "./src/screens/NotificationFailed";
 import NotificationSuccess from "./src/screens/NotificationSuccess";
+import ProfileKeuanganGriya from "./src/screens/ProfileKeuanganGriya";
+import ProfileKeuanganFleksiAktif from "./src/screens/ProfileKeuanganFleksiAktif";
+import ProfileKeuanganFleksiPensiun from "./src/screens/ProfileKeuanganFleksiPensiun";
 
 const Stack = createStackNavigator();
 
@@ -127,8 +129,32 @@ export default function App() {
             }}
           />
           <Stack.Screen
-            name="ProfileKeuangan"
-            component={ProfileKeuangan}
+            name="ProfileKeuanganGriya"
+            component={ProfileKeuanganGriya}
+            options={{
+              headerTintColor: "black",
+              headerStyle: {
+                backgroundColor: "#FFFFFF",
+                shadowOpacity: 0,
+                elevation: 0,
+              },
+            }}
+          />
+          <Stack.Screen
+            name="ProfileKeuanganFleksiAktif"
+            component={ProfileKeuanganFleksiAktif}
+            options={{
+              headerTintColor: "black",
+              headerStyle: {
+                backgroundColor: "#FFFFFF",
+                shadowOpacity: 0,
+                elevation: 0,
+              },
+            }}
+          />
+          <Stack.Screen
+            name="ProfileKeuanganFleksiPensiun"
+            component={ProfileKeuanganFleksiPensiun}
             options={{
               headerTintColor: "black",
               headerStyle: {
