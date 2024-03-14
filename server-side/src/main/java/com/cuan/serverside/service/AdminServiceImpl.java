@@ -5,9 +5,10 @@ import com.cuan.serverside.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service // Define Service Implementation
 public class AdminServiceImpl implements AdminService {
 
+    // Dependency Injection to prevent coupling
     @Autowired
     private AdminRepository adminRepository;
 
@@ -16,6 +17,7 @@ public class AdminServiceImpl implements AdminService {
         this.adminRepository = adminRepository;
     }
 
+    // Function overriding from interface
     @Override
     public Iterable<Admin> getAllAdmin() {
 

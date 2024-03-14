@@ -93,7 +93,7 @@ const DataPemohon = ({navigation}) => {
         <View style={styles.input}>
             <Bniaddress/>
         </View>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('ProfileKeuangan')}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SyaratKetentuan')}>
             <Text style={{alignSelf: 'center', paddingTop: 8, color: 'white', fontWeight: '900'}}>Selanjutnya</Text>
         </TouchableOpacity>
       </View>

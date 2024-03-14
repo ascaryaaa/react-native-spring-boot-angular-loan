@@ -27,11 +27,8 @@ public class User {
     @Column(name = "nik_user")
     private String nikUser;
 
+    // Introduce Json Ignore to prevent recursion
     @JsonIgnore
     @OneToOne(mappedBy = "accountToUser")
     private Account userToAccount;
-
-//    @JsonIgnore
-//    @ManyToOne
-//    private FormPengajuan userToForm;
 }
