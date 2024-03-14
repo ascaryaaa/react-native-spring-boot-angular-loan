@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView} from 'react-native';
 
 const ProfileKeuanganGriya = ({navigation}) => {
 
@@ -11,61 +11,81 @@ const ProfileKeuanganGriya = ({navigation}) => {
     uangMuka: " ",
   });
 
+  const data = [
+    {id: 1, title: 'Harga Rumah', content: 'Rp 500.000.000,00'},
+    {id: 2, title: 'Jangka Waktu', content: '120 Bulan'},
+    {id: 3, title: 'Presentase Uang Muka (%)', content: '10%'},
+    {id: 4, title: 'Uang Muka', content: 'Rp 50.000.000,00'},
+    {id: 5, title: 'Suku Bunga per Tahun', content: '6,75%'},
+    {id: 6, title: 'Total Pinjaman', content: 'Rp 450.000.000,00'},
+    {id: 7, title: 'Angsuran Pinjaman per Bulan', content: 'Rp 5.167.445,22'}
+  ];
+
   return (
-    <View style={styles.container}>
-      <Text style={{fontWeight: '800'}}>Harga Rumah</Text>
-      <TextInput 
-        style={styles.input}
-        placeholder="Harga Rumah"
-        value={inputData.hargaRumah}
-        onChangeText={(number) => setInputData({...inputData, hargaRumah: number})}
+    <ScrollView style={styles.container}>
+      <View style={{backgroundColor: 'pink'}}>
+        <Text style={{fontWeight: '500', fontSize: 23, marginBottom: 13}}>Profile Keuangan</Text>
+        <Text style={styles.text}>Harga Rumah</Text>
+        <TextInput 
+          style={styles.input}
+          placeholder="Harga Rumah"
+          value={inputData.hargaRumah}
+          onChangeText={(number) => setInputData({...inputData, hargaRumah: number})}
+        />
+
+        <Text style={styles.text}>Jangka Waktu</Text>
+        <TextInput 
+          style={styles.input}
+          placeholder="Jangka Waktu"
+          value={inputData.jangkaWaktu}
+          onChangeText={(number) => setInputData({...inputData, jangkaWaktu: number})}
+        />
+        <Text style={{marginBottom: 10, fontSize: 10}}>*Maksimal 360 Bulan</Text>
+
+        <Text style={styles.text}>Presentase Uang Muka (%)</Text>
+        <TextInput 
+          style={styles.input}
+          placeholder="Presentase Uang Muka"
+          value={inputData.uangMuka}
+          onChangeText={(number) => setInputData({...inputData, uangMuka: number})}
+        />
+
+        <Text style={styles.text}>Penghasilan Bersih per. Bulan</Text>
+        <TextInput 
+          style={styles.input}
+          placeholder="Penghasilan Bersih per. Bulan"
+          value={inputData.penghasilanBersih}
+          onChangeText={(number) => setInputData({...inputData, penghasilanBersih: number})}
       />
 
-      <Text style={{fontWeight: '800'}}>Jangka Waktu</Text>
-      <TextInput 
-        style={styles.input}
-        placeholder="Jangka Waktu"
-        value={inputData.jangkaWaktu}
-        onChangeText={(number) => setInputData({...inputData, jangkaWaktu: number})}
-      />
+        <Text style={styles.text}>Bunga Pinjaman</Text>
+        <TextInput 
+          style={styles.input}
+          placeholder='Persediaan Per Tahun'
+          value='6,75%'
+        />
 
-      <Text style={{fontWeight: '800'}}>Presentase Uang Muka (%)</Text>
-      <TextInput 
-        style={styles.input}
-        placeholder="Presentase Uang Muka"
-        value={inputData.uangMuka}
-        onChangeText={(number) => setInputData({...inputData, uangMuka: number})}
-      />
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SyaratKetentuan')}>
+          <Text style={{alignSelf: 'center', paddingTop: 8, color: 'white', fontWeight: '900'}}>Simulasi Angsuran</Text>
+        </TouchableOpacity>
+        <Text style={styles.text}>Hasil :</Text>
+        <View style={styles.table}>
+          {data.map(view => (
+          <View key={view.id} style={styles.row}>
+            <Text style={{flex: 1, textAlign: 'auto'}}>{view.title}</Text>
+            <Text style={{flex: 1, textAlign: 'center'}}>:</Text>
+            <Text style={{flex: 1, textAlign: 'left'}}>{view.content}</Text>
+          </View>
+          ))}
+        </View>
 
-      <Text style={{fontWeight: '800'}}>Penghasilan Bersih per. Bulan</Text>
-      <TextInput 
-        style={styles.input}
-        placeholder="Penghasilan Bersih per. Bulan"
-        value={inputData.penghasilanBersih}
-        onChangeText={(number) => setInputData({...inputData, penghasilanBersih: number})}
-     />
+        <Text style={{fontWeight: '500', marginVertical: 20}}>Bunga Dapat Berubah Sewaktu-waktu Tanpa Pemberitahuan Lebih Lanjut</Text>
 
-      <Text style={{fontWeight: '800'}}>Bunga Pinjaman</Text>
-      <TextInput 
-        style={styles.input}
-        placeholder='Persediaan Per Tahun'
-        value='6,75%'
-      />
-      <Text>*Maksimal 360 Bulan</Text>
-
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SyaratKetentuan')}>
-        <Text style={{alignSelf: 'center', paddingTop: 8, color: 'white', fontWeight: '900'}}>Simulasi Angsuran</Text>
-      </TouchableOpacity>
-      <Text>Hasil :</Text>
-      <Text>Maksimal Kredit : Rp. 450.000.000,00</Text>
-      <Text>Uang Muka : Rp. 50.000.000,00</Text>
-      <Text>Angsuran Kredit Perbulan : Rp. 3.421.638,00</Text>
-      <Text style={{fontWeight: '500', marginVertical: 20}}>Bunga Dapat Berubah Sewaktu-waktu Tanpa Pemberitahuan Lebih Lanjut</Text>
-
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SyaratKetentuan')}>
-        <Text style={{alignSelf: 'center', paddingTop: 8, color: 'white', fontWeight: '900'}}>Ajukan Pinjaman</Text>
-      </TouchableOpacity>
-    </View>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SyaratKetentuan')}>
+          <Text style={{alignSelf: 'center', paddingTop: 8, color: 'white', fontWeight: '900'}}>Ajukan Pinjaman</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
   );
 };
 export default ProfileKeuanganGriya;
@@ -91,5 +111,22 @@ input: {
   padding: 8,
   borderRadius: 8,
   marginVertical: 8,
+},
+text: {
+  fontWeight: '800',
+},
+table: {
+  top: 8,
+  padding: 15,
+  borderColor: '#000',
+  marginBottom: 10,
+  backgroundColor: 'white',
+  borderRadius: 10,
+},
+row: {
+  flexDirection: 'row',
+  borderColor: '#000',
+  marginBottom: 15,
+  justifyContent: 'space-between',
 },
 });
