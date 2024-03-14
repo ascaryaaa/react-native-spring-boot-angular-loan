@@ -34,6 +34,9 @@ public class Admin {
     @Column(name = "password_admin")
     private String passwordAdmin;
 
+    @Column(name = "profilepict_admin")
+    private String profilepictdAdmin;
+
     public Admin(String usernameAdmin, String passwordAdmin) {
         this.usernameAdmin = usernameAdmin;
         this.passwordAdmin = passwordAdmin;
