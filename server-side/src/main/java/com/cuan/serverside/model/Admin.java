@@ -35,7 +35,7 @@ public class Admin {
     private String passwordAdmin;
 
     @Column(name = "profilepict_admin")
-    private String profilepictdAdmin;
+    private String profilepictAdmin;
 
     public Admin(String usernameAdmin, String passwordAdmin) {
         this.usernameAdmin = usernameAdmin;
