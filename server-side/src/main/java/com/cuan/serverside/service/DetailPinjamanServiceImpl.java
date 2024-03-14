@@ -5,8 +5,9 @@ import com.cuan.serverside.repository.DetailPinjamanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service // Define Service Implementation
 public class DetailPinjamanServiceImpl implements DetailPinjamanService{
+    // Dependency Injection to prevent coupling
     @Autowired
     private DetailPinjamanRepository detailPinjamanRepository;
     public DetailPinjamanServiceImpl(DetailPinjamanRepository detailPinjamanRepository) {
@@ -14,6 +15,7 @@ public class DetailPinjamanServiceImpl implements DetailPinjamanService{
         this.detailPinjamanRepository = detailPinjamanRepository;
     }
 
+    // Function overriding from interface
     @Override
     public Iterable<DetailPinjaman> getAllDetailPinjaman() {
         return detailPinjamanRepository.findAll();

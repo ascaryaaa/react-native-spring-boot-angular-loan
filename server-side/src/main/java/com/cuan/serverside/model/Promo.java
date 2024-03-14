@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor // Generate empty constructor
 @AllArgsConstructor // Generate constructors with all elements
 public class Promo {
+    // Initialize the id and attributes of table
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_promo", updatable = false, nullable = false) // Can't be updated or null
