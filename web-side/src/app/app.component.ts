@@ -6,11 +6,12 @@ import { initFlowbite } from 'flowbite';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth/auth.service';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterModule, CommonModule, HomeComponent, LoginComponent],
+  imports: [RouterOutlet, RouterModule, CommonModule, HomeComponent, LoginComponent, SidebarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
