@@ -1,6 +1,5 @@
 package com.cuan.serverside.service;
 
-import com.cuan.serverside.model.Account;
 import com.cuan.serverside.model.FormPengajuan;
 
 public interface FormPengajuanService {
