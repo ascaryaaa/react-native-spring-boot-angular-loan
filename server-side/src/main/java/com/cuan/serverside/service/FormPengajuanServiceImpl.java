@@ -6,8 +6,10 @@ import com.cuan.serverside.repository.FormPengajuanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service // Define Service Implementation
 public class FormPengajuanServiceImpl implements FormPengajuanService{
+
+    // Dependency Injection to prevent coupling
     @Autowired
     private FormPengajuanRepository formPengajuanRepository;
     public FormPengajuanServiceImpl(FormPengajuanRepository formPengajuanRepository) {
@@ -15,6 +17,7 @@ public class FormPengajuanServiceImpl implements FormPengajuanService{
         this.formPengajuanRepository = formPengajuanRepository;
     }
 
+    // Function overriding from interface
     @Override
     public Iterable<FormPengajuan> getAllForm() {
         return formPengajuanRepository.findAll();

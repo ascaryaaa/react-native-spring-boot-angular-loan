@@ -11,5 +11,6 @@ public interface AdminService {
     // Define POST user in service
     public Admin saveAdmin(Admin admin);
 
+    // Define GET admin by name in service
     public Admin findByUsernameAdmin(String username);
 }
