@@ -45,7 +45,10 @@ public class SecurityConfig  {
                 .requestMatchers("loan/v1/jenis-pinjaman/get-jenis-pinjamans").permitAll()
                 .requestMatchers("loan/v1/admin/post-admin").permitAll()
                 .requestMatchers("loan/v1/admin/get-admins").permitAll()
+                .requestMatchers("loan/v1/user/post-user").permitAll()
                 .requestMatchers("loan/v1/user/get-users").permitAll()
+                .requestMatchers("loan/v1/pinjaman/get-pinjamans").permitAll()
+                .requestMatchers("loan/v1/pinjaman/post-pinjaman").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
