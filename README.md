@@ -444,5 +444,27 @@ In your app.component.html, implement navigation using router links:
 <router-outlet></router-outlet>
 ```
 
+### 3. Implemented Authentication and Login
 
+Install axios to fetch the data
+```
+npm i axios
+```
 
+To fetch the data from the API-Endpoint
+
+```ruby
+    const response = await axios.post("http://localhost:8081/rest/auth/login",{username: form.username, password: form.password});
+```
+
+Add CrossOrigin for the `AuthController`
+
+```
+@CrossOrigin(origins = "http://localhost:4200")
+```
+
+Because using `await`, then we need to add `async` to the `login` function
+
+```ruby
+ async login(form: UserForm) {
+```
