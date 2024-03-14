@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -6,28 +6,47 @@ import {
   TouchableOpacity,
   Image,
   Button,
+  Modal,
+  Pressable,
 } from "react-native";
+import ModalAwal from "../components/ModalAwal";
 
 const Login = ({ navigation }) => {
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const openModal = () => {
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
   return (
     <View style={styles.container}>
       <Image
         source={require("../../../mobile-side/src/assets/bg_login.png")}
         style={styles.background}
       />
-      {/* <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('DigitalLoan')}> */}
-      <View style={styles.button}>
-        <Text
-          style={styles.text}
-          onPress={() => navigation.navigate("DigitalLoan")}
-        >
-          Login
-        </Text>
-      </View>
-      {/* </TouchableOpacity> */}
+      <TouchableOpacity style={styles.button} onPress={openModal}>
+        <Text style={styles.text}>Login</Text>
+      </TouchableOpacity>
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={closeModal} // Close the modal when the back button is pressed on Android or when tapping outside the modal on iOS
+      >
+        <Pressable style={styles.modalContainer} onPress={closeModal}>
+          <View style={styles.button}>
+            <ModalAwal navigation={navigation} />
+          </View>
+        </Pressable>
+      </Modal>
     </View>
   );
 };
+
 export default Login;
 
 const styles = StyleSheet.create({
@@ -57,7 +76,13 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     fontSize: 19,
-    fontWeight: "400",
+    fontWeight: "500",
     backgroundColor: "#18C1CD",
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.5)",
   },
 });
