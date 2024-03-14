@@ -1,0 +1,27 @@
+.container {
+    text-align: center;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .button {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    margin: 5px;
+  }
+  
+  .processed {
+    background-color: #f0ad4e;
+    color: #fff;
+  }
+  
+  .accepted {
+    background-color: #5cb85c;
+    color: #fff;
+  }
+  

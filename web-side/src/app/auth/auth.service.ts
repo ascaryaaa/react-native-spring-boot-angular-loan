@@ -4,10 +4,10 @@ import { User, UserForm } from './auth';
 import { Route, Router } from '@angular/router';
 import axios from 'axios';
 
-const users: Array<User> = [
-  { username: 'Rifqiw', password: 'rifqi160' },
-  { username: 'Yoshuy', password: 'batmobile' },
-];
+// const users: Array<User> = [
+//   { username: 'Rifqiw', password: 'rifqi160' },
+//   { username: 'Yoshuy', password: 'batmobile' },
+// ];
 
 @Injectable({
   providedIn: 'root',
@@ -17,15 +17,18 @@ export class AuthService {
   constructor(private router: Router) {}
 
   async login(form: UserForm) {
-    console.log('Form username:', form.username);
-    console.log('Form password:', form.password);
+    // console.log('Form username:', form.username);
+    // console.log('Form password:', form.password);
 
     //npm i axios
-    const response = await axios.post("http://localhost:8081/rest/auth/login",{username: form.username, password: form.password});
+    const response = await axios.post('http://localhost:8081/rest/auth/login', {
+      username: form.username,
+      password: form.password,
+    });
 
     // const response = users.find((user) => this.matchUser(user, form));
 
-    console.log('Response:', response);
+    // console.log('Response:', response);
 
     if (!response) {
       alert('User is not found!');
