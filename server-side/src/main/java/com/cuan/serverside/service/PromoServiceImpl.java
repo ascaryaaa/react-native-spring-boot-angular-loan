@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PromoServiceImpl implements PromoService{
+
+    // Dependency Injection to prevent coupling
     @Autowired
     private PromoRepository promoRepository;
 
@@ -15,6 +17,7 @@ public class PromoServiceImpl implements PromoService{
         this.promoRepository = promoRepository;
     }
 
+    // Function overriding from interface
     @Override
     public Iterable<Promo> getAllPromo() {
 

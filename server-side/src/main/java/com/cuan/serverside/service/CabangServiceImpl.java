@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service // Define Service Implementation
 public class CabangServiceImpl implements CabangService{
+
+    // Dependency Injection to prevent coupling
     @Autowired
     private CabangRepository cabangRepository;
 
@@ -17,6 +19,7 @@ public class CabangServiceImpl implements CabangService{
         this.cabangRepository = cabangRepository;
     }
 
+    // Function overriding from interface
     @Override
     public Iterable<Cabang> getAllCabang() {
 

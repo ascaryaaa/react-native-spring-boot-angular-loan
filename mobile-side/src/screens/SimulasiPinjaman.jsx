@@ -93,7 +93,7 @@ const SimulasiPinjaman = ({ navigation }) => {
             </Text>
             <TouchableOpacity
               style={styles.button}
-              onPress={() => navigation.navigate("DataPemohon")}
+              onPress={() => navigation.navigate("ProfileKeuanganFleksiPensiun")}
             >
               <Text style={styles.simulasikan}> Selanjutnya</Text>
             </TouchableOpacity>
@@ -138,11 +138,8 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   bodyContainer: {
-    // alignItems: "center",
     width: "100%",
-    // verticalAlign: "top",
     paddingHorizontal: 10,
-    // backgroundColor: "red",
   },
   imgSimulasi: {
     width: 228,
