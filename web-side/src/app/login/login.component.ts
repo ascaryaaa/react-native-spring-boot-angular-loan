@@ -12,7 +12,6 @@ import { CommonModule } from '@angular/common';
 export class LoginComponent {
   constructor(private service: AuthService) {}
   onSubmit(form: NgForm) {
-    alert(form.value?.username + form.value?.password);
     if (!form.valid) {
       alert("Please complete the form!");
       return;
