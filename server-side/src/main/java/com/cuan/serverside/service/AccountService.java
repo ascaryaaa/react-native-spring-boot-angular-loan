@@ -14,4 +14,6 @@ public interface AccountService {
 
     // Define DELETE account by id in service
     public void deleteAccountById(Long id);
+
+    public Account findByUsernameAccount(String username);
 }
