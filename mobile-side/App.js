@@ -19,6 +19,7 @@ import NotificationSuccess from "./src/screens/NotificationSuccess";
 import ProfileKeuanganGriya from "./src/screens/ProfileKeuanganGriya";
 import ProfileKeuanganFleksiAktif from "./src/screens/ProfileKeuanganFleksiAktif";
 import ProfileKeuanganFleksiPensiun from "./src/screens/ProfileKeuanganFleksiPensiun";
+import Monitoring from "./src/screens/Monitoring";
 
 const Stack = createStackNavigator();
 
@@ -167,6 +168,18 @@ export default function App() {
           <Stack.Screen
             name="SyaratKetentuan"
             component={SyaratKetentuan}
+            options={{
+              headerTintColor: "black",
+              headerStyle: {
+                backgroundColor: "#FFFFFF",
+                shadowOpacity: 0,
+                elevation: 0,
+              },
+            }}
+          />
+          <Stack.Screen
+            name="Monitoring"
+            component={Monitoring}
             options={{
               headerTintColor: "black",
               headerStyle: {

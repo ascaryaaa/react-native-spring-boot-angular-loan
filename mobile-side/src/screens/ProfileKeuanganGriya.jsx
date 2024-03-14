@@ -12,10 +12,10 @@ const ProfileKeuanganGriya = ({navigation}) => {
   });
 
   const data = [
-    {id: 1, title: 'Harga Rumah', content: 'Rp 500.000.000,00'},
+    {id: 1, title: 'Harga Rumah', content: 'Rp 500.000.000'},
     {id: 2, title: 'Jangka Waktu', content: '120 Bulan'},
     {id: 3, title: 'Presentase Uang Muka (%)', content: '10%'},
-    {id: 4, title: 'Uang Muka', content: 'Rp 50.000.000,00'},
+    {id: 4, title: 'Uang Muka', content: 'Rp 50.000.000'},
     {id: 5, title: 'Suku Bunga per Tahun', content: '6,75%'},
     {id: 6, title: 'Total Pinjaman', content: 'Rp 450.000.000,00'},
     {id: 7, title: 'Angsuran Pinjaman per Bulan', content: 'Rp 5.167.445,22'}
@@ -23,7 +23,7 @@ const ProfileKeuanganGriya = ({navigation}) => {
 
   return (
     <ScrollView style={styles.container}>
-      <View style={{backgroundColor: 'pink'}}>
+      <View>
         <Text style={{fontWeight: '500', fontSize: 23, marginBottom: 13}}>Profile Keuangan</Text>
         <Text style={styles.text}>Harga Rumah</Text>
         <TextInput 
@@ -68,7 +68,7 @@ const ProfileKeuanganGriya = ({navigation}) => {
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SyaratKetentuan')}>
           <Text style={{alignSelf: 'center', paddingTop: 8, color: 'white', fontWeight: '900'}}>Simulasi Angsuran</Text>
         </TouchableOpacity>
-        <Text style={styles.text}>Hasil :</Text>
+        <Text style={styles.text}>Hasil</Text>
         <View style={styles.table}>
           {data.map(view => (
           <View key={view.id} style={styles.row}>
@@ -79,7 +79,7 @@ const ProfileKeuanganGriya = ({navigation}) => {
           ))}
         </View>
 
-        <Text style={{fontWeight: '500', marginVertical: 20}}>Bunga Dapat Berubah Sewaktu-waktu Tanpa Pemberitahuan Lebih Lanjut</Text>
+        <Text style={{fontWeight: '300', marginVertical: 20}}>Bunga Dapat Berubah Sewaktu-waktu Tanpa Pemberitahuan Lebih Lanjut</Text>
 
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SyaratKetentuan')}>
           <Text style={{alignSelf: 'center', paddingTop: 8, color: 'white', fontWeight: '900'}}>Ajukan Pinjaman</Text>
@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
 container: {
     flex:1,
     padding: 8,
+    marginTop: 5,
 },
 button: {
   padding: 5,
@@ -122,6 +123,8 @@ table: {
   marginBottom: 10,
   backgroundColor: 'white',
   borderRadius: 10,
+  borderColor: 'grey',
+  borderWidth: 1.5,
 },
 row: {
   flexDirection: 'row',
