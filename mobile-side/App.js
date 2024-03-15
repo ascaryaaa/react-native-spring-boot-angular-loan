@@ -43,8 +43,8 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login">
-          {/* <Stack.Navigator> */}
+        {/* <Stack.Navigator initialRouteName="Login"> */}
+        <Stack.Navigator>
           {isSignedIn ? (
             // Screens to show when signed in
             <Stack.Screen
