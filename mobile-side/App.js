@@ -24,7 +24,6 @@ import Monitoring from "./src/screens/Monitoring";
 import KetentuanTabel from "./src/screens/KetentuanTabel";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -44,8 +43,8 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login">
-          {/* <Stack.Navigator> */}
+        {/* <Stack.Navigator initialRouteName="Login"> */}
+        <Stack.Navigator>
           {isSignedIn ? (
             // Screens to show when signed in
             <Stack.Screen

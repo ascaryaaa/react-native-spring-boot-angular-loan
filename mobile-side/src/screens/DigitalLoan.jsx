@@ -8,8 +8,14 @@ import {
   ScrollView,
   FlatList,
 } from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const DigitalLoan = ({ navigation }) => {
+  const handleLogout = async () => {
+    await AsyncStorage.removeItem('token');
+    // Replace the current screen with the Login screen in the navigation stack
+    navigation.navigate('Login');
+  };
   const list = [
     require("../../../mobile-side/src/assets/ban_kejutan1.png"),
     require("../../../mobile-side/src/assets/ban_kejutan2.png"),
@@ -22,9 +28,9 @@ const DigitalLoan = ({ navigation }) => {
     <View style={styles.container}>
       {/* container atas */}
       <View style={styles.navbar}>
-        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+        <TouchableOpacity onPress={handleLogout}>
           <Image
-            source={require("../../../mobile-side/src/assets/Icon_leftarrow.png")}
+            source={require("../../../mobile-side/src/assets/Icon_logout.png")}
           />
         </TouchableOpacity>
         <Text>Digital Loan</Text>
@@ -79,18 +85,17 @@ const styles = StyleSheet.create({
   containerTengah: {
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 60,
+    marginTop: 30,
     marginLeft: 30,
     marginRight: 30,
   },
   containerBawah: {
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 60,
+    marginTop: 30,
     marginLeft: 30,
     marginRight: 30,
-    padding: 0,
-    paddingTop: -10,
+    paddingTop: 10,
   },
   kejutan: {
     fontWeight: "600",
@@ -144,7 +149,6 @@ const styles = StyleSheet.create({
   },
   bannerImage: {
     marginTop: 15,
-    height: 180,
     marginHorizontal: 5,
     borderRadius: 10,
     width: 300,

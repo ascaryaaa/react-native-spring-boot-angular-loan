@@ -63,38 +63,39 @@
             <th scope="col" class="px-4 py-2">Action</th>
           </tr>
         </thead>
-        <tbody>
-          <tr
-            class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
-          >
-            <td
-              class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              W1832343
-            </td>
-            <td class="px-4 py-2">Gerald Marihot</td>
-            <td class="px-4 py-2">3520121000924832323</td>
-            <td class="px-4 py-2">BNI Griya</td>
-            <td class="px-4 py-2">
-              <div
-                class="justify-center p-1.5 text-sm tracking-normal leading-4 text-center text-emerald-100 whitespace-nowrap bg-green-600 rounded-xl text-ellipsis"
+        <tbody *ngFor="let pinjaman of pinjamans">
+            <tr
+              class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
+            >   
+              <td
+                class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
               >
-                Diterima
-              </div>
-            </td>
-            <td class="px-4 py-2">Admin</td>
-            <td class="px-4 py-2">Tanggal Realisasi</td>
-            <td class="px-4 py-2">
-              <button
-                (click)="navigateToDetail()"
-                href="#"
-                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-              >
-                View
-              </button>
-            </td>
-          </tr>
-          <tr
+                {{pinjaman.idPinjaman}}
+              </td>
+              <td class="px-4 py-2">{{ pinjaman.pinjamanToUser.nameUser}}</td>
+              <td class="px-4 py-2">{{pinjaman.pinjamanToUser.nikUser}}</td>
+              <td class="px-4 py-2">{{pinjaman.pinjamanToForm.formToJenis.nameJenisPinjaman}}</td>
+              <td class="px-4 py-2">
+                <div
+                  class="justify-center p-1.5 text-sm tracking-normal leading-4 text-center text-emerald-100 whitespace-nowrap bg-green-600 rounded-xl text-ellipsis"
+                >
+                  {{pinjaman.status}}
+                </div>
+              </td>
+              <td class="px-4 py-2">{{pinjaman.pinjamanToAdmin.nameAdmin}}</td>
+              <td class="px-4 py-2">{{pinjaman.tanggalRealisasi}}</td>
+              <td class="px-4 py-2">
+                <button
+                  (click)="navigateToDetail()"
+                  href="#"
+                  class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                >
+                  View
+                </button>
+              </td>
+            </tr>
+        </tbody>
+          <!-- <tr
             class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
           >
             <td
@@ -304,9 +305,9 @@
                 View
               </button>
             </td>
-          </tr>
+          </tr> -->
           <!-- Add more rows here if needed -->
-        </tbody>
+        <!-- </tbody> -->
       </table>
       <nav
         class="flex items-center flex-column flex-wrap md:flex- justify-between pt-4"

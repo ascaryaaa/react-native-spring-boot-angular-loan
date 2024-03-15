@@ -18,13 +18,15 @@ const ProfileKeuanganGriya = ({ navigation }) => {
   });
 
   const data = [
-    {id: 1, title: 'Harga Rumah', content: 'Rp 500.000.000'},
-    {id: 2, title: 'Jangka Waktu', content: '120 Bulan'},
-    {id: 3, title: 'Presentase Uang Muka (%)', content: '10%'},
-    {id: 4, title: 'Uang Muka', content: 'Rp 50.000.000'},
-    {id: 5, title: 'Suku Bunga per Tahun', content: '6,75%'},
-    {id: 6, title: 'Total Pinjaman', content: 'Rp 450.000.000,00'},
-    {id: 7, title: 'Angsuran Pinjaman per Bulan', content: 'Rp 5.167.445,22'}
+
+    { id: 1, title: "Harga Rumah", content: "Rp 500.000.000,00" },
+    { id: 2, title: "Jangka Waktu", content: "120 Bulan" },
+    { id: 3, title: "Presentase Uang Muka (%)", content: "10%" },
+    { id: 4, title: "Uang Muka", content: "Rp 50.000.000,00" },
+    { id: 5, title: "Suku Bunga per Tahun", content: "6,75%" },
+    { id: 6, title: "Total Pinjaman", content: "Rp 450.000.000,00" },
+    { id: 7, title: "Angsuran Pinjaman per Bulan", content: "Rp 5.167.445,22" },
+
   ];
 
   return (
@@ -107,7 +109,6 @@ const ProfileKeuanganGriya = ({ navigation }) => {
           ))}
         </View>
         <Text style={{fontWeight: '300', marginVertical: 20}}>Bunga Dapat Berubah Sewaktu-waktu Tanpa Pemberitahuan Lebih Lanjut</Text>
-
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate("KetentuanTabel")}
@@ -133,22 +134,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 8,
-  },
-  button: {
-    padding: 5,
-    margin: 5,
-    alignSelf: "flex-end",
-    marginLeft: 80,
-    backgroundColor: "#18C1CD",
-    borderRadius: 20,
-    width: 160,
-    height: 44,
-  },
-  input: {
-    borderColor: "#1394AD",
-    borderWidth: 1.5,
-    padding: 8,
-    marginTop: 5,
+
 },
 button: {
   padding: 5,
