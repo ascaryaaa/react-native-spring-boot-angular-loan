@@ -1,45 +1,60 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, FlatList, Image} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
 
 const Monitoring = ({ navigation}) => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isDropdownOpen1, setIsDropdownOpen1] = useState(false);
 
-    return (
-      <ScrollView style={styles.container}>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between', marginBottom: 10}}>
-          <Text style={{fontSize: 20, fontWeight: '500'}}>Monitoring Pinjaman</Text>
-          <Text style={{textAlign: 'right', marginTop: 5}}>Peringatan</Text>
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+  const toggleDropdown1 = () => {
+    setIsDropdownOpen1(!isDropdownOpen1);
+  };
+
+  return (
+    <ScrollView style={styles.container}>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between', marginBottom: 10}}>
+        <Text style={{fontSize: 20, fontWeight: '500'}}>Monitoring Pinjaman</Text>
+        <Text style={{textAlign: 'right', marginTop: 5}}>Peringatan</Text>
+      </View>
+      <View style={styles.table}>
+        <Text style={{color: 'white', fontWeight: '700'}}>Sisa Pinjaman</Text>
+        <Text style={{color: 'white', fontSize: 28, fontWeight: '700', marginTop: 5}}>Rp. 248.000.000,00</Text>
+        <Text style={{color: 'white', marginTop: 8}}>Pembayaran 7 hari lagi</Text>
+        <Text style={{color: 'white'}}>- - - - - - - - - - - - - - - - - - - - - - - - - - - </Text>
+        <View style={styles.row}>
+          <Text style={{fontSize: 15, marginTop: 8, color: 'white', fontWeight: '700'}}>BNI Griya</Text>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Riwayat')}>
+            <Text style={{textAlign: 'center', color: '#F68310', fontWeight: '700' }}>Riwayat</Text>
+          </TouchableOpacity>
         </View>
-        <View style={styles.table}>
-          <Text style={{color: 'white', fontWeight: '700'}}>Sisa Pinjaman</Text>
-          <Text style={{color: 'white', fontSize: 28, fontWeight: '700', marginTop: 5}}>Rp. 248.000.000,00</Text>
-          <Text style={{color: 'white', marginTop: 8}}>Pembayaran 7 hari lagi</Text>
-          <Text style={{color: 'white'}}>- - - - - - - - - - - - - - - - - - - - - - - - - - - </Text>
-          <View style={styles.row}>
-            <Text style={{fontSize: 15, marginTop: 8, color: 'white', fontWeight: '700'}}>BNI Griya</Text>
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Riwayat')}>
-              <Text style={{textAlign: 'center', color: '#F68310', fontWeight: '700' }}>Riwayat</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={{marginTop: 10}}>
-          <Text style={{fontWeight: '600', fontSize: 18}}>Keterangan</Text>
-          <View style={styles.status}>
-            <View style={styles.ellipse} />
-            <Text style={{marginLeft: 5}}>Telat Bayar</Text>
-            <View style={styles.ellipse1} />
-            <Text style={{marginLeft: 5}}>Peringatan</Text>
-            <View style={styles.ellipse2} />
-            <Text style={{marginLeft: 5}}>Terbayar</Text>
-          </View>
-        </View>
-        <View style={styles.detailButton}>
+      </View>
+      <View style={styles.container1}>
+        <TouchableOpacity onPress={toggleDropdown} style={styles.detailButton}>
           <Text style={styles.textButton}>Data Debitur</Text>
-        </View>
-        <View style={styles.detailButton}>
+        </TouchableOpacity>
+        {isDropdownOpen && (
+          <View style={styles.dropdownContent}>
+            <Text style={styles.infoText}>This is the dropdown content.</Text>
+            <Text style={styles.infoText}>It can contain any information you want to display.</Text>
+          </View>
+        )}
+      </View>
+
+      <View style={styles.container1}>
+        <TouchableOpacity onPress={toggleDropdown1} style={styles.detailButton}>
           <Text style={styles.textButton}>Detail Pinjaman</Text>
-        </View>
-      </ScrollView>
-    );
+        </TouchableOpacity>
+        {isDropdownOpen1 && (
+          <View style={styles.dropdownContent}>
+            <Text style={styles.infoText}>This is the dropdown content.</Text>
+            <Text style={styles.infoText}>It can contain any information you want to display.</Text>
+          </View>
+        )}
+      </View>
+    </ScrollView>
+  );
 };
 export default Monitoring;
 
@@ -75,29 +90,6 @@ status: {
   flexDirection: 'row',
   marginTop: 8,
 },
-ellipse: {
-  marginTop: 1,
-  width: 14,
-  height: 14,
-  borderRadius: 20,
-  backgroundColor: '#D4352A',
-},
-ellipse1: {
-  marginTop: 1,
-  width: 14,
-  height: 14,
-  borderRadius: 20,
-  backgroundColor: '#FFC930',
-  marginLeft: 40,
-},
-ellipse2: {
-  marginTop: 1,
-  width: 14,
-  height: 14,
-  borderRadius: 20,
-  backgroundColor: '#04C300',
-  marginLeft: 40,
-},
 detailButton: {
   marginTop: 15,
   padding: 15,
@@ -112,4 +104,20 @@ textButton: {
   fontWeight: '600',
   fontSize: 14,
 },
+
+container1: {
+  flex: 1,
+  alignItems: "center",
+  justifyContent: "center",
+},
+dropdownContent: {
+  backgroundColor: "rgba(0, 0, 0, 0.1)",
+  padding: 10,
+  borderRadius: 5,
+  marginTop: 10,
+},
+infoText: {
+  fontSize: 16,
+},
+
 })
