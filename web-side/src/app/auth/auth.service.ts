@@ -21,23 +21,32 @@ export class AuthService {
     console.log('Form password:', form.password);
 
     try {
+<<<<<<< HEAD
         const response = await axios.post("http://localhost:8083/rest/auth/login-admin", {
             username: form.username,
             password: form.password
         });
+=======
+      const response = await axios.post(
+        'http://localhost:8083/rest/auth/login-admin',
+        {
+          username: form.username,
+          password: form.password,
+        }
+      );
+>>>>>>> 842c699d570486571ea4c8e0beaf7a08506ab710
 
-        console.log('Response:', response);
+      console.log('Response:', response);
 
-        if (response) {
-            localStorage.setItem('user', JSON.stringify(response.data));
-            this.router.navigate(['home']);
-        } 
+      if (response) {
+        localStorage.setItem('user', JSON.stringify(response.data));
+        this.router.navigate(['home']);
+      }
     } catch (error) {
-        console.error('Login failed!', error);
-        alert('User is not found!');
+      console.error('Login failed!', error);
+      alert('User is not found!');
     }
-}
-
+  }
 
   getAuth(): User | undefined {
     const response = localStorage.getItem('user');

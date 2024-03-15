@@ -53,4 +53,8 @@ public class DetailPinjaman {
     // Date of next payment
     @Column(name = "tanggal_bayar_tagihan_pinjaman")
     private Date tanggalBayarTagihan;
+
+    // Full address of debtor
+    @Column(name = "alamat_pinjaman")
+    private String alamat;
 }
