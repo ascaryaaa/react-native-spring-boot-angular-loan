@@ -77,4 +77,24 @@ public class FormPengajuan {
     // Loan interest rate requested by the debtor
     @Column(name = "bunga_pinjaman_form_pengajuan_pinjaman")
     private Double bungaPinjaman;
+
+    // Maximum loan amount allowed
+    @Column(name = "maksimal_pinjaman_form_pengajuan_pinjaman")
+    private Long maksimalPinjaman;
+
+    // Monthly installment amount
+    @Column(name = "angsuran_perBulan_form_pengajuan_pinjaman")
+    private Long angsuranPerbulan;
+
+    // Price of the house being purchased
+    @Column(name = "harga_rumah_form_pengajuan_pinjaman")
+    private Long hargaRumah;
+
+    // Percentage of down payment
+    @Column(name = "persentase_uang_muka_form_pengajuan_pinjaman")
+    private Double persentaseUangMuka;
+
+    // Amount of down payment
+    @Column(name = "uang_muka_form_pengajuan_pinjaman")
+    private Long uangMuka;
 }
