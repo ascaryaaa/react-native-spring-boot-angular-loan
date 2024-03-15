@@ -20,11 +20,8 @@ import NotificationSuccess from "./src/screens/NotificationSuccess";
 import ProfileKeuanganGriya from "./src/screens/ProfileKeuanganGriya";
 import ProfileKeuanganFleksiAktif from "./src/screens/ProfileKeuanganFleksiAktif";
 import ProfileKeuanganFleksiPensiun from "./src/screens/ProfileKeuanganFleksiPensiun";
-// <<<<<<< HEAD
 import Monitoring from "./src/screens/Monitoring";
-// =======
 import AsyncStorage from '@react-native-async-storage/async-storage';
-// >>>>>>> 36bcd56d603d78ac332b15b5aa3ea12826ce9e03
 
 const Stack = createStackNavigator();
 
