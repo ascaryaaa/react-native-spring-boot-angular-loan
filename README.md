@@ -170,28 +170,50 @@ If it working, the you are done!
 
 ## API Documentation
 
-### The main pathing of the API edpoint is http://localhost:8081/loan/v1/user
+### The main pathing of the API edpoint is http://localhost:8083/loan/v1/user
 
 #### Read All Users / Membaca semua User
 ```
-http://localhost:8081/loan/v1/user/get-users
+http://localhost:8083/loan/v1/user/get-users
 ```
 
 #### Post User to database / Posting User ke databse
 ```
-http://localhost:8081/loan/v1/user/post-user
+http://localhost:8083/loan/v1/user/post-user
 ```
 
 #### Read user by Id / Membaca user dari Id
 ```
-http://localhost:8081/loan/v1/user/{number of user id}
+http://localhost:8083/loan/v1/user/{number of user id}
 
 # Example
-http://localhost:8081/loan/v1/user/2
+http://localhost:8083/loan/v1/user/2
 ```
 
 #### Read user by name / Membaca user dari nama
 coming soon
+
+### The main pathing of the API edpoint is http://localhost:8083/loan/v1/account
+
+
+#### Read All Users / Membaca semua User
+```
+http://localhost:8083/loan/v1/account/get-accounts
+```
+
+#### Post User to database / Posting User ke databse
+```
+http://localhost:8083/loan/v1/account/post-account
+```
+
+#### Read user by Id / Membaca user dari Id
+```
+http://localhost:8083/loan/v1/account/{number of user id}
+
+# Example
+http://localhost:8083/loan/v1/account/2
+```
+
 
 ## Server-Side Documentation
 
