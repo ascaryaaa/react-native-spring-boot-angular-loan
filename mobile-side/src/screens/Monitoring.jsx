@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, FlatList, Image} from 'react-native';
 
 const Monitoring = ({ navigation}) => {
+
     return (
       <ScrollView style={styles.container}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between', marginBottom: 10}}>
@@ -23,10 +24,19 @@ const Monitoring = ({ navigation}) => {
         <View style={{marginTop: 10}}>
           <Text style={{fontWeight: '600', fontSize: 18}}>Keterangan</Text>
           <View style={styles.status}>
-            <Text>Telat Bayar</Text>
-            <Text style={{marginLeft: 40}}>Peringatan</Text>
-            <Text style={{marginLeft: 40}}>Terbayar</Text>
+            <View style={styles.ellipse} />
+            <Text style={{marginLeft: 5}}>Telat Bayar</Text>
+            <View style={styles.ellipse1} />
+            <Text style={{marginLeft: 5}}>Peringatan</Text>
+            <View style={styles.ellipse2} />
+            <Text style={{marginLeft: 5}}>Terbayar</Text>
           </View>
+        </View>
+        <View style={styles.detailButton}>
+          <Text style={styles.textButton}>Data Debitur</Text>
+        </View>
+        <View style={styles.detailButton}>
+          <Text style={styles.textButton}>Detail Pinjaman</Text>
         </View>
       </ScrollView>
     );
@@ -40,7 +50,7 @@ container: {
     marginTop: 5,
 },
 table: {
-  top: 8,
+  marginTop: 8,
   padding: 15,
   marginBottom: 8,
   backgroundColor:'#18C1CD',
@@ -64,5 +74,42 @@ row: {
 status: {
   flexDirection: 'row',
   marginTop: 8,
+},
+ellipse: {
+  marginTop: 1,
+  width: 14,
+  height: 14,
+  borderRadius: 20,
+  backgroundColor: '#D4352A',
+},
+ellipse1: {
+  marginTop: 1,
+  width: 14,
+  height: 14,
+  borderRadius: 20,
+  backgroundColor: '#FFC930',
+  marginLeft: 40,
+},
+ellipse2: {
+  marginTop: 1,
+  width: 14,
+  height: 14,
+  borderRadius: 20,
+  backgroundColor: '#04C300',
+  marginLeft: 40,
+},
+detailButton: {
+  marginTop: 15,
+  padding: 15,
+  marginBottom: 8,
+  backgroundColor:'#F68310',
+  borderRadius: 10,
+  borderColor: '#F68310',
+  width: '100%'
+},
+textButton: {
+  color: 'white',
+  fontWeight: '600',
+  fontSize: 14,
 },
 })
