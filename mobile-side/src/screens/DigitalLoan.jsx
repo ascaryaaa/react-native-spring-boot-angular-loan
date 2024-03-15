@@ -11,10 +11,10 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const DigitalLoan = ({ navigation }) => {
-  const handleLogout = async () => {
-    await AsyncStorage.removeItem('token');
-    // Replace the current screen with the Login screen in the navigation stack
-    navigation.navigate('Login');
+  const handleLogout = () => {
+    AsyncStorage
+    .removeItem('token')
+    .then(()=>navigation.navigate('Login'))
   };
   const list = [
     require("../../../mobile-side/src/assets/ban_kejutan1.png"),

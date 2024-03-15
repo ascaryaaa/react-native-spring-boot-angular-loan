@@ -23,7 +23,7 @@ const ModalAwal = ({ navigation }) => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://192.168.193.54:8083/rest/auth/login-account', {
+      const response = await axios.post('http://192.168.231.54:8083/rest/auth/login-account', {
         username,
         password,
       });
