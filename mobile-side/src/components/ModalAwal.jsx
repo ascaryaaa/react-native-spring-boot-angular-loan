@@ -8,12 +8,32 @@ import {
   TextInput,
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons"; // Import FontAwesome from @expo/vector-icons
+import axios from "axios";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ModalAwal = ({ navigation }) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
   const [checked, setChecked] = useState(false);
 
   const toggleCheckbox = () => {
     setChecked(!checked);
+  };
+
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('http://192.168.210.169:8083/rest/auth/login-account', {
+        username,
+        password,
+      });
+      const { token } = response.data;
+      await AsyncStorage.setItem('token', token);
+      navigation.navigate("DigitalLoan");
+    } catch (error) {
+      console.error(error);
+      alert("Login failed!");
+    }
   };
 
   return (
@@ -33,9 +53,18 @@ const ModalAwal = ({ navigation }) => {
             Selamat datang kembali,
           </Text>
           <Text style={{ paddingTop: 33 }}>User ID</Text>
-          <TextInput style={styles.inputform}></TextInput>
+          <TextInput 
+            style={styles.inputform} 
+            onChangeText={setUsername} 
+            value={username}
+          />
           <Text style={{ paddingTop: 33 }}>MPIN</Text>
-          <TextInput style={styles.inputform}></TextInput>
+          <TextInput 
+            style={styles.inputform} 
+            onChangeText={setPassword} 
+            secureTextEntry={true} // This hides the password input
+            value={password}
+          />
 
           <TouchableOpacity
             onPress={toggleCheckbox}
@@ -62,7 +91,7 @@ const ModalAwal = ({ navigation }) => {
 
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate("DigitalLoan")}
+            onPress={handleLogin} // Updated to use handleLogin
           >
             <Text style={styles.teksLogin}>Login</Text>
           </TouchableOpacity>

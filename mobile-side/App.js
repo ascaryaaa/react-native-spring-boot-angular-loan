@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 // import { StatusBar } from "expo-status-bar";
@@ -19,14 +20,63 @@ import NotificationSuccess from "./src/screens/NotificationSuccess";
 import ProfileKeuanganGriya from "./src/screens/ProfileKeuanganGriya";
 import ProfileKeuanganFleksiAktif from "./src/screens/ProfileKeuanganFleksiAktif";
 import ProfileKeuanganFleksiPensiun from "./src/screens/ProfileKeuanganFleksiPensiun";
+import Monitoring from "./src/screens/Monitoring";
+import KetentuanTabel from "./src/screens/KetentuanTabel";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 const Stack = createStackNavigator();
 
 export default function App() {
+  const [isSignedIn, setIsSignedIn] = useState(false);
+
+  useEffect(() => {
+    const checkToken = async () => {
+      const token = await AsyncStorage.getItem("token");
+      if (token) {
+        setIsSignedIn(true);
+      }
+    };
+
+    checkToken();
+  }, []);
+
   return (
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Login">
+          {/* <Stack.Navigator> */}
+          {isSignedIn ? (
+            // Screens to show when signed in
+            <Stack.Screen
+              name="DigitalLoan"
+              component={DigitalLoan}
+              options={{
+                headerTintColor: "black",
+                headerShown: false,
+                headerStyle: {
+                  backgroundColor: "#FFFFFF",
+                  shadowOpacity: 0,
+                  elevation: 0,
+                },
+              }}
+            />
+          ) : (
+            // Login screen
+            <Stack.Screen
+              name="Login"
+              component={Login}
+              options={{
+                headerTintColor: "black",
+                headerShown: false,
+                headerStyle: {
+                  backgroundColor: "#FFFFFF",
+                  shadowOpacity: 0,
+                  elevation: 0,
+                },
+              }}
+            />
+          )}
           <Stack.Screen
             name="Home"
             component={Home}
@@ -40,7 +90,7 @@ export default function App() {
               },
             }}
           />
-          <Stack.Screen
+          {/* <Stack.Screen
             name="Login"
             component={Login}
             options={{
@@ -52,7 +102,7 @@ export default function App() {
                 elevation: 0,
               },
             }}
-          />
+          /> */}
           <Stack.Screen
             name="SimulasiPinjaman"
             component={SimulasiPinjaman}
@@ -90,7 +140,7 @@ export default function App() {
               },
             }}
           />
-          <Stack.Screen
+          {/* <Stack.Screen
             name="DigitalLoan"
             component={DigitalLoan}
             options={{
@@ -102,7 +152,7 @@ export default function App() {
                 elevation: 0,
               },
             }}
-          />
+          /> */}
           <Stack.Screen
             name="PengajuanPinjaman"
             component={PengajuanPinjaman}
@@ -133,6 +183,7 @@ export default function App() {
             component={ProfileKeuanganGriya}
             options={{
               headerTintColor: "black",
+              headerShown: false,
               headerStyle: {
                 backgroundColor: "#FFFFFF",
                 shadowOpacity: 0,
@@ -177,6 +228,18 @@ export default function App() {
             }}
           />
           <Stack.Screen
+            name="Monitoring"
+            component={Monitoring}
+            options={{
+              headerTintColor: "black",
+              headerStyle: {
+                backgroundColor: "#FFFFFF",
+                shadowOpacity: 0,
+                elevation: 0,
+              },
+            }}
+          />
+          <Stack.Screen
             name="Riwayat"
             component={Riwayat}
             options={{
@@ -205,6 +268,19 @@ export default function App() {
             component={NotificationSuccess}
             options={{
               headerTintColor: "black",
+              headerStyle: {
+                backgroundColor: "#FFFFFF",
+                shadowOpacity: 0,
+                elevation: 0,
+              },
+            }}
+          />
+          <Stack.Screen
+            name="KetentuanTabel"
+            component={KetentuanTabel}
+            options={{
+              headerTintColor: "black",
+              headerShown: false,
               headerStyle: {
                 backgroundColor: "#FFFFFF",
                 shadowOpacity: 0,
