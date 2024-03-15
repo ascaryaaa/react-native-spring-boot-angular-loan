@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -10,8 +10,20 @@ import {
   Pressable,
 } from "react-native";
 import ModalAwal from "../components/ModalAwal";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Login = ({ navigation }) => {
+
+  useEffect(() => {
+    AsyncStorage
+    .getItem('token')
+    .then(token => {
+        if (token !== null) {
+            navigation.navigate('DigitalLoan')
+        }
+    })
+  }, [])
+
   const [modalVisible, setModalVisible] = useState(false);
 
   const openModal = () => {
