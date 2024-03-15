@@ -19,6 +19,7 @@ import NotificationSuccess from "./src/screens/NotificationSuccess";
 import ProfileKeuanganGriya from "./src/screens/ProfileKeuanganGriya";
 import ProfileKeuanganFleksiAktif from "./src/screens/ProfileKeuanganFleksiAktif";
 import ProfileKeuanganFleksiPensiun from "./src/screens/ProfileKeuanganFleksiPensiun";
+import KetentuanTabel from "./src/screens/KetentuanTabel";
 
 const Stack = createStackNavigator();
 
@@ -133,6 +134,7 @@ export default function App() {
             component={ProfileKeuanganGriya}
             options={{
               headerTintColor: "black",
+              headerShown: false,
               headerStyle: {
                 backgroundColor: "#FFFFFF",
                 shadowOpacity: 0,
@@ -205,6 +207,19 @@ export default function App() {
             component={NotificationSuccess}
             options={{
               headerTintColor: "black",
+              headerStyle: {
+                backgroundColor: "#FFFFFF",
+                shadowOpacity: 0,
+                elevation: 0,
+              },
+            }}
+          />
+          <Stack.Screen
+            name="KetentuanTabel"
+            component={KetentuanTabel}
+            options={{
+              headerTintColor: "black",
+              headerShown: false,
               headerStyle: {
                 backgroundColor: "#FFFFFF",
                 shadowOpacity: 0,
