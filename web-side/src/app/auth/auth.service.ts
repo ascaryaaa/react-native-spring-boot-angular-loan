@@ -21,10 +21,13 @@ export class AuthService {
     console.log('Form password:', form.password);
 
     try {
-        const response = await axios.post("http://localhost:8083/rest/auth/login-admin", {
-            username: form.username,
-            password: form.password
-        });
+      const response = await axios.post(
+        'http://localhost:8083/rest/auth/login-admin',
+        {
+          username: form.username,
+          password: form.password,
+        }
+      );
 
       console.log('Response:', response);
 
