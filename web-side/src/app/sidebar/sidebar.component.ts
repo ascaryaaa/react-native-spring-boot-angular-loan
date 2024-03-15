@@ -46,7 +46,7 @@ export class SidebarComponent implements OnInit {
     }
   }
 
-  apiUrl = 'http://localhost:8081/loan/v1/admin/get-admins';
+  apiUrl = 'http://localhost:8083/loan/v1/admin/get-admins';
   async ngOnInit() {
     this.refreshAdminList();
   }
