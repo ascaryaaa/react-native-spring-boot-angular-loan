@@ -5,7 +5,7 @@ const NotificationFailed = ({navigation}) => {
     return (
       <View style={styles.container}>
         <View style={styles.modal}>
-            <Image style={{width: 230, height: 230}} source={require('../assets/notification_failed.png')}/>
+            <Image style={{width: 330, height: 280}} source={require('../assets/notification_failed.png')}/>
             <Text style={{fontWeight:'800', paddingTop: 10}}>Terjadi Kesalahan!</Text>
             <Text>Pengajuan anda tidak dapat diproses,</Text>
             <Text>silahkan coba beberapa saat lagi</Text>
