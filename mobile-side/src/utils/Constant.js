@@ -1,5 +1,5 @@
-const CONNECTION = "192.168.231.54";
-const PORT = "8083";
+const CONNECTION = '192.168.210.169';
+const PORT = '8083';
 const MAIN_URL = `http://${CONNECTION}:${PORT}/loan/v1/`;
 const LOGIN_URL = `http://${CONNECTION}:${PORT}/rest/auth/`;
 
