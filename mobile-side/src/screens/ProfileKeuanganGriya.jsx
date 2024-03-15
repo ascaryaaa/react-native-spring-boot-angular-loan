@@ -18,6 +18,7 @@ const ProfileKeuanganGriya = ({ navigation }) => {
   });
 
   const data = [
+
     { id: 1, title: "Harga Rumah", content: "Rp 500.000.000,00" },
     { id: 2, title: "Jangka Waktu", content: "120 Bulan" },
     { id: 3, title: "Presentase Uang Muka (%)", content: "10%" },
@@ -25,6 +26,7 @@ const ProfileKeuanganGriya = ({ navigation }) => {
     { id: 5, title: "Suku Bunga per Tahun", content: "6,75%" },
     { id: 6, title: "Total Pinjaman", content: "Rp 450.000.000,00" },
     { id: 7, title: "Angsuran Pinjaman per Bulan", content: "Rp 5.167.445,22" },
+
   ];
 
   return (
@@ -132,7 +134,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 8,
-    marginTop: 5,
+
 },
 button: {
   padding: 5,
