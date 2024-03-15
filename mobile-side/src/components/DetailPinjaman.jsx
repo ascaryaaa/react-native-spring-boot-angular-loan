@@ -1,16 +1,16 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 
 const viewsData = [
-  { id: 1, title: 'Nama Debitur', content: 'Wahyu Khumairoh' },
-  { id: 2, title: 'No. KTP', content: '123456789' },
-  { id: 3, title: 'Jenis Kelamin', content: 'Wanita' },
-  { id: 4, title: 'Tempat, Tanggal Lahir', content: 'Kediri, 6 Juli 1998' },
-  { id: 5, title: 'Alamat', content: 'Kras, Kediri' },
+  { id: 1, title: 'Harga Rumah', content: 'Rp 500.000.000,00' },
+  { id: 2, title: 'Jangka Waktu', content: '120 Bulan' },
+  { id: 3, title: 'Presentase Uang Muka (%)', content: '10%' },
+  { id: 4, title: 'Uang Muka', content: 'Rp 50.000.000,00' },
+  { id: 5, title: 'Suku Bunga per Tahun', content: '6,75%' },
 ];
 
-const DataDebitur = () => {
+const DetailPinjaman = () => {
     return (
       <View style={styles.table}>
         {viewsData.map(view => (
@@ -24,7 +24,7 @@ const DataDebitur = () => {
     )
 }
 
-export default DataDebitur;
+export default DetailPinjaman;
 
 const styles = StyleSheet.create({
 table: {

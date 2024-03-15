@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
+import DataDebitur from '../components/DataDebitur';
+import DetailPinjaman from '../components/DetailPinjaman';
 
 const Monitoring = ({ navigation}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -16,7 +18,10 @@ const Monitoring = ({ navigation}) => {
     <ScrollView style={styles.container}>
       <View style={{flexDirection: 'row', justifyContent: 'space-between', marginBottom: 10}}>
         <Text style={{fontSize: 20, fontWeight: '500'}}>Monitoring Pinjaman</Text>
-        <Text style={{textAlign: 'right', marginTop: 5}}>Peringatan</Text>
+        <View style={{flexDirection:'row'}}>
+          <View style={styles.ellipse} />
+          <Text style={{textAlign: 'right', marginTop: 6, marginLeft: 2}}>Peringatan</Text>
+        </View>
       </View>
       <View style={styles.table}>
         <Text style={{color: 'white', fontWeight: '700'}}>Sisa Pinjaman</Text>
@@ -36,8 +41,7 @@ const Monitoring = ({ navigation}) => {
         </TouchableOpacity>
         {isDropdownOpen && (
           <View style={styles.dropdownContent}>
-            <Text style={styles.infoText}>This is the dropdown content.</Text>
-            <Text style={styles.infoText}>It can contain any information you want to display.</Text>
+            <DataDebitur />
           </View>
         )}
       </View>
@@ -48,8 +52,7 @@ const Monitoring = ({ navigation}) => {
         </TouchableOpacity>
         {isDropdownOpen1 && (
           <View style={styles.dropdownContent}>
-            <Text style={styles.infoText}>This is the dropdown content.</Text>
-            <Text style={styles.infoText}>It can contain any information you want to display.</Text>
+            <DetailPinjaman />
           </View>
         )}
       </View>
@@ -115,9 +118,16 @@ dropdownContent: {
   padding: 10,
   borderRadius: 5,
   marginTop: 10,
+  width: '100%',
 },
 infoText: {
   fontSize: 16,
 },
-
+ellipse: {
+  width: 15,
+  height: 15,
+  borderRadius: 50,
+  backgroundColor: '#FFC930',
+  marginTop: 7,
+},
 })

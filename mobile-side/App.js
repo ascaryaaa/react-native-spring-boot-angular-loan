@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import store from "./src/reducers/Index";
 import Home from "./src/screens/Home";
 import Login from "./src/screens/Login";
-import DataDebitur from "./src/screens/DataDebitur";
+// import DataDebitur from "./src/screens/DataDebitur";
 import SimulasiPinjaman from "./src/screens/SimulasiPinjaman";
 import SANDBOX from "./src/screens/SANDBOX";
 import DigitalLoan from "./src/screens/DigitalLoan";
@@ -115,7 +115,7 @@ export default function App() {
               },
             }}
           />
-          <Stack.Screen
+          {/* <Stack.Screen
             name="DataDebitur"
             component={DataDebitur}
             options={{
@@ -126,7 +126,7 @@ export default function App() {
                 elevation: 0,
               },
             }}
-          />
+          /> */}
           <Stack.Screen
             name="SANDBOX"
             component={SANDBOX}
