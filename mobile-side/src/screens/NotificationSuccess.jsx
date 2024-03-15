@@ -5,7 +5,7 @@ const NotificationSuccess = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.modal}>
-          <Image style={{width: 320, height: 270}} source={require('../assets/notification_success.png')}/>
+          <Image style={{width: 320, height: 260}} source={require('../assets/notification_success.png')}/>
           <Text style={{fontWeight:'800', paddingTop: 10}}>Pinjaman Berhasil Diajukan!</Text>
           <Text>Pantau proses pengajuan dan pinjaman pada</Text>
           <Text>halaman beranda</Text>
