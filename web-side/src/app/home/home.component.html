@@ -3,16 +3,16 @@
   class="p-4 sm:ml-64 text-left text-2xl mb-4 font-bold"
   style="color: #e55300; padding-top: 24px; margin-bottom: -4px"
 >
-  Daftar Debitur
+  Daftar Pengajuan Pinjaman
 </h1>
 
 <app-sidebar/>
 
-<div
+<!-- <div
   id="container-home"
   class="relative overflow-x-auto sm:rounded-lg"
   style="padding-top: 10px"
->
+> -->
   <div class="p-4 sm:ml-64">
     <div class="p-4 border-2 border-gray-200 rounded-lg dark:border-gray-700">
       <div
@@ -41,7 +41,7 @@
             type="text"
             id="table-search"
             class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Cari debitur"
+            placeholder="Search"
           />
         </div>
       </div>
@@ -60,7 +60,7 @@
             <th scope="col" class="px-4 py-2">Status Pengajuan</th>
             <th scope="col" class="px-4 py-2">Admin</th>
             <th scope="col" class="px-4 py-2">Tanggal Realisasi</th>
-            <th scope="col" class="px-4 py-2">Action</th>
+            <th scope="col" class="px-4 py-2">Aksi</th>
           </tr>
         </thead>
         <tbody *ngFor="let pinjaman of pinjamans">
@@ -349,4 +349,4 @@
       </nav>
     </div>
   </div>
-</div>
+

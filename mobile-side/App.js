@@ -22,41 +22,42 @@ import ProfileKeuanganFleksiAktif from "./src/screens/ProfileKeuanganFleksiAktif
 import ProfileKeuanganFleksiPensiun from "./src/screens/ProfileKeuanganFleksiPensiun";
 import Monitoring from "./src/screens/Monitoring";
 import KetentuanTabel from "./src/screens/KetentuanTabel";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { LoginModal } from "./src/screens/LoginModal";
 
 const Stack = createStackNavigator();
 
 export default function App() {
-
   return (
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Login">
-            <Stack.Screen
-              name="DigitalLoan"
-              component={DigitalLoan}
-              options={{
-                headerTintColor: "black",
-                headerShown: false,
-                headerStyle: {
-                  backgroundColor: "#FFFFFF",
-                  shadowOpacity: 0,
-                  elevation: 0,
-                },
-              }}
-            />
-            <Stack.Screen
-              name="Login"
-              component={Login}
-              options={{
-                headerTintColor: "black",
-                headerShown: false,
-                headerStyle: {
-                  backgroundColor: "#FFFFFF",
-                  shadowOpacity: 0,
-                  elevation: 0,
-                },
-              }}
-            />
+          <Stack.Screen
+            name="DigitalLoan"
+            component={DigitalLoan}
+            options={{
+              headerTintColor: "black",
+              headerShown: false,
+              headerStyle: {
+                backgroundColor: "#FFFFFF",
+                shadowOpacity: 0,
+                elevation: 0,
+              },
+            }}
+          />
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{
+              headerTintColor: "black",
+              headerShown: false,
+              headerStyle: {
+                backgroundColor: "#FFFFFF",
+                shadowOpacity: 0,
+                elevation: 0,
+              },
+            }}
+          />
           <Stack.Screen
             name="Home"
             component={Home}
@@ -97,6 +98,19 @@ export default function App() {
             }}
           />
           <Stack.Screen
+            name="LoginModal"
+            component={LoginModal}
+            options={{
+              headerTintColor: "black",
+              headerShown: false,
+              headerStyle: {
+                backgroundColor: "#FFFFFF",
+                shadowOpacity: 0,
+                elevation: 0,
+              },
+            }}
+          />
+          <Stack.Screen
             name="DataDebitur"
             component={DataDebitur}
             options={{
@@ -120,19 +134,6 @@ export default function App() {
               },
             }}
           />
-          {/* <Stack.Screen
-            name="DigitalLoan"
-            component={DigitalLoan}
-            options={{
-              headerTintColor: "black",
-              headerShown: false,
-              headerStyle: {
-                backgroundColor: "#FFFFFF",
-                shadowOpacity: 0,
-                elevation: 0,
-              },
-            }}
-          /> */}
           <Stack.Screen
             name="PengajuanPinjaman"
             component={PengajuanPinjaman}
@@ -200,6 +201,20 @@ export default function App() {
             component={SyaratKetentuan}
             options={{
               headerTintColor: "black",
+              headerShown: false,
+              headerStyle: {
+                backgroundColor: "#FFFFFF",
+                shadowOpacity: 0,
+                elevation: 0,
+              },
+            }}
+          />
+          <Stack.Screen
+            name="Monitoring"
+            component={Monitoring}
+            options={{
+              headerTintColor: "black",
+              headerShown: false,
               headerStyle: {
                 backgroundColor: "#FFFFFF",
                 shadowOpacity: 0,
