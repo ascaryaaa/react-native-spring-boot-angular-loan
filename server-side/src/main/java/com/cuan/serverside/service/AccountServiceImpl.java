@@ -5,6 +5,8 @@ import com.cuan.serverside.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service // Define Service Implementation
 public class AccountServiceImpl implements AccountService{
 
@@ -42,8 +44,8 @@ public class AccountServiceImpl implements AccountService{
     }
 
     @Override
-    public Account findByUsernameAccount(String username) {
+    public Optional<Account> findByUsernameAccount(String username) {
 
-        return accountRepository.findByUsernameAccount(username);
+        return Optional.ofNullable(accountRepository.findByUsernameAccount(username));
     }
 }

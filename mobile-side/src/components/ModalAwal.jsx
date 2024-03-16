@@ -34,7 +34,7 @@ const ModalAwal = ({}) => {
       );
       const { token } = response.data;
       await AsyncStorage.setItem("token", token);
-      navigation.navigate("DigitalLoan");
+      navigation.navigate("DIgitalLoan");
     } catch (error) {
       console.error(error);
       alert("Login failed!");

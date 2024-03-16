@@ -1,6 +1,4 @@
-// Login.jsx
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -10,9 +8,18 @@ import {
   ImageBackground,
 } from "react-native";
 import ModalAwal from "../components/ModalAwal";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LoginModal } from "./LoginModal";
 
 const Login = ({ navigation }) => {
+  useEffect(() => {
+    AsyncStorage.getItem("token").then((token) => {
+      if (token !== null) {
+        navigation.navigate("DigitalLoan");
+      }
+    });
+  }, []);
+
   const [modalVisible, setModalVisible] = useState(false);
 
   const openModal = () => {

@@ -13,7 +13,7 @@ const NotificationSuccess = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.modal}>
         <Image
-          style={{ width: 230, height: 230 }}
+          style={{ width: 320, height: 260 }}
           source={require("../assets/notification_success.png")}
         />
         <Text style={{ fontWeight: "800", paddingTop: 10 }}>
@@ -23,7 +23,7 @@ const NotificationSuccess = ({ navigation }) => {
         <Text>halaman beranda</Text>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("DigitalLoan")}
+          onPress={() => navigation.navigate("Monitoring")}
         >
           <Text
             style={{

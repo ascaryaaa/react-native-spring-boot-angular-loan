@@ -170,28 +170,87 @@ If it working, the you are done!
 
 ## API Documentation
 
-### The main pathing of the API edpoint is http://localhost:8081/loan/v1/user
+### The main pathing of the API edpoint is http://localhost:8083/loan/v1/user
 
 #### Read All Users / Membaca semua User
 ```
-http://localhost:8081/loan/v1/user/get-users
+http://localhost:8083/loan/v1/user/get-users
 ```
 
 #### Post User to database / Posting User ke databse
 ```
-http://localhost:8081/loan/v1/user/post-user
+http://localhost:8083/loan/v1/user/post-user
 ```
 
 #### Read user by Id / Membaca user dari Id
 ```
-http://localhost:8081/loan/v1/user/{number of user id}
+http://localhost:8083/loan/v1/user/{number of user id}
 
 # Example
-http://localhost:8081/loan/v1/user/2
+http://localhost:8083/loan/v1/user/2
 ```
+
 
 #### Read user by name / Membaca user dari nama
 coming soon
+
+### The main pathing of the API edpoint is http://localhost:8083/loan/v1/account
+
+
+#### Read All Accounts / Membaca semua Account
+```
+http://localhost:8083/loan/v1/account/get-accounts
+```
+
+#### Post Account to database / Posting Account ke databse
+```
+http://localhost:8083/loan/v1/account/post-account
+```
+
+#### Read Account by Id / Membaca Account dari Id
+```
+http://localhost:8083/loan/v1/account/{number of user id}
+
+# Example
+http://localhost:8083/loan/v1/account/2
+```
+
+
+### The main pathing of the API edpoint is http://localhost:8083/loan/v1/admin
+
+
+#### Read All Admins / Membaca semua Admin
+```
+http://localhost:8083/loan/v1/Admin/get-Admins
+```
+
+#### Post Admin to database / Posting Admin ke databse
+```
+http://localhost:8083/loan/v1/Admin/post-Admin
+```
+
+#### Read Admin by Id / Membaca Admin dari Id
+```
+http://localhost:8083/loan/v1/Admin/{number of user id}
+
+# Example
+http://localhost:8083/loan/v1/Admin/2
+```
+
+### The main pathing of the API edpoint is http://localhost:8083/rest/auth
+
+
+#### Login for Admin / Login sebagai Admin
+```
+http://localhost:8083/rest/auth/login-admin
+```
+
+#### Login for User / Login sebagai User
+```
+http://localhost:8083/rest/auth/login-account
+```
+
+
 
 ## Server-Side Documentation
 
@@ -362,6 +421,128 @@ i install this library because This library provides native components for gestu
 
 ```
 px expo install react-native-gesture-handler
+```
+
+### 1. Login
+
+a. Installing Required Packages
+
+Ensure you have Axios and AsyncStorage installed in your project. If not, you can install them by running:
+```
+npm install axios @react-native-async-storage/async-storage
+```
+
+b. Updating ModalAwal.jsx for Login Implementation
+
+First, import Axios and AsyncStorage at the top of your ModalAwal.jsx file:
+
+```
+import React, { useState } from "react";
+import axios from "axios";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+// Other imports remain the same
+
+```
+
+Next, add state hooks for the username and password, and implement the login function:
+
+```
+const ModalAwal = ({ navigation }) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [checked, setChecked] = useState(false);
+
+  // Toggle checkbox remains the same
+
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('http://192.168.231.54:8083/rest/auth/login-account', {
+        username,
+        password,
+      });
+      const { token } = response.data;
+      await AsyncStorage.setItem('token', token);
+      navigation.navigate("YourNextScreenHere"); // Update "YourNextScreenHere" to your target screen after login
+    } catch (error) {
+      console.error(error);
+      alert("Login failed!");
+    }
+  };
+
+  // JSX remains mostly the same, update TextInput components as follows:
+
+  return (
+    <View style={styles.container}>
+      {/* All your JSX code remains the same until the TextInput for User ID */}
+      <TextInput 
+        style={styles.inputform} 
+        onChangeText={setUsername} 
+        value={username}
+      />
+      {/* MPIN/Password TextInput */}
+      <TextInput 
+        style={styles.inputform} 
+        onChangeText={setPassword} 
+        secureTextEntry={true} // This hides the password input
+        value={password}
+      />
+      {/* Remaining JSX code stays the same until the Login button */}
+      <TouchableOpacity
+        style={styles.button}
+        onPress={handleLogin} // Updated to use handleLogin
+      >
+        <Text style={styles.teksLogin}>Login</Text>
+      </TouchableOpacity>
+      {/* Rest of the component */}
+    </View>
+  );
+};
+
+```
+
+c. Handling Navigation Based on Token Presence
+
+In your App.js or wherever you handle navigation, you should decide whether to show the login screen or navigate directly to the main content based on the presence of a token. This could look something like this:
+
+```
+import React, { useEffect, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+// Import other necessary components and screens
+
+const Stack = createStackNavigator();
+
+function App() {
+  const [isSignedIn, setIsSignedIn] = useState(false);
+
+  useEffect(() => {
+    const checkToken = async () => {
+      const token = await AsyncStorage.getItem('token');
+      if (token) {
+        setIsSignedIn(true);
+      }
+    };
+
+    checkToken();
+  }, []);
+
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        {isSignedIn ? (
+          // Screens to show when signed in
+          <Stack.Screen name="Home" component={HomeScreen} />
+        ) : (
+          // Login screen
+          <Stack.Screen name="Login" component={Login} />
+        )}
+         //add other screens here
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
 ```
 
 # Website-Side

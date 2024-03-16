@@ -1,10 +1,10 @@
 package com.cuan.serverside.model.response;
 
-public class AdminLoginRes {
+public class LoginResponse {
     private String username;
     private String token;
 
-    public AdminLoginRes(String username, String token) {
+    public LoginResponse(String username, String token) {
         this.username = username;
         this.token = token;
     }

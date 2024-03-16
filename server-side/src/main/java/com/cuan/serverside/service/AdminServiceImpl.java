@@ -5,6 +5,8 @@ import com.cuan.serverside.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service // Define Service Implementation
 public class AdminServiceImpl implements AdminService {
 
@@ -37,9 +39,9 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public Admin findByUsernameAdmin(String username) {
+    public Optional<Admin> findByUsernameAdmin(String username) {
 
-        return adminRepository.findByUsernameAdmin(username);
+        return Optional.ofNullable(adminRepository.findByUsernameAdmin(username));
     }
 
 }
