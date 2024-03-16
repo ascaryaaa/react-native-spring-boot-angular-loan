@@ -29,6 +29,7 @@ public class AuthController {
         this.jwtUtil = jwtUtil;
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/login-admin")
     public ResponseEntity<?> loginAdmin(@RequestBody AdminLoginReq adminLoginReq) {
         try {
@@ -52,6 +53,7 @@ public class AuthController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/login-account")
     public ResponseEntity<?> loginAccount(@RequestBody AccountLoginReq accountLoginReq) {
         try {
