@@ -4,8 +4,7 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity,
-  toggleCheckbox,
+  TouchableOpacity
 } from "react-native";
 import { useState } from "react";
 

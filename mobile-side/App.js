@@ -230,7 +230,6 @@ export default function App() {
             component={SyaratKetentuan}
             options={{
               headerTintColor: "black",
-              headerShown: false,
               headerStyle: {
                 backgroundColor: "#FFFFFF",
                 shadowOpacity: 0,
@@ -244,18 +243,6 @@ export default function App() {
             options={{
               headerTintColor: "black",
               headerShown: false,
-              headerStyle: {
-                backgroundColor: "#FFFFFF",
-                shadowOpacity: 0,
-                elevation: 0,
-              },
-            }}
-          />
-          <Stack.Screen
-            name="Monitoring"
-            component={Monitoring}
-            options={{
-              headerTintColor: "black",
               headerStyle: {
                 backgroundColor: "#FFFFFF",
                 shadowOpacity: 0,
