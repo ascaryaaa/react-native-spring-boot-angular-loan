@@ -25,6 +25,7 @@ public class DetailPinjamanController {
     }
 
     // GET Function of API, Reads detail pinjaman data from 'pengajuan' database by id
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/{id}")
     public DetailPinjaman getDetailPinjamanById(@PathVariable Long id){
         return detailPinjamanService.getDetailPinjamanId(id);
