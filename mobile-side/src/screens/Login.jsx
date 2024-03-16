@@ -15,7 +15,8 @@ const Login = ({ navigation }) => {
   useEffect(() => {
     AsyncStorage.getItem("token").then((token) => {
       if (token !== null) {
-        navigation.navigate("DigitalLoan");
+        // navigation.navigate("DigitalLoan");
+        navigation.navigate("DigitalLoan")
       }
     });
   }, []);

@@ -5,7 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { StyleSheet, Text, View } from "react-native";
 import { Provider } from "react-redux";
 import store from "./src/reducers/Index";
-import Home from "./src/screens/Home";
+import Home from "./src/screens/HomeMonitoring";
 import Login from "./src/screens/Login";
 // import DataDebitur from "./src/screens/DataDebitur";
 import SANDBOX from "./src/screens/SANDBOX";
@@ -25,6 +25,7 @@ import SimulasiGriya from "./src/screens/SimulasiGriya";
 import SimulasiFleksiAktif from "./src/screens/SimulasiFleksiAktif";
 import SimulasiFleksiPensiun from "./src/screens/SimulasiFleksiPensiun";
 import { LoginModal } from "./src/screens/LoginModal";
+import HomeMonitoring from "./src/screens/HomeMonitoring";
 // import AsyncStorage from "@react-native-async-storage/async-storage";
 // import { LoginModal } from "./src/screens/LoginModal";
 
@@ -62,8 +63,8 @@ export default function App() {
             }}
           />
           <Stack.Screen
-            name="Home"
-            component={Home}
+            name="HomeMonitoring"
+            component={HomeMonitoring}
             options={{
               headerTintColor: "black",
               headerShown: false,
@@ -230,20 +231,6 @@ export default function App() {
             component={SyaratKetentuan}
             options={{
               headerTintColor: "black",
-              headerShown: false,
-              headerStyle: {
-                backgroundColor: "#FFFFFF",
-                shadowOpacity: 0,
-                elevation: 0,
-              },
-            }}
-          />
-          <Stack.Screen
-            name="Monitoring"
-            component={Monitoring}
-            options={{
-              headerTintColor: "black",
-              headerShown: false,
               headerStyle: {
                 backgroundColor: "#FFFFFF",
                 shadowOpacity: 0,
