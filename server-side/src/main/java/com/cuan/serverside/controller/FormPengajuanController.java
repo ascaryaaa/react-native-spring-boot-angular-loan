@@ -25,6 +25,7 @@ public class FormPengajuanController {
     }
 
     // GET Function of API, Reads form pengajuan data from 'pengajuan' database by id
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/{id}")
     public FormPengajuan getFormById(@PathVariable Long id){
         return formPengajuanService.getFormId(id);

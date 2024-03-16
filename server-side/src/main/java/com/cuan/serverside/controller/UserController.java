@@ -22,7 +22,6 @@ public class UserController {
 //    private AccountService accountService;
 
     // Endpoint to GET Function of API, Reads data from 'pengajuan' database
-    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/get-users")
     public Iterable<User> getAllUser(){
         return userService.getAllUser();
