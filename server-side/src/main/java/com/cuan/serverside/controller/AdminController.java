@@ -26,6 +26,7 @@ public class AdminController {
     }
 
     // GET Function of API, Reads admin data from 'pengajuan' database by id
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/{id}")
     public Admin getAdminById(@PathVariable Long id){
         return AdminService.getAdminId(id);

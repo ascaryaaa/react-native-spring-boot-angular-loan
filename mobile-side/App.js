@@ -21,44 +21,48 @@ import ProfileKeuanganFleksiAktif from "./src/screens/ProfileKeuanganFleksiAktif
 import ProfileKeuanganFleksiPensiun from "./src/screens/ProfileKeuanganFleksiPensiun";
 import Monitoring from "./src/screens/Monitoring";
 import KetentuanTabel from "./src/screens/KetentuanTabel";
+<<<<<<< HEAD
 import SimulasiGriya from "./src/screens/SimulasiGriya";
 import SimulasiFleksiAktif from "./src/screens/SimulasiFleksiAktif";
 import SimulasiFleksiPensiun from "./src/screens/SimulasiFleksiPensiun";
+=======
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { LoginModal } from "./src/screens/LoginModal";
+>>>>>>> 3651c6044aa90a72e19fc12e9e2a27d4f5b8e19a
 
 const Stack = createStackNavigator();
 
 export default function App() {
-
   return (
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Login">
-            <Stack.Screen
-              name="DigitalLoan"
-              component={DigitalLoan}
-              options={{
-                headerTintColor: "black",
-                headerShown: false,
-                headerStyle: {
-                  backgroundColor: "#FFFFFF",
-                  shadowOpacity: 0,
-                  elevation: 0,
-                },
-              }}
-            />
-            <Stack.Screen
-              name="Login"
-              component={Login}
-              options={{
-                headerTintColor: "black",
-                headerShown: false,
-                headerStyle: {
-                  backgroundColor: "#FFFFFF",
-                  shadowOpacity: 0,
-                  elevation: 0,
-                },
-              }}
-            />
+          <Stack.Screen
+            name="DigitalLoan"
+            component={DigitalLoan}
+            options={{
+              headerTintColor: "black",
+              headerShown: false,
+              headerStyle: {
+                backgroundColor: "#FFFFFF",
+                shadowOpacity: 0,
+                elevation: 0,
+              },
+            }}
+          />
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{
+              headerTintColor: "black",
+              headerShown: false,
+              headerStyle: {
+                backgroundColor: "#FFFFFF",
+                shadowOpacity: 0,
+                elevation: 0,
+              },
+            }}
+          />
           <Stack.Screen
             name="Home"
             component={Home}
@@ -148,19 +152,6 @@ export default function App() {
               },
             }}
           />
-          {/* <Stack.Screen
-            name="DigitalLoan"
-            component={DigitalLoan}
-            options={{
-              headerTintColor: "black",
-              headerShown: false,
-              headerStyle: {
-                backgroundColor: "#FFFFFF",
-                shadowOpacity: 0,
-                elevation: 0,
-              },
-            }}
-          /> */}
           <Stack.Screen
             name="PengajuanPinjaman"
             component={PengajuanPinjaman}
@@ -227,6 +218,20 @@ export default function App() {
             component={SyaratKetentuan}
             options={{
               headerTintColor: "black",
+              headerShown: false,
+              headerStyle: {
+                backgroundColor: "#FFFFFF",
+                shadowOpacity: 0,
+                elevation: 0,
+              },
+            }}
+          />
+          <Stack.Screen
+            name="Monitoring"
+            component={Monitoring}
+            options={{
+              headerTintColor: "black",
+              headerShown: false,
               headerStyle: {
                 backgroundColor: "#FFFFFF",
                 shadowOpacity: 0,

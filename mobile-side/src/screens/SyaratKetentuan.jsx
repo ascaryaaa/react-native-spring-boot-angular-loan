@@ -1,9 +1,15 @@
-import React from 'react';
+import React from "react";
 import { FontAwesome } from "@expo/vector-icons"; // Import FontAwesome from @expo/vector-icons
-import { View, Text, StyleSheet, TouchableOpacity, toggleCheckbox} from 'react-native';
-import { useState } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  toggleCheckbox,
+} from "react-native";
+import { useState } from "react";
 
-const SyaratKetentuan = ({navigation}) => {
+const SyaratKetentuan = ({ navigation }) => {
   const [checked, setChecked] = useState(false);
 
   const toggleCheckbox = () => {
@@ -12,37 +18,61 @@ const SyaratKetentuan = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.container1}>
-        <Text style={{ marginBottom: 10, fontSize: 16, fontWeight:'600' }}>Syarat dan Ketentuan</Text>
-        <Text style={{marginBottom: 10, textAlign: 'justify'}}>Dengan menekan tombol "Setuju & Ajukan Pinjaman" di bawah ini, saya menyatakan hal-hal sebagai berikut :</Text>
-        <View style={styles.text}>
-          <Text>1. </Text>
-          <Text style={{textAlign: 'justify'}}>Data dan informasi yang saya berikan dalam pengajuan ini adalah sesuai keadaaan yang sebenar-benarnya.</Text>
-        </View>
-        <View style={styles.text}>
-          <Text>2. </Text>
-          <View style={styles.text1}>
-            <Text style={{textAlign: 'justify'}}>Saya menyetujui bahwa PT. Bank Negara Indonesia (Persero), Tbk, selanjutnya disebut Bank, berwenang untuk:</Text>
-            <View style={styles.text}>
-              <Text>a. </Text>
-              <Text style={{textAlign: 'justify'}}>Memeriksa kebenaran data yang saya sampaikan dalam pengajuan ini.</Text>
-            </View>
-            <View style={styles.text}>
-              <Text>b. </Text>
-              <Text style={{textAlign: 'justify'}}>Mencari dan memperoleh keterangan dan referensi dari sumber manapun dengan cara yang dianggap sah oleh Bank.</Text>
-            </View>
-            <View style={styles.text}>
-              <Text>c. </Text>
-              <Text style={{textAlign: 'justify'}}>Menyetujui atau menolak pengajuan pinjaman saya berdasarkan analisa Bank.</Text>
-            </View>
-            <View style={styles.text}>
-              <Text>d. </Text>
-              <Text style={{textAlign: 'justify'}}>Tidak mengembalikan seluruh dokumen yang telah saya serahkan kepada Bank</Text>
-            </View>
-            <View style={styles.text}>
-              <Text>e. </Text>
-              <Text style={{textAlign: 'justify'}}>Memberikan secara terbatas dan/atau tidak terbatas data yang telah saya sampaikan dalam pengajuan ini kepada pihak ketiga dalam rangka kepentingan pemrosesan pengajuan pinjaman</Text>
-            </View>
+      <Text style={{ marginBottom: 10, fontSize: 16, fontWeight: "600" }}>
+        Syarat dan Ketentuan
+      </Text>
+      <Text>
+        Dengan menekan tombol "Setuju & Ajukan Pinjaman" di bawah ini, saya
+        menyatakan hal-hal sebagai berikut :
+      </Text>
+      <View style={styles.text}>
+        <Text>1. </Text>
+        <Text>
+          Data dan informasi yang saya berikan dalam pengajuan ini adalah sesuai
+          keadaaan yang sebenar-benarnya.
+        </Text>
+      </View>
+      <View style={styles.text}>
+        <Text>2. </Text>
+        <View style={styles.text1}>
+          <Text>
+            Saya menyetujui bahwa PT. Bank Negara Indonesia (Persero), Tbk,
+            selanjutnya disebut Bank, berwenang untuk:
+          </Text>
+          <View style={styles.text}>
+            <Text>a. </Text>
+            <Text>
+              Memeriksa kebenaran data yang saya sampaikan dalam pengajuan ini.
+            </Text>
+          </View>
+          <View style={styles.text}>
+            <Text>b. </Text>
+            <Text>
+              Mencari dan memperoleh keterangan dan referensi dari sumber
+              manapun dengan cara yang dianggap sah oleh Bank.
+            </Text>
+          </View>
+          <View style={styles.text}>
+            <Text>c. </Text>
+            <Text>
+              Menyetujui atau menolak pengajuan pinjaman saya berdasarkan
+              analisa Bank.
+            </Text>
+          </View>
+          <View style={styles.text}>
+            <Text>d. </Text>
+            <Text>
+              Tidak mengembalikan seluruh dokumen yang telah saya serahkan
+              kepada Bank
+            </Text>
+          </View>
+          <View style={styles.text}>
+            <Text>e. </Text>
+            <Text>
+              Memberikan secara terbatas dan/atau tidak terbatas data yang telah
+              saya sampaikan dalam pengajuan ini kepada pihak ketiga dalam
+              rangka kepentingan pemrosesan pengajuan pinjaman
+            </Text>
           </View>
         </View>
         <View style={styles.text}>
@@ -77,33 +107,27 @@ const SyaratKetentuan = ({navigation}) => {
 export default SyaratKetentuan;
 
 const styles = StyleSheet.create({
-container: {
-  flex:1,
-  marginRight: 10,
-},
-container1: {
-  marginHorizontal: 16,
-  marginRight: 25,
-},
-button: {
-  backgroundColor:'lightgrey',
-  padding: 5,
-  borderRadius: 5,
-  margin: 5,
-},
-button1: {
-  marginTop: 10,
-  backgroundColor: '#18C1CD',
-  borderRadius: 20,
-  width: 390,
-  height: 44,
-},
-text: {
-  flexDirection: 'row',
-  fontSize: 12,
-},
-text1: {
-  flexDirection: 'column',
-  marginRight: 35,
-}
-})
+  container: {
+    flex: 1,
+    padding: 10,
+  },
+  button: {
+    backgroundColor: "lightgrey",
+    padding: 5,
+    borderRadius: 5,
+    margin: 5,
+  },
+  button1: {
+    marginTop: 10,
+    backgroundColor: "#18C1CD",
+    borderRadius: 20,
+    width: 390,
+    height: 44,
+  },
+  text: {
+    flexDirection: "row",
+  },
+  text1: {
+    flexDirection: "column",
+  },
+});
