@@ -21,14 +21,11 @@ import ProfileKeuanganFleksiAktif from "./src/screens/ProfileKeuanganFleksiAktif
 import ProfileKeuanganFleksiPensiun from "./src/screens/ProfileKeuanganFleksiPensiun";
 import Monitoring from "./src/screens/Monitoring";
 import KetentuanTabel from "./src/screens/KetentuanTabel";
-<<<<<<< HEAD
 import SimulasiGriya from "./src/screens/SimulasiGriya";
 import SimulasiFleksiAktif from "./src/screens/SimulasiFleksiAktif";
 import SimulasiFleksiPensiun from "./src/screens/SimulasiFleksiPensiun";
-=======
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { LoginModal } from "./src/screens/LoginModal";
->>>>>>> 3651c6044aa90a72e19fc12e9e2a27d4f5b8e19a
+// import AsyncStorage from "@react-native-async-storage/async-storage";
+// import { LoginModal } from "./src/screens/LoginModal";
 
 const Stack = createStackNavigator();
 
