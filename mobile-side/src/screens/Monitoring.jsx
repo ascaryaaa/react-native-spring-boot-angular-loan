@@ -63,17 +63,17 @@ export default Monitoring;
 
 const styles = StyleSheet.create({
 container: {
-    flex:1,
-    padding: 10,
-    marginTop: 5,
+  flex:1,
+  padding: 10,
+  marginTop: 5,
 },
 table: {
   marginTop: 8,
   padding: 15,
   marginBottom: 8,
-  backgroundColor:'#18C1CD',
+  backgroundColor:'#1394AD',
   borderRadius: 10,
-  borderColor: '#18C1CD',
+  borderColor: '#1394AD',
   width: '100%'
 },
 button: {

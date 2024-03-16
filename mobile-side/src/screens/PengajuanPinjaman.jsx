@@ -34,7 +34,7 @@ const PengajuanPinjaman = ({ navigation }) => {
         <View style={styles.cardContainer}>
           <View style={styles.cardContent}>
             <Image
-              source={require("../../../mobile-side/src/assets/icon_housecf.png")}
+              source={require("../../../mobile-side/src/assets/icon_griya.png")}
               style={styles.productImage}
             />
             <View style={styles.titleContainer}>
@@ -42,7 +42,7 @@ const PengajuanPinjaman = ({ navigation }) => {
             </View>
           </View>
           <TouchableOpacity
-            onPress={() => navigation.navigate("SimulasiPinjaman")}
+            onPress={() => navigation.navigate("SimulasiGriya")}
             style={styles.selectButton}
           >
             <Text style={styles.selectButtonText}>Pilih</Text>
@@ -51,7 +51,7 @@ const PengajuanPinjaman = ({ navigation }) => {
         <View style={styles.cardContainer}>
           <View style={styles.cardContent}>
             <Image
-              source={require("../../../mobile-side/src/assets/icon_housecf.png")}
+              source={require("../../../mobile-side/src/assets/icon_fleksi_aktif.png")}
               style={styles.productImage}
             />
             <View style={styles.titleContainer}>
@@ -59,7 +59,7 @@ const PengajuanPinjaman = ({ navigation }) => {
             </View>
           </View>
           <TouchableOpacity
-            onPress={() => navigation.navigate("SimulasiPinjaman")}
+            onPress={() => navigation.navigate("SimulasiFleksiAktif")}
             style={styles.selectButton}
           >
             <Text style={styles.selectButtonText}>Pilih</Text>
@@ -68,7 +68,7 @@ const PengajuanPinjaman = ({ navigation }) => {
         <View style={styles.cardContainer}>
           <View style={styles.cardContent}>
             <Image
-              source={require("../../../mobile-side/src/assets/icon_housecf.png")}
+              source={require("../../../mobile-side/src/assets/icon_fleksi_pensiun.png")}
               style={styles.productImage}
             />
             <View style={styles.titleContainer}>
@@ -76,7 +76,7 @@ const PengajuanPinjaman = ({ navigation }) => {
             </View>
           </View>
           <TouchableOpacity
-            onPress={() => navigation.navigate("SimulasiPinjaman")}
+            onPress={() => navigation.navigate("SimulasiFleksiPensiun")}
             style={styles.selectButton}
           >
             <Text style={styles.selectButtonText}>Pilih</Text>
@@ -126,7 +126,6 @@ const styles = StyleSheet.create({
   textbody: {
     fontSize: 13,
     paddingTop: 10,
-    paddingBottom: 25,
     paddingRight: 20,
   },
   jeniscontainer: {

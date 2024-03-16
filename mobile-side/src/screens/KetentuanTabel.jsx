@@ -35,7 +35,7 @@ const KetentuanTabel = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.navbar}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("ProfileKeuanganGriya")}
+          onPress={() => navigation.navigate("ProfileKeuanganFleksiPensiun")}
         >
           <Image
             source={require("../../../mobile-side/src/assets/Icon_leftarrow.png")}
@@ -98,7 +98,7 @@ const KetentuanTabel = ({ navigation }) => {
           >
             <TouchableOpacity
               style={styles.buttonSebelumnya}
-              onPress={() => navigation.navigate("ProfileKeuanganGriya")}
+              onPress={() => navigation.navigate("ProfileKeuanganFleksiAktif")}
             >
               <Text style={styles.sebelumnya}> Sebelumnya</Text>
             </TouchableOpacity>

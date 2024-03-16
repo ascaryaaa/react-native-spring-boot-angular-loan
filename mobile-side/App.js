@@ -8,7 +8,6 @@ import store from "./src/reducers/Index";
 import Home from "./src/screens/Home";
 import Login from "./src/screens/Login";
 // import DataDebitur from "./src/screens/DataDebitur";
-import SimulasiPinjaman from "./src/screens/SimulasiPinjaman";
 import SANDBOX from "./src/screens/SANDBOX";
 import DigitalLoan from "./src/screens/DigitalLoan";
 import PengajuanPinjaman from "./src/screens/PengajuanPinjaman";
@@ -22,6 +21,9 @@ import ProfileKeuanganFleksiAktif from "./src/screens/ProfileKeuanganFleksiAktif
 import ProfileKeuanganFleksiPensiun from "./src/screens/ProfileKeuanganFleksiPensiun";
 import Monitoring from "./src/screens/Monitoring";
 import KetentuanTabel from "./src/screens/KetentuanTabel";
+import SimulasiGriya from "./src/screens/SimulasiGriya";
+import SimulasiFleksiAktif from "./src/screens/SimulasiFleksiAktif";
+import SimulasiFleksiPensiun from "./src/screens/SimulasiFleksiPensiun";
 
 const Stack = createStackNavigator();
 
@@ -84,8 +86,34 @@ export default function App() {
             }}
           /> */}
           <Stack.Screen
-            name="SimulasiPinjaman"
-            component={SimulasiPinjaman}
+            name="SimulasiGriya"
+            component={SimulasiGriya}
+            options={{
+              headerTintColor: "black",
+              headerShown: false,
+              headerStyle: {
+                backgroundColor: "#FFFFFF",
+                shadowOpacity: 0,
+                elevation: 0,
+              },
+            }}
+          />
+          <Stack.Screen
+            name="SimulasiFleksiAktif"
+            component={SimulasiFleksiAktif}
+            options={{
+              headerTintColor: "black",
+              headerShown: false,
+              headerStyle: {
+                backgroundColor: "#FFFFFF",
+                shadowOpacity: 0,
+                elevation: 0,
+              },
+            }}
+          />
+          <Stack.Screen
+            name="SimulasiFleksiPensiun"
+            component={SimulasiFleksiPensiun}
             options={{
               headerTintColor: "black",
               headerShown: false,
@@ -163,7 +191,6 @@ export default function App() {
             component={ProfileKeuanganGriya}
             options={{
               headerTintColor: "black",
-              headerShown: false,
               headerStyle: {
                 backgroundColor: "#FFFFFF",
                 shadowOpacity: 0,

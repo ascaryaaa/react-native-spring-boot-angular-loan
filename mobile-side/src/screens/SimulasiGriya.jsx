@@ -9,10 +9,22 @@ import {
   ScrollView,
 } from "react-native";
 
-const SimulasiPinjaman = ({ navigation }) => {
+const SimulasiGriya = ({ navigation }) => {
   const [inputData, setInputData] = useState({
     penghasilan: "",
+    jangkaWaktu: "",
   });
+
+  const data =[
+    {id: 1, title: "Maksimal Pinjaman", content: "Rp 794.993.871,00"},
+    {id: 2, title: "Angsuran Pinjaman per Bulan", content: "Rp 4.554.761,00"}
+  ];
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
 
   return (
     <View style={styles.container}>
@@ -36,7 +48,7 @@ const SimulasiPinjaman = ({ navigation }) => {
           <View style={{ alignItems: "center" }}>
             <Text style={styles.texttitle}>Simulasi BNI Griya</Text>
             <Image
-              source={require("../../../mobile-side/src/assets/img_simulasi.png")}
+              source={require("../../../mobile-side/src/assets/img_simulasi_griya.png")}
               style={styles.imgSimulasi}
             />
             <Text>
@@ -57,10 +69,10 @@ const SimulasiPinjaman = ({ navigation }) => {
             <Text style={styles.textform}>Jangka Waktu</Text>
             <TextInput
               style={styles.input}
-              onChangeText={(text) =>
-                setInputData({ ...inputData, penghasilan: text })
+              onChangeText={(number) =>
+                setInputData({ ...inputData, jangkaWaktu: number })
               }
-              value={setInputData.penghasilan}
+              value={setInputData.jangkaWaktu}
               placeholder="bulan"
               textAlign="right"
             ></TextInput>
@@ -76,34 +88,33 @@ const SimulasiPinjaman = ({ navigation }) => {
             ></TextInput>
           </View>
 
-          <TouchableOpacity
-            style={styles.button}
-            // onPress={() => navigation.navigate("DataPemohon")}
-          >
-            <Text style={styles.simulasikan}> Simulasikan</Text>
-          </TouchableOpacity>
-
-          <View style={styles.hasil}>
-            <Text style={styles.textform}>Hasil</Text>
-            <Text style={{ paddingTop: 5 }}>
-              Maksimal Kredit : Rp. 345.000.000{" "}
-            </Text>
-            <Text style={{ paddingTop: 8 }}>
-              Angsuran per Bulan : Rp. 4.000.000
-            </Text>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate("ProfileKeuanganGriya")}
-            >
-              <Text style={styles.simulasikan}> Selanjutnya</Text>
+          <View style={styles.container1}>
+            <TouchableOpacity onPress={toggleDropdown} style={styles.button}>
+              <Text style={styles.textButton}>Simulasi Angsuran</Text>
             </TouchableOpacity>
+            {isDropdownOpen && (
+              <View style={styles.dropdownContent}>
+                <Text style={styles.text}>Hasil</Text>
+                {data.map((view) => (
+                <View key={view.id} style={styles.row}>
+                  <Text style={{ flex: 1, textAlign: 'left', fontWeight: '300' }}>{view.title}</Text>
+                  <Text style={{ flex: 1,textAlign: 'right', fontWeight: '600'}}>{view.content}</Text>
+                </View>
+                ))}
+              </View>
+            )}
           </View>
+          <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate("ProfileKeuanganGriya")}>
+              <Text style={styles.simulasikan}> Selanjutnya</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </View>
   );
 };
-export default SimulasiPinjaman;
+export default SimulasiGriya;
 
 const styles = StyleSheet.create({
   container: {
@@ -154,11 +165,9 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 40,
     borderWidth: 1,
-    borderColor: "gray",
     marginTop: 10,
     marginBottom: 20,
     paddingHorizontal: 10,
-    // width: 358,
     borderRadius: 8,
     borderColor: "#1394AD",
     borderWidth: 1,
@@ -168,5 +177,33 @@ const styles = StyleSheet.create({
   },
   textform: {
     fontWeight: "800",
+  },
+  container1: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  textButton: {
+    alignSelf: "center",
+    paddingTop: 8,
+    color: "white",
+    fontWeight: "700",
+    fontSize: 14,
+  },
+  dropdownContent: {
+    backgroundColor: "rgba(0, 0, 0, 0.1)",
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 10,
+    width: '100%',
+  },
+  text: {
+    fontWeight: '700',
+  },
+  row: {
+    flexDirection: 'row',
+    borderColor: '#000',
+    marginBottom: 15,
+    justifyContent: 'space-between',
   },
 });

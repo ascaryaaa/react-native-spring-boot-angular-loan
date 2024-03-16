@@ -9,6 +9,7 @@ import {
 } from "react-native";
 
 const ProfileKeuanganGriya = ({ navigation }) => {
+
   const [inputData, setInputData] = useState({
     hargaRumah: " ",
     penghasilanBersih: " ",
@@ -17,8 +18,13 @@ const ProfileKeuanganGriya = ({ navigation }) => {
     uangMuka: " ",
   });
 
-  const data = [
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const data = [
     { id: 1, title: "Harga Rumah", content: "Rp 500.000.000,00" },
     { id: 2, title: "Jangka Waktu", content: "120 Bulan" },
     { id: 3, title: "Presentase Uang Muka (%)", content: "10%" },
@@ -26,13 +32,12 @@ const ProfileKeuanganGriya = ({ navigation }) => {
     { id: 5, title: "Suku Bunga per Tahun", content: "6,75%" },
     { id: 6, title: "Total Pinjaman", content: "Rp 450.000.000,00" },
     { id: 7, title: "Angsuran Pinjaman per Bulan", content: "Rp 5.167.445,22" },
-
   ];
 
   return (
     <ScrollView style={styles.container}>
       <View>
-        <Text style={{fontWeight: '500', fontSize: 23, marginBottom: 13}}>Profile Keuangan</Text>
+        <Text style={{fontWeight: '600', fontSize: 16, marginBottom: 13}}>Profile Keuangan</Text>
         <Text style={styles.text}>Harga Rumah</Text>
         <TextInput
           style={styles.input}
@@ -79,50 +84,27 @@ const ProfileKeuanganGriya = ({ navigation }) => {
         <Text style={styles.text}>Bunga Pinjaman</Text>
         <TextInput
           style={styles.input}
-          placeholder="Persediaan Per Tahun"
           value="6,75%"
         />
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("SyaratKetentuan")}
-        >
-          <Text
-            style={{
-              alignSelf: "center",
-              paddingTop: 8,
-              color: "white",
-              fontWeight: "900",
-            }}
-          >
-            Simulasi Angsuran
-          </Text>
-        </TouchableOpacity>
-        <Text style={styles.text}>Hasil</Text>
-        <View style={styles.table}>
-          {data.map((view) => (
-            <View key={view.id} style={styles.row}>
-              <Text style={{ flex: 1, textAlign: "auto" }}>{view.title}</Text>
-              <Text style={{ flex: 1, textAlign: "center" }}>:</Text>
-              <Text style={{ flex: 1, textAlign: "left" }}>{view.content}</Text>
+        <View style={styles.container1}>
+          <TouchableOpacity onPress={toggleDropdown} style={styles.button}>
+            <Text style={styles.textButton}>Simulasi Angsuran</Text>
+          </TouchableOpacity>
+          {isDropdownOpen && (
+            <View style={styles.dropdownContent}>
+              <Text style={styles.text}>Hasil</Text>
+              {data.map((view) => (
+              <View key={view.id} style={styles.row}>
+                <Text style={{ flex: 1, textAlign: 'left', fontWeight: '300' }}>{view.title}</Text>
+                <Text style={{ flex: 1,textAlign: 'right', fontWeight: '600'}}>{view.content}</Text>
+              </View>
+            ))}
+            <Text style={{fontWeight: '300', marginVertical: 20, fontWeight: '500'}}>Bunga Dapat Berubah Sewaktu-waktu Tanpa Pemberitahuan Lebih Lanjut</Text>
             </View>
-          ))}
+          )}
         </View>
-        <Text style={{fontWeight: '300', marginVertical: 20}}>Bunga Dapat Berubah Sewaktu-waktu Tanpa Pemberitahuan Lebih Lanjut</Text>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("KetentuanTabel")}
-        >
-          <Text
-            style={{
-              alignSelf: "center",
-              paddingTop: 8,
-              color: "white",
-              fontWeight: "900",
-            }}
-          >
-            Ajukan Pinjaman
-          </Text>
+        <TouchableOpacity style={styles.button1} onPress={() => navigation.navigate('DataPemohon')}>
+          <Text style={{textAlign: 'center', paddingTop: 12, color: 'white', fontWeight: '700', fontSize: 16}}>Ajukan Pinjaman</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
@@ -134,7 +116,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 8,
-
+},
+container1: {
+  flex: 1,
+  alignItems: "center",
+  justifyContent: "center",
 },
 button: {
   padding: 5,
@@ -146,30 +132,46 @@ button: {
   width:160,
   height:44,
 },
+button1: {
+  marginTop: 10,
+  marginBottom: 30,
+  backgroundColor: '#18C1CD',
+  borderRadius: 20,
+  width: 390,
+  height: 44,
+},
+textButton: {
+  alignSelf: "center",
+  paddingTop: 8,
+  color: "white",
+  fontWeight: "700",
+  fontSize: 14,
+},
 input: {
-  borderColor: '#1394AD',
-  borderWidth: 1.5,
-  padding: 8,
+  width: "100%",
+  height: 40,
+  borderWidth: 1,
+  marginTop: 10,
+  marginBottom: 20,
+  paddingHorizontal: 10,
   borderRadius: 8,
-  marginVertical: 8,
+  borderColor: "#1394AD",
+  borderWidth: 1,
 },
 text: {
-  fontWeight: '800',
-},
-table: {
-  top: 8,
-  padding: 15,
-  borderColor: '#000',
-  marginBottom: 10,
-  backgroundColor: 'white',
-  borderRadius: 10,
-  borderColor: 'grey',
-  borderWidth: 1.5,
+  fontWeight: '700',
 },
 row: {
   flexDirection: 'row',
   borderColor: '#000',
   marginBottom: 15,
   justifyContent: 'space-between',
+},
+dropdownContent: {
+  backgroundColor: "rgba(0, 0, 0, 0.1)",
+  padding: 10,
+  borderRadius: 5,
+  marginTop: 10,
+  width: '100%',
 },
 });
