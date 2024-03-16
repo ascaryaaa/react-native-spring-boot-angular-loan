@@ -1,100 +1,66 @@
 package com.cuan.serverside.utils;
 
-import com.cuan.serverside.model.Account;
-import com.cuan.serverside.model.Admin;
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
+
 
 @Component
 public class JwtUtil {
 
+    private final String secretKey = "mysecretkey"; // Consider externalizing this as a configuration property
+    private final long accessTokenValidity = 60 * 60 * 1000; // 1 hour in milliseconds
 
-    private final String secret_key = "mysecretkey";
-    private long accessTokenValidity = 60*60*1000;
-
-    private final JwtParser jwtParser;
-
-    private final String TOKEN_HEADER = "Authorization";
-    private final String TOKEN_PREFIX = "Bearer ";
-
-    public JwtUtil(){
-        this.jwtParser = Jwts.parser().setSigningKey(secret_key);
+    public JwtUtil() {
     }
 
-    public String createTokenAdmin(Admin admin) {
-        Claims claims = Jwts.claims().setSubject(admin.getUsernameAdmin());
-        Date tokenCreateTime = new Date();
-        Date tokenValidity = new Date(tokenCreateTime.getTime() + TimeUnit.MINUTES.toMillis(accessTokenValidity));
+    public String createToken(String username, String role) {
+        Claims claims = Jwts.claims().setSubject(username);
+        claims.put("role", role); // Include the user role in the token
+
+        long nowMillis = System.currentTimeMillis();
+        Date now = new Date(nowMillis);
+        Date validity = new Date(nowMillis + accessTokenValidity);
+
         return Jwts.builder()
                 .setClaims(claims)
-                .setExpiration(tokenValidity)
-                .signWith(SignatureAlgorithm.HS256, secret_key)
-                .compact();
-    }
-    public String createTokenAccount(Account account) {
-        Claims claims = Jwts.claims().setSubject(account.getUsernameAccount());
-        Date tokenCreateTime = new Date();
-        Date tokenValidity = new Date(tokenCreateTime.getTime() + TimeUnit.MINUTES.toMillis(accessTokenValidity));
-        return Jwts.builder()
-                .setClaims(claims)
-                .setExpiration(tokenValidity)
-                .signWith(SignatureAlgorithm.HS256, secret_key)
+                .setIssuedAt(now)
+                .setExpiration(validity)
+                .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
     }
 
-    private Claims parseJwtClaims(String token) {
-        return jwtParser.parseClaimsJws(token).getBody();
-    }
-
-    public Claims resolveClaims(HttpServletRequest req) {
-        try {
-            String token = resolveToken(req);
-            if (token != null) {
-                return parseJwtClaims(token);
-            }
-            return null;
-        } catch (ExpiredJwtException ex) {
-            req.setAttribute("expired", ex.getMessage());
-            throw ex;
-        } catch (Exception ex) {
-            req.setAttribute("invalid", ex.getMessage());
-            throw ex;
-        }
+    public Claims getClaimsFromToken(String token) {
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
     }
 
     public String resolveToken(HttpServletRequest request) {
-
-        String bearerToken = request.getHeader(TOKEN_HEADER);
-        if (bearerToken != null && bearerToken.startsWith(TOKEN_PREFIX)) {
-            return bearerToken.substring(TOKEN_PREFIX.length());
+        String bearerToken = request.getHeader("Authorization");
+        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
+            return bearerToken.substring(7);
         }
         return null;
     }
 
-    public boolean validateClaims(Claims claims) throws AuthenticationException {
+    public boolean validateToken(String token) {
         try {
-            return claims.getExpiration().after(new Date());
+            Claims claims = getClaimsFromToken(token);
+            return !claims.getExpiration().before(new Date());
         } catch (Exception e) {
-            throw e;
+            return false;
         }
     }
 
-    public String getUsernameAdmin(Claims claims) {
-        return claims.getSubject();
-    }
-    public String getUsernameAccount(Claims claims) {
-        return claims.getSubject();
+    public String getUsernameFromToken(String token) {
+        return getClaimsFromToken(token).getSubject();
     }
 
-    private List<String> getRoles(Claims claims) {
-        return (List<String>) claims.get("roles");
+    public String getRoleFromToken(String token) {
+        Claims claims = getClaimsFromToken(token);
+        return claims.get("role", String.class);
     }
-
-
 }
