@@ -30,6 +30,10 @@ export class SidebarComponent implements OnInit {
     // Menggunakan Router untuk melakukan navigasi ke path /home
     this.router.navigate(['/home']);
   }
+  navigateToMonitoring() {
+    // Menggunakan Router untuk melakukan navigasi ke path /monitoring
+    this.router.navigate(['/monitoring']);
+  }
 
   admins: AdminsResponse = [];
   async fetchAdminDataAsync(url: string): Promise<AdminsResponse> {
