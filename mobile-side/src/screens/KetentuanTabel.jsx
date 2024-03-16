@@ -97,7 +97,6 @@ const KetentuanTabel = ({ navigation }) => {
               </Text>
             </View>
           </View>
-          <DropdownPT></DropdownPT>
           <View
             style={{
               flexDirection: "row",

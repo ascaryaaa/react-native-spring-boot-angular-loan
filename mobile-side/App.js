@@ -252,18 +252,6 @@ export default function App() {
             }}
           />
           <Stack.Screen
-            name="Monitoring"
-            component={Monitoring}
-            options={{
-              headerTintColor: "black",
-              headerStyle: {
-                backgroundColor: "#FFFFFF",
-                shadowOpacity: 0,
-                elevation: 0,
-              },
-            }}
-          />
-          <Stack.Screen
             name="Riwayat"
             component={Riwayat}
             options={{
