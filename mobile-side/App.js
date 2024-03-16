@@ -24,6 +24,7 @@ import KetentuanTabel from "./src/screens/KetentuanTabel";
 import SimulasiGriya from "./src/screens/SimulasiGriya";
 import SimulasiFleksiAktif from "./src/screens/SimulasiFleksiAktif";
 import SimulasiFleksiPensiun from "./src/screens/SimulasiFleksiPensiun";
+import { LoginModal } from "./src/screens/LoginModal";
 // import AsyncStorage from "@react-native-async-storage/async-storage";
 // import { LoginModal } from "./src/screens/LoginModal";
 
@@ -86,6 +87,20 @@ export default function App() {
               },
             }}
           /> */}
+          <Stack.Screen
+            name="LoginModal"
+            component={LoginModal}
+            options={{
+              headerTintColor: "black",
+              headerShown: false,
+              headerStyle: {
+                backgroundColor: "#FFFFFF",
+                shadowOpacity: 0,
+                elevation: 0,
+              },
+            }}
+          />
+
           <Stack.Screen
             name="SimulasiGriya"
             component={SimulasiGriya}
