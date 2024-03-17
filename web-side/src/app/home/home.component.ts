@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { DetailComponent } from './detail/detail.component';
 
-export type PinjamanResponse = Pinjaman[];
+export type FormResponse = FormPengajuan[];
 
 export interface Pinjaman {
   idPinjaman: number;
@@ -74,14 +74,14 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/detail']);
   }
 
-  pinjamans: PinjamanResponse = [];
-  async fetchAdminDataAsync(url: string): Promise<PinjamanResponse> {
+  form: FormResponse = [];
+  async fetchAdminDataAsync(url: string): Promise<FormResponse> {
     try {
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      const data: PinjamanResponse = await response.json();
+      const data: FormResponse = await response.json();
       return data;
     } catch (error) {
       console.error('Fetching error:', error);
@@ -89,7 +89,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  apiUrl = 'http://localhost:8083/loan/v1/pinjaman/get-pinjamans';
+  apiUrl = 'http://localhost:8083/loan/v1/form/get-form';
   
   async ngOnInit() {
     this.refreshAdminList();
@@ -97,8 +97,8 @@ export class HomeComponent implements OnInit {
 
   async refreshAdminList() {
     try {
-      this.pinjamans = await this.fetchAdminDataAsync(this.apiUrl);
-      console.log(this.pinjamans); // Process your users here
+      this.form = await this.fetchAdminDataAsync(this.apiUrl);
+      console.log(this.form); // Process your users here
     } catch (error) {
       console.error('Error fetching users:', error);
     }
