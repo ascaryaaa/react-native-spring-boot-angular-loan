@@ -6,7 +6,9 @@ import { CommonModule } from '@angular/common';
   selector: 'app-detail',
   standalone: true,
   imports: [SidebarComponent, CommonModule],
-  templateUrl: './detail.component.html',
-  styleUrl: './detail.component.css',
+  templateUrl: './detail-pengajuan-pinjaman.component.html',
+  styleUrl: './detail-pengajuan-pinjaman.component.css'
 })
-export class DetailComponent {}
+export class DetailPengajuanPinjamanComponent {
+
+}

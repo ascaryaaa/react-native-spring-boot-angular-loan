@@ -33,7 +33,7 @@ export class AuthService {
 
       if (response) {
         localStorage.setItem('user', JSON.stringify(response.data));
-        this.router.navigate(['home']);
+        this.router.navigate(['list-pengajuan-pinjaman']);
       }
     } catch (error) {
       console.error('Login failed!', error);

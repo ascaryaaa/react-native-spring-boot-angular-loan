@@ -26,9 +26,9 @@ export class SidebarComponent implements OnInit {
   logout() {
     this.authService.logout();
   }
-  navigateToDashboard() {
+  navigateToListPengajuanPinjaman() {
     // Menggunakan Router untuk melakukan navigasi ke path /home
-    this.router.navigate(['/home']);
+    this.router.navigate(['/list-pengajuan-pinjaman']);
   }
   navigateToMonitoring() {
     // Menggunakan Router untuk melakukan navigasi ke path /monitoring

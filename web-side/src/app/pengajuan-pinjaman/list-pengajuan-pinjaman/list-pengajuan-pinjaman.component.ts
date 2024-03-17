@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-// import { AuthService } from './../auth/auth.service';
-import { SidebarComponent } from '../sidebar/sidebar.component';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { SidebarComponent } from '../../sidebar/sidebar.component';
+import { DetailPengajuanPinjamanComponent } from '../detail-pengajuan-pinjaman/detail-pengajuan-pinjaman.component';
 import { Router } from '@angular/router';
-import { DetailComponent } from './detail/detail.component';
 
 export type FormResponse = FormPengajuan[];
 
@@ -58,20 +57,20 @@ export interface Admin {
 }
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-list-pengajuan-pinjaman',
   standalone: true,
-  imports: [SidebarComponent, CommonModule, DetailComponent],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css',
+  imports: [SidebarComponent, CommonModule, DetailPengajuanPinjamanComponent],
+  templateUrl: './list-pengajuan-pinjaman.component.html',
+  styleUrl: './list-pengajuan-pinjaman.component.css'
 })
-export class HomeComponent implements OnInit {
+export class ListPengajuanPinjamanComponent implements OnInit {
   constructor(
     private router: Router
   ) {} // Injeksi Router
 
   navigateToDetail() {
     // Menggunakan Router untuk melakukan navigasi ke path /detail
-    this.router.navigate(['/home/detail']);
+    this.router.navigate(['detail-pengajuan-pinjaman']);
   }
 
   form: FormResponse = [];
@@ -104,3 +103,4 @@ export class HomeComponent implements OnInit {
     }
   }
 }
+
