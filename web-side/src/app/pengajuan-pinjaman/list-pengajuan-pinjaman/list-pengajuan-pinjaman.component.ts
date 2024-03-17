@@ -1,106 +1,35 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { SidebarComponent } from '../../sidebar/sidebar.component';
-import { DetailPengajuanPinjamanComponent } from '../detail-pengajuan-pinjaman/detail-pengajuan-pinjaman.component';
-import { Router } from '@angular/router';
-
-export type FormResponse = FormPengajuan[];
-
-export interface Pinjaman {
-  idPinjaman: number;
-  pinjamanToUser: User;
-  pinjamanToForm: FormPengajuan;
-  pinjamanToAdmin: Admin;
-  tanggalRealisasi: Date;
-  status: string;
-  sisaTagihan: number;
-  totalBayarTagihan: number;
-  tanggalBayarTagihan: Date;
-}
-
-export interface User {
-  idUser: number;
-  nameUser: string;
-  nikUser: string;
-}
-
-export interface FormPengajuan {
-  idFormPengajuanPinjaman: number;
-  formToJenis: JenisPinjaman;
-  formToUser: User;
-  jenisKelamin: string;
-  tempatLahir: string;
-  tanggalLahir: Date;
-  alamatKtp: string;
-  kodePos: string;
-  kelurahan: string;
-  kecamatan: string;
-  npwp: string;
-  unitBNI: string;
-  penghasilanBersihPerbulan: number;
-  jumlaPinjaman: number;
-  jangkaWaktu: number;
-  bungaPinjaman: number;
-}
-
-export interface JenisPinjaman {
-  idJenisPinjaman: number;
-  nameJenisPinjaman: string;
-  gambarJenisPinjaman: string;
-  iconJenisPinjaman: string;
-}
-
-export interface Admin {
-  idAdmin: number;
-  nameAdmin: string;
-  nppAdmin: string;
-}
+import { Component } from '@angular/core';
+import { FormPengajuanPinjaman, FormResponse } from '../pengajuan-pinjaman';
+import { Observable } from 'rxjs';
+import { PengajuanPinjamanService } from '../pengajuan-pinjaman.service';
+import { listPengajuanPinjaman } from '../../config/api';
 
 @Component({
   selector: 'app-list-pengajuan-pinjaman',
-  standalone: true,
-  imports: [SidebarComponent, CommonModule, DetailPengajuanPinjamanComponent],
   templateUrl: './list-pengajuan-pinjaman.component.html',
   styleUrl: './list-pengajuan-pinjaman.component.css'
 })
-export class ListPengajuanPinjamanComponent implements OnInit {
-  constructor(
-    private router: Router
-  ) {} // Injeksi Router
+export class ListPengajuanPinjamanComponent {
+  forms: FormPengajuanPinjaman[] = [];
 
-  navigateToDetail() {
-    // Menggunakan Router untuk melakukan navigasi ke path /detail
-    this.router.navigate(['detail-pengajuan-pinjaman']);
-  }
+  constructor(private pengajuanPinjamanService: PengajuanPinjamanService) { }
 
-  form: FormResponse = [];
-  async fetchAdminDataAsync(url: string): Promise<FormResponse> {
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data: FormResponse = await response.json();
-      return data;
-    } catch (error) {
-      console.error('Fetching error:', error);
-      throw error;
-    }
-  }
-
-  apiUrl = 'http://localhost:8083/loan/v1/form/get-form';
-  
   async ngOnInit() {
-    this.refreshAdminList();
+    this.refreshFormList();
   }
 
-  async refreshAdminList() {
-    try {
-      this.form = await this.fetchAdminDataAsync(this.apiUrl);
-      console.log(this.form); // Process your users here
+  async refreshFormList() {
+    try{
+      this.pengajuanPinjamanService.getListPengajuanPinjaman().subscribe({
+        next: (data) => {
+          this.forms = data;
+          console.log(this.forms); // For debugging
+        },
+      })
     } catch (error) {
-      console.error('Error fetching users:', error);
+      console.error('Error fetching data:', error)
     }
   }
+
 }
 

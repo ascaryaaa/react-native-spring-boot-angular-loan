@@ -6,12 +6,11 @@ import { initFlowbite } from 'flowbite';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth/auth.service';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { ListPengajuanPinjamanComponent } from './pengajuan-pinjaman/list-pengajuan-pinjaman/list-pengajuan-pinjaman.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterModule, CommonModule, ListPengajuanPinjamanComponent, LoginComponent, SidebarComponent],
+  imports: [RouterOutlet, RouterModule, CommonModule, LoginComponent, SidebarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
