@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit {
 
   navigateToDetail() {
     // Menggunakan Router untuk melakukan navigasi ke path /detail
-    this.router.navigate(['/detail']);
+    this.router.navigate(['/home/detail']);
   }
 
   form: FormResponse = [];

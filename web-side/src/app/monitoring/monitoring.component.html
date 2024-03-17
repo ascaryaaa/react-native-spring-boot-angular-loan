@@ -5,7 +5,7 @@
 >
   Daftar Debitur
 </h1>
-<app-sidebar></app-sidebar>
+<app-sidebar/>
 <div class="p-4 sm:ml-64">
     <div class="p-4 border-2 border-gray-200 rounded-lg dark:border-gray-700">
       <div
@@ -70,10 +70,12 @@
             <td class="px-4 py-2">Lancar</td>
           
             <td class="px-4 py-2">
-              <a
+              <button
+              (click)="navigateToMontoringDetail()"
+            
                 href="#"
                 class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                >View</a
+                >View</button
               >
             </td>
           </tr>
