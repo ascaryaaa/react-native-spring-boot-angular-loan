@@ -3,6 +3,7 @@
 
 <div class="flex flex-col px-6 pt-6 pb-14 bg-white rounded-xl max-md:px-5">
   <div class="flex flex-col justify-center bg-white max-md:max-w-full">
+    <div *ngIf="pinjamans"></div>
     <div class="py-2.5 max-md:max-w-full">
       <div class="flex gap-5 max-md:flex-col max-md:gap-0">
         <div class="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
@@ -12,7 +13,7 @@
                 <div class="flex flex-col ml-5 w-[78%] max-md:ml-0 max-md:w-full">
                   <div class="flex flex-col grow max-md:mt-8">
                     <div class="text-xl font-bold tracking-normal leading-6 text-zinc-800">
-                      Gerald Marihot
+                      {{pinjamans?.pinjamanToUser?.nameUser}}
                     </div>
                     <div class="flex gap-1 mt-2 text-xs text-black">
                       <div class="flex flex-col self-start pr-3 leading-[150%]">
@@ -26,24 +27,21 @@
                         <div class="mt-2">Riwayat Pinjaman</div>
                       </div>
                       <div class="flex flex-col">
-                        <div class="leading-[150%]">: W18342324</div>
-                        <div class="mt-2 leading-[150%]">: 52700001011001</div>
-                        <div class="mt-2 leading-[150%]">: 3456-0982-9801</div>
-                        <div class="mt-2 leading-[150%]">: Wanita</div>
+                        <div class="leading-[150%]">: {{pinjamans?.pinjamanToUser?.idUser}}</div>
+                        <div class="mt-2 leading-[150%]">: {{pinjamans?.pinjamanToUser?.nikUser}}</div>
+                        <div class="mt-2 leading-[150%]">: {{pinjamans?.pinjamanToForm?.npwp}}</div>
+                        <div class="mt-2 leading-[150%]">: {{pinjamans?.pinjamanToForm?.jenisKelamin}}</div>
                         <div class="mt-2 leading-[150%]">
-                          : Kediri, 6 Juli 1998
+                          : {{pinjamans?.pinjamanToForm?.tempatLahir}}
                         </div>
                         <div class="mt-2 leading-5">
-                          : Jl. Kejayaan No. 49a, Krukut, Taman Sari, Jakarta
-                          Barat
+                          : {{pinjamans?.pinjamanToForm?.alamatKtp}}
                         </div>
-                        <div class="mt-2 leading-[150%]">: BNI Kota Tua</div>
+                        <div class="mt-2 leading-[150%]">:{{pinjamans?.pinjamanToForm?.unitBNI}}</div>
                         <div class="flex gap-0 mt-2">
                           <div class="self-start leading-[150%]">:</div>
                           <div class="leading-5">
-                            BNI Griya
-                            <br />
-                            BNI Fleksi Aktif
+                            {{pinjamans?.pinjamanToForm?.formToJenis?.nameJenisPinjaman}}
                           </div>
                         </div>
                       </div>
@@ -80,16 +78,16 @@
                   <tbody >
                     <tr class="bg-orange-50 border-b ">
                       <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap" >
-                        BNI Griya
+                        {{pinjamans?.pinjamanToForm?.formToJenis?.nameJenisPinjaman}}
                       </th>
                       <td class="px-6 py-4">
-                        5.000.000
+                        {{pinjamans?.pinjamanToForm?.angsuranPerbulan}}
                       </td>
                       <td class="px-6 py-4">
-                        Wahyu
+                        {{pinjamans?.pinjamanToAdmin?.nameAdmin}}
                       </td>
                       <td class="px-6 py-4">
-                        25/03/2024
+                        {{pinjamans?.tanggalRealisasi}}
                       </td>
                     </tr>
                   </tbody>
@@ -118,7 +116,7 @@
                     <div class="flex flex-col justify-center my-auto">
                       <div class="text-xs text-neutral-500">Total Pinjaman</div>
                       <div class="mt-1 text-xs leading-4 text-center text-zinc-800">
-                        Rp. 3.500.000,00
+                        {{pinjamans?.pinjamanToForm?.jumlaPinjaman}}
                       </div>
                     </div>
                   </div>
@@ -131,7 +129,7 @@
                         Tanggal Realisasi
                       </div>
                       <div class="mt-1 text-xs leading-4 text-center text-zinc-800">
-                        25 Maret 2024
+                        {{pinjamans?.tanggalRealisasi}}
                       </div>
                     </div>
                   </div>
@@ -142,7 +140,7 @@
                     <div class="flex flex-col justify-center my-auto">
                       <div class="text-xs text-neutral-500">Kolektabilitas</div>
                       <div class="mt-1 text-xs leading-4 text-center text-zinc-800">
-                        Lancar
+                        {{pinjamans?.kolektabilitas}}
                       </div>
                     </div>
                   </div>
@@ -178,13 +176,13 @@
                         Sisa Pokok
                       </th>
                       <td class="px-6 py-4">
-                        82.520.772,00
+                        {{pinjamans?.amountsSisaPokok}}
                       </td>
                       <td class="px-6 py-4">
-                        0,00
+                        {{pinjamans?.rebatesSisaPokok}}
                       </td>
                       <td class="px-6 py-4">
-                        82.520.772,00
+                       {{pinjamans?.payoffsSisaPokok}}
                       </td>
                     </tr>
                     <tr class="bg-orange-50 border-b ">
@@ -192,13 +190,13 @@
                         Bunga Berjalan
                       </th>
                       <td class="px-6 py-4">
-                        239.577,00
+                        {{pinjamans?.amountsBungaBerjalan}}
                       </td>
                       <td class="px-6 py-4">
-                        0,00
+                        {{pinjamans?.rebatesBungaBerjalan}}
                       </td>
                       <td class="px-6 py-4">
-                        82.760.349,00
+                        {{pinjamans?.payoffsBungaBerjalan}}
                       </td>
                     </tr>
                     <tr class="bg-orange-50 border-b ">
@@ -206,13 +204,13 @@
                         TOTALS
                       </th>
                       <td class="px-6 py-4">
-                        0,00
+                        {{pinjamans?.totalAmounts}}
                       </td>
                       <td class="px-6 py-4">
-                        0,00
+                        {{pinjamans?.totalRebates}}
                       </td>
                       <td class="px-6 py-4">
-                        82.760.349,00
+                        {{pinjamans?.totalPayoffs}}
                       </td>
                     </tr>
                   </tbody>

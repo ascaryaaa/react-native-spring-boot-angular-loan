@@ -75,12 +75,7 @@
             <td class="px-4 py-2">{{pinjaman.status}}</td>
           
             <td class="px-4 py-2">
-              <button
-            
-                href="#"
-                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                >View</button
-              >
+              <a [routerLink]="['../', pinjaman.idPinjaman]" class="text-blue-600 hover:underline">View</a>
             </td>
           </tr>
           <!-- Add more rows here if needed -->

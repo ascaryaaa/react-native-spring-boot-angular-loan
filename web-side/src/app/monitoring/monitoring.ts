@@ -11,6 +11,16 @@ export interface Pinjaman {
     sisaTagihan: number;
     totalBayarTagihan: number;
     tanggalBayarTagihan: Date;
+    kolektabilitas: String;
+    amountsSisaPokok: number;
+    rebatesSisaPokok: number;
+    payoffsSisaPokok: number;
+    amountsBungaBerjalan: number;
+    rebatesBungaBerjalan: number;
+    payoffsBungaBerjalan: number;
+    totalAmounts: number;
+    totalRebates: number;
+    totalPayoffs: number;
 }
 
 
