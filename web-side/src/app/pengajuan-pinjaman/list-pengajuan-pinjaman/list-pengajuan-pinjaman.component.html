@@ -74,7 +74,12 @@
                   <td class="px-4 py-2">{{ form.formToJenis.nameJenisPinjaman }}</td>
                   <td class="px-4 py-2">
                     <div
-                      class="px-4 py-2"
+                      class="px-4 py-2 text-white"
+                      [ngClass]="{
+                        'bg-green-500': form.statusPengajuan === 'Diterima',
+                        'bg-red-500': form.statusPengajuan === 'Ditolak',
+                        'bg-gray-500': form.statusPengajuan === 'Diproses'
+                      }"
                     >
                       {{ form.statusPengajuan }}
                     </div>
