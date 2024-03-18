@@ -36,6 +36,7 @@ export interface FormPengajuanPinjaman {
     jumlaPinjaman: number;
     jangkaWaktu: number;
     bungaPinjaman: number;
+    statusPengajuan: string;
 }
   
 export interface JenisPinjaman {
