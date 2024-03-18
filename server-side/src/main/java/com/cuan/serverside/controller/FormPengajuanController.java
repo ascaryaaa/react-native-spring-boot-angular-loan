@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller // Define Class Controller
 @RestController // Define Rest Controller for REST API
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/loan/v1/form") // Pathing
 public class FormPengajuanController {
     // Dependency Injection, prevents coupling

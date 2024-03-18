@@ -94,7 +94,7 @@ const DataPemohon = ({navigation}) => {
                 <View style={styles.input}>
                     <Bniaddress/>
                 </View>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('KetentuanTabel')}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('KetentuanFleksiAktif')}>
                     <Text style={{alignSelf: 'center', paddingTop: 8, color: 'white', fontWeight: '900'}}>Selanjutnya</Text>
                 </TouchableOpacity>
             </View>

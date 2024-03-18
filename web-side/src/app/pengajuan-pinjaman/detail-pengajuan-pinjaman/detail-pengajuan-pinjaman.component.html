@@ -1,4 +1,3 @@
-<app-sidebar />
 <h1
   id="judul"
   class="p-4 sm:ml-64 text-left text-2xl mb-4 font-bold"
@@ -7,7 +6,7 @@
   Detail Pemohon
 </h1>
 <div class="sm:ml-64">
-
+<div *ngIf="form">
  <div class="p-4 flex flex-col gap-4">
   <a href="#" class="block flex-1 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 flex items-center" style="pointer-events: none;">
     <div class="flex-shrink-0 w-14 bg-gray-200 rounded-full overflow-hidden mr-4">
@@ -16,17 +15,20 @@
     <div class="flex flex-col justify-between">
       <div>
         <h5 id="nama" class="text-xl font-bold tracking-normal leading-6 text-zinc-800">
-          Gerald Marihot
+          {{ form.formToUser.nameUser }}
         </h5>
         <div class="flex gap-1 mt-2">
           <img id="alamat" src="https://cdn.builder.io/api/v1/image/assets/TEMP/6f97584209bb4e19cde38f704f49cebe787e69b77c2eec4ef56c6320264d07a7?" class="shrink-0 w-5 aspect-square" />
           <div class="flex-auto">
-            Jl. Kejayaan No. 49a, Krukut, Taman Sari, Jakarta Barat
+            {{ form.alamatKtp }} 
+            {{ form.kelurahan }}, 
+            {{ form.kecamatan }}, 
+            {{ form.kodePos }}
           </div>
         </div>
         <div class="flex gap-1 mt-2">
           <img id="kantor" loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/d09122466aea09fa7e57204962507c6c35c995a041d6e7c5c729816a253cb76b?" class="shrink-0 w-5 aspect-square" />
-          <div class="flex-auto">Kantor Cabang Terdekat : BNI Kota Tua</div>
+          <div class="flex-auto">Kantor Cabang Terdekat : {{form.unitBNI}}</div>
         </div>
       </div>
     </div>
@@ -47,18 +49,18 @@
                 <div class="mt-2">Kantor Cabang</div>
               </div>
               <div class="flex flex-col">
-                <div>: W18342324</div>
-                <div class="mt-2 max-md:mr-2">: 52700001011001</div>
-                <div class="mt-2">: Wanita</div>
-                <div class="mt-2">: Kediri, 6 Juli 1998</div>
-                <div class="mt-2">: BNI Kota Tua</div>
+                <div>: {{ form.idFormPengajuanPinjaman }} </div>
+                <div class="mt-2 max-md:mr-2">: {{ form.formToUser.nikUser }}</div>
+                <div class="mt-2">: {{ form.jenisKelamin }}</div>
+                <div class="mt-2">: {{ form.tempatLahir }}, {{ form.tanggalLahir }}</div>
+                <div class="mt-2">: {{form.unitBNI}}</div>
               </div>
             </div>
           </div>
         </div>
         <div class="flex flex-col w-[33%] max-md:w-full">
           <div class="flex flex-col grow items-start py-6 pl-6 text-xs leading-5 rounded-2xl border border-solid border-neutral-200 max-md:mt-2.5">
-            <div class="font-bold text-center text-zinc-800">Riwayat Pinjaman</div>
+            <div class="font-bold text-center text-zinc-800">Riwayat Pinjaman (On Prgress)</div>
             <div class="font-bold mt-2 tracking-normal leading-[120%]">
               1. BNI Griya
             </div>
@@ -79,9 +81,9 @@
                 <div class="mt-2">NPWP</div>
               </div>
               <div class="flex flex-col">
-                <div>: W18342324</div>
-                <div class="mt-2">: 52700001011001</div>
-                <div class="mt-2">: 3456-0982-9801</div>
+                <div>: {{ form.idFormPengajuanPinjaman }}</div>
+                <div class="mt-2">: {{ form.formToUser.nikUser }}</div>
+                <div class="mt-2">: {{ form.npwp }}</div>
               </div>
             </div>
             <button class="justify-center px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]" style="padding: 6px 12px;">
@@ -110,6 +112,7 @@
   <div class="px-6 pt-6 pb-56 mt-2.5 w-full text-xs font-bold leading-5 text-center rounded-2xl border border-solid border-neutral-200 text-zinc-800 max-md:px-5 max-md:pb-10 max-md:max-w-full">
     <div class="flex text-xs font-bold text-center text-zinc-800">Detail Keterangan SLIK</div>
   </div>
+</div>
 </div>
 
 

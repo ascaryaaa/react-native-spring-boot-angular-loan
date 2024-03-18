@@ -12,7 +12,7 @@ import DropdownPT from "../components/DropdownPT";
 import DropdownPro from "../components/DropdownPro";
 import DropdownPW from "../components/DropdownPW";
 
-const KetentuanTabel = ({ navigation }) => {
+const KetentuanGriya = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.navbar}>
@@ -165,4 +165,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default KetentuanTabel;
+export default KetentuanGriya;

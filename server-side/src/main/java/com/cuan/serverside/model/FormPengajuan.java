@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Entity // Define database class
 @Table(name = "form_pengajuan") // Define the name of the table in the database
 @Data // Initialize getter, setter, hashCode, equals, and toString
@@ -17,7 +19,7 @@ public class FormPengajuan {
     @Column(name = "id_form_pengajuan_pinjaman", updatable = false, nullable = false) // Can't be updated or null
     private Long idFormPengajuanPinjaman;
 
-    // Assign Foreign Keys from Jenis Pinjaman and User
+    // Assign Foreign Keys from Jenis Pinjaman, Admin, and User
     @ManyToOne
     @JoinColumn(name = "id_jenis_pinjaman", referencedColumnName = "id_jenis_pinjaman")
     private JenisPinjaman formToJenis;
@@ -25,6 +27,10 @@ public class FormPengajuan {
     @ManyToOne
     @JoinColumn(name = "id_user", referencedColumnName = "id_user")
     private User formToUser;
+
+    @ManyToOne
+    @JoinColumn(name = "id_admin", referencedColumnName = "id_admin")
+    private Admin formToAdmin;
 
     // Gender of debtor
     @Column(name = "jenis_kelamin_form_pengajuan_pinjaman")
@@ -68,7 +74,7 @@ public class FormPengajuan {
 
     // Loan amount requested by the debtor
     @Column(name = "jumlah_pinjaman_form_pengajuan_pinjaman")
-    private Long jumlaPinjaman;
+    private Long jumlahPinjaman;
 
     // Loan term requested by the debtor (in months)
     @Column(name = "jangka_waktu_form_pengajuan_pinjaman")
@@ -97,4 +103,12 @@ public class FormPengajuan {
     // Amount of down payment
     @Column(name = "uang_muka_form_pengajuan_pinjaman")
     private Long uangMuka;
+
+    // Status of loan approved by admin
+    @Column(name = "status_form_pengajuan_pinjaman")
+    private String statusPengajuan;
+
+    // Date of loan realization
+    @Column(name = "tanggal_realisasi_pinjaman")
+    private Date tanggalRealisasi;
 }
