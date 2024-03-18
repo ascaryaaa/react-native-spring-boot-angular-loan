@@ -37,6 +37,7 @@ export interface FormPengajuanPinjaman {
     jangkaWaktu: number;
     bungaPinjaman: number;
     statusPengajuan: string;
+    tanggalRealisasi: string;
 }
   
 export interface JenisPinjaman {

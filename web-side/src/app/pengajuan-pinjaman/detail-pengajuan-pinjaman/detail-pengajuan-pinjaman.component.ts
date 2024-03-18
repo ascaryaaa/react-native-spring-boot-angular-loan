@@ -30,4 +30,52 @@ export class DetailPengajuanPinjamanComponent {
       console.error('Error fetching data:', error)
     }
   }
+  acceptPengajuan(id: number) {
+    this.pengajuanPinjamanService.getDetailPengajuanPinjaman(id).subscribe({
+      next: (currentData) => {
+        const updatedData = {
+          ...currentData,
+          statusPengajuan: "Diterima"
+        };
+        this.pengajuanPinjamanService.updateStatusPengajuanPinjaman(id, updatedData).subscribe({
+          next: (response) => {
+            console.log("Status updated successfully", response);
+            // Handle successful update here
+          },
+          error: (error) => {
+            console.error("Error updating status:", error);
+            // Handle error here
+          }
+        });
+      },
+      error: (error) => {
+        console.error("Error fetching current data:", error);
+        // Handle error here
+      }
+    });
+  }
+  rejectPengajuan(id: number) {
+    this.pengajuanPinjamanService.getDetailPengajuanPinjaman(id).subscribe({
+      next: (currentData) => {
+        const updatedData = {
+          ...currentData,
+          statusPengajuan: "Ditolak"
+        };
+        this.pengajuanPinjamanService.updateStatusPengajuanPinjaman(id, updatedData).subscribe({
+          next: (response) => {
+            console.log("Status updated successfully", response);
+            // Handle successful update here
+          },
+          error: (error) => {
+            console.error("Error updating status:", error);
+            // Handle error here
+          }
+        });
+      },
+      error: (error) => {
+        console.error("Error fetching current data:", error);
+        // Handle error here
+      }
+    });
+  }
 }

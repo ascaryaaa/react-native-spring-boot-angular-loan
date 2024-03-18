@@ -17,5 +17,8 @@ export class PengajuanPinjamanService {
   getDetailPengajuanPinjaman(id: number): Observable<FormDetailResponse> {
     return this.httpClient.get<FormDetailResponse>(detailPengajuanPinjaman + id);
   }
+  updateStatusPengajuanPinjaman(id: number, data: any): Observable<any> {
+    return this.httpClient.put(detailPengajuanPinjaman + id, data);
+  }
 }
 
