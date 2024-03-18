@@ -23,13 +23,13 @@ public class AccountController {
 //    private UserService userService;
 
     // GET Function of API, Reads account data from 'pengajuan' database
-    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/get-accounts")
     public Iterable<Account> getAllAccount(){
         return accountService.getAllAccount();
     }
 
     // GET Function of API, Reads account data from 'pengajuan' database by id
+
     @GetMapping("/{id}")
     public Account getAccountById(@PathVariable Long id){
         return accountService.getAccountId(id);

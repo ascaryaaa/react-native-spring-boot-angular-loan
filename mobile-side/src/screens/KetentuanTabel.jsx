@@ -8,34 +8,16 @@ import {
   ScrollView,
   Image,
 } from "react-native";
+import DropdownPT from "../components/DropdownPT";
+import DropdownPro from "../components/DropdownPro";
+import DropdownPW from "../components/DropdownPW";
 
 const KetentuanTabel = ({ navigation }) => {
-  const items = [
-    { id: "1", text: "Warga Negara Indonesia." },
-    { id: "2", text: "Bekerja sebagai karyawan / wiraswasta / profesional." },
-    {
-      id: "3",
-      text: "Berusia minimal 21 tahun saat pengajuan dan pada saat kredit lunas maksimum berusia 55 tahun (karyawan) atau 65 tahun (wiraswasta/ profesional).",
-    },
-    {
-      id: "4",
-      text: "Mengisi formulir dan melengkapi persyaratan dokumen permohonan.",
-    },
-  ];
-
-  const ListItem = ({ item }) => {
-    return (
-      <Text style={styles.item}>
-        {item.id}. {item.text}
-      </Text>
-    );
-  };
-
   return (
     <View style={styles.container}>
       <View style={styles.navbar}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("ProfileKeuanganGriya")}
+          onPress={() => navigation.navigate("ProfileKeuanganFleksiPensiun")}
         >
           <Image
             source={require("../../../mobile-side/src/assets/Icon_leftarrow.png")}
@@ -59,6 +41,7 @@ const KetentuanTabel = ({ navigation }) => {
               fontSize: 12,
               lineHeight: 18,
               marginRight: 20,
+              width: "100%",
             }}
           >
             BNI GRIYA merupakan fasilitas pembiayaan konsumtif yang dapat
@@ -78,17 +61,29 @@ const KetentuanTabel = ({ navigation }) => {
             <Text style={styles.fontbesar}>Persyaratan Umum</Text>
             <Text style={styles.fontkecil}>1. Warga Negara Indonesia.</Text>
             <Text style={styles.fontkecil}>
-              2.Bekerja sebagai karyawan / wiraswasta / profesional.
+              2. Bekerja sebagai karyawan / wiraswasta / profesional.
             </Text>
-            <Text style={styles.fontkecil}>
-              3. Berusia minimal 21 tahun saat pengajuan dan pada saat kredit
-              lunas maksimum berusia 55 tahun (karyawan) atau 65 tahun
-              (wiraswasta/ profesional).
-            </Text>
-            <Text style={styles.fontkecil}>
-              4. Mengisi formulir dan melengkapi persyaratan dokumen permohonan.
-            </Text>
+            <View style={{ flexDirection: "row" }}>
+              <Text style={styles.fontkecil}>3. </Text>
+              <Text style={styles.fontkecil}>
+                Berusia minimal 21 tahun saat pengajuan dan pada saat kredit
+                lunas maksimum berusia 55 tahun (karyawan) atau 65 tahun
+                (wiraswasta/ profesional).
+              </Text>
+            </View>
+            <View style={{ flexDirection: "row" }}>
+              <Text style={styles.fontkecil}>4. </Text>
+              <Text style={styles.fontkecil}>
+                Mengisi formulir dan melengkapi persyaratan dokumen permohonan.
+              </Text>
+            </View>
           </View>
+
+          <Text style={styles.fontbesar}>Persyaratan Dokumen</Text>
+          <DropdownPT></DropdownPT>
+          <DropdownPro></DropdownPro>
+          <DropdownPW></DropdownPW>
+
           <View
             style={{
               flexDirection: "row",
@@ -98,7 +93,7 @@ const KetentuanTabel = ({ navigation }) => {
           >
             <TouchableOpacity
               style={styles.buttonSebelumnya}
-              onPress={() => navigation.navigate("ProfileKeuanganGriya")}
+              onPress={() => navigation.navigate("ProfileKeuanganFleksiAktif")}
             >
               <Text style={styles.sebelumnya}> Sebelumnya</Text>
             </TouchableOpacity>
@@ -119,21 +114,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 40,
-    // paddingLeft: 20,
-    // paddingRight: 20, // Mengatur padding horizontal di sini
+    paddingHorizontal: 16, // Set horizontal padding to 16
   },
   navbar: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     width: "100%",
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingLeft: 16,
+    paddingRight: 16,
     height: 48,
   },
   body: {
     width: "100%",
-    margin: 20,
   },
   fontkecil: {
     textAlign: "justify",

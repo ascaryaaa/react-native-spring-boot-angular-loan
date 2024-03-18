@@ -9,11 +9,13 @@ import {
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons"; // Import FontAwesome from @expo/vector-icons
 import axios from "axios";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 
-const ModalAwal = ({ navigation }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+const ModalAwal = ({}) => {
+  const navigation = useNavigation();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const [checked, setChecked] = useState(false);
 
@@ -23,13 +25,16 @@ const ModalAwal = ({ navigation }) => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://192.168.210.169:8083/rest/auth/login-account', {
-        username,
-        password,
-      });
+      const response = await axios.post(
+        "http://192.168.0.101/rest/auth/login-account",
+        {
+          username,
+          password,
+        }
+      );
       const { token } = response.data;
-      await AsyncStorage.setItem('token', token);
-      navigation.navigate("DigitalLoan");
+      await AsyncStorage.setItem("token", token);
+      navigation.navigate("DIgitalLoan");
     } catch (error) {
       console.error(error);
       alert("Login failed!");
@@ -53,15 +58,15 @@ const ModalAwal = ({ navigation }) => {
             Selamat datang kembali,
           </Text>
           <Text style={{ paddingTop: 33 }}>User ID</Text>
-          <TextInput 
-            style={styles.inputform} 
-            onChangeText={setUsername} 
+          <TextInput
+            style={styles.inputform}
+            onChangeText={setUsername}
             value={username}
           />
           <Text style={{ paddingTop: 33 }}>MPIN</Text>
-          <TextInput 
-            style={styles.inputform} 
-            onChangeText={setPassword} 
+          <TextInput
+            style={styles.inputform}
+            onChangeText={setPassword}
             secureTextEntry={true} // This hides the password input
             value={password}
           />

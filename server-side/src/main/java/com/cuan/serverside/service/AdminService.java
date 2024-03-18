@@ -2,6 +2,8 @@ package com.cuan.serverside.service;
 
 import com.cuan.serverside.model.Admin;
 
+import java.util.Optional;
+
 public interface AdminService {
     public Iterable<Admin> getAllAdmin();
 
@@ -12,5 +14,5 @@ public interface AdminService {
     public Admin saveAdmin(Admin admin);
 
     // Define GET admin by name in service
-    public Admin findByUsernameAdmin(String username);
+    Optional<Admin> findByUsernameAdmin(String username);
 }

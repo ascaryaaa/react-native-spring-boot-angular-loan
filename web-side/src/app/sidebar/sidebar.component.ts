@@ -26,9 +26,13 @@ export class SidebarComponent implements OnInit {
   logout() {
     this.authService.logout();
   }
-  navigateToDashboard() {
+  navigateToListPengajuanPinjaman() {
     // Menggunakan Router untuk melakukan navigasi ke path /home
-    this.router.navigate(['/home']);
+    this.router.navigate(['pengajuan-pinjaman']);
+  }
+  navigateToMonitoring() {
+    // Menggunakan Router untuk melakukan navigasi ke path /monitoring
+    this.router.navigate(['/monitoring']);
   }
 
   admins: AdminsResponse = [];
@@ -46,7 +50,7 @@ export class SidebarComponent implements OnInit {
     }
   }
 
-  apiUrl = 'http://localhost:8081/loan/v1/admin/get-admins';
+  apiUrl = 'http://localhost:8083/loan/v1/admin/get-admins';
   async ngOnInit() {
     this.refreshAdminList();
   }
