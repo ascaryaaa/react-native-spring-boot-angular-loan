@@ -8,13 +8,11 @@ import {
   ScrollView,
   FlatList,
 } from "react-native";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const DigitalLoan = ({ navigation }) => {
   const handleLogout = () => {
-    AsyncStorage
-    .removeItem('token')
-    .then(()=>navigation.navigate('Login'))
+    AsyncStorage.removeItem("token").then(() => navigation.navigate("Login"));
   };
   const list = [
     require("../../../mobile-side/src/assets/ban_kejutan1.png"),
@@ -28,9 +26,9 @@ const DigitalLoan = ({ navigation }) => {
     <View style={styles.container}>
       {/* container atas */}
       <View style={styles.navbar}>
-        <TouchableOpacity onPress={handleLogout}>
+        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
           <Image
-            source={require("../../../mobile-side/src/assets/Icon_logout.png")}
+            source={require("../../../mobile-side/src/assets/Icon_leftarrow.png")}
           />
         </TouchableOpacity>
         <Text>Digital Loan</Text>
