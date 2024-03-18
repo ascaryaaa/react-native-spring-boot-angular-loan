@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FormResponse} from './pengajuan-pinjaman';
+import { FormDetailResponse, FormResponse} from './pengajuan-pinjaman';
 import { Observable } from 'rxjs';
 import { listPengajuanPinjaman } from '../config/api';
 
@@ -13,6 +13,9 @@ export class PengajuanPinjamanService {
 
   getListPengajuanPinjaman(): Observable<FormResponse> {
     return this.httpClient.get<FormResponse>(listPengajuanPinjaman);
+  }
+  getDetailPengajuanPinjaman(id: number): Observable<FormDetailResponse> {
+    return this.httpClient.get<FormDetailResponse>(listPengajuanPinjaman + id);
   }
 }
 
