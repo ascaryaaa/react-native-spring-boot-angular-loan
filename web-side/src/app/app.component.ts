@@ -25,17 +25,4 @@ export class AppComponent implements OnInit {
   constructor(private service: AuthService) {
     this.isLogin = !!this.service.getAuth();
   }
-  // constructor(private router: Router) {}
-
-  // goHome() {
-  //   this.router.navigate(['/home']);
-  // }
-  // goLogin() {
-  //   this.router.navigate(['/login']);
-  // }
-  // goSandbox() {
-  //   this.router.navigate(['/sandbox']);
-  // }
-  
-  
 }
