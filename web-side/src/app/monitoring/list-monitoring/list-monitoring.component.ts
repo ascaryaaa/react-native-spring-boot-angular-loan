@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
-import { SidebarComponent } from '../sidebar/sidebar.component';
+// import { SidebarComponent } from '../sidebar/sidebar.component';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-monitoring',
-  standalone: true,
-  imports: [SidebarComponent,],
-  templateUrl: './monitoring.component.html',
-  styleUrl: './monitoring.component.css',
+  // standalone: true,
+  // imports: [SidebarComponent,],
+  templateUrl: './list-monitoring.component.html',
+  styleUrl: './list-monitoring.component.css',
 })
-export class MonitoringComponent {
+export class ListMonitoringComponent {
   constructor(
     private router: Router
   ) {} 
