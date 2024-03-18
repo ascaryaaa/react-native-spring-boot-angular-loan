@@ -55,6 +55,7 @@ public class SecurityConfig  {
                 .requestMatchers("loan/v1/form/get-form").permitAll()
                 .requestMatchers("loan/v1/form/**").permitAll()
                 .requestMatchers("loan/v1/form/post-form").permitAll()
+                .requestMatchers("loan/v1/jenis-pinjaman/post-jenis-pinjaman").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
