@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 // import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { Provider } from "react-redux";
 import store from "./src/reducers/Index";
-import Home from "./src/screens/Home";
+import Home from "./src/screens/HomeMonitoring";
 import Login from "./src/screens/Login";
-import DataDebitur from "./src/screens/DataDebitur";
-import SimulasiPinjaman from "./src/screens/SimulasiPinjaman";
+// import DataDebitur from "./src/screens/DataDebitur";
 import SANDBOX from "./src/screens/SANDBOX";
 import DigitalLoan from "./src/screens/DigitalLoan";
 import PengajuanPinjaman from "./src/screens/PengajuanPinjaman";
@@ -22,64 +21,50 @@ import ProfileKeuanganFleksiAktif from "./src/screens/ProfileKeuanganFleksiAktif
 import ProfileKeuanganFleksiPensiun from "./src/screens/ProfileKeuanganFleksiPensiun";
 import Monitoring from "./src/screens/Monitoring";
 import KetentuanTabel from "./src/screens/KetentuanTabel";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import SimulasiGriya from "./src/screens/SimulasiGriya";
+import SimulasiFleksiAktif from "./src/screens/SimulasiFleksiAktif";
+import SimulasiFleksiPensiun from "./src/screens/SimulasiFleksiPensiun";
+import { LoginModal } from "./src/screens/LoginModal";
+import HomeMonitoring from "./src/screens/HomeMonitoring";
+// import AsyncStorage from "@react-native-async-storage/async-storage";
+// import { LoginModal } from "./src/screens/LoginModal";
 
 const Stack = createStackNavigator();
 
 export default function App() {
-  const [isSignedIn, setIsSignedIn] = useState(false);
-
-  useEffect(() => {
-    const checkToken = async () => {
-      const token = await AsyncStorage.getItem("token");
-      if (token) {
-        setIsSignedIn(true);
-      }
-    };
-
-    checkToken();
-  }, []);
-
   return (
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Login">
-          {/* <Stack.Navigator> */}
-          {isSignedIn ? (
-            // Screens to show when signed in
-            <Stack.Screen
-              name="DigitalLoan"
-              component={DigitalLoan}
-              options={{
-                headerTintColor: "black",
-                headerShown: false,
-                headerStyle: {
-                  backgroundColor: "#FFFFFF",
-                  shadowOpacity: 0,
-                  elevation: 0,
-                },
-              }}
-            />
-          ) : (
-            // Login screen
-            <Stack.Screen
-              name="Login"
-              component={Login}
-              options={{
-                headerTintColor: "black",
-                headerShown: false,
-                headerStyle: {
-                  backgroundColor: "#FFFFFF",
-                  shadowOpacity: 0,
-                  elevation: 0,
-                },
-              }}
-            />
-          )}
           <Stack.Screen
-            name="Home"
-            component={Home}
+            name="DigitalLoan"
+            component={DigitalLoan}
+            options={{
+              headerTintColor: "black",
+              headerShown: false,
+              headerStyle: {
+                backgroundColor: "#FFFFFF",
+                shadowOpacity: 0,
+                elevation: 0,
+              },
+            }}
+          />
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{
+              headerTintColor: "black",
+              headerShown: false,
+              headerStyle: {
+                backgroundColor: "#FFFFFF",
+                shadowOpacity: 0,
+                elevation: 0,
+              },
+            }}
+          />
+          <Stack.Screen
+            name="HomeMonitoring"
+            component={HomeMonitoring}
             options={{
               headerTintColor: "black",
               headerShown: false,
@@ -104,8 +89,22 @@ export default function App() {
             }}
           /> */}
           <Stack.Screen
-            name="SimulasiPinjaman"
-            component={SimulasiPinjaman}
+            name="LoginModal"
+            component={LoginModal}
+            options={{
+              headerTintColor: "black",
+              headerShown: false,
+              headerStyle: {
+                backgroundColor: "#FFFFFF",
+                shadowOpacity: 0,
+                elevation: 0,
+              },
+            }}
+          />
+
+          <Stack.Screen
+            name="SimulasiGriya"
+            component={SimulasiGriya}
             options={{
               headerTintColor: "black",
               headerShown: false,
@@ -117,6 +116,32 @@ export default function App() {
             }}
           />
           <Stack.Screen
+            name="SimulasiFleksiAktif"
+            component={SimulasiFleksiAktif}
+            options={{
+              headerTintColor: "black",
+              headerShown: false,
+              headerStyle: {
+                backgroundColor: "#FFFFFF",
+                shadowOpacity: 0,
+                elevation: 0,
+              },
+            }}
+          />
+          <Stack.Screen
+            name="SimulasiFleksiPensiun"
+            component={SimulasiFleksiPensiun}
+            options={{
+              headerTintColor: "black",
+              headerShown: false,
+              headerStyle: {
+                backgroundColor: "#FFFFFF",
+                shadowOpacity: 0,
+                elevation: 0,
+              },
+            }}
+          />
+          {/* <Stack.Screen
             name="DataDebitur"
             component={DataDebitur}
             options={{
@@ -127,7 +152,7 @@ export default function App() {
                 elevation: 0,
               },
             }}
-          />
+          /> */}
           <Stack.Screen
             name="SANDBOX"
             component={SANDBOX}
@@ -140,19 +165,6 @@ export default function App() {
               },
             }}
           />
-          {/* <Stack.Screen
-            name="DigitalLoan"
-            component={DigitalLoan}
-            options={{
-              headerTintColor: "black",
-              headerShown: false,
-              headerStyle: {
-                backgroundColor: "#FFFFFF",
-                shadowOpacity: 0,
-                elevation: 0,
-              },
-            }}
-          /> */}
           <Stack.Screen
             name="PengajuanPinjaman"
             component={PengajuanPinjaman}
@@ -183,7 +195,6 @@ export default function App() {
             component={ProfileKeuanganGriya}
             options={{
               headerTintColor: "black",
-              headerShown: false,
               headerStyle: {
                 backgroundColor: "#FFFFFF",
                 shadowOpacity: 0,
@@ -218,18 +229,6 @@ export default function App() {
           <Stack.Screen
             name="SyaratKetentuan"
             component={SyaratKetentuan}
-            options={{
-              headerTintColor: "black",
-              headerStyle: {
-                backgroundColor: "#FFFFFF",
-                shadowOpacity: 0,
-                elevation: 0,
-              },
-            }}
-          />
-          <Stack.Screen
-            name="Monitoring"
-            component={Monitoring}
             options={{
               headerTintColor: "black",
               headerStyle: {

@@ -29,35 +29,33 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         this.jwtUtil = jwtUtil;
         this.mapper = mapper;
     }
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         Map<String, Object> errorDetails = new HashMap<>();
 
         try {
             String accessToken = jwtUtil.resolveToken(request);
-            if (accessToken == null ) {
+            if (accessToken == null) {
                 filterChain.doFilter(request, response);
                 return;
             }
-            System.out.println("token : "+accessToken);
-            Claims claims = jwtUtil.resolveClaims(request);
-
-            if(claims != null & jwtUtil.validateClaims(claims)){
+            System.out.println("Token: " + accessToken);
+            if (jwtUtil.validateToken(accessToken)) { // Adjusted to use validateToken
+                Claims claims = jwtUtil.getClaimsFromToken(accessToken); // Adjusted to use getClaimsFromToken
                 String username = claims.getSubject();
-                System.out.println("Username : "+username);
-                Authentication authentication =
-                        new UsernamePasswordAuthenticationToken(username,"",new ArrayList<>());
+                System.out.println("Username: " + username);
+                Authentication authentication = new UsernamePasswordAuthenticationToken(username, "", new ArrayList<>());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             errorDetails.put("message", "Authentication Error");
-            errorDetails.put("details",e.getMessage());
+            errorDetails.put("details", e.getMessage());
             response.setStatus(HttpStatus.FORBIDDEN.value());
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 
             mapper.writeValue(response.getWriter(), errorDetails);
-
         }
         filterChain.doFilter(request, response);
     }

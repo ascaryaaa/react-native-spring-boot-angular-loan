@@ -2,6 +2,8 @@ package com.cuan.serverside.service;
 
 import com.cuan.serverside.model.Account;
 
+import java.util.Optional;
+
 public interface AccountService {
     // Define GET all accounts in service
     public Iterable<Account> getAllAccount();
@@ -15,5 +17,5 @@ public interface AccountService {
     // Define DELETE account by id in service
     public void deleteAccountById(Long id);
 
-    public Account findByUsernameAccount(String username);
+    Optional<Account> findByUsernameAccount(String username);
 }

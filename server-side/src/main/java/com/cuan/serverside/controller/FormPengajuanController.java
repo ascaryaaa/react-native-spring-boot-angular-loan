@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller // Define Class Controller
 @RestController // Define Rest Controller for REST API
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/loan/v1/form") // Pathing
 public class FormPengajuanController {
     // Dependency Injection, prevents coupling
@@ -25,6 +26,7 @@ public class FormPengajuanController {
     }
 
     // GET Function of API, Reads form pengajuan data from 'pengajuan' database by id
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/{id}")
     public FormPengajuan getFormById(@PathVariable Long id){
         return formPengajuanService.getFormId(id);
