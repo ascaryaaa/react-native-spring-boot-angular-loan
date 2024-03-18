@@ -7,6 +7,9 @@ import {
   Image,
   onSelect,
 } from "react-native";
+import FontLoader from "./FontLoader";
+
+// import FontLoader from "../../FontLoader";
 
 const PengajuanPinjaman = ({ navigation }) => {
   return (
@@ -72,7 +75,7 @@ const PengajuanPinjaman = ({ navigation }) => {
               style={styles.productImage}
             />
             <View style={styles.titleContainer}>
-              <Text style={styles.titleText}>BNI Fleksi Pensiun</Text>
+              <Text style={styles.textJenisPinjaman}>BNI Fleksi Pensiun</Text>
             </View>
           </View>
           <TouchableOpacity
@@ -153,7 +156,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 13,
     fontWeight: "500",
-    fontFamily: "Montserrat-VariableFont_wght",
+    fontFamily: "Montserrat-Regular",
   },
   buttonJenis: {
     backgroundColor: "white",
