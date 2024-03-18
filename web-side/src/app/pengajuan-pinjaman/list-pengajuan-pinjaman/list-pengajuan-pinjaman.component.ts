@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { FormPengajuanPinjaman, FormResponse } from '../pengajuan-pinjaman';
-import { Observable } from 'rxjs';
 import { PengajuanPinjamanService } from '../pengajuan-pinjaman.service';
-import { listPengajuanPinjaman } from '../../config/api';
+import { SidebarComponent } from '../../sidebar/sidebar.component';
 
 @Component({
   selector: 'app-list-pengajuan-pinjaman',
@@ -30,6 +29,5 @@ export class ListPengajuanPinjamanComponent {
       console.error('Error fetching data:', error)
     }
   }
-
 }
 

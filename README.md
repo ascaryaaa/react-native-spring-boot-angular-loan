@@ -649,3 +649,47 @@ Because using `await`, then we need to add `async` to the `login` function
 ```ruby
  async login(form: UserForm) {
 ```
+
+### Refactoring Structure
+
+```
+-pengajuan-pinjaman
+   --detail-pengajuan-pinjaman
+   --list-pengajuan-pinjaman
+   pengajuan-pinjaman.module
+   routing.mdule.ts
+```
+
+```
+ng generate module pengajuan-pinjaman/routing --flat --module=pengajuan-pinjaman
+```
+```
+ng generate service pengajuan-pinjaman/pengajuan-pinjaman 
+```
+
+pengajuan-pinjaman/routing.module.ts
+```
+const routes: Routes = [
+  {path:'', redirectTo:'list', pathMatch: 'full'},
+  {
+    path: 'list',
+    component: ListPengajuanPinjamanComponent
+  },
+  { path: ':id', component: DetailPengajuanPinjamanComponent }
+];
+
+@NgModule({
+  exports: [RouterModule],
+  imports: [RouterModule.forChild(routes)]
+})
+export class RoutingModule { }
+```
+app.routes.ts
+```
+  {
+    path: 'pengajuan-pinjaman',
+    loadChildren: ()=> 
+    import('./pengajuan-pinjaman/pengajuan-pinjaman.module').then(m => m.PengajuanPinjamanModule),    
+  },
+```
+

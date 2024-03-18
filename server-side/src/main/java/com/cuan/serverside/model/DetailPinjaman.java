@@ -33,14 +33,41 @@ public class DetailPinjaman {
     @JoinColumn(name = "id_admin", referencedColumnName = "id_admin")
     private Admin pinjamanToAdmin;
 
+    @Column(name = "status_tagihan_pinjaman")
+    private String statusTagihan;
 
-    // Date of loan realization
-    @Column(name = "tanggal_realisasi_pinjaman")
-    private Date tanggalRealisasi;
+    @Column(name = "kolektabilitas_pinjaman")
+    private String kolektabilitas;
 
-    // Status of loan approved by admin
-    @Column(name = "status_pinjaman")
-    private String status;
+    @Column(name = "deskripsi_pembayaran_pinjaman")
+    private String deskripsiPembayaran;
+
+    @Column(name = "amounts_sisa_pokok_pinjaman")
+    private Long amountsSisaPokok;
+
+    @Column(name = "rebates_sisa_pokok_pinjaman")
+    private Long rebatesSisaPokok;
+
+    @Column(name = "payoffs_sisa_pokok_pinjaman")
+    private Long payoffsSisaPokok;
+
+    @Column(name = "amounts_bunga_berjalan_pinjaman")
+    private Long amountsBungaBerjalan;
+
+    @Column(name = "rebates_bunga_berjalan_pinjaman")
+    private Long rebatesBungaBerjalan;
+
+    @Column(name = "payoffs_bunga_berjalan_pinjaman")
+    private Long payoffsBungaBerjalan;
+
+    @Column(name = "total_amounts_pinjaman")
+    private Long totalAmounts;
+
+    @Column(name = "total_rebates_pinjaman")
+    private Long totalRebates;
+
+    @Column(name = "total_payoffs_pinjaman")
+    private Long totalPayoffs;
 
     // Remaining loan bill
     @Column(name = "sisa_tagihan_pinjaman")

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SandboxComponent } from './sandbox.component';
+import { ListMonitoringComponent } from './list-monitoring.component';
 
-describe('SandboxComponent', () => {
-  let component: SandboxComponent;
-  let fixture: ComponentFixture<SandboxComponent>;
+describe('ListMonitoringComponent', () => {
+  let component: ListMonitoringComponent;
+  let fixture: ComponentFixture<ListMonitoringComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SandboxComponent]
+      imports: [ListMonitoringComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(SandboxComponent);
+    fixture = TestBed.createComponent(ListMonitoringComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

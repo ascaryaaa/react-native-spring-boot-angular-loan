@@ -15,7 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     CommonModule,
     RoutingModule,
-    HttpClientModule
+    HttpClientModule,
   ]
 })
 export class PengajuanPinjamanModule { }
