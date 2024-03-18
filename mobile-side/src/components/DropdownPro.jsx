@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import InfoPT from "./InfoPT";
+import InfoPro from "./InfoPro";
 
-const DropdownPT = () => {
+const DropdownPro = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -12,7 +13,7 @@ const DropdownPT = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={toggleDropdown} style={styles.button}>
-        <Text style={styles.buttonText}>Pegawai Tetap</Text>
+        <Text style={styles.buttonText}>Profesional</Text>
         <Image
           source={require("../../../mobile-side/src/assets/icon_arrowDown.png")}
           style={{ marginTop: 4 }}
@@ -20,7 +21,7 @@ const DropdownPT = () => {
       </TouchableOpacity>
       {isDropdownOpen && (
         <View style={styles.dropdownContent}>
-          <InfoPT></InfoPT>
+          <InfoPro></InfoPro>
         </View>
       )}
     </View>
@@ -59,4 +60,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DropdownPT;
+export default DropdownPro;

@@ -9,29 +9,10 @@ import {
   Image,
 } from "react-native";
 import DropdownPT from "../components/DropdownPT";
+import DropdownPro from "../components/DropdownPro";
+import DropdownPW from "../components/DropdownPW";
 
 const KetentuanTabel = ({ navigation }) => {
-  // const items = [
-  //   { id: "1", text: "Warga Negara Indonesia." },
-  //   { id: "2", text: "Bekerja sebagai karyawan / wiraswasta / profesional." },
-  //   {
-  //     id: "3",
-  //     text: "Berusia minimal 21 tahun saat pengajuan dan pada saat kredit lunas maksimum berusia 55 tahun (karyawan) atau 65 tahun (wiraswasta/ profesional).",
-  //   },
-  //   {
-  //     id: "4",
-  //     text: "Mengisi formulir dan melengkapi persyaratan dokumen permohonan.",
-  //   },
-  // ];
-
-  // const ListItem = ({ item }) => {
-  //   return (
-  //     <Text style={styles.item}>
-  //       {item.id}. {item.text}
-  //     </Text>
-  //   );
-  // };
-
   return (
     <View style={styles.container}>
       <View style={styles.navbar}>
@@ -97,6 +78,12 @@ const KetentuanTabel = ({ navigation }) => {
               </Text>
             </View>
           </View>
+
+          <Text style={styles.fontbesar}>Persyaratan Dokumen</Text>
+          <DropdownPT></DropdownPT>
+          <DropdownPro></DropdownPro>
+          <DropdownPW></DropdownPW>
+
           <View
             style={{
               flexDirection: "row",
