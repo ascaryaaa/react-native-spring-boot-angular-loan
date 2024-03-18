@@ -1,5 +1,5 @@
 export type FormResponse = FormPengajuanPinjaman[];
-export type FormDetailResponse = FormPengajuanPinjaman[];
+export type FormDetailResponse = FormPengajuanPinjaman;
 
 export interface Pinjaman {
     idPinjaman: number;

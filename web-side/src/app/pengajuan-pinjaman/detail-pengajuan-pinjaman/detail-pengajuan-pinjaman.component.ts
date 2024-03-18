@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { PengajuanPinjamanService } from '../pengajuan-pinjaman.service';
-import { FormPengajuanPinjaman } from '../pengajuan-pinjaman';
+import { FormDetailResponse, FormPengajuanPinjaman } from '../pengajuan-pinjaman';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './detail-pengajuan-pinjaman.component.css'
 })
 export class DetailPengajuanPinjamanComponent {
-  forms: FormPengajuanPinjaman[] = [];
+  form?: FormDetailResponse;
 
   constructor(private router: ActivatedRoute, private pengajuanPinjamanService: PengajuanPinjamanService) { }
 
@@ -22,8 +22,8 @@ export class DetailPengajuanPinjamanComponent {
     try{
       this.pengajuanPinjamanService.getDetailPengajuanPinjaman(id).subscribe({
         next: (data) => {
-          this.forms = data;
-          console.log(this.forms); // For debugging
+          this.form = data;
+          console.log(this.form);
         },
       })
     } catch (error) {
