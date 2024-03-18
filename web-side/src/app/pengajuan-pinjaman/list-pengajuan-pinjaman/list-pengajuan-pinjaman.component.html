@@ -65,34 +65,27 @@
         </thead>
         <!-- Loading and Error Handling -->
         <ng-container *ngIf="forms.length > 0; else loading">
-            <table>
-              <thead>
-                <tr>
-                  <th>ID Form</th>
-                  <th>User Name</th>
-                  <th>NIK User</th>
-                  <th>Jenis Pinjaman</th>
-                  <th>Jenis Kelamin</th>
-                  <th>Tempat Lahir</th>
-                  <th>Tanggal Lahir</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
               <tbody>
                 <tr *ngFor="let form of forms">
-                  <td>{{ form.idFormPengajuanPinjaman }}</td>
-                  <td>{{ form.formToUser.nameUser }}</td>
-                  <td>{{ form.formToUser.nikUser }}</td>
-                  <td>{{ form.formToJenis.nameJenisPinjaman }}</td>
-                  <td>{{ form.jenisKelamin }}</td>
-                  <td>{{ form.tempatLahir }}</td>
-                  <td>{{ form.tanggalLahir | date: 'longDate' }}</td>
-                  <td>
+                  <td class="px-4 py-2">{{ form.idFormPengajuanPinjaman }}</td>
+                  <td class="px-4 py-2">{{ form.formToUser.nameUser }}</td>
+                  <td class="px-4 py-2">{{ form.formToUser.nikUser }}</td>
+                  <td class="px-4 py-2">{{ form.formToJenis.nameJenisPinjaman }}</td>
+                  <td class="px-4 py-2">
+                    <div
+                    class="justify-center p-1.5 text-sm tracking-normal leading-4 text-center text-emerald-100 whitespace-nowrap bg-green-600 rounded-xl text-ellipsis"
+                    >
+                    Status
+                    </div>
+                  </td>
+                  <td class="px-4 py-2">Admin</td>
+                  <!-- <td class="px-4 py-2">{{ form.tanggalLahir | date: 'longDate' }}</td> -->
+                  <td class="px-4 py-2">Tanggal Realisasi</td>
+                  <td class="px-4 py-2">
                     <a [routerLink]="['/detail', form.idFormPengajuanPinjaman]" class="text-blue-600 hover:underline">View</a>
                   </td>
                 </tr>
               </tbody>
-            </table>
           </ng-container>
           
           <ng-template #loading>
@@ -113,7 +106,7 @@
               <div
                 class="justify-center p-1.5 text-sm tracking-normal leading-4 text-center text-emerald-100 whitespace-nowrap bg-green-600 rounded-xl text-ellipsis"
               >
-                Diterima
+                Status
               </div>
             </td>
             <td class="px-4 py-2">Admin</td>
