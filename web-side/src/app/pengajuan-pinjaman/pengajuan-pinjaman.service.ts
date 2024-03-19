@@ -10,7 +10,7 @@ import { AuthService } from '../auth/auth.service';
 })
 export class PengajuanPinjamanService {
 
-  constructor(private httpClient: HttpClient, private authService: AuthService) { }
+  constructor(private httpClient: HttpClient) { }
 
   private getHeaders(): HttpHeaders {
     const token = localStorage.getItem('token'); // Ideally, use an AuthService to get the token
@@ -29,7 +29,8 @@ export class PengajuanPinjamanService {
     return this.httpClient.get<FormDetailResponse>(`${detailPengajuanPinjaman}${id}`, { headers });
   }
   updateStatusPengajuanPinjaman(id: number, data: any): Observable<any> {
-    return this.httpClient.put(detailPengajuanPinjaman + id, data);
+    const headers = this.getHeaders();
+    return this.httpClient.put(detailPengajuanPinjaman + id, data, { headers });
   }
 }
 
