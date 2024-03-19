@@ -56,18 +56,4 @@ export class AuthService {
     // Setelah itu, arahkan pengguna ke halaman login
     this.router.navigate(['/login']);
   }
-
-  private matchUser(user: User, form: UserForm): boolean {
-    // Mengubah nilai username dan password menjadi huruf kecil sebelum membandingkan
-    const usernameLower = user.username.toLowerCase();
-    const passwordLower = user.password.toLowerCase();
-
-    // Mengubah nilai username dan password dari form menjadi huruf kecil sebelum membandingkan
-    const formUsernameLower = form.username.toLowerCase();
-    const formPasswordLower = form.password.toLowerCase();
-    // Membandingkan nilai yang telah diubah menjadi huruf kecil
-    return (
-      usernameLower === formUsernameLower && passwordLower === formPasswordLower
-    );
-  }
 }
