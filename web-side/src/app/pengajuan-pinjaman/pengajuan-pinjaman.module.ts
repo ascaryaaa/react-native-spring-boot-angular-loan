@@ -10,7 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     DetailPengajuanPinjamanComponent,
-    ListPengajuanPinjamanComponent
+    ListPengajuanPinjamanComponent,
+    
   ],
   imports: [
     CommonModule,
