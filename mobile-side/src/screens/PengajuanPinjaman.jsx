@@ -30,7 +30,9 @@ const PengajuanPinjaman = ({ navigation }) => {
         </Text>
       </View>
 
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("ProfileKeuanganGriya")}
+      >
         <View style={styles.cardContainer}>
           <Image
             source={require("../../../mobile-side/src/assets/icon_griya.png")}
@@ -39,7 +41,9 @@ const PengajuanPinjaman = ({ navigation }) => {
           <Text style={styles.titleText}>BNI Griya</Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("ProfileKeuanganFleksiAktif")}
+      >
         <View style={styles.cardContainer}>
           <Image
             source={require("../../../mobile-side/src/assets/icon_fleksi_aktif.png")}
@@ -48,7 +52,9 @@ const PengajuanPinjaman = ({ navigation }) => {
           <Text style={styles.titleText}>BNI Fleksi Aktif</Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("ProfileKeuanganFleksiPensiun")}
+      >
         <View style={styles.cardContainer}>
           <Image
             source={require("../../../mobile-side/src/assets/icon_fleksi_pensiun.png")}
