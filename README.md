@@ -650,7 +650,7 @@ Because using `await`, then we need to add `async` to the `login` function
  async login(form: UserForm) {
 ```
 
-### Refactoring Structure
+### 4. Refactoring Structure
 
 ```
 -pengajuan-pinjaman
@@ -693,3 +693,44 @@ app.routes.ts
   },
 ```
 
+### 5. Get the token from local storage and insert it to api-endpoint Authorization token bearer
+
+insert token to local storage
+```
+        localStorage.setItem('token', response.data.token); // Assuming the token is directly under response.data
+```
+get token from local storage
+```
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+```
+
+insert the token to the Authorization token bearer
+```
+constructor(private httpClient: HttpClient) { }
+
+  private getHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    if (token) {
+      return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    }
+    return new HttpHeaders();
+  }
+```
+pass it along-side with the service funstion of the api-endpint.
+for example:
+before:
+```
+  getListPengajuanPinjaman(): Observable<FormResponse> {
+    return this.httpClient.get<FormResponse>(listPengajuanPinjaman);
+  }
+```
+after
+```
+  getListPengajuanPinjaman(): Observable<FormResponse> {
+    const headers = this.getHeaders();
+    return this.httpClient.get<FormResponse>(listPengajuanPinjaman, { headers });
+  }
+```
+by doing this, when the api-endpoint is being used it automatically get the token from local storage and insrted it to the api-endpoint Authorization token bearer.
