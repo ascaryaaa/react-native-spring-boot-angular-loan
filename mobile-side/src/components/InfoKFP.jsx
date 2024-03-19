@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native"
 
-const InfoKFA = () => {
+const InfoKFP = () => {
     return (
     <View style={styles.container}>
         <View style={{flexDirection: 'row', marginBottom: 20}}>
@@ -8,7 +8,7 @@ const InfoKFA = () => {
                 <Text style={styles.textHeader}>Suku Bunga</Text>
             </View>
             <View style={{width:'50%'}}>
-                <Text style={styles.textContent}>Mengikuti Program atau ketentuan BNI Fleksi Aktif yang berlaku</Text>
+                <Text style={styles.textContent}>Mengikuti Program atau ketentuan BNI Fleksi Pensiun yang berlaku</Text>
             </View>
         </View>
         <View style={{flexDirection: 'row', marginBottom: 20}}>
@@ -43,7 +43,7 @@ const InfoKFA = () => {
                 <View style={{flexDirection: 'column'}}>
                     <View style={{flexDirection: 'row'}}>
                         <Text>•</Text>
-                        <Text style={styles.textContent}>Mengajukan BNI Fleksi sesuai ketentuan BNI dan mengikatkan diri dengan BNI</Text>
+                        <Text style={styles.textContent}>Mengajukan BNI Fleksi Pensiun sesuai ketentuan BNI dan mengikatkan diri dengan BNI</Text>
                     </View>
                     <View style={{flexDirection: 'row'}}>
                         <Text>•</Text>
@@ -59,7 +59,11 @@ const InfoKFA = () => {
                     </View>
                     <View style={{flexDirection: 'row'}}>
                         <Text>•</Text>
-                        <Text style={styles.textContent}>Saldo blokir 1x angsuran</Text>
+                        <Text style={styles.textContent}>Saldo blokir 1x angsuran (Penyaluran Gaji BNI)</Text>
+                    </View>
+                    <View style={{flexDirection: 'row'}}>
+                        <Text>•</Text>
+                        <Text style={styles.textContent}>Saldo blokir 3x angsuran (Penyaluran Gaji Tidak BNI)</Text>
                     </View>
                     <View style={{flexDirection: 'row'}}>
                         <Text>•</Text>
@@ -90,4 +94,4 @@ const styles=StyleSheet.create ({
     }
 })
 
-export default InfoKFA;
+export default InfoKFP;
