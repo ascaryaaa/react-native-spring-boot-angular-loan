@@ -85,14 +85,17 @@ import { PengajuanPinjamanService } from '../pengajuan-pinjaman.service';
 import { FormDetailResponse } from '../pengajuan-pinjaman';
 import { ActivatedRoute } from '@angular/router';
 // import { jsPDF } from 'jspdf';
+// import 'jspdf-autotable';
+// declare let jsPDF: new () => any;
+// import jsPDF from 'jspdf';
+import jsPDF from 'jspdf';
 import 'jspdf-autotable';
-declare let jsPDF: new () => any;
-
+import autoTable from 'jspdf-autotable';
 
 @Component({
   selector: 'app-detail',
   templateUrl: './detail-pengajuan-pinjaman.component.html',
-  styleUrls: ['./detail-pengajuan-pinjaman.component.css']
+  styleUrls: ['./detail-pengajuan-pinjaman.component.css'],
 })
 export class DetailPengajuanPinjamanComponent {
   form?: FormDetailResponse;
@@ -182,24 +185,21 @@ export class DetailPengajuanPinjamanComponent {
       this.slikData = slikData; // Assign slikData to slikData property
 
       this.showSLIKTable = true; // Show the SLIK table
-      this.slikGenerated = true; // Set slikGenerated to true to indicate that the table has been generated
-    } else {
-      console.log("SLIK sudah digenerate sebelumnya.");
+       // Create PDF
+   
     }
+    //   this.slikGenerated = true; // Set slikGenerated to true to indicate that the table has been generated
+    // } else {
+    //   console.log("SLIK sudah digenerate sebelumnya.");
+    // }
+  }
+  downloadSLIK(){
+    //pdf generate table to pdf
+    var doc = new jsPDF()
+    autoTable(doc, {html:"#slik-debitur",
+    theme: 'grid',
+  })
+    doc.save("SLIK-Debitur")
   }
       
-  
-
-downloadSLIKPDF(): void {
-  if (this.showSLIKTable) {
-    const doc = new jsPDF();
-    const table = this.slikTable.nativeElement;
-    doc.autoTable({ html: table });
-    doc.save('SLIK_Debitur.pdf');
-  } else {
-    console.error('Tabel SLIK tidak tersedia untuk diunduh.');
-  }
-}
-}
-
-
+} 

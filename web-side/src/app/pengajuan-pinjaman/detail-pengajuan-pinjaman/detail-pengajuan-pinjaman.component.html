@@ -109,7 +109,7 @@
     </div>
   </div>
 
-  <div *ngIf="showSLIKTable">
+  <div *ngIf="showSLIKTable" >
     <div class="px-6 pt-6 pb-56 mt-2.5 w-full text-xs leading-5 text-center rounded-2xl border border-solid border-neutral-200 text-zinc-800 max-md:px-5 max-md:pb-10 max-md:max-w-full">
       <div class="flex text-xs text-center font-bold text-zinc-800 mb-4">SLIK Debitur</div>
       <table #slikTable id="slik-debitur" class="w-full text-sm text-left rtl:text-right">
@@ -120,7 +120,7 @@
             <th scope="col" class="px-3 py-6">Irrevocable L/C (Dalam IDR)</th>
             <th scope="col" class="px-3 py-6">Fasilitas Lain (Dalam IDR)</th>
             <th scope="col" class="px-3 py-6">Total (Dalam IDR)</th>
-            <th scope="col" class="px-3 py-6">Kualitas Terbutuk / Bulan Data</th>
+            <th scope="col" class="px-3 py-6">Kualitas Terburuk / Bulan Data</th>
           </tr>
         </thead>
         <tbody>
@@ -146,9 +146,9 @@
           </tr>
         </tbody>
       </table>
-    <button (click)="downloadSLIKPDF()" class="flex px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]" style="padding: 6px 12px;">
-      Download SLIK
-    </button>
+      <button (click)="downloadSLIK()" class="flex px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]" style="padding: 6px 12px;">
+        Download SLIK
+      </button>
   </div>
 </div>
 </div>
