@@ -89,8 +89,7 @@ const KetentuanGriya = ({ navigation }) => {
               flexDirection: "row",
               marginTop: 8,
               justifyContent: "flex-end",
-            }}
-          >
+            }}>
             <TouchableOpacity
               style={styles.buttonSebelumnya}
               onPress={() => navigation.navigate("ProfileKeuanganFleksiAktif")}

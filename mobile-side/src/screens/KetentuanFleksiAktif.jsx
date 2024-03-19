@@ -1,7 +1,6 @@
-import { View, Text, ScrollView, StyleSheet } from "react-native"
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from "react-native"
 import TPAktif from "../components/TPAktif";
 import DropdownKFA from "../components/DropdownKFA";
-import InfoKFA from "../components/InfoKFA";
 
 const KetentuanFleksiAktif = ({navigation}) => {
     return (
@@ -61,6 +60,14 @@ const KetentuanFleksiAktif = ({navigation}) => {
                 <Text style={styles.textcontent}>Pegawai aktif yang mempunyai penghasilan tetap (fixed income) dan mampu mengangsur, dengan ketentuan :</Text>
                 <TPAktif/>
                 <DropdownKFA/>
+                <View style={{flexDirection: 'row', marginTop: 8, justifyContent: 'flex-end', marginBottom:5}}>
+                    <TouchableOpacity style={styles.buttonBack} onPress={() => navigation.navigate('SyaratKetentuan')}>
+                        <Text style={{alignSelf: 'center', paddingTop: 8, color: '#757575', fontWeight: '900'}}>Selanjutnya</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.buttonNext} onPress={() => navigation.navigate('SyaratKetentuan')}>
+                        <Text style={{alignSelf: 'center', paddingTop: 8, color: 'white', fontWeight: '900'}}>Selanjutnya</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </ScrollView>
     )
@@ -81,13 +88,29 @@ const styles = StyleSheet.create({
     textcontent: {
         fontWeight: '400',
         fontSize: 12,
-        // marginTop: 10,
         textAlign: 'justify',
+        lineHeight: 16,
     },
     row: {
         flexDirection: 'row',
         paddingHorizontal: 10,
-    }
+    },
+    buttonNext: {
+        padding: 5,
+        margin: 5,
+        backgroundColor:'#18C1CD',
+        borderRadius:20,
+        width:130,
+        height:44,
+    },
+    buttonBack: {
+        padding: 5,
+        margin: 5,
+        backgroundColor:'#DDEAF3',
+        borderRadius:20,
+        width:130,
+        height:44,
+    },
 })
 
 export default KetentuanFleksiAktif;

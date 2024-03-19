@@ -3,15 +3,12 @@ export type DetailPinjamanResponse = Pinjaman;
 
 export interface Pinjaman {
     idPinjaman: number;
-    pinjamanToUser: User;
-    pinjamanToForm: FormPengajuanPinjaman;
-    pinjamanToAdmin: Admin;
-    tanggalRealisasi: Date;
-    status: string;
-    sisaTagihan: number;
-    totalBayarTagihan: number;
-    tanggalBayarTagihan: Date;
-    kolektabilitas: String;
+    pinjamanToUser: PinjamanToUser;
+    pinjamanToForm: PinjamanToForm;
+    pinjamanToAdmin: PinjamanToAdmin;
+    statusTagihan: string;
+    kolektabilitas: string;
+    deskripsiPembayaran: string;
     amountsSisaPokok: number;
     rebatesSisaPokok: number;
     payoffsSisaPokok: number;
@@ -21,22 +18,26 @@ export interface Pinjaman {
     totalAmounts: number;
     totalRebates: number;
     totalPayoffs: number;
-}
-
-
-export interface User {
+    sisaTagihan: number;
+    totalBayarTagihan: number;
+    tanggalBayarTagihan: string;
+    alamat: string;
+  }
+  
+  export interface PinjamanToUser {
     idUser: number;
     nameUser: string;
     nikUser: string;
-}
-
-export interface FormPengajuanPinjaman {
+  }
+  
+  export interface PinjamanToForm {
     idFormPengajuanPinjaman: number;
-    formToJenis: JenisPinjaman;
-    formToUser: User;
+    formToJenis: FormToJenis;
+    formToUser: PinjamanToUser;
+    formToAdmin: null;
     jenisKelamin: string;
     tempatLahir: string;
-    tanggalLahir: Date;
+    tanggalLahir: string;
     alamatKtp: string;
     kodePos: string;
     kelurahan: string;
@@ -44,28 +45,31 @@ export interface FormPengajuanPinjaman {
     npwp: string;
     unitBNI: string;
     penghasilanBersihPerbulan: number;
-    jumlaPinjaman: number;
+    jumlahPinjaman: number;
     jangkaWaktu: number;
     bungaPinjaman: number;
-    maksimalPinjaman: number; // Added to match JSON structure
-    angsuranPerbulan: number; // Added to match JSON structure
-    hargaRumah: number; // Added to match JSON structure
-    persentaseUangMuka: number; // Added to match JSON structure
-    uangMuka: number; // Added to match JSON structure
-}
-
-export interface JenisPinjaman {
+    maksimalPinjaman: number;
+    angsuranPerbulan: number;
+    hargaRumah: number;
+    persentaseUangMuka: number;
+    uangMuka: number;
+    statusPengajuan: string;
+    tanggalRealisasi: string;
+  }
+  
+  export interface FormToJenis {
     idJenisPinjaman: number;
     nameJenisPinjaman: string;
     gambarJenisPinjaman: string;
     iconJenisPinjaman: string;
-}
-
-export interface Admin {
+  }
+  
+  export interface PinjamanToAdmin {
     idAdmin: number;
     nameAdmin: string;
     nppAdmin: string;
-    usernameAdmin: string; // Added to match JSON structure
-    passwordAdmin: string; // Added to match JSON structure
-    profilepictAdmin: string | null; // Added to match JSON structure
-}
+    usernameAdmin: string;
+    passwordAdmin: string;
+    profilepictAdmin: null;
+  }
+  
