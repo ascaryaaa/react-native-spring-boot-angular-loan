@@ -7,9 +7,6 @@ import {
   Image,
   onSelect,
 } from "react-native";
-import FontLoader from "./FontLoader";
-
-// import FontLoader from "../../FontLoader";
 
 const PengajuanPinjaman = ({ navigation }) => {
   return (
@@ -20,7 +17,7 @@ const PengajuanPinjaman = ({ navigation }) => {
             source={require("../../../mobile-side/src/assets/Icon_leftarrow.png")}
           />
         </TouchableOpacity>
-        <Text>Digital Loan</Text>
+        <Text style={{ fontSize: 16 }}>Digital Loan</Text>
         <Image
           source={require("../../../mobile-side/src/assets/Icon_homeorg.png")}
         />
@@ -33,57 +30,33 @@ const PengajuanPinjaman = ({ navigation }) => {
         </Text>
       </View>
 
-      <View style={{ padding: 10 }}>
+      <TouchableOpacity>
         <View style={styles.cardContainer}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("SimulasiGriya")}
-          >
-            <View style={styles.cardContent}>
-              <Image
-                source={require("../../../mobile-side/src/assets/icon_griya.png")}
-                style={styles.productImage}
-              />
-              <View style={styles.titleContainer}>
-                <Text style={styles.titleText}>BNI Griya</Text>
-              </View>
-            </View>
-          </TouchableOpacity>
+          <Image
+            source={require("../../../mobile-side/src/assets/icon_griya.png")}
+            style={styles.productImage}
+          />
+          <Text style={styles.titleText}>BNI Griya</Text>
         </View>
+      </TouchableOpacity>
+      <TouchableOpacity>
         <View style={styles.cardContainer}>
-          <View style={styles.cardContent}>
-            <Image
-              source={require("../../../mobile-side/src/assets/icon_fleksi_aktif.png")}
-              style={styles.productImage}
-            />
-            <View style={styles.titleContainer}>
-              <Text style={styles.titleText}>BNI Fleksi Aktif</Text>
-            </View>
-          </View>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("SimulasiFleksiAktif")}
-            style={styles.selectButton}
-          >
-            <Text style={styles.selectButtonText}>Pilih</Text>
-          </TouchableOpacity>
+          <Image
+            source={require("../../../mobile-side/src/assets/icon_fleksi_aktif.png")}
+            style={styles.productImage}
+          />
+          <Text style={styles.titleText}>BNI Fleksi Aktif</Text>
         </View>
+      </TouchableOpacity>
+      <TouchableOpacity>
         <View style={styles.cardContainer}>
-          <View style={styles.cardContent}>
-            <Image
-              source={require("../../../mobile-side/src/assets/icon_fleksi_pensiun.png")}
-              style={styles.productImage}
-            />
-            <View style={styles.titleContainer}>
-              <Text style={styles.textJenisPinjaman}>BNI Fleksi Pensiun</Text>
-            </View>
-          </View>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("SimulasiFleksiPensiun")}
-            style={styles.selectButton}
-          >
-            <Text style={styles.selectButtonText}>Pilih</Text>
-          </TouchableOpacity>
+          <Image
+            source={require("../../../mobile-side/src/assets/icon_fleksi_pensiun.png")}
+            style={styles.productImage}
+          />
+          <Text style={styles.titleText}>BNI Fleksi Pensiun</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -92,32 +65,24 @@ export default PengajuanPinjaman;
 const styles = StyleSheet.create({
   container: {
     marginTop: 40,
+    marginHorizontal: 16,
+    // backgroundColor: "red",
+    flex: 1,
   },
-  button: {
-    backgroundColor: "lightgrey",
-    padding: 5,
-    borderRadius: 5,
-    margin: 5,
-  },
+
   navbar: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     width: "100%",
     verticalAlign: "top",
-    paddingLeft: 20,
-    paddingRight: 20,
     height: 48,
-    // backgroundColor:'#fff',
-    // shadowColor: '#000',
-    // shadowOffset: { width: 0, height: 2 },
-    // shadowOpacity: 0.5,
-    // shadowRadius: 2,
+    // backgroundColor: "red",
   },
   headertxt: {
     paddingLeft: 15,
     paddingRight: 15,
-    marginTop: 30,
+    marginTop: 25,
     marginBottom: 20,
   },
   texttitle: {
@@ -148,7 +113,6 @@ const styles = StyleSheet.create({
     width: 368,
     height: 64,
     marginLeft: 4,
-    marginTop: 14,
   },
   textJenisPinjaman: {
     color: "white",
@@ -162,27 +126,19 @@ const styles = StyleSheet.create({
     width: 60,
     height: 26,
   },
-  textPilih: {
-    color: "#F68310",
-    textAlign: "center",
-    fontSize: 13,
-    fontWeight: "600",
-  },
   iconContainerRight: {
     position: "absolute",
     right: 20,
   },
   cardContainer: {
-    alignItems: "stretch",
+    alignItems: "center",
     borderRadius: 8,
-    elevation: 10,
     backgroundColor: "#1394AD",
-    display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between",
-    marginTop: 22,
+    // justifyContent: "space-between",
+    marginBottom: 8,
     width: "100%",
-    height: "64",
+    height: 64,
   },
   cardContent: {
     flexDirection: "row", // Ensures image and text are side by side
@@ -190,17 +146,21 @@ const styles = StyleSheet.create({
     alignItems: "center", // Align items in center for better visual alignment
   },
   productImage: {
-    width: 32,
-    height: 32, // Explicit height for consistent sizing
+    width: 39,
+    height: 39,
+    marginLeft: 8,
   },
   titleContainer: {
     justifyContent: "center",
   },
   titleText: {
     color: "#FFF",
-    fontFamily: "Montserrat-VariableFont_wght",
-    fontSize: 12,
+    // fontFamily: "Montserrat-VariableFont_wght",
+    fontSize: 14,
     fontWeight: "700",
+    // backgroundColor: "red",
+    textAlign: "left",
+    marginLeft: 20,
   },
   selectButton: {
     justifyContent: "center",
