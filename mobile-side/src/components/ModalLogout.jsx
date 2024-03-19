@@ -16,12 +16,7 @@ const ModalLogout = ({ visible, onClose, navigation }) => {
         <Text style={styles.teksYakin}>Apakah anda yakin ?</Text>
         <View style={styles.pilihan}>
           <TouchableOpacity>
-            <Text
-              style={styles.cancel}
-              onPress={() => {
-                console.log("hai");
-              }}
-            >
+            <Text style={styles.cancel} onPress={onClose}>
               Cancel
             </Text>
           </TouchableOpacity>

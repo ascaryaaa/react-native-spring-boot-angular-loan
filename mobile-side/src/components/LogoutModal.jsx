@@ -29,7 +29,7 @@ export function LogoutModal({ visible, onClose, navigation }) {
           {/* ModalAwal tetap berada di dalam View */}
         </Pressable>
         <View style={styles.button}>
-          <ModalLogout navigation={navigation}></ModalLogout>
+          <ModalLogout onClose={onClose} navigation={navigation}></ModalLogout>
         </View>
       </View>
     </Modal>
