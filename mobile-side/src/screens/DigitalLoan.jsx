@@ -11,9 +11,6 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const DigitalLoan = ({ navigation }) => {
-  const handleLogout = () => {
-    AsyncStorage.removeItem("token").then(() => navigation.navigate("Login"));
-  };
   const list = [
     require("../../../mobile-side/src/assets/ban_kejutan1.png"),
     require("../../../mobile-side/src/assets/ban_kejutan2.png"),
@@ -31,7 +28,7 @@ const DigitalLoan = ({ navigation }) => {
             source={require("../../../mobile-side/src/assets/Icon_leftarrow.png")}
           />
         </TouchableOpacity>
-        <Text>Digital Loan</Text>
+        <Text style={{ fontSize: 16 }}>Digital Loan</Text>
         <Image
           source={require("../../../mobile-side/src/assets/Icon_homeorg.png")}
         />
@@ -75,25 +72,25 @@ export default DigitalLoan;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    // justifyContent: "center",
     alignItems: "center",
-    // position: 'absolute',
-    marginTop: 280,
+    marginHorizontal: 20,
+    marginTop: 40,
+    // backgroundColor: "red",
   },
   containerTengah: {
     justifyContent: "center",
     alignItems: "center",
     marginTop: 30,
-    marginLeft: 30,
-    marginRight: 30,
+    // marginLeft: 30,
+    // marginRight: 30,
+    width: "100%",
   },
   containerBawah: {
     justifyContent: "center",
-    alignItems: "center",
-    marginTop: 30,
-    marginLeft: 30,
-    marginRight: 30,
-    paddingTop: 10,
+    marginTop: 20,
+    width: "100%",
+    // backgroundColor: "red",
   },
   kejutan: {
     fontWeight: "600",
@@ -106,7 +103,7 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 5,
     margin: 5,
-    marginTop: 10,
+    marginTop: 28,
     width: 350,
     height: 45,
     borderRadius: 20,
@@ -117,6 +114,7 @@ const styles = StyleSheet.create({
     margin: 5,
     height: 173,
     width: 175,
+    marginBottom: 20,
   },
   ajukan: {
     color: "white",
@@ -130,8 +128,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     width: "100%",
     verticalAlign: "top",
-    paddingLeft: 20,
-    paddingRight: 20,
+
     height: 48,
   },
   texttitle: {
@@ -142,8 +139,8 @@ const styles = StyleSheet.create({
   textbody: {
     fontSize: 13,
     textAlign: "center",
-    paddingTop: 20,
-    paddingBottom: 25,
+    // backgroundColor: "red",
+    // width: "100%",
   },
   bannerImage: {
     marginTop: 15,

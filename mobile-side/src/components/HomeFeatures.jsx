@@ -103,7 +103,7 @@ const HomeFeatures = ({ navigation }) => {
           <Text style={{ fontSize: 12 }}>Mobile Tunai</Text>
         </View>
         <View style={styles.features}>
-          <TouchableOpacity onPress={() => navigation.navigate("DigitalLoan")}>
+          <TouchableOpacity>
             <Image
               source={require("../../../mobile-side/src/assets/icon_rekeningku.png")}
               style={{ width: 55, height: 55 }}

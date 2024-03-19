@@ -35,20 +35,18 @@ const PengajuanPinjaman = ({ navigation }) => {
 
       <View style={{ padding: 10 }}>
         <View style={styles.cardContainer}>
-          <View style={styles.cardContent}>
-            <Image
-              source={require("../../../mobile-side/src/assets/icon_griya.png")}
-              style={styles.productImage}
-            />
-            <View style={styles.titleContainer}>
-              <Text style={styles.titleText}>BNI Griya</Text>
-            </View>
-          </View>
           <TouchableOpacity
             onPress={() => navigation.navigate("SimulasiGriya")}
-            style={styles.selectButton}
           >
-            <Text style={styles.selectButtonText}>Pilih</Text>
+            <View style={styles.cardContent}>
+              <Image
+                source={require("../../../mobile-side/src/assets/icon_griya.png")}
+                style={styles.productImage}
+              />
+              <View style={styles.titleContainer}>
+                <Text style={styles.titleText}>BNI Griya</Text>
+              </View>
+            </View>
           </TouchableOpacity>
         </View>
         <View style={styles.cardContainer}>
@@ -177,16 +175,14 @@ const styles = StyleSheet.create({
   cardContainer: {
     alignItems: "stretch",
     borderRadius: 8,
-    elevation: 10, // Updated for shadow in Android
+    elevation: 10,
     backgroundColor: "#1394AD",
     display: "flex",
-    flexDirection: "row", // Ensures child elements are side by side
+    flexDirection: "row",
     justifyContent: "space-between",
     marginTop: 22,
     width: "100%",
-    // maxWidth: 358,
-    paddingVertical: 11,
-    paddingHorizontal: 8,
+    height: "64",
   },
   cardContent: {
     flexDirection: "row", // Ensures image and text are side by side
