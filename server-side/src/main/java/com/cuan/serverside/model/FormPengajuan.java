@@ -79,11 +79,7 @@ public class FormPengajuan {
     // Loan term requested by the debtor (in months)
     @Column(name = "jangka_waktu_form_pengajuan_pinjaman")
     private Long jangkaWaktu;
-
-    // Maximum loan amount allowed
-    @Column(name = "maksimal_pinjaman_form_pengajuan_pinjaman")
-    private Long maksimalPinjaman;
-
+    
     // Monthly installment amount
     @Column(name = "angsuran_perBulan_form_pengajuan_pinjaman")
     private Long angsuranPerbulan;
