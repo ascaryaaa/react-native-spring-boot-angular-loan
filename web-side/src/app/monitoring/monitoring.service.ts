@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { DetailPinjamanResponse, ListPinjamanResponse } from './monitoring';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { DetailPinjamanResponse, ListPinjamanResponse, Pinjaman } from './monitoring';
 import { Observable } from 'rxjs';
 import { listMonitoringPinjaman } from '../config/api'
 import { detailMonitoringPinjaman } from '../config/api'
@@ -11,10 +11,20 @@ export class MonitoringService {
 
   constructor(private httpClient: HttpClient) { }
 
+  private getHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token'); // Ideally, use an AuthService to get the token
+    if (token) {
+      return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    }
+    return new HttpHeaders();
+  }
+
   getListMonitoringPinjaman(): Observable<ListPinjamanResponse> {
-    return this.httpClient.get<ListPinjamanResponse>(listMonitoringPinjaman);
+    const headers = this.getHeaders();
+    return this.httpClient.get<ListPinjamanResponse>(listMonitoringPinjaman, { headers });
   }
   getDetailMonitoringPinjaman(id: number): Observable<DetailPinjamanResponse> {
-    return this.httpClient.get<DetailPinjamanResponse>(detailMonitoringPinjaman + id);
+    const headers = this.getHeaders();
+    return this.httpClient.get<DetailPinjamanResponse>(detailMonitoringPinjaman + id, { headers });
   }
 }

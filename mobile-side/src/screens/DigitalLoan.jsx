@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -9,12 +9,8 @@ import {
   FlatList,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Riwayat from "./Riwayat";
-import SyaratKetentuan from "./SyaratKetentuan";
-import KetentuanFleksiPensiun from "./KetentuanFleksiPensiun";
-import ProfileKeuanganGriya from "./ProfileKeuanganGriya";
-import KetentuanGriya from "./KetentuanGriya";
-import KetentuanFleksiAktif from "./KetentuanFleksiAktif";
+import ListPengajuanPinjaman from "./ListPengajuanPinjaman";
+import ListPinjaman from "./ListPinjaman";
 
 const DigitalLoan = ({ navigation }) => {
   const list = [
@@ -27,13 +23,50 @@ const DigitalLoan = ({ navigation }) => {
 
   const [result, setResult] = useState("");
 
+  const listPengajuanPinjamanData = [
+    {
+      id: 1,
+      title: "BNI Griya",
+      date: "10/03/2024",
+      period: "6 Bulan",
+      amount: "Rp 100.000.000",
+      status: "Diproses",
+    },
+  ];
+  const listPinjamanData = [
+    {
+      id: 1,
+      title: "BNI Griya",
+      date: "10/03/2024",
+      period: "6 Bulan",
+      amount: "Rp 100.000.000",
+      status: "Diterima",
+    },
+  ];
+
+  const handleAll = () => {
+    setResult(
+      <View>
+        <ListPengajuanPinjaman />
+        <ListPinjaman navigation={navigation} />
+      </View>
+    );
+  };
+
   const handleButton1Press = () => {
-    setResult(<KetentuanFleksiAktif />);
+    setResult(<ListPengajuanPinjaman />);
   };
 
   const handleButton2Press = () => {
-    setResult(<KetentuanFleksiPensiun />);
+    setResult(<ListPinjaman />);
   };
+
+  useEffect(() => {
+    // handleButton1Press();
+    // handleButton2Press();
+    handleAll();
+    // handle();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -54,41 +87,42 @@ const DigitalLoan = ({ navigation }) => {
       <ScrollView>
         <View style={styles.containerTengah}>
           <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              onPress={handleButton1Press}
-              style={styles.button1}
-            >
-              <Text>Tombol 1</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={handleButton2Press}
-              style={styles.button1}
-            >
-              <Text>Tombol 2</Text>
-            </TouchableOpacity>
+            <View style={{ width: "35%", padding: 5 }}>
+              <TouchableOpacity onPress={handleAll} style={styles.button1}>
+                <Text style={styles.textButton}>List Semua Pinjaman</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={{ width: "35%", padding: 5 }}>
+              <TouchableOpacity
+                onPress={handleButton1Press}
+                style={styles.button1}
+              >
+                <Text style={styles.textButton}>List Pengajuan Pinjaman</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={{ width: "30%", padding: 5 }}>
+              <TouchableOpacity
+                onPress={handleButton2Press}
+                style={styles.button1}
+              >
+                <Text style={styles.textButton}>List Pinjaman</Text>
+              </TouchableOpacity>
+            </View>
           </View>
           {result !== "" && (
             <View style={styles.resultContainer}>
               <Text style={styles.resultText}>{result}</Text>
             </View>
           )}
-          <Image
-            source={require("../../../mobile-side/src/assets/illu_DL.png")}
-            style={styles.amico}
-          />
-          <Text style={styles.texttitle}>Selamat datang di Digital Loan !</Text>
-          <Text style={styles.textbody}>
-            Solusi pinjaman berbasis digital untuk mempermudah anda mendapatkan
-            produk impian
-          </Text>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate("PengajuanPinjaman")}
-          >
-            <Text style={styles.ajukan}>Ajukan Pinjaman</Text>
-          </TouchableOpacity>
         </View>
       </ScrollView>
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("PengajuanPinjaman")}
+      >
+        <Text style={styles.ajukan}>Ajukan Pinjaman</Text>
+      </TouchableOpacity>
 
       {/* container bawah */}
       <View style={styles.containerBawah}>
@@ -159,6 +193,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingTop: 5,
     fontWeight: "700",
+    fontSize: 16,
   },
   navbar: {
     flexDirection: "row",
@@ -199,22 +234,33 @@ const styles = StyleSheet.create({
 
   buttonContainer: {
     flexDirection: "row",
-    justifyContent: "space-around",
-    marginBottom: 20,
+    marginBottom: 10,
+    marginRight: 10,
+    marginLeft: 10,
+    color: "#F68310",
   },
   button1: {
     paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 50,
+    backgroundColor: "#F68310",
+    borderColor: "#F68310",
   },
   resultContainer: {
     marginTop: 20,
     padding: 10,
     borderWidth: 1,
     borderRadius: 5,
+    // backgroundColor:'red'
   },
   resultText: {
     fontSize: 16,
+  },
+  textButton: {
+    color: "white",
+    fontSize: 12,
+    fontWeight: "700",
+    textAlign: "center",
   },
 });

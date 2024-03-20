@@ -32,12 +32,14 @@ public class DetailPinjamanController {
     }
 
     // POST Function of API, Creates detail pinjaman data into 'pengajuan' database
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/post-pinjaman")
     public DetailPinjaman saveDetailPinjaman(@RequestBody DetailPinjaman detailPinjaman){
         return detailPinjamanService.saveDetailPinjaman(detailPinjaman);
     }
 
     // PUT Function of API, Updates detail pinjaman from 'pengajuan' database by id
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("/{id}")
     public DetailPinjaman updateDetailPinjaman(@PathVariable Long id, @RequestBody DetailPinjaman detailPinjaman) {
         detailPinjaman.setIdPinjaman(id);

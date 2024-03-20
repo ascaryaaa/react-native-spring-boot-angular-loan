@@ -32,6 +32,10 @@ public class FormPengajuan {
     @JoinColumn(name = "id_admin", referencedColumnName = "id_admin")
     private Admin formToAdmin;
 
+    @ManyToOne
+    @JoinColumn(name = "id_cabang", referencedColumnName = "id_cabang")
+    private Cabang formToCabang;
+
     // Gender of debtor
     @Column(name = "jenis_kelamin_form_pengajuan_pinjaman")
     private String jenisKelamin;
@@ -79,18 +83,13 @@ public class FormPengajuan {
     // Loan term requested by the debtor (in months)
     @Column(name = "jangka_waktu_form_pengajuan_pinjaman")
     private Long jangkaWaktu;
-
-    // Loan interest rate requested by the debtor
-    @Column(name = "bunga_pinjaman_form_pengajuan_pinjaman")
-    private Double bungaPinjaman;
-
-    // Maximum loan amount allowed
-    @Column(name = "maksimal_pinjaman_form_pengajuan_pinjaman")
-    private Long maksimalPinjaman;
-
+    
     // Monthly installment amount
     @Column(name = "angsuran_perBulan_form_pengajuan_pinjaman")
     private Long angsuranPerbulan;
+
+    @Column(name = "maks_angsuran_griya")
+    private Double maksAngsuran;
 
     // Price of the house being purchased
     @Column(name = "harga_rumah_form_pengajuan_pinjaman")
@@ -111,4 +110,5 @@ public class FormPengajuan {
     // Date of loan realization
     @Column(name = "tanggal_realisasi_pinjaman")
     private Date tanggalRealisasi;
+
 }

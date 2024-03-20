@@ -43,6 +43,7 @@ public class SecurityConfig  {
                 .requestMatchers("/rest/auth/**").permitAll()
 //                .requestMatchers("/loan/v1/promo/get-promos").permitAll() //Tambah path yang mau di permit
 //                .requestMatchers("/loan/v1/cabang/get-cabangs").permitAll() //Tambah path yang mau di permit
+//                .requestMatchers("/loan/v1/cabang/post-cabang").permitAll()
 //                .requestMatchers("loan/v1/jenis-pinjaman/get-jenis-pinjamans").permitAll()
 //                .requestMatchers("loan/v1/account/get-accounts").permitAll()
 //                .requestMatchers("loan/v1/account/post-account").permitAll()
