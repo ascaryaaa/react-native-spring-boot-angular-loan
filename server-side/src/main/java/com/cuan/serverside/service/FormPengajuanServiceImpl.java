@@ -1,23 +1,20 @@
 package com.cuan.serverside.service;
 
 import com.cuan.serverside.model.FormPengajuan;
-import com.cuan.serverside.repository.AccountRepository;
 import com.cuan.serverside.repository.FormPengajuanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service // Define Service Implementation
+@Service
 public class FormPengajuanServiceImpl implements FormPengajuanService{
 
-    // Dependency Injection to prevent coupling
+    // Dependency Injection, prevents coupling
     @Autowired
     private FormPengajuanRepository formPengajuanRepository;
     public FormPengajuanServiceImpl(FormPengajuanRepository formPengajuanRepository) {
-
         this.formPengajuanRepository = formPengajuanRepository;
     }
 
-    // Function overriding from interface
     @Override
     public Iterable<FormPengajuan> getAllForm() {
         return formPengajuanRepository.findAll();
@@ -30,6 +27,11 @@ public class FormPengajuanServiceImpl implements FormPengajuanService{
 
     @Override
     public FormPengajuan saveForm(FormPengajuan formPengajuan) {
+        return formPengajuanRepository.save(formPengajuan);
+    }
+
+    @Override
+    public FormPengajuan updateForm(FormPengajuan formPengajuan) {
         return formPengajuanRepository.save(formPengajuan);
     }
 

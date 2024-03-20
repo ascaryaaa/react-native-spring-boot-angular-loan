@@ -22,6 +22,10 @@ public class JenisPinjaman {
     @Column(name = "name_jenis_pinjaman")
     private String nameJenisPinjaman;
 
+    // Loan interest rate requested by the debtor
+    @Column(name = "bunga_jenis_pinjaman")
+    private Double bungaPinjaman;
+
     // Image associated with the loan type
     @Column(name = "gambar_jenis_pinjaman")
     private String gambarJenisPinjaman;
@@ -29,4 +33,5 @@ public class JenisPinjaman {
     // Icon associated with the loan type
     @Column(name = "icon_jenis_pinjaman")
     private String iconJenisPinjaman;
+
 }
