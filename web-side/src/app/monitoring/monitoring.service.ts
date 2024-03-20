@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { DetailPinjamanResponse, ListPinjamanResponse } from './monitoring';
+import { DetailPinjamanResponse, ListPinjamanResponse, Pinjaman } from './monitoring';
 import { Observable } from 'rxjs';
 import { listMonitoringPinjaman } from '../config/api'
 import { detailMonitoringPinjaman } from '../config/api'
