@@ -18,6 +18,7 @@ export class DetailMonitoringComponent {
 
   async ngOnInit() {
     this.refreshFormList();
+    
   }
 
 
@@ -37,38 +38,38 @@ export class DetailMonitoringComponent {
 
   
   RenderChart(totalPinjaman: any, sisapinjaman: any) {
-    const persentaseSisaPinjaman = ((sisapinjaman / totalPinjaman) * 100);
-    const myChart = new Chart("RenderChart",{
-      type: 'doughnut',
+    const persentaseSisaPinjaman = Math.round(((sisapinjaman / totalPinjaman) * 100));
+  
+    const myChart = new Chart("RenderChart", {
+      type: 'pie',
       data: {
-        labels: [`${persentaseSisaPinjaman}%`] ,
-        datasets:[{
-          // label: '# of votes',
-          data: [100 -75, 75], // Wrap pinjamansData in an array if it's not already an array
-          //rumus data [totalpinjaman-sisapinjaman, sisapinjaman]
-          backgroundColor: [
-            'rgb(246, 131, 16)',
-            'rgb(245, 245, 245)'
-          ],
-          borderColor: [
-            'rgb(246, 131, 16)',
-            'rgb(245, 245, 245)'
-          ],
+        labels: [],
+        datasets: [{
+          data: [totalPinjaman - sisapinjaman, sisapinjaman],
+          backgroundColor: ['rgb(246, 131, 16)', 'rgb(245, 245, 245)'],
+          borderColor: ['rgb(246, 131, 16)', 'rgb(245, 245, 245)'],
           borderWidth: 1,
-          
-        }] 
+        }]
       },
-      options:{
+      options: {
         cutout: '75%',
-        // plugins:{
-        //   title: {
-        //     // Set the chart title here
-        //     display: true, // Ensure the title is displayed
-        //     text: 'Pinjaman Progress', // Replace with your desired title
-        //     color: 'black'
-        //   }
-        // }
+        plugins: {
+          title: {
+            display: true,
+            text: `${persentaseSisaPinjaman}%`,
+            color: 'grey',
+            font: {
+              size: 20 // Adjust font size as needed
+            },
+            padding: {
+              top: 10 // Adjust padding as needed
+            },
+            // **Corrected line:**
+            position: 'right' // Position the title in the center of the chart
+          }
+        }
       }
     });
   }
+  
 }
