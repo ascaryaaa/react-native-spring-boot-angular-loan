@@ -53,6 +53,7 @@ public class SecurityConfig  {
                 .requestMatchers("loan/v1/pinjaman/get-pinjamans").permitAll()
                 .requestMatchers("loan/v1/pinjaman/post-pinjaman").permitAll()
                 .requestMatchers("loan/v1/form/get-form").permitAll()
+                .requestMatchers("loan/v1/form/update-status/{id}").permitAll()
                 .requestMatchers("loan/v1/form/**").permitAll()
                 .requestMatchers("loan/v1/form/post-form").permitAll()
                 .requestMatchers("loan/v1/jenis-pinjaman/post-jenis-pinjaman").permitAll()

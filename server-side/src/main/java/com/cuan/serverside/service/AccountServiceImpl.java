@@ -14,27 +14,23 @@ public class AccountServiceImpl implements AccountService{
     @Autowired
     private AccountRepository accountRepository;
     public AccountServiceImpl(AccountRepository accountRepository) {
-
         this.accountRepository = accountRepository;
     }
 
     // Function overriding from interface
     @Override
     public Iterable<Account> getAllAccount() {
-
         return accountRepository.findAll();
     }
 
     @Override
     public Account getAccountId(Long id) {
-
         return accountRepository.findById(id).orElse(null);
     }
 
     @Override
     public Account saveAccount(Account account) {
-        return
-                accountRepository.save(account);
+        return accountRepository.save(account);
     }
 
     @Override
@@ -45,7 +41,6 @@ public class AccountServiceImpl implements AccountService{
 
     @Override
     public Optional<Account> findByUsernameAccount(String username) {
-
         return Optional.ofNullable(accountRepository.findByUsernameAccount(username));
     }
 }
