@@ -1,10 +1,12 @@
 package com.cuan.serverside.controller;
 
+import com.cuan.serverside.dto.UpdateStatusRequest;
 import com.cuan.serverside.model.FormPengajuan;
 import com.cuan.serverside.service.FormPengajuanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
 
 @Controller // Define Class Controller
 @RestController // Define Rest Controller for REST API
@@ -35,8 +37,6 @@ public class FormPengajuanController {
     // POST Function of API, Creates form pengajuan data into 'pengajuan' database
     @PostMapping("/post-form")
     public FormPengajuan saveForm(@RequestBody FormPengajuan formPengajuan){
-//        User savedUser = userService.saveUser(account.getUser());
-//        account.setUser(savedUser);
         return formPengajuanService.saveForm(formPengajuan);
     }
 
@@ -44,7 +44,7 @@ public class FormPengajuanController {
     @PutMapping("/{id}")
     public FormPengajuan updateForm(@PathVariable Long id, @RequestBody FormPengajuan formPengajuan) {
         formPengajuan.setIdFormPengajuanPinjaman(id);
-        return formPengajuanService.saveForm(formPengajuan);
+        return formPengajuanService.updateForm(formPengajuan);
     }
 
     // DELETE Function of API, Deletes form pengajuan data into 'pengajuan' database
@@ -53,3 +53,4 @@ public class FormPengajuanController {
         formPengajuanService.deleteFormById(id);
     }
 }
+

@@ -30,6 +30,7 @@ import Home from "./src/screens/Home";
 
 import KetentuanGriya from "./src/screens/KetentuanGriya";
 import KetentuanFleksiAktif from "./src/screens/KetentuanFleksiAktif";
+import KetentuanFleksiPensiun from "./src/screens/KetentuanFleksiPensiun";
 
 // import AsyncStorage from "@react-native-async-storage/async-storage";
 // import { LoginModal } from "./src/screens/LoginModal";
@@ -321,6 +322,19 @@ export default function App() {
           <Stack.Screen
             name="KetentuanFleksiAktif"
             component={KetentuanFleksiAktif}
+            options={{
+              headerTintColor: "black",
+              headerShown: false,
+              headerStyle: {
+                backgroundColor: "#FFFFFF",
+                shadowOpacity: 0,
+                elevation: 0,
+              },
+            }}
+          />
+          <Stack.Screen
+            name="KetentuanFleksiPensiun"
+            component={KetentuanFleksiPensiun}
             options={{
               headerTintColor: "black",
               headerShown: false,

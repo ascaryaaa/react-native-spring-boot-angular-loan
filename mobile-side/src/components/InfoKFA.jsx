@@ -86,6 +86,7 @@ const styles=StyleSheet.create ({
         fontWeight: '400',
         fontSize: 12,
         textAlign: 'justify',
+        lineHeight: 16,
     }
 })
 

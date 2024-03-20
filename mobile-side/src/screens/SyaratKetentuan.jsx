@@ -17,6 +17,7 @@ const SyaratKetentuan = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <View style={{padding:8}}>
       <Text style={{ marginBottom: 10, fontSize: 16, fontWeight: "600" }}>
         Syarat dan Ketentuan
       </Text>
@@ -26,14 +27,14 @@ const SyaratKetentuan = ({ navigation }) => {
       </Text>
       <View style={{flexDirection: 'row'}}>
         <Text>1. </Text>
-        <Text>
+        <Text  style={{flex:1}}>
           Data dan informasi yang saya berikan dalam pengajuan ini adalah sesuai
           keadaaan yang sebenar-benarnya.
         </Text>
       </View>
       <View style={{flexDirection: 'row'}}>
         <Text>2. </Text>
-        <View style={{flexDirection: 'column'}}>
+        <View style={{flexDirection: 'column', flex:1}}>
           <Text style={{textAlign: 'justify'}}>
             Saya menyetujui bahwa PT. Bank Negara Indonesia (Persero), Tbk,
             selanjutnya disebut Bank, berwenang untuk:
@@ -77,11 +78,11 @@ const SyaratKetentuan = ({ navigation }) => {
       </View>
       <View style={{flexDirection: 'row'}}>
         <Text>3. </Text>
-        <Text style={{textAlign: 'justify'}}>Saya memahami dan mengerti bahwa Bank tidak berkewajiban untuk memberikan fasilitas kredit kepada saya hingga saya memenuhi semua persyaratan yang berlaku pada Bank dan telah menandatangani dokumen yang diperlukan Bank dalam pemberian kredit.</Text>
+        <Text style={{textAlign: 'justify', flex: 1}}>Saya memahami dan mengerti bahwa Bank tidak berkewajiban untuk memberikan fasilitas kredit kepada saya hingga saya memenuhi semua persyaratan yang berlaku pada Bank dan telah menandatangani dokumen yang diperlukan Bank dalam pemberian kredit.</Text>
       </View>
       <View style={{flexDirection: 'row'}}>
         <Text>4. </Text>
-        <Text style={{textAlign: 'justify'}}>Apabila ternyata data dan informasi, serta pernyataan yang saya berikan/buat tidak sesuai dengan keadaan yang sebenarnya, maka segala risiko dan konsekuensi yang diakibatkannya menjadi sepenuhnya tanggung jawab saya.</Text>
+        <Text style={{textAlign: 'justify', flex: 1}}>Apabila ternyata data dan informasi, serta pernyataan yang saya berikan/buat tidak sesuai dengan keadaan yang sebenarnya, maka segala risiko dan konsekuensi yang diakibatkannya menjadi sepenuhnya tanggung jawab saya.</Text>
       </View>
       <TouchableOpacity
         onPress={toggleCheckbox}
@@ -100,6 +101,7 @@ const SyaratKetentuan = ({ navigation }) => {
       <TouchableOpacity style={styles.button1} onPress={() => navigation.navigate('NotificationSuccess')}>
         <Text style={{textAlign: 'center', paddingTop: 13, color: 'white', fontWeight: '900'}}>Ajukan Pinjaman</Text>
       </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -108,8 +110,10 @@ export default SyaratKetentuan;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
-    marginRight: 25,
+    // padding: 10,
+    // marginRight: 25,
+    backgroundColor: 'red',
+    // paddingHorizontal: 16,
   },
   button: {
     backgroundColor: "lightgrey",

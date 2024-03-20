@@ -86,9 +86,9 @@
                 <div class="mt-2">: {{ form.npwp }}</div>
               </div>
             </div>
-            <!-- <button (click)="generateSLIK()" class="justify-center px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]" style="padding: 6px 12px;">
+            <button (click)="generateSLIK()" class="justify-center px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]" style="padding: 6px 12px;">
               Generate SLIK
-            </button> -->
+            </button>
           
           
           </div>
@@ -109,7 +109,7 @@
     </div>
   </div>
 
-  <!-- <div *ngIf="showSLIKTable" > -->
+  <div *ngIf="showSLIKTable" >
     <div class="px-6 pt-6 pb-56 mt-2.5 w-full text-xs leading-5 text-center rounded-2xl border border-solid border-neutral-200 text-zinc-800 max-md:px-5 max-md:pb-10 max-md:max-w-full">
       <div class="flex text-xs text-center font-bold text-zinc-800 mb-4">SLIK Debitur</div>
       <table #slikTable id="slik-debitur" class="w-full text-sm text-left rtl:text-right">
@@ -124,7 +124,7 @@
           </tr>
         </thead>
         <tbody>
-          <!-- <tr class="bg-orange-50 border-b" *ngFor="let item of slikData">
+          <tr class="bg-orange-50 border-b" *ngFor="let item of slikData">
             <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
               {{ item.fasilitas }}
             </th>
@@ -143,12 +143,12 @@
             <td class="px-6 py-4">
               {{ item.kualitas }}
             </td>
-          </tr> -->
+          </tr>
         </tbody>
       </table>
-      <!-- <button (click)="downloadSLIK()" class="flex px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]" style="padding: 6px 12px;">
+      <button (click)="downloadSLIK()" class="flex px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]" style="padding: 6px 12px;">
         Download SLIK
-      </button> -->
+      </button>
   </div>
 </div>
 </div>
