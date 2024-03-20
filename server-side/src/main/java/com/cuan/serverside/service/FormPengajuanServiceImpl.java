@@ -38,14 +38,22 @@ public class FormPengajuanServiceImpl implements FormPengajuanService{
     public FormPengajuan saveForm(FormPengajuan formPengajuan) {
         formPengajuan.setStatusPengajuan("Diproses");
 
-        // Check if formToJenis is not null before accessing its properties
+        // Get formToJenis idJenisPinjaman to get-jenis-pinjaman
         Long idJenis = formPengajuan.getFormToJenis().getIdJenisPinjaman();
         JenisPinjaman jenisPinjaman = jenisPinjamanRepository.findById(idJenis).orElse(null);
 
-        // Perform calculations or other operations using jenisPinjamanName
+        // Perform calculations by formula
+        // MAKS = A * ( 1 - ( 1 +( i / 12 ))^-t ) / ( i / 12 )
+        // A: jumlah maks angsuran (50% dari fixed income)
+        // i: bunga
+        // t: jangka waktu
+
+        // Initialize the calculation
         Double bunga = jenisPinjaman.getBungaPinjaman();
         Long jangka = formPengajuan.getJangkaWaktu();
         Long maks = formPengajuan.getPenghasilanBersihPerbulan()/2;
+
+        // Calculate
         Double result = (maks) * (1 - Math.pow(1 + (bunga/12), -jangka)) / (bunga/12);
 
         formPengajuan.setMaksAngsuran(result);
