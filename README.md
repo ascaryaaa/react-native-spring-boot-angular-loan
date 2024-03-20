@@ -734,3 +734,13 @@ after
   }
 ```
 by doing this, when the api-endpoint is being used it automatically get the token from local storage and insrted it to the api-endpoint Authorization token bearer.
+
+### 6. Implement Chart
+
+```
+   npm install chart.js
+```
+if get error, you can using:
+```
+   npm install chart.js --force
+```
