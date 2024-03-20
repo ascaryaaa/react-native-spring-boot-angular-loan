@@ -49,16 +49,8 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  // Simplified token retrieval
+
   getToken(): string | null {
     return localStorage.getItem('token');
-  }
-
-  // Utility method to get the authentication header
-  getAuthHeader(): { Authorization?: string } {
-    const token = localStorage.getItem('token');
-    const headers = token ? { Authorization: `Bearer ${token}` } : {};
-    console.log('Sending headers:', headers);
-    return headers;
   }
 }

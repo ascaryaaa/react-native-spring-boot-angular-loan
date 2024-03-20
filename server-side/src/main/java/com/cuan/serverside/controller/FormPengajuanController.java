@@ -41,6 +41,7 @@ public class FormPengajuanController {
     }
 
     // PUT Function of API, Updates admin form pengajuan from 'pengajuan' database by id
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("/{id}")
     public FormPengajuan updateForm(@PathVariable Long id, @RequestBody FormPengajuan formPengajuan) {
         formPengajuan.setIdFormPengajuanPinjaman(id);

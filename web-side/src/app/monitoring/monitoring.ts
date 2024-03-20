@@ -2,38 +2,39 @@ export type ListPinjamanResponse = Pinjaman[];
 export type DetailPinjamanResponse = Pinjaman;
 
 export interface Pinjaman {
-    idPinjaman: number;
-    pinjamanToUser: PinjamanToUser;
-    pinjamanToForm: PinjamanToForm;
-    pinjamanToAdmin: PinjamanToAdmin;
-    statusTagihan: string;
-    kolektabilitas: string;
-    deskripsiPembayaran: string;
-    amountsSisaPokok: number;
-    rebatesSisaPokok: number;
-    payoffsSisaPokok: number;
-    amountsBungaBerjalan: number;
-    rebatesBungaBerjalan: number;
-    payoffsBungaBerjalan: number;
-    totalAmounts: number;
-    totalRebates: number;
-    totalPayoffs: number;
-    sisaTagihan: number;
-    totalBayarTagihan: number;
-    tanggalBayarTagihan: string;
+    idPinjaman: number | null;
+    pinjamanToUser: User;
+    pinjamanToForm: FormPengajuanPinjaman;
+    pinjamanToAdmin: Admin | null;
+    tanggalRealisasi: String | null;
+    status: string | null;
+    sisaTagihan: number | null;
+    totalBayarTagihan: number | null;
+    tanggalBayarTagihan: String | null;
+    kolektabilitas: string | null;
+    amountsSisaPokok: number | null;
+    rebatesSisaPokok: number | null;
+    payoffsSisaPokok: number | null;
+    amountsBungaBerjalan: number | null;
+    rebatesBungaBerjalan: number | null;
+    payoffsBungaBerjalan: number | null;
+    totalAmounts: number | null;
+    totalRebates: number | null;
+    totalPayoffs: number | null;
+    deskripsiPembayaran: string | null;
     alamat: string;
-  }
-  
-  export interface PinjamanToUser {
+}
+
+export interface User {
     idUser: number;
     nameUser: string;
     nikUser: string;
   }
   
-  export interface PinjamanToForm {
+  export interface FormPengajuanPinjaman {
     idFormPengajuanPinjaman: number;
-    formToJenis: FormToJenis;
-    formToUser: PinjamanToUser;
+    formToJenis: JenisPinjaman;
+    formToUser: User;
     formToAdmin: null;
     jenisKelamin: string;
     tempatLahir: string;
@@ -55,21 +56,20 @@ export interface Pinjaman {
     uangMuka: number;
     statusPengajuan: string;
     tanggalRealisasi: string;
-  }
-  
-  export interface FormToJenis {
+}
+
+export interface JenisPinjaman {
     idJenisPinjaman: number;
     nameJenisPinjaman: string;
     gambarJenisPinjaman: string;
     iconJenisPinjaman: string;
   }
   
-  export interface PinjamanToAdmin {
+  export interface Admin {
     idAdmin: number;
     nameAdmin: string;
     nppAdmin: string;
-    usernameAdmin: string;
-    passwordAdmin: string;
-    profilepictAdmin: null;
-  }
-  
+    usernameAdmin: string ;
+    passwordAdmin: string ;
+    profilepictAdmin: string | null;
+}
