@@ -19,6 +19,7 @@
     "@types/react": "^18.2.66",
     "axios": "^0.27.2",
     "expo": "~50.0.11",
+    "expo-font": "^11.10.3",
     "expo-image-picker": "^14.7.1",
     "expo-status-bar": "~1.11.1",
     "react": "18.2.0",

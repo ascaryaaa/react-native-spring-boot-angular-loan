@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormPengajuanPinjaman, FormResponse } from '../pengajuan-pinjaman';
 import { PengajuanPinjamanService } from '../pengajuan-pinjaman.service';
+import { SidebarComponent } from '../../sidebar/sidebar.component';
 
 @Component({
   selector: 'app-list-pengajuan-pinjaman',

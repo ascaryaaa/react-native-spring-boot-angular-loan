@@ -16,7 +16,7 @@ const Login = ({ navigation }) => {
     AsyncStorage.getItem("token").then((token) => {
       if (token !== null) {
         // navigation.navigate("DigitalLoan");
-        navigation.navigate("DigitalLoan")
+        navigation.navigate("Home");
       }
     });
   }, []);

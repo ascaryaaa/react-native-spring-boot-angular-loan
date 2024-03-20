@@ -41,6 +41,7 @@ public class SecurityConfig  {
         http.csrf().disable()
                 .authorizeRequests()
                 .requestMatchers("/rest/auth/**").permitAll()
+<<<<<<< HEAD
                 .requestMatchers("/loan/v1/promo/get-promos").permitAll() //Tambah path yang mau di permit
                 .requestMatchers("/loan/v1/cabang/get-cabangs").permitAll() //Tambah path yang mau di permit
                 .requestMatchers("loan/v1/jenis-pinjaman/get-jenis-pinjamans").permitAll()
@@ -57,6 +58,24 @@ public class SecurityConfig  {
                 .requestMatchers("loan/v1/form/**").permitAll()
                 .requestMatchers("loan/v1/form/post-form").permitAll()
                 .requestMatchers("loan/v1/jenis-pinjaman/post-jenis-pinjaman").permitAll()
+=======
+//                .requestMatchers("/loan/v1/promo/get-promos").permitAll() //Tambah path yang mau di permit
+//                .requestMatchers("/loan/v1/cabang/get-cabangs").permitAll() //Tambah path yang mau di permit
+//                .requestMatchers("loan/v1/jenis-pinjaman/get-jenis-pinjamans").permitAll()
+//                .requestMatchers("loan/v1/account/get-accounts").permitAll()
+//                .requestMatchers("loan/v1/account/post-account").permitAll()
+//                .requestMatchers("loan/v1/admin/post-admin").permitAll()
+//                .requestMatchers("loan/v1/admin/get-admins").permitAll()
+//                .requestMatchers("loan/v1/user/post-user").permitAll()
+//                .requestMatchers("loan/v1/user/get-users").permitAll()
+//                .requestMatchers("loan/v1/pinjaman/get-pinjamans").permitAll()
+//                .requestMatchers("loan/v1/pinjaman/post-pinjaman").permitAll()
+//                .requestMatchers("loan/v1/form/get-form").permitAll()
+//                .requestMatchers("loan/v1/form/**").permitAll()
+//                .requestMatchers("loan/v1/pinjaman/**").permitAll()
+//                .requestMatchers("loan/v1/form/post-form").permitAll()
+//                .requestMatchers("loan/v1/jenis-pinjaman/post-jenis-pinjaman").permitAll()
+>>>>>>> b81b6c5f723b555aa89350dc662548f5f1d197a1
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
