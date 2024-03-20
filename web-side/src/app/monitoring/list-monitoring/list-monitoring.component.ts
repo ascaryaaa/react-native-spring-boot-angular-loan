@@ -13,6 +13,7 @@ import {MonitoringService} from '../monitoring.service'
 })
 export class ListMonitoringComponent {
   pinjamans: Pinjaman[] = [];
+  
   constructor(private monitoringService: MonitoringService) { }
 
   async ngOnInit() {
