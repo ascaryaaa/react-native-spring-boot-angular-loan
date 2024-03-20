@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 // import { SidebarComponent } from '../sidebar/sidebar.component';
 import { Router } from '@angular/router';
+import {ListPinjamanResponse, Pinjaman} from '../monitoring';
+import {MonitoringService} from '../monitoring.service'
 
 @Component({
   selector: 'app-monitoring',
@@ -10,11 +12,24 @@ import { Router } from '@angular/router';
   styleUrl: './list-monitoring.component.css',
 })
 export class ListMonitoringComponent {
-  constructor(
-    private router: Router
-  ) {} 
-  navigateToMontoringDetail() {
-    // Menggunakan Router untuk melakukan navigasi ke path /monitoring/detail-monitoring
-    this.router.navigate(['monitoring/detail-monitoring']);
+  pinjamans: Pinjaman[] = [];
+  
+  constructor(private monitoringService: MonitoringService) { }
+
+  async ngOnInit() {
+    this.refreshFormList();
+  }
+
+  async refreshFormList() {
+    try{
+      this.monitoringService.getListMonitoringPinjaman().subscribe({
+        next: (data) => {
+          this.pinjamans = data;
+          console.log(this.pinjamans); // For debugging
+        },
+      })
+    } catch (error) {
+      console.error('Error fetching data:', error)
+    }
   }
 }

@@ -26,7 +26,8 @@ const ModalAwal = ({}) => {
   const handleLogin = async () => {
     try {
       const response = await axios.post(
-        "http://192.168.0.101/rest/auth/login-account",
+        "http://192.168.22.140:8083/rest/auth/login-account",
+
         {
           username,
           password,
@@ -34,7 +35,8 @@ const ModalAwal = ({}) => {
       );
       const { token } = response.data;
       await AsyncStorage.setItem("token", token);
-      navigation.navigate("DIgitalLoan");
+
+      navigation.navigate("Home");
     } catch (error) {
       console.error(error);
       alert("Login failed!");

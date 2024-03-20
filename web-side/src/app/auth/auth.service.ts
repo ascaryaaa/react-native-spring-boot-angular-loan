@@ -1,38 +1,31 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { User, UserForm } from './auth';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import axios from 'axios';
-
-// const users: Array<User> = [
-//   { username: 'Rifqiw', password: 'rifqi160' },
-//   { username: 'Yoshuy', password: 'batmobile' },
-// ];
+import { User, UserForm } from './auth';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   user: User | undefined;
+
   constructor(private router: Router) {}
 
-  async login(form: UserForm) {
+  async login(form: UserForm): Promise<void> {
     console.log('Form username:', form.username);
     console.log('Form password:', form.password);
 
     try {
-      const response = await axios.post(
-        'http://localhost:8083/rest/auth/login-admin',
-        {
-          username: form.username,
-          password: form.password,
-        }
-      );
+      const response = await axios.post('http://localhost:8083/rest/auth/login-admin', {
+        username: form.username,
+        password: form.password,
+      });
 
       console.log('Response:', response);
 
       if (response) {
         localStorage.setItem('user', JSON.stringify(response.data));
+        localStorage.setItem('token', response.data.token); // Assuming the token is directly under response.data
         this.router.navigate(['pengajuan-pinjaman']);
       }
     } catch (error) {
@@ -49,25 +42,23 @@ export class AuthService {
       return JSON.parse(response);
     }
   }
-  logout() {
-    // Hapus data pengguna dari localStorage atau lakukan operasi logout lainnya
-    localStorage.removeItem('user');
 
-    // Setelah itu, arahkan pengguna ke halaman login
+  logout(): void {
+    localStorage.removeItem('user');
+    localStorage.removeItem('token'); // Ensure token is also removed on logout
     this.router.navigate(['/login']);
   }
 
-  private matchUser(user: User, form: UserForm): boolean {
-    // Mengubah nilai username dan password menjadi huruf kecil sebelum membandingkan
-    const usernameLower = user.username.toLowerCase();
-    const passwordLower = user.password.toLowerCase();
+  // Simplified token retrieval
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
 
-    // Mengubah nilai username dan password dari form menjadi huruf kecil sebelum membandingkan
-    const formUsernameLower = form.username.toLowerCase();
-    const formPasswordLower = form.password.toLowerCase();
-    // Membandingkan nilai yang telah diubah menjadi huruf kecil
-    return (
-      usernameLower === formUsernameLower && passwordLower === formPasswordLower
-    );
+  // Utility method to get the authentication header
+  getAuthHeader(): { Authorization?: string } {
+    const token = localStorage.getItem('token');
+    const headers = token ? { Authorization: `Bearer ${token}` } : {};
+    console.log('Sending headers:', headers);
+    return headers;
   }
 }

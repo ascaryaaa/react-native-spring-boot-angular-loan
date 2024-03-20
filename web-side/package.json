@@ -19,7 +19,12 @@
     "@angular/platform-browser-dynamic": "^17.2.0",
     "@angular/router": "^17.2.0",
     "axios": "^1.6.7",
+    "chart.js": "^4.4.2",
+    "chartjs-plugin-datalabels": "^2.2.0",
+    "chartjs-plugin-doughnutlabel": "^2.0.3",
     "flowbite": "^2.3.0",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.8.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

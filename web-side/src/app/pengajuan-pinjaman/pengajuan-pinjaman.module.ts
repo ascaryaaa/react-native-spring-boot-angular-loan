@@ -10,12 +10,13 @@ import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     DetailPengajuanPinjamanComponent,
-    ListPengajuanPinjamanComponent
+    ListPengajuanPinjamanComponent,
+    
   ],
   imports: [
     CommonModule,
     RoutingModule,
-    HttpClientModule
+    HttpClientModule,
   ]
 })
 export class PengajuanPinjamanModule { }
