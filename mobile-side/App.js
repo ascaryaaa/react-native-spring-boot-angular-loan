@@ -24,13 +24,12 @@ import SimulasiGriya from "./src/screens/SimulasiGriya";
 import SimulasiFleksiAktif from "./src/screens/SimulasiFleksiAktif";
 import SimulasiFleksiPensiun from "./src/screens/SimulasiFleksiPensiun";
 import { LoginModal } from "./src/screens/LoginModal";
-import HomeMonitoring from "./src/screens/HomeMonitoring";
-
 import Home from "./src/screens/Home";
 
 import KetentuanGriya from "./src/screens/KetentuanGriya";
 import KetentuanFleksiAktif from "./src/screens/KetentuanFleksiAktif";
 import KetentuanFleksiPensiun from "./src/screens/KetentuanFleksiPensiun";
+import listPinjaman from "./src/screens/ListPinjaman";
 
 // import AsyncStorage from "@react-native-async-storage/async-storage";
 // import { LoginModal } from "./src/screens/LoginModal";
@@ -82,8 +81,8 @@ export default function App() {
             }}
           />
           <Stack.Screen
-            name="HomeMonitoring"
-            component={HomeMonitoring}
+            name="ListPinjaman"
+            component={listPinjaman}
             options={{
               headerTintColor: "black",
               headerShown: false,
@@ -239,6 +238,7 @@ export default function App() {
             component={ProfileKeuanganFleksiAktif}
             options={{
               headerTintColor: "black",
+              headerShown: false,
               headerStyle: {
                 backgroundColor: "#FFFFFF",
                 shadowOpacity: 0,
