@@ -32,6 +32,10 @@ public class FormPengajuan {
     @JoinColumn(name = "id_admin", referencedColumnName = "id_admin")
     private Admin formToAdmin;
 
+    @ManyToOne
+    @JoinColumn(name = "id_cabang", referencedColumnName = "id_cabang")
+    private Cabang formToCabang;
+
     // Gender of debtor
     @Column(name = "jenis_kelamin_form_pengajuan_pinjaman")
     private String jenisKelamin;
