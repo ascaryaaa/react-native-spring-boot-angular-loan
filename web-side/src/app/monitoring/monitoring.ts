@@ -30,14 +30,14 @@ export interface User {
     nikUser: string;
   }
   
-  export interface PinjamanToForm {
+  export interface FormPengajuanPinjaman {
     idFormPengajuanPinjaman: number;
-    formToJenis: FormToJenis;
-    formToUser: PinjamanToUser;
+    formToJenis: JenisPinjaman;
+    formToUser: User;
     formToAdmin: null;
     jenisKelamin: string;
     tempatLahir: string;
-    tanggalLahir: string;
+    tanggalLahir: string; 
     alamatKtp: string;
     kodePos: string;
     kelurahan: string;
@@ -62,7 +62,7 @@ export interface JenisPinjaman {
     iconJenisPinjaman: string;
   }
   
-  export interface PinjamanToAdmin {
+  export interface Admin {
     idAdmin: number;
     nameAdmin: string;
     nppAdmin: string;

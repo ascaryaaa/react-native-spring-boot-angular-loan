@@ -1,4 +1,3 @@
-// import { Component, OnInit } from '@angular/core';
 // import { PengajuanPinjamanService } from '../pengajuan-pinjaman.service';
 // import { FormDetailResponse, FormPengajuanPinjaman } from '../pengajuan-pinjaman';
 // import { ActivatedRoute } from '@angular/router';
@@ -79,9 +78,8 @@
 //     });
 //   }
 // }
-
-import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { PengajuanPinjamanService } from '../pengajuan-pinjaman.service';
 import { FormDetailResponse } from '../pengajuan-pinjaman';
 import jsPDF from 'jspdf';
@@ -90,7 +88,7 @@ import autoTable from 'jspdf-autotable';
 @Component({
   selector: 'app-detail',
   templateUrl: './detail-pengajuan-pinjaman.component.html',
-  styleUrls: ['./detail-pengajuan-pinjaman.component.css'],
+  styleUrls: ['./detail-pengajuan-pinjaman.component.css']
 })
 export class DetailPengajuanPinjamanComponent implements OnInit {
   form?: FormDetailResponse;
@@ -195,6 +193,8 @@ export class DetailPengajuanPinjamanComponent implements OnInit {
       error: (error) => console.error("Error creating new pengajuan pinjaman:", error)
     });
   }
+
+    
   rejectPengajuan(id: number) {
     this.pengajuanPinjamanService.getDetailPengajuanPinjaman(id).subscribe({
       next: (currentData) => {
@@ -256,7 +256,8 @@ export class DetailPengajuanPinjamanComponent implements OnInit {
     var doc = new jsPDF()
     autoTable(doc, {html:"#slik-debitur",
     theme: 'grid',
-  })
+    })
     doc.save("SLIK-Debitur")
   }
-}
+      
+} 
