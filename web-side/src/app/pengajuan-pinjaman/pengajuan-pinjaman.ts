@@ -2,30 +2,31 @@ export type FormResponse = FormPengajuanPinjaman[];
 export type FormDetailResponse = FormPengajuanPinjaman;
 
 export interface Pinjaman {
-    idPinjaman: number;
+    idPinjaman: number | null;
     pinjamanToUser: User;
     pinjamanToForm: FormPengajuanPinjaman;
-    pinjamanToAdmin: Admin;
+    pinjamanToAdmin: Admin | null;
     tanggalRealisasi: Date;
     status: string;
     sisaTagihan: number;
     totalBayarTagihan: number;
     tanggalBayarTagihan: Date;
 }
-  
+
 export interface User {
     idUser: number;
     nameUser: string;
     nikUser: string;
 }
-  
+
 export interface FormPengajuanPinjaman {
     idFormPengajuanPinjaman: number;
     formToJenis: JenisPinjaman;
     formToUser: User;
+    formToAdmin: Admin;
     jenisKelamin: string;
     tempatLahir: string;
-    tanggalLahir: Date;
+    tanggalLahir: string; 
     alamatKtp: string;
     kodePos: string;
     kelurahan: string;
@@ -33,22 +34,30 @@ export interface FormPengajuanPinjaman {
     npwp: string;
     unitBNI: string;
     penghasilanBersihPerbulan: number;
-    jumlaPinjaman: number;
+    jumlahPinjaman: number; 
     jangkaWaktu: number;
     bungaPinjaman: number;
-    statusPengajuan: string;
-    tanggalRealisasi: string;
+    maksimalPinjaman: number; 
+    angsuranPerbulan: number; 
+    hargaRumah: number; 
+    persentaseUangMuka: number; 
+    uangMuka: number; 
+    statusPengajuan: string | null;
+    tanggalRealisasi: string | null;
 }
-  
+
 export interface JenisPinjaman {
     idJenisPinjaman: number;
     nameJenisPinjaman: string;
     gambarJenisPinjaman: string;
     iconJenisPinjaman: string;
 }
-  
+
 export interface Admin {
     idAdmin: number;
     nameAdmin: string;
     nppAdmin: string;
+    usernameAdmin: string,
+    password: string,
+    profilepictAdmin: string,
 }

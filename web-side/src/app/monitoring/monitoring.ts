@@ -2,27 +2,27 @@ export type ListPinjamanResponse = Pinjaman[];
 export type DetailPinjamanResponse = Pinjaman;
 
 export interface Pinjaman {
-    idPinjaman: number;
+    idPinjaman: number | null;
     pinjamanToUser: User;
     pinjamanToForm: FormPengajuanPinjaman;
-    pinjamanToAdmin: Admin;
-    tanggalRealisasi: Date;
-    status: string;
-    sisaTagihan: number;
-    totalBayarTagihan: number;
-    tanggalBayarTagihan: Date;
-    kolektabilitas: String;
-    amountsSisaPokok: number;
-    rebatesSisaPokok: number;
-    payoffsSisaPokok: number;
-    amountsBungaBerjalan: number;
-    rebatesBungaBerjalan: number;
-    payoffsBungaBerjalan: number;
-    totalAmounts: number;
-    totalRebates: number;
-    totalPayoffs: number;
+    pinjamanToAdmin: Admin | null;
+    tanggalRealisasi: String | null;
+    status: string | null;
+    sisaTagihan: number | null;
+    totalBayarTagihan: number | null;
+    tanggalBayarTagihan: String | null;
+    kolektabilitas: string | null;
+    amountsSisaPokok: number | null;
+    rebatesSisaPokok: number | null;
+    payoffsSisaPokok: number | null;
+    amountsBungaBerjalan: number | null;
+    rebatesBungaBerjalan: number | null;
+    payoffsBungaBerjalan: number | null;
+    totalAmounts: number | null;
+    totalRebates: number | null;
+    totalPayoffs: number | null;
+    deskripsiPembayaran: string | null;
 }
-
 
 export interface User {
     idUser: number;
@@ -36,7 +36,7 @@ export interface FormPengajuanPinjaman {
     formToUser: User;
     jenisKelamin: string;
     tempatLahir: string;
-    tanggalLahir: Date;
+    tanggalLahir: string; 
     alamatKtp: string;
     kodePos: string;
     kelurahan: string;
@@ -44,14 +44,14 @@ export interface FormPengajuanPinjaman {
     npwp: string;
     unitBNI: string;
     penghasilanBersihPerbulan: number;
-    jumlaPinjaman: number;
+    jumlahPinjaman: number; 
     jangkaWaktu: number;
     bungaPinjaman: number;
-    maksimalPinjaman: number; // Added to match JSON structure
-    angsuranPerbulan: number; // Added to match JSON structure
-    hargaRumah: number; // Added to match JSON structure
-    persentaseUangMuka: number; // Added to match JSON structure
-    uangMuka: number; // Added to match JSON structure
+    maksimalPinjaman: number; 
+    angsuranPerbulan: number; 
+    hargaRumah: number; 
+    persentaseUangMuka: number; 
+    uangMuka: number; 
 }
 
 export interface JenisPinjaman {
@@ -65,7 +65,7 @@ export interface Admin {
     idAdmin: number;
     nameAdmin: string;
     nppAdmin: string;
-    usernameAdmin: string; // Added to match JSON structure
-    passwordAdmin: string; // Added to match JSON structure
-    profilepictAdmin: string | null; // Added to match JSON structure
+    usernameAdmin: string ;
+    passwordAdmin: string ;
+    profilepictAdmin: string | null;
 }

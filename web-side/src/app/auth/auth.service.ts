@@ -25,7 +25,7 @@ export class AuthService {
 
       if (response) {
         localStorage.setItem('user', JSON.stringify(response.data));
-        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('token', response.data.token); // Assuming the token is directly under response.data
         this.router.navigate(['pengajuan-pinjaman']);
       }
     } catch (error) {
