@@ -22,6 +22,7 @@ const DigitalLoan = ({ navigation }) => {
   );
 
   const [result, setResult] = useState("");
+<<<<<<< HEAD
 
   const listPengajuanPinjamanData = [
     {
@@ -52,6 +53,8 @@ const DigitalLoan = ({ navigation }) => {
       </View>
     );
   };
+=======
+>>>>>>> tiya8juta
 
   const handleButton1Press = () => {
     setResult(<ListPengajuanPinjaman />);
@@ -87,6 +90,7 @@ const DigitalLoan = ({ navigation }) => {
       <ScrollView>
         <View style={styles.containerTengah}>
           <View style={styles.buttonContainer}>
+<<<<<<< HEAD
             <View style={{ width: "35%", padding: 5 }}>
               <TouchableOpacity onPress={handleAll} style={styles.button1}>
                 <Text style={styles.textButton}>List Semua Pinjaman</Text>
@@ -108,12 +112,44 @@ const DigitalLoan = ({ navigation }) => {
                 <Text style={styles.textButton}>List Pinjaman</Text>
               </TouchableOpacity>
             </View>
+=======
+            <TouchableOpacity
+              onPress={handleButton1Press}
+              style={styles.button1}
+            >
+              <Text>Tombol 1</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={handleButton2Press}
+              style={styles.button1}
+            >
+              <Text>Tombol 2</Text>
+            </TouchableOpacity>
+>>>>>>> tiya8juta
           </View>
           {result !== "" && (
             <View style={styles.resultContainer}>
               <Text style={styles.resultText}>{result}</Text>
             </View>
           )}
+<<<<<<< HEAD
+=======
+          <Image
+            source={require("../../../mobile-side/src/assets/illu_DL.png")}
+            style={styles.amico}
+          />
+          <Text style={styles.texttitle}>Selamat datang di Digital Loan !</Text>
+          <Text style={styles.textbody}>
+            Solusi pinjaman berbasis digital untuk mempermudah anda mendapatkan
+            produk impian
+          </Text>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate("PengajuanPinjaman")}
+          >
+            <Text style={styles.ajukan}>Ajukan Pinjaman</Text>
+          </TouchableOpacity>
+>>>>>>> tiya8juta
         </View>
       </ScrollView>
 
@@ -234,10 +270,15 @@ const styles = StyleSheet.create({
 
   buttonContainer: {
     flexDirection: "row",
+<<<<<<< HEAD
     marginBottom: 10,
     marginRight: 10,
     marginLeft: 10,
     color: "#F68310",
+=======
+    justifyContent: "space-around",
+    marginBottom: 20,
+>>>>>>> tiya8juta
   },
   button1: {
     paddingVertical: 10,
