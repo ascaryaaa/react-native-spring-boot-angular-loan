@@ -4,7 +4,7 @@ const HomeFeatures = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.atas}>
-        <View style={styles.features}>
+        <View style={styles.featuresKiri}>
           <TouchableOpacity>
             <Image
               source={require("../../../mobile-side/src/assets/icon_ewallet.png")}
@@ -32,7 +32,7 @@ const HomeFeatures = ({ navigation }) => {
           </TouchableOpacity>
           <Text style={{ fontSize: 12 }}>Pembayaran</Text>
         </View>
-        <View style={styles.features}>
+        <View style={styles.featuresKanan}>
           <TouchableOpacity>
             <Image
               source={require("../../../mobile-side/src/assets/icon_pembelian.png")}
@@ -44,7 +44,7 @@ const HomeFeatures = ({ navigation }) => {
       </View>
       {/* ============================================ */}
       <View style={styles.tengah}>
-        <View style={styles.features}>
+        <View style={styles.featuresKiri}>
           <TouchableOpacity>
             <Image
               source={require("../../../mobile-side/src/assets/icon_investasi.png")}
@@ -72,7 +72,7 @@ const HomeFeatures = ({ navigation }) => {
           </TouchableOpacity>
           <Text style={{ fontSize: 12 }}>Digital Loan</Text>
         </View>
-        <View style={styles.features}>
+        <View style={styles.featuresKanan}>
           <TouchableOpacity>
             <Image
               source={require("../../../mobile-side/src/assets/icon_lifeGoals.png")}
@@ -84,7 +84,7 @@ const HomeFeatures = ({ navigation }) => {
       </View>
       {/* ===================================== */}
       <View style={styles.tengah}>
-        <View style={styles.features}>
+        <View style={styles.featuresKiri}>
           <TouchableOpacity>
             <Image
               source={require("../../../mobile-side/src/assets/icon_dikado.png")}
@@ -112,7 +112,7 @@ const HomeFeatures = ({ navigation }) => {
           </TouchableOpacity>
           <Text style={{ fontSize: 12 }}>Rekeningku</Text>
         </View>
-        <View style={styles.features}>
+        <View style={styles.featuresKanan}>
           <TouchableOpacity>
             <Image
               source={require("../../../mobile-side/src/assets/icon_menuLain.png")}
@@ -134,15 +134,27 @@ const styles = StyleSheet.create({
     alignItems: "center",
     // backgroundColor: "yellow",
     width: 90,
+    // backgroundColor: "pink"
+  },
+  featuresKiri: {
+    alignItems: "center",
+    paddingRight: 12,
+    // backgroundColor: "pink"
+  },
+  featuresKanan: {
+    alignItems: "center",
+    paddingLeft:12
+    // backgroundColor: "pink"
   },
   atas: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
+    resizeMode: "stretch"
   },
   tengah: {
     // backgroundColor: "red",
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
     marginTop: 20,
   },
 });

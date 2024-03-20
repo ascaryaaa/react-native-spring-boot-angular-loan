@@ -215,6 +215,7 @@ export default function App() {
             component={DataPemohon}
             options={{
               headerTintColor: "black",
+              headerShown: false,
               headerStyle: {
                 backgroundColor: "#FFFFFF",
                 shadowOpacity: 0,
@@ -227,6 +228,7 @@ export default function App() {
             component={ProfileKeuanganGriya}
             options={{
               headerTintColor: "black",
+              headerShown: false,
               headerStyle: {
                 backgroundColor: "#FFFFFF",
                 shadowOpacity: 0,
@@ -239,6 +241,7 @@ export default function App() {
             component={ProfileKeuanganFleksiAktif}
             options={{
               headerTintColor: "black",
+              headerShown: false,
               headerStyle: {
                 backgroundColor: "#FFFFFF",
                 shadowOpacity: 0,

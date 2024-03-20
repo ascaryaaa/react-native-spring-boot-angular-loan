@@ -33,7 +33,7 @@ const Home = ({ navigation }) => {
   );
 
   return (
-    <View>
+    <View style={styles.bg}>
       <View style={styles.container}>
         <ScrollView>
           <View style={styles.header}>
@@ -123,10 +123,15 @@ const Home = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     // alignItems: "center",
-    marginHorizontal: 20,
+    marginHorizontal: 16,
     marginTop: 40,
     height: "100%",
-    // backgroundColor: "red",
+    backgroundColor: "red"
+  },
+  bg: {
+    backgroundColor: "white",
+    height: "100%",
+    width: "100%"
   },
   header: {
     flexDirection: "row",

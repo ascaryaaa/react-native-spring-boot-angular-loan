@@ -25,7 +25,7 @@ const DigitalLoan = ({ navigation }) => {
     <Image style={styles.bannerImage} source={item} />
   );
 
-  const [result, setResult] = useState('');
+  const [result, setResult] = useState("");
 
   const handleButton1Press = () => {
     setResult(<KetentuanFleksiAktif />);
@@ -52,36 +52,42 @@ const DigitalLoan = ({ navigation }) => {
 
       {/* container tengah */}
       <ScrollView>
-      <View style={styles.containerTengah}>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={handleButton1Press} style={styles.button1}>
-            <Text>Tombol 1</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleButton2Press} style={styles.button1}>
-            <Text>Tombol 2</Text>
+        <View style={styles.containerTengah}>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              onPress={handleButton1Press}
+              style={styles.button1}
+            >
+              <Text>Tombol 1</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={handleButton2Press}
+              style={styles.button1}
+            >
+              <Text>Tombol 2</Text>
+            </TouchableOpacity>
+          </View>
+          {result !== "" && (
+            <View style={styles.resultContainer}>
+              <Text style={styles.resultText}>{result}</Text>
+            </View>
+          )}
+          <Image
+            source={require("../../../mobile-side/src/assets/illu_DL.png")}
+            style={styles.amico}
+          />
+          <Text style={styles.texttitle}>Selamat datang di Digital Loan !</Text>
+          <Text style={styles.textbody}>
+            Solusi pinjaman berbasis digital untuk mempermudah anda mendapatkan
+            produk impian
+          </Text>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate("PengajuanPinjaman")}
+          >
+            <Text style={styles.ajukan}>Ajukan Pinjaman</Text>
           </TouchableOpacity>
         </View>
-        {result !== '' && (
-          <View style={styles.resultContainer}>
-            <Text style={styles.resultText}>{result}</Text>
-          </View>
-        )}
-        <Image
-          source={require("../../../mobile-side/src/assets/illu_DL.png")}
-          style={styles.amico}
-        />
-        <Text style={styles.texttitle}>Selamat datang di Digital Loan !</Text>
-        <Text style={styles.textbody}>
-          Solusi pinjaman berbasis digital untuk mempermudah anda mendapatkan
-          produk impian
-        </Text>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("PengajuanPinjaman")}
-        >
-          <Text style={styles.ajukan}>Ajukan Pinjaman</Text>
-        </TouchableOpacity>
-      </View>
       </ScrollView>
 
       {/* container bawah */}
@@ -192,8 +198,8 @@ const styles = StyleSheet.create({
   },
 
   buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    flexDirection: "row",
+    justifyContent: "space-around",
     marginBottom: 20,
   },
   button1: {
