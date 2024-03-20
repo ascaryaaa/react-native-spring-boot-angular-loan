@@ -22,6 +22,7 @@ export interface Pinjaman {
     totalRebates: number | null;
     totalPayoffs: number | null;
     deskripsiPembayaran: string | null;
+    alamat: string;
 }
 
 export interface User {
@@ -37,7 +38,7 @@ export interface User {
     formToAdmin: null;
     jenisKelamin: string;
     tempatLahir: string;
-    tanggalLahir: string; 
+    tanggalLahir: string;
     alamatKtp: string;
     kodePos: string;
     kelurahan: string;
@@ -45,14 +46,16 @@ export interface User {
     npwp: string;
     unitBNI: string;
     penghasilanBersihPerbulan: number;
-    jumlahPinjaman: number; 
+    jumlahPinjaman: number;
     jangkaWaktu: number;
     bungaPinjaman: number;
-    maksimalPinjaman: number; 
-    angsuranPerbulan: number; 
-    hargaRumah: number; 
-    persentaseUangMuka: number; 
-    uangMuka: number; 
+    maksimalPinjaman: number;
+    angsuranPerbulan: number;
+    hargaRumah: number;
+    persentaseUangMuka: number;
+    uangMuka: number;
+    statusPengajuan: string;
+    tanggalRealisasi: string;
 }
 
 export interface JenisPinjaman {

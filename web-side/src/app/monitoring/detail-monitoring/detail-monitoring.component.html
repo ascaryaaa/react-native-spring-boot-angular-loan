@@ -1,6 +1,13 @@
 <!-- <app-sidebar/> -->
-<div class="p-4 sm:ml-64">
+<h1
+  id="judul"
+  class="p-4 sm:ml-64 text-left text-2xl mb-4 font-bold"
+  style="color: #e55300; padding-top: 24px; margin-bottom: -4px"
+>
+  Detail Debitur
+</h1>
 
+<div class="p-4 sm:ml-64">
 <div class="flex flex-col px-6 pt-6 pb-14 bg-white rounded-xl max-md:px-5">
   <div class="flex flex-col justify-center bg-white max-md:max-w-full">
     <div *ngIf="pinjamans"></div>
@@ -29,19 +36,19 @@
                       <div class="flex flex-col">
                         <div class="leading-[150%]">: {{pinjamans?.pinjamanToUser?.idUser}}</div>
                         <div class="mt-2 leading-[150%]">: {{pinjamans?.pinjamanToUser?.nikUser}}</div>
-                        <div class="mt-2 leading-[150%]">: npwp</div>
-                        <div class="mt-2 leading-[150%]">: jeniskelamin</div>
+                        <div class="mt-2 leading-[150%]">: {{pinjamans?.pinjamanToForm?.npwp}}</div>
+                        <div class="mt-2 leading-[150%]">: {{pinjamans?.pinjamanToForm?.jenisKelamin}}</div>
                         <div class="mt-2 leading-[150%]">
-                          : tempatLahir
+                          : {{pinjamans?.pinjamanToForm?.tempatLahir}}, {{pinjamans?.pinjamanToForm?.tanggalLahir}}
                         </div>
                         <div class="mt-2 leading-5">
-                          : alamatKtp
+                          : {{pinjamans?.pinjamanToForm?.alamatKtp}}
                         </div>
-                        <div class="mt-2 leading-[150%]">: unitBNI</div>
+                        <div class="mt-2 leading-[150%]">: {{pinjamans?.pinjamanToForm?.unitBNI}}</div>
                         <div class="flex gap-0 mt-2">
                           <div class="self-start leading-[150%]">:</div>
                           <div class="leading-5">
-                            nameJenisPinjaman
+                            {{pinjamans?.pinjamanToForm?.formToJenis?.nameJenisPinjaman}}
                           </div>
                         </div>
                         <!-- <div class="mt-2 leading-[150%]">: {{pinjamans?.pinjamanToForm?.npwp}}</div>
@@ -93,16 +100,16 @@
                   <tbody >
                     <tr class="bg-orange-50 border-b ">
                       <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap" >
-                        nameJenisPinjaman
+                        {{pinjamans?.pinjamanToForm?.formToJenis?.nameJenisPinjaman}}
                       </th>
                       <td class="px-6 py-4">
-                        angsuranPerbulan
+                        {{pinjamans?.pinjamanToForm?.angsuranPerbulan}}
                       </td>
                       <td class="px-6 py-4">
-                        nameAdmin
+                        {{pinjamans?.pinjamanToAdmin?.nameAdmin}}
                       </td>
                       <td class="px-6 py-4">
-                        tanggalRealisasi
+                        {{pinjamans?.tanggalRealisasi}}
                       </td>
                       <!-- <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap" >
                         {{pinjamans?.pinjamanToForm?.formToJenis?.nameJenisPinjaman}}
@@ -136,7 +143,7 @@
                   src="https://cdn.builder.io/api/v1/image/assets/TEMP/0ea868451ca3edc2ddb48dc9090751608dd63274b1a7af03e9894a86025c8638?"
                   class="shrink-0 max-w-full aspect-square w-[136px]" /> -->
                   <div>
-                    <canvas id="RenderChart" style="width: 200px; height: 200px;"></canvas>
+                    <canvas id="RenderChart" style="width: 150px; height: 150px;"></canvas>
                   </div>
                   
                   <div class="flex flex-col flex-1 justify-center">

@@ -65,7 +65,7 @@ export class DetailMonitoringComponent {
               top: 10 // Adjust padding as needed
             },
             // **Corrected line:**
-            position: 'right' // Position the title in the center of the chart
+            position: 'top' // Position the title in the center of the chart
           }
         }
       }
