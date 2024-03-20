@@ -20,18 +20,18 @@ public class DetailPinjaman {
     @Column(name = "id_pinjaman", updatable = false, nullable = false) // Can't be updated or null
     private Long idPinjaman;
 
-    // Assign Foreign Keys from User, Form Pengajuan, and Admin
-    @ManyToOne
-    @JoinColumn(name = "id_user", referencedColumnName = "id_user")
-    private User pinjamanToUser;
-
+    // Assign Foreign Key from Form Pengajuan
     @OneToOne
     @JoinColumn(name = "id_form_pengajuan_pinjaman", referencedColumnName = "id_form_pengajuan_pinjaman")
     private FormPengajuan pinjamanToForm;
 
-    @ManyToOne
-    @JoinColumn(name = "id_admin", referencedColumnName = "id_admin")
-    private Admin pinjamanToAdmin;
+    // User's full name
+    @Column(name = "name_user")
+    private String nameUser;
+
+    // User's nik number
+    @Column(name = "nik_user")
+    private String nikUser;
 
     @Column(name = "status_tagihan_pinjaman")
     private String statusTagihan;
