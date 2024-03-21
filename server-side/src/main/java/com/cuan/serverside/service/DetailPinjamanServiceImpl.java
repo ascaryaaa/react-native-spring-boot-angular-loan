@@ -38,13 +38,13 @@ public class DetailPinjamanServiceImpl implements DetailPinjamanService{
 
     @Override
     public DetailPinjaman saveDetailPinjaman(DetailPinjaman detailPinjaman) {
-        Long idForm = detailPinjaman.getPinjamanToForm().getIdFormPengajuanPinjaman();
-        FormPengajuan formPengajuan = formPengajuanRepository.findById(idForm).orElse(null);
-        Long idUser = formPengajuan.getFormToUser().getIdUser();
-        User user = userRepository.findById(idUser).orElse(null);
-
-        detailPinjaman.setNameUser(user.getNameUser());
-        detailPinjaman.setNikUser(user.getNikUser());
+//        Long idForm = detailPinjaman.getPinjamanToForm().getIdFormPengajuanPinjaman();
+//        FormPengajuan formPengajuan = formPengajuanRepository.findById(idForm).orElse(null);
+//        Long idUser = formPengajuan.getFormToUser().getIdUser();
+//        User user = userRepository.findById(idUser).orElse(null);
+//
+//        detailPinjaman.setNameUser(user.getNameUser());
+//        detailPinjaman.setNikUser(user.getNikUser());
         return detailPinjamanRepository.save(detailPinjaman);
     }
 
