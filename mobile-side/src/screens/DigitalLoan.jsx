@@ -8,7 +8,7 @@ import {
   ScrollView,
   FlatList,
 } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import ListPengajuanPinjaman from "./ListPengajuanPinjaman";
 import ListPinjaman from "./ListPinjaman";
 
