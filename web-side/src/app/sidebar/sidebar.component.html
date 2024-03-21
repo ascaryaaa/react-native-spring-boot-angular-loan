@@ -25,14 +25,14 @@
           <div
             class="flex-shrink-0 w-14 h-14 bg-gray-200 rounded-full overflow-hidden"
           >
-            <img src="./../../assets/img/wahuy.jpeg" alt="Profile Picture" />
+            <img src="{{ admin?.profilepictAdmin }}" alt="Profile Picture" />
           </div>
           <div class="ms-3">
             <li>
               <span
                 class="block text-sm font-medium text-gray-900 dark:text-white"
               >
-                {{ admins[0]?.nameAdmin }}
+                {{ admin?.nameAdmin }}
               </span>
               <span
                 class="flex justify-center items-center text-xs font-medium text-white bg-orange-500 dark:bg-gray-500 dark:text-gray-100 px-6 py-2 rounded"
@@ -41,7 +41,7 @@
                   font-size: 12px;
                   line-height: 150%;
                 "
-                >{{ admins[0]?.nppAdmin }}</span
+                >{{ admin?.nppAdmin }}</span
               >
             </li>
           </div>
