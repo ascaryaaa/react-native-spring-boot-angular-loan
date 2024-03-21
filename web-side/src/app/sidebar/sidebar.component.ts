@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../auth/auth.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router'; // Import Router dari @angular/router
+import { LogoutModalComponent } from '../sidebar/logout-modal/logout-modal.component';
 
 export type AdminsResponse = Admin[];
 export interface Admin {
@@ -13,7 +14,7 @@ export interface Admin {
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, LogoutModalComponent],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css',
 })
@@ -23,9 +24,24 @@ export class SidebarComponent implements OnInit {
     private router: Router // Tambahkan Router ke dalam constructor
   ) {} // Buat instance AuthService melalui dependency injection
 
+  showLogoutModal = false;
+
+  // Function to handle confirmation result
   logout() {
     this.authService.logout();
   }
+
+  onConfirmed(confirmed: boolean) {
+    if (confirmed) {
+      this.logout();
+      console.log('Action confirmed');
+    } else {
+      // Cancel the action
+      console.log('Action cancelled');
+    }
+    this.showLogoutModal = false;
+  }
+
   navigateToListPengajuanPinjaman() {
     // Menggunakan Router untuk melakukan navigasi ke path /home
     this.router.navigate(['/pengajuan-pinjaman']);

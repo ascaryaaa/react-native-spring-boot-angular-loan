@@ -1,9 +1,12 @@
 package com.cuan.serverside.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity // Define database class
 @Table(name = "cabang") // Define the name of the table in the database
@@ -15,6 +18,10 @@ public class Cabang {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cabang", updatable = false, nullable = false) // Can't be updated or null
     private Long idCabang;
+
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "formToCabang")
+//    private List<FormPengajuan> cabangToForm;
 
     // Cabang name
     @Column(name = "name_cabang")
