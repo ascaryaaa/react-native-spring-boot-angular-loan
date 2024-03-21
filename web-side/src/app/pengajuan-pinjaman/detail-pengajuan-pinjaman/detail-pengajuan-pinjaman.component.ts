@@ -92,6 +92,7 @@ import { Pinjaman } from '../../monitoring/monitoring';
   styleUrls: ['./detail-pengajuan-pinjaman.component.css']
 })
 export class DetailPengajuanPinjamanComponent implements OnInit {
+[x: string]: any;
   form?: FormDetailResponse;
   showSLIKTable: boolean = false;
   slikGenerated: boolean = false;
