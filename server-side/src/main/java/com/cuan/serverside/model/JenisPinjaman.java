@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity // Define database class
 @Table(name = "jenis_pinjaman") // Define the name of the table in the database
 @Data // Initialize getter, setter, hashCode, equals, and toString
@@ -33,5 +35,9 @@ public class JenisPinjaman {
     // Icon associated with the loan type
     @Column(name = "icon_jenis_pinjaman")
     private String iconJenisPinjaman;
+
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "formToJenis")
+//    private List<FormPengajuan> jenisToForm;
 
 }
