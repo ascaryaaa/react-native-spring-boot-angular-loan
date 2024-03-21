@@ -3,10 +3,10 @@ import {
   View,
   TextInput,
   Text,
-  Image,
   StyleSheet,
   TouchableOpacity,
   ScrollView,
+  Image,
 } from "react-native";
 import Buttonjk from "../components/Buttonjk";
 import Bniaddress from "../components/Bniaddress";
@@ -199,7 +199,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     width: 130,
     height: 44,
-    marginBottom: 20,
   },
   input: {
     width: "100%",
@@ -235,21 +234,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 8,
     borderColor: "#1394AD",
-    height: 37,
     width: 120,
-    marginLeft: 75,
+    marginLeft: 60,
   },
   text: {
     fontWeight: "700",
-    marginBottom: 8,
-  },
-  navbar: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    width: "100%",
-    verticalAlign: "top",
-    marginBottom: 24,
-    height: 48,
   },
 });

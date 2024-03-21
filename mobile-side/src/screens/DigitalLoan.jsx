@@ -87,7 +87,6 @@ const DigitalLoan = ({ navigation }) => {
       <ScrollView>
         <View style={styles.containerTengah}>
           <View style={styles.buttonContainer}>
-
             <View style={{ width: "35%", padding: 5 }}>
               <TouchableOpacity onPress={handleAll} style={styles.button1}>
                 <Text style={styles.textButton}>List Semua Pinjaman</Text>
