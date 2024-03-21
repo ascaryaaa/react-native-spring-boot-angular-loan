@@ -5,9 +5,11 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
-  ScrollView,
+  Modal,
+  Pressable,
 } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import ModalDelete from "../components/ModalDelete";
 
 const ListPengajuanPinjaman = ({ navigation }) => {
 
@@ -18,24 +20,72 @@ const ListPengajuanPinjaman = ({ navigation }) => {
   const renderItem = ({ item }) => (
     <Image style={styles.bannerImage} source={item} />
   );
+
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
+  const openModal = () => {
+    setModalVisible(true);
+  };
   
   return (
     <View style={styles.container}>
       {/* <Text style={{marginBottom: 10}}>List Pengajuan Pinjaman</Text> */}
+      {/* <TouchableOpacity onPress={openModal}> */}
         <View style={{flexDirection: 'row', marginBottom: 15}}>
-            <View style={{width: '30%', marginRight: 5}}>
-                <Image 
-                source={require("../../../mobile-side/src/assets/img_simulasi_pensiun.png")}
-                style={styles.image}/>
+          <View style={{width: '30%', marginRight: 5}}>
+              <Image 
+              source={require("../../../mobile-side/src/assets/img_simulasi_pensiun.png")}
+              style={styles.image}/>
+          </View>
+          <View style={{width: '70%', flexDirection: 'column'}}>
+            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              <Text style={styles.textHeader}>BNI Fleksi Pensiun</Text>
+              <TouchableOpacity onPress={openModal}>
+              <Image 
+              source={require("../../../mobile-side/src/assets/icon_delete.png")}/>              
+              </TouchableOpacity>
             </View>
-            <View style={{width: '70%', flexDirection: 'column'}}>
-                <Text style={styles.textHeader}>BNI Fleksi Pensiun</Text>
-                <Text style={styles.textContent}>Tanggal Pengajuan : 10/03/2024</Text>
-                <Text style={styles.textContent}>Periode Peminjaman : 6 Bulan</Text>
-                <Text style={styles.textContent}>Total Pengajuan : Rp. 100.000.000</Text>
-                <Text style={styles.textContent}>Status : Diproses</Text>
-            </View>
+            <Text style={styles.textContent}>Tanggal Pengajuan : 10/03/2024</Text>
+            <Text style={styles.textContent}>Periode Peminjaman : 6 Bulan</Text>
+            <Text style={styles.textContent}>Total Pengajuan : Rp. 100.000.000</Text>
+            <Text style={styles.textContent}>Status : Ditolak</Text>
+          </View>
         </View>
+      {/* </TouchableOpacity> */}
+
+      <Modal
+        animationType="fade"
+        transparent
+        visible={modalVisible}
+        onRequestClose={closeModal}
+        >
+        <View style={styles.modalContainer}>
+        {/* Pressable di luar modal */}
+          <Pressable
+            style={{
+            flex: 1,
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(0,0,0,0.5)",
+            }}
+            // onPress={closeModal}
+            >
+            {/* ModalAwal tetap berada di dalam View */}
+          </Pressable>
+          <View>
+            <ModalDelete
+              navigation={navigation}
+              modalVisible={modalVisible}
+              closeModal={closeModal}
+            ></ModalDelete>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -152,5 +202,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '400',
     marginBottom: 4,
-  }
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center", // Pusatkan konten secara horizontal
+    // alignItems: "center", // Pusatkan konten secara vertikal
+    // backgroundColor: "rgba(0, 0, 0, 0.5)", // Atur warna latar belakang
+  },
 });

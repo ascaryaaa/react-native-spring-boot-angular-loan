@@ -22,32 +22,12 @@ const DigitalLoan = ({ navigation }) => {
   );
 
   const [result, setResult] = useState("");
-
-  const listPengajuanPinjamanData = [
-    {
-      id: 1,
-      title: "BNI Griya",
-      date: "10/03/2024",
-      period: "6 Bulan",
-      amount: "Rp 100.000.000",
-      status: "Diproses",
-    },
-  ];
-  const listPinjamanData = [
-    {
-      id: 1,
-      title: "BNI Griya",
-      date: "10/03/2024",
-      period: "6 Bulan",
-      amount: "Rp 100.000.000",
-      status: "Diterima",
-    },
-  ];
-
+  
   const handleAll = () => {
     setResult(
       <View>
-        <ListPengajuanPinjaman />
+        <ListPengajuanPinjaman navigation={navigation}
+        ListPengajuanPinjaman={ListPengajuanPinjaman} />
         <ListPinjaman navigation={navigation} />
       </View>
     );
