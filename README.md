@@ -756,7 +756,7 @@ ng generate component confirmation-modal
 Confirmation Modal Component (HTML): Within the confirmation-modal.component.html file, define the structure of your modal. This includes the message asking for confirmation and buttons for user interaction.
 
 `confirmation-modal.component.html`
-```
+```ruby
 <div class="modal">
   <div class="modal-content">
     <p>Are you sure you want to proceed?</p>
@@ -771,7 +771,7 @@ Confirmation Modal Component (HTML): Within the confirmation-modal.component.htm
 Confirmation Modal Component (TypeScript): In the confirmation-modal.component.ts file, handle user actions and emit events accordingly using Angular's EventEmitter.
 
 `confirmation-modal.component.ts`
-```
+```ruby
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
@@ -797,7 +797,7 @@ Usage in Parent Component: Incorporate the confirmation modal into your parent c
 
 service of your parent component
 for example inside `DetailPengajuanPinjamanComponent.ts`
-```
+```ruby
 showConfirmationModal = false;
 
 confirm() {
@@ -816,7 +816,7 @@ HTML of Parent Component: Within the parent component's HTML (DetailPengajuanPin
 
 html of your parent component
 example `DetailPengajuanPinjamanComponent.html`
-```
+```ruby
 <div class="modal-container" *ngIf="showConfirmationModal">
   <app-confirmation-modal 
     (confirmed)="onConfirmed($event)"
@@ -831,7 +831,7 @@ example `DetailPengajuanPinjamanComponent.html`
 CSS of Parent Component: Style the modal container and adjust the z-index to ensure it appears above other content.
 
 css of your parent component
-```
+```ruby
 /* Modal container */
 .modal-container {
     position: fixed;
