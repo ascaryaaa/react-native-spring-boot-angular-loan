@@ -91,7 +91,7 @@ public class FormPengajuan {
     
     // Monthly installment amount
     @Column(name = "angsuran_perBulan_form_pengajuan_pinjaman")
-    private Long angsuranPerbulan;
+    private Double angsuranPerbulan;
 
     @Column(name = "maks_angsuran_griya")
     private Double maksAngsuran;

@@ -5,11 +5,11 @@ export interface FormPengajuanPinjaman {
     idFormPengajuanPinjaman: number;
     formToJenis: JenisPinjaman;
     formToUser: User;
-    formToAdmin: Admin;
-    formToCabang: Cabang;
+    formToAdmin: Admin | null;
+    formToCabang: Cabang; // Added formToCabang based on JSON
     jenisKelamin: string;
-    tempatLahir: string | null; // Adjusted to reflect that "NULL" might be intended as a null value
-    tanggalLahir: string; // Keeping as string to match JSON, consider converting to Date in application logic if needed
+    tempatLahir: string | null; // Updated to allow null
+    tanggalLahir: string; // No change
     alamatKtp: string;
     kodePos: string;
     kelurahan: string;
@@ -19,13 +19,14 @@ export interface FormPengajuanPinjaman {
     penghasilanBersihPerbulan: number;
     jumlahPinjaman: number;
     jangkaWaktu: number;
+    bungaPinjaman: number;
+    maksAngsuran: number; // Changed from maksimalPinjaman
     angsuranPerbulan: number;
-    maksAngsuran: number | null; // Making nullable as indicated by the potential for null values
     hargaRumah: number;
     persentaseUangMuka: number;
-    uangMuka: number | null;
+    uangMuka: number | null; // Updated to allow null
     statusPengajuan: string;
-    tanggalRealisasi: string | null; // Keeping as string to match JSON, consider converting to Date in application logic if needed
+    tanggalRealisasi: string | null; // Updated to allow null
 }
 
 export interface JenisPinjaman {

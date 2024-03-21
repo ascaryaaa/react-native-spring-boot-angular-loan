@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity // Define database class
 @Table(name = "user") // Define the name of the table in the database
 @Data // Initialize getter, setter, hashCode, equals, and toString
@@ -31,4 +33,8 @@ public class User {
     @JsonIgnore
     @OneToOne(mappedBy = "accountToUser")
     private Account userToAccount;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "formToUser")
+    private List<FormPengajuan> userToForm;
 }

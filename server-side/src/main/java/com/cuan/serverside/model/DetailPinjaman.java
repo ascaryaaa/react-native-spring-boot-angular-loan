@@ -25,13 +25,13 @@ public class DetailPinjaman {
     @JoinColumn(name = "id_form_pengajuan_pinjaman", referencedColumnName = "id_form_pengajuan_pinjaman")
     private FormPengajuan pinjamanToForm;
 
-    // User's full name
-    @Column(name = "name_user")
-    private String nameUser;
-
-    // User's nik number
-    @Column(name = "nik_user")
-    private String nikUser;
+//    // User's full name
+//    @Column(name = "name_user")
+//    private String nameUser;
+//
+//    // User's nik number
+//    @Column(name = "nik_user")
+//    private String nikUser;
 
     @Column(name = "status_tagihan_pinjaman")
     private String statusTagihan;
