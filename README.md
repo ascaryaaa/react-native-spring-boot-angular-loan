@@ -852,4 +852,118 @@ css of your parent component
   }
 ```
 
+### 8. Admin ID Parshing
+
+Parshing the Admin Id that loged in to be able to be used in fetching admin detail api-endpoint
+
+from the backend, we need to respon the id
+```ruby
+    public LoginResponse(Long id, String username, String token) {
+        this.id = id;
+        this.username = username;
+        this.token = token;
+    }
+```
+
+the login respon json example
+
+```ruby
+{
+    "id": 1,
+    "username": "Admin",
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsInJvbGUiOiJST0xFX0FETUlOIiwidXNlcm5hbWUiOiJBZG1pbiIsImlhdCI6MTcxMTAyNjk2NCwiZXhwIjoxNzExMDMwNTY0fQ.oP3ANxsV5iArNQ64MAcKvLSotLBBBsoHXEl7ZUc76nY"
+}
+```
+
+as you can see, the respon if we lgged in include the id of the user.
+
+then, in the web-side, we need to add the id to local storage:
+
+`auth.seervice.ts`
+```ruby
+  async login(form: UserForm): Promise<void> {
+    console.log('Form username:', form.username);
+    console.log('Form password:', form.password);
+
+    try {
+      const response = await axios.post('http://localhost:8083/rest/auth/login-admin', {
+        username: form.username,
+        password: form.password,
+      });
+
+      console.log('Response:', response);
+
+      if (response) {
+        localStorage.setItem('user', JSON.stringify(response.data));
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('id', response.data.id); //inser id to local storage
+        this.router.navigate(['pengajuan-pinjaman']);
+      }
+    } catch (error) {
+      console.error('Login failed!', error);
+      alert('User is not found!');
+    }
+  }
+```
+
+after we input it to the loocal storage we can use it by createing a functuin in service, then use `localStorage.getItem('id')` in component 
+for example:
+
+pengajuan-pinjaman.service.ts
+```
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class PengajuanPinjamanService {
+
+    constructor(private httpClient: HttpClient) { }
+//for authentication
+    private getHeaders(): HttpHeaders {
+      const token = localStorage.getItem('token'); // Ideally, use an AuthService to get the token
+      if (token) {
+        return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      }
+      return new HttpHeaders();
+    }
+
+//this it the function to get admin detail
+    getDetailAdmin(id: number): Observable<AdminDetailResponse> {
+      const headers = this.getHeaders(); //for authentication
+      return this.httpClient.get<AdminDetailResponse>(`${detailAdmin}${id}`, { headers })
+    }
+  }
+```
+then use the function in component like this:
+
+sidebar.component.ts
+```ruby
+  admin?: AdminDetailResponse;
+
+  constructor(
+    private pengajuanPinjamanService: PengajuanPinjamanService
+  ) {} 
+
+  refreshAdminDetail() {
+    const idString: string | null = localStorage.getItem('id');
+    if (idString === null) {
+      // Handle the case where 'id' is not found in localStorage
+      console.error('ID not found in localStorage');
+    } else {
+      const id: number = +idString;
+      this.pengajuanPinjamanService.getDetailAdmin(id).subscribe({
+        next: (dataAdmin) => {
+          this.admin = dataAdmin;
+          console.log(this.admin);
+        },
+        error: (error) => console.error('Error fetching data:', error)
+      });
+    }
+  }
+```
+
+then you can use it in html like this
+
+```
+{{ admin?.nameAdmin }}
+```
 
