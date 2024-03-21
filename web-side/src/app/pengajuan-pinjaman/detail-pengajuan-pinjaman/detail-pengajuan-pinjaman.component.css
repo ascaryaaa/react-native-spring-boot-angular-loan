@@ -16,3 +16,7 @@
   app-confirmation-modal {
     z-index: 10000; /* Ensure it's above the overlay */
   }
+
+  app-rejecting-modal {
+    z-index: 10000; /* Ensure it's above the overlay */
+  }

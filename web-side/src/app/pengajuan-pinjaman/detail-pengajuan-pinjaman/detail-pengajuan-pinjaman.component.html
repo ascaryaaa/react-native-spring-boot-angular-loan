@@ -11,9 +11,9 @@
   ></app-confirmation-modal>
 </div>
 <div class="modal-container" *ngIf="showConfirmationModalTolak">
-  <app-confirmation-modal 
+  <app-rejecting-modal 
     (confirmed)="tolak($event)"
-  ></app-confirmation-modal>
+  ></app-rejecting-modal>
 </div>
 <div class="sm:ml-64">
 <div *ngIf="form">

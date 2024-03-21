@@ -1,9 +1,16 @@
-<div class="modal">
-    <div class="modal-content">
-      <p>Are you sure you want to proceed?</p>
-      <div class="modal-actions">
-        <button (click)="confirm()" style="width: calc(50% - 3px); padding: 6px 12px; margin-right: 6px; background: #29CC6A; border-radius: 8px; justify-content: center; align-items: center; display: inline-flex; border: none; color: white; font-size: 14px; font-family: Montserrat; font-weight: 400; line-height: 21px; word-wrap: break-word;">Yes</button>
-        <button (click)="cancel()" style="width: calc(50% - 3px); padding: 6px 12px; background: #29CC6A; border-radius: 8px; justify-content: center; align-items: center; display: inline-flex; border: none; color: white; font-size: 14px; font-family: Montserrat; font-weight: 400; line-height: 21px; word-wrap: break-word;">No</button>
-      </div>
+  <div class="flex flex-col items-center justify-center p-20 text-sm font-bold leading-5 text-center whitespace-nowrap bg-white rounded-3xl max-w-[693px] max-md:px-5">
+    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/9e9c44782dd88b2f7c109dfe219385b09f6d0323793fd8ef1cab099cfd2f3803?apiKey=c7add3469bc04a5f85486a4cfdac2330&" alt="Decorative image" class="max-w-full aspect-[1.33] w-[295px]" />
+    <h2 class="mt-6 text-3xl tracking-normal leading-10 text-neutral-950 max-md:max-w-full">
+      Yakin menerima pengajuan?
+    </h2>
+    <div class="flex justify-center gap-2 mt-6">
+      <button (click)="cancel()" class="justify-center px-5 py-2 text-neutral-400 bg-zinc-100 rounded-3xl">
+        Batal
+      </button>
+      <button (click)="confirm()" class="justify-center px-5 py-2 text-white bg-green-600 rounded-3xl">
+        Terima
+      </button>
     </div>
   </div>
+
+  
