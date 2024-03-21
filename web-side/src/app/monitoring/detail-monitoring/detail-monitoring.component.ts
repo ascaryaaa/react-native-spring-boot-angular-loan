@@ -66,8 +66,9 @@ export class DetailMonitoringComponent {
             },
             // **Corrected line:**
             position: 'top' // Position the title in the center of the chart
-          }
-        }
+          },
+        },
+        backgroundColor: 'rgba(211, 211, 211, 0.5)' // Ubah nilai warna sesuai keinginan Anda
       }
     });
   }
