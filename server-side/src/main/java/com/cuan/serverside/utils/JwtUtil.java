@@ -21,6 +21,7 @@ public class JwtUtil {
     public String createToken(String username, String role) {
         Claims claims = Jwts.claims().setSubject(username);
         claims.put("role", role); // Include the user role in the token
+        claims.put("username", username);
 
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);

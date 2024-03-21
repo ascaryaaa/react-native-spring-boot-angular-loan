@@ -1,5 +1,6 @@
 package com.cuan.serverside.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,6 +36,10 @@ public class FormPengajuan {
     @ManyToOne
     @JoinColumn(name = "id_cabang", referencedColumnName = "id_cabang")
     private Cabang formToCabang;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "pinjamanToForm")
+    private DetailPinjaman formToPinjaman;
 
     // Gender of debtor
     @Column(name = "jenis_kelamin_form_pengajuan_pinjaman")

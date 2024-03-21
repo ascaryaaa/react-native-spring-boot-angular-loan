@@ -52,9 +52,7 @@ const PengajuanPinjaman = ({ navigation }) => {
           <Text style={styles.titleText}>BNI Fleksi Aktif</Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => navigation.navigate("ProfileKeuanganFleksiPensiun")}
-      >
+      <TouchableOpacity onPress={() => navigation.navigate("SimulasiGriya")}>
         <View style={styles.cardContainer}>
           <Image
             source={require("../../../mobile-side/src/assets/icon_fleksi_pensiun.png")}
@@ -73,6 +71,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
     marginHorizontal: 16,
     // backgroundColor: "red",
+    // backgroundColor: "#ffff",
     flex: 1,
   },
 
@@ -94,6 +93,8 @@ const styles = StyleSheet.create({
   texttitle: {
     fontSize: 18,
     fontWeight: "600",
+    // fontFamily: "Montserrat-VariableFont_wght",
+    // fontStyle: "Montserrat-Regular",
   },
   textbody: {
     fontSize: 13,

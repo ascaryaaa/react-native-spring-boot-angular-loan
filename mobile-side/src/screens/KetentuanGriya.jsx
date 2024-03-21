@@ -16,9 +16,7 @@ const KetentuanGriya = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.navbar}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("ProfileKeuanganFleksiPensiun")}
-        >
+        <TouchableOpacity onPress={() => navigation.navigate("DataPemohon")}>
           <Image
             source={require("../../../mobile-side/src/assets/Icon_leftarrow.png")}
           />
@@ -89,7 +87,8 @@ const KetentuanGriya = ({ navigation }) => {
               flexDirection: "row",
               marginTop: 8,
               justifyContent: "flex-end",
-            }}>
+            }}
+          >
             <TouchableOpacity
               style={styles.buttonSebelumnya}
               onPress={() => navigation.navigate("ProfileKeuanganFleksiAktif")}
