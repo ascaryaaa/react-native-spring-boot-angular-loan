@@ -6,7 +6,12 @@
 >
   Daftar Debitur
 </h1>
-
+<ng-template #noData>
+  <div class="flex flex-col items-center justify-center self-center">
+    <img class="w-28 h-28 justify-center" src="../../../assets/img/nodata.png" alt="No Data">
+    <div class="pt-10  w-60 text-center text-2xl text-gray-400">Data Tidak Ditemukan</div>
+  </div>
+</ng-template>
 <div class="p-4 sm:ml-64">
     <div class="p-4 border-2 border-gray-200 rounded-lg dark:border-gray-700">
       <div
@@ -43,6 +48,7 @@
         class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
         style="margin-bottom: 20px"
       >
+      <ng-container *ngIf="pinjamans.length > 0; else noData">
         <thead
           class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
         >
@@ -56,10 +62,6 @@
             <th scope="col" class="px-4 py-2">Aksi</th>
           </tr>
         </thead>
-        <ng-template #loading>
-          Data tidak ada
-        </ng-template>
-        <ng-container *ngIf="pinjamans.length > 0; else loading"></ng-container>
         <tbody>
           <tr *ngFor="let pinjaman of pinjamans"
             class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
@@ -81,6 +83,7 @@
           </tr>
           <!-- Add more rows here if needed -->
         </tbody>
+      </ng-container>
       </table>
       <nav
         class="flex items-center flex-column flex-wrap md:flex- justify-between pt-4"
