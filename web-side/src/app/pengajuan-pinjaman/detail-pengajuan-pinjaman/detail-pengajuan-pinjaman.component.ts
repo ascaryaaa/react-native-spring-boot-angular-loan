@@ -163,6 +163,19 @@ export class DetailPengajuanPinjamanComponent implements OnInit {
       }
     });
   }
+  showConfirmationModal = false;
+
+  // Function to handle confirmation result
+  onConfirmed(confirmed: boolean) {
+    if (confirmed) {
+      this.createMinimalPinjaman()
+      console.log('Action confirmed');
+    } else {
+      // Cancel the action
+      console.log('Action cancelled');
+    }
+    this.showConfirmationModal = false;
+  }
 
   createMinimalPinjaman() {
     if (!this.form) {
@@ -176,7 +189,7 @@ export class DetailPengajuanPinjamanComponent implements OnInit {
       pinjamanToForm: this.form,
       nameUser: this.form?.formToUser.nameUser ?? null,
       nikUser: this.form?.formToUser.nikUser ?? null,
-      statusTagihan: "Diterima",
+      statusTagihan: "Hijau",
       kolektabilitas: "Ok",
       deskripsiPembayaran: "test",
       amountsSisaPokok: null,
