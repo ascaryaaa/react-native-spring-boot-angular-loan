@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     marginTop: 40,
     height: "100%",
-    backgroundColor: "red"
+    // backgroundColor: "red"
   },
   bg: {
     backgroundColor: "white",

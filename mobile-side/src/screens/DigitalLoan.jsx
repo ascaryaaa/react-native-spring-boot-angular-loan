@@ -22,32 +22,12 @@ const DigitalLoan = ({ navigation }) => {
   );
 
   const [result, setResult] = useState("");
-
-  const listPengajuanPinjamanData = [
-    {
-      id: 1,
-      title: "BNI Griya",
-      date: "10/03/2024",
-      period: "6 Bulan",
-      amount: "Rp 100.000.000",
-      status: "Diproses",
-    },
-  ];
-  const listPinjamanData = [
-    {
-      id: 1,
-      title: "BNI Griya",
-      date: "10/03/2024",
-      period: "6 Bulan",
-      amount: "Rp 100.000.000",
-      status: "Diterima",
-    },
-  ];
-
+  
   const handleAll = () => {
     setResult(
       <View>
-        <ListPengajuanPinjaman />
+        <ListPengajuanPinjaman navigation={navigation}
+        ListPengajuanPinjaman={ListPengajuanPinjaman} />
         <ListPinjaman navigation={navigation} />
       </View>
     );
@@ -114,21 +94,6 @@ const DigitalLoan = ({ navigation }) => {
               <Text style={styles.resultText}>{result}</Text>
             </View>
           )}
-          <Image
-            source={require("../../../mobile-side/src/assets/illu_DL.png")}
-            style={styles.amico}
-          />
-          <Text style={styles.texttitle}>Selamat datang di Digital Loan !</Text>
-          <Text style={styles.textbody}>
-            Solusi pinjaman berbasis digital untuk mempermudah anda mendapatkan
-            produk impian
-          </Text>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate("PengajuanPinjaman")}
-          >
-            <Text style={styles.ajukan}>Ajukan Pinjaman</Text>
-          </TouchableOpacity>
         </View>
       </ScrollView>
 
@@ -254,7 +219,6 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     color: "#F68310",
     justifyContent: "space-around",
-    marginBottom: 20,
   },
   button1: {
     paddingVertical: 10,
