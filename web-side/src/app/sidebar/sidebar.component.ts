@@ -3,6 +3,8 @@ import { AuthService } from './../auth/auth.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router'; // Import Router dari @angular/router
 import { LogoutModalComponent } from '../sidebar/logout-modal/logout-modal.component';
+import { PengajuanPinjamanService } from '../pengajuan-pinjaman/pengajuan-pinjaman.service';
+import { AdminDetailResponse } from '../pengajuan-pinjaman/pengajuan-pinjaman';
 
 export type AdminsResponse = Admin[];
 export interface Admin {
@@ -21,12 +23,17 @@ export interface Admin {
 export class SidebarComponent implements OnInit {
   constructor(
     private authService: AuthService,
-    private router: Router // Tambahkan Router ke dalam constructor
+    private router: Router, // Tambahkan Router ke dalam constructor
+    private pengajuanPinjamanService: PengajuanPinjamanService
   ) {} // Buat instance AuthService melalui dependency injection
-
+  
+  admin?: AdminDetailResponse;
   showLogoutModal = false;
 
-  // Function to handle confirmation result
+  ngOnInit() {
+    this.refreshAdminDetail();
+  }
+
   logout() {
     this.authService.logout();
   }
@@ -51,32 +58,20 @@ export class SidebarComponent implements OnInit {
     this.router.navigate(['/monitoring']);
   }
 
-  admins: AdminsResponse = [];
-  async fetchAdminDataAsync(url: string): Promise<AdminsResponse> {
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data: AdminsResponse = await response.json();
-      return data;
-    } catch (error) {
-      console.error('Fetching error:', error);
-      throw error;
-    }
-  }
-
-  apiUrl = 'http://localhost:8083/loan/v1/admin/get-admins';
-  async ngOnInit() {
-    this.refreshAdminList();
-  }
-
-  async refreshAdminList() {
-    try {
-      this.admins = await this.fetchAdminDataAsync(this.apiUrl);
-      console.log(this.admins); // Process your users here
-    } catch (error) {
-      console.error('Error fetching users:', error);
+  refreshAdminDetail() {
+    const idString: string | null = localStorage.getItem('id');
+    if (idString === null) {
+      // Handle the case where 'id' is not found in localStorage
+      console.error('ID not found in localStorage');
+    } else {
+      const id: number = +idString;
+      this.pengajuanPinjamanService.getDetailAdmin(id).subscribe({
+        next: (dataAdmin) => {
+          this.admin = dataAdmin;
+          console.log(this.admin);
+        },
+        error: (error) => console.error('Error fetching data:', error)
+      });
     }
   }
 }

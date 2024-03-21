@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState } from "react";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
 const Buttonjk = () => {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -9,24 +9,32 @@ const Buttonjk = () => {
   };
 
   return (
-    <View>
-      <TouchableOpacity onPress={() => handleOptionSelect('Pria')}>
-        <View style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 3 }}>
+    <View style={styles.luar}>
+      <TouchableOpacity onPress={() => handleOptionSelect("Pria")}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            paddingVertical: 3,
+          }}
+        >
           <View style={styles.container}>
-            {selectedOption === 'Pria' && (
-              <View style={styles.button}/>
-            )}
+            {selectedOption === "Pria" && <View style={styles.button} />}
           </View>
           <Text style={styles.text}>Pria</Text>
         </View>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => handleOptionSelect('Wanita')}>
-        <View style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 3 }}>
+      <TouchableOpacity onPress={() => handleOptionSelect("Wanita")}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            paddingVertical: 3,
+          }}
+        >
           <View style={styles.container}>
-            {selectedOption === 'Wanita' && (
-              <View style={styles.button}/>
-            )}
+            {selectedOption === "Wanita" && <View style={styles.button} />}
           </View>
           <Text style={styles.text}>Wanita</Text>
         </View>
@@ -37,24 +45,27 @@ const Buttonjk = () => {
 
 export default Buttonjk;
 
-const styles = StyleSheet.create ({
-container: {
+const styles = StyleSheet.create({
+  container: {
     height: 20,
     width: 20,
     borderRadius: 12,
     borderWidth: 1.5,
-    borderColor: '#1394AD',
-    alignItems: 'center',
-    justifyContent: 'center',
+    borderColor: "#1394AD",
+    alignItems: "center",
+    justifyContent: "center",
     marginRight: 8,
-},
-button: {
+  },
+  button: {
     height: 12,
     width: 12,
     borderRadius: 8,
-    backgroundColor: '#000',
-},
-text: {
-    fontWeight: '400',
-}
-})
+    backgroundColor: "#000",
+  },
+  text: {
+    fontWeight: "400",
+  },
+  luar: {
+    marginBottom: 24,
+  },
+});

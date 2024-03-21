@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image} from 'react-native';
 import DataDebitur from '../components/DataDebitur';
 import DetailPinjaman from '../components/DetailPinjaman';
 
@@ -15,48 +15,71 @@ const Monitoring = ({ navigation}) => {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between', marginBottom: 10}}>
-        <Text style={{fontSize: 20, fontWeight: '500'}}>Monitoring Pinjaman</Text>
-        <View style={{flexDirection:'row'}}>
-          <View style={styles.ellipse} />
-          <Text style={{textAlign: 'right', marginTop: 6, marginLeft: 2}}>Peringatan</Text>
-        </View>
-      </View>
-      <View style={styles.table}>
-        <Text style={{color: 'white', fontWeight: '700'}}>Sisa Pinjaman</Text>
-        <Text style={{color: 'white', fontSize: 28, fontWeight: '700', marginTop: 5}}>Rp. 248.000.000,00</Text>
-        <Text style={{color: 'white', marginTop: 8}}>Pembayaran 7 hari lagi</Text>
-        <Text style={{color: 'white'}}>- - - - - - - - - - - - - - - - - - - - - - - - - - - </Text>
-        <View style={styles.row}>
-          <Text style={{fontSize: 15, marginTop: 8, color: 'white', fontWeight: '700'}}>BNI Griya</Text>
-          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Riwayat')}>
-            <Text style={{textAlign: 'center', color: '#F68310', fontWeight: '700' }}>Riwayat</Text>
+    <View style={styles.bg}>
+      <View style={styles.shadow}>
+        <View style={styles.navbar}>
+          <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+            <Image
+              source={require("../../../mobile-side/src/assets/Icon_leftarrow.png")}
+            />
           </TouchableOpacity>
+          <Text style={{ fontSize: 16 }}>Digital Loan</Text>
+          <Image
+            source={require("../../../mobile-side/src/assets/Icon_homeorg.png")}
+          />
         </View>
       </View>
-      <View style={styles.container1}>
-        <TouchableOpacity onPress={toggleDropdown} style={styles.detailButton}>
-          <Text style={styles.textButton}>Data Debitur</Text>
-        </TouchableOpacity>
-        {isDropdownOpen && (
-          <View style={styles.dropdownContent}>
-            <DataDebitur />
+      <ScrollView style={styles.container}>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between', marginBottom: 10}}>
+          <Text style={{fontSize: 18, fontWeight: '600'}}>Monitoring Pinjaman</Text>
+          <View style={{flexDirection:'row'}}>
+            <View style={styles.ellipse} />
+            <Text style={{textAlign: 'right', marginTop: 3, marginLeft: 2}}>Peringatan</Text>
           </View>
-        )}
-      </View>
+        </View>
+        <View style={styles.table}>
+          <Text style={{color: 'white', fontWeight: '700'}}>Sisa Pinjaman</Text>
+          <Text style={{color: 'white', fontSize: 28, fontWeight: '700', marginTop: 5}}>Rp. 248.000.000,00</Text>
+          <Text style={{color: 'white', marginTop: 8}}>Pembayaran 7 hari lagi</Text>
+          <Text style={{color: 'white'}}>- - - - - - - - - - - - - - - - - - - - - - - - - - - </Text>
+          <View style={styles.row}>
+            <Text style={{fontSize: 15, marginTop: 8, color: 'white', fontWeight: '700'}}>BNI Griya</Text>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Riwayat')}>
+              <Text style={{textAlign: 'center', color: '#F68310', fontWeight: '700' }}>Riwayat</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.container1}>
+          <TouchableOpacity onPress={toggleDropdown} style={styles.detailButton}>
+            <Text style={styles.textButton}>Data Debitur</Text>
+            <Image
+              source={require("../../../mobile-side/src/assets/icon_arrowDown.png")}
+              style={{ marginTop: 4 }}
+            />
+          </TouchableOpacity>
+          {isDropdownOpen && (
+            <View style={styles.dropdownContent}>
+              <DataDebitur />
+            </View>
+          )}
+        </View>
 
-      <View style={styles.container1}>
-        <TouchableOpacity onPress={toggleDropdown1} style={styles.detailButton}>
-          <Text style={styles.textButton}>Detail Pinjaman</Text>
-        </TouchableOpacity>
-        {isDropdownOpen1 && (
-          <View style={styles.dropdownContent}>
-            <DetailPinjaman />
-          </View>
-        )}
-      </View>
-    </ScrollView>
+        <View style={styles.container1}>
+          <TouchableOpacity onPress={toggleDropdown1} style={styles.detailButton}>
+            <Text style={styles.textButton}>Detail Pinjaman</Text>
+            <Image
+              source={require("../../../mobile-side/src/assets/icon_arrowDown.png")}
+              style={{ marginTop: 4 }}
+            />
+          </TouchableOpacity>
+          {isDropdownOpen1 && (
+            <View style={styles.dropdownContent}>
+              <DetailPinjaman />
+            </View>
+          )}
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 export default Monitoring;
@@ -64,8 +87,31 @@ export default Monitoring;
 const styles = StyleSheet.create({
 container: {
   flex:1,
-  padding: 10,
-  marginTop: 5,
+  marginHorizontal: 16,
+  marginTop: 10,
+},
+bg: {
+  backgroundColor: "white",
+  height: "100%",
+  // width: "100%",
+},
+navbar: {
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "space-between",
+  width: "100%",
+  verticalAlign: "top",
+  paddingTop: 60,
+  padding: 12,
+  backgroundColor: "#FFF",
+  // marginBottom: 24,
+  // backgroundColor: "red"
+},
+shadow: {
+  shadowColor: "#ddd",
+  shadowOffset: { width: 0, height: 4 },
+  shadowOpacity: 0.25,
+  shadowRadius: 15,
 },
 table: {
   marginTop: 8,
@@ -94,20 +140,20 @@ status: {
   marginTop: 8,
 },
 detailButton: {
-  marginTop: 15,
-  padding: 15,
+  backgroundColor: "#F68310",
+  padding: 10,
+  borderRadius: 5,
   marginBottom: 8,
-  backgroundColor:'#F68310',
-  borderRadius: 10,
-  borderColor: '#F68310',
-  width: '100%'
+  width: "100%",
+  marginTop: 8,
+  flexDirection: "row",
+  justifyContent: "space-between",
 },
 textButton: {
   color: 'white',
   fontWeight: '600',
   fontSize: 14,
 },
-
 container1: {
   flex: 1,
   alignItems: "center",
@@ -128,6 +174,6 @@ ellipse: {
   height: 15,
   borderRadius: 50,
   backgroundColor: '#FFC930',
-  marginTop: 7,
+  marginTop: 4,
 },
 })

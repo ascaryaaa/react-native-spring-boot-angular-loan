@@ -1,8 +1,8 @@
   import { HttpClient, HttpHeaders } from '@angular/common/http';
   import { Injectable } from '@angular/core';
-  import { FormDetailResponse, FormResponse} from './pengajuan-pinjaman';
+  import { Admin, AdminDetailResponse, FormDetailResponse, FormResponse} from './pengajuan-pinjaman';
   import { Observable } from 'rxjs';
-  import { createPengajuanPinjamanUrl, createPinjamanUrl, detailPengajuanPinjaman, listPengajuanPinjaman } from '../config/api';
+  import { createPengajuanPinjamanUrl, createPinjamanUrl, detailAdmin, detailPengajuanPinjaman, listPengajuanPinjaman } from '../config/api';
   import { AuthService } from '../auth/auth.service';
   import { Pinjaman } from '../monitoring/monitoring';
 
@@ -41,9 +41,9 @@
       const headers = this.getHeaders();
       return this.httpClient.post(createPengajuanPinjamanUrl, data, { headers });
     }
-    // createPinjamanMinimal(data: any): Observable<any> {
-    //   const headers = this.getHeaders();
-    //   return this.httpClient.post(createPinjamanUrl, data, { headers });
-    // }
+    getDetailAdmin(id: number): Observable<AdminDetailResponse> {
+      const headers = this.getHeaders();
+      return this.httpClient.get<AdminDetailResponse>(`${detailAdmin}${id}`, { headers })
+    }
   }
 

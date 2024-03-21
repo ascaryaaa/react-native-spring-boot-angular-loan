@@ -5,18 +5,20 @@
 >
   Detail Pemohon
 </h1>
-<div class="modal-container" *ngIf="showConfirmationModal">
+<div class="modal-container" *ngIf="showConfirmationModalTerima">
   <app-confirmation-modal 
-    (confirmed)="onConfirmed($event)"
+    (confirmed)="terima($event)"
+  ></app-confirmation-modal>
+</div>
+<div class="modal-container" *ngIf="showConfirmationModalTolak">
+  <app-confirmation-modal 
+    (confirmed)="tolak($event)"
   ></app-confirmation-modal>
 </div>
 <div class="sm:ml-64">
 <div *ngIf="form">
  <div class="p-4 flex flex-col gap-4">
   <a href="#" class="block flex-1 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 flex items-center" style="pointer-events: none;">
-    <!-- <div class="flex-shrink-0 w-14 bg-gray-200 rounded-full overflow-hidden mr-4">
-      <img id="image" src="./../../../assets/img/geri.JPG" alt="Profile Picture" style="height: 100%; width: 100%;" />
-    </div> -->
     <div class="flex flex-col justify-between">
       <div>
         <h5 id="nama" class="text-xl font-bold tracking-normal leading-6 text-zinc-800">
@@ -101,13 +103,26 @@
       </div>
     </div>
     <div class="max-md:w-full">
-      <div style="width: 100%; height: 100%; padding: 24px; border-radius: 16px; border: 0.50px #E0E0E0 solid; flex-direction: column; justify-content: flex-start; align-items: center; gap: 10px; display: inline-flex">
-        <div style="text-align: center; color: #303030; font-size: 12px; font-family: Montserrat; font-weight: 700; line-height: 18px; word-wrap: break-word">Aksi</div>
-        <div style="align-self: stretch; height: 74px; flex-direction: column; justify-content: flex-start; align-items: center; gap: 8px; display: flex">
-            <button (click)="showConfirmationModal = true"style="width: 100%; padding: 6px 12px; background: #29CC6A; border-radius: 8px; justify-content: center; align-items: center; gap: 6px; display: inline-flex; border: none; color: white; font-size: 14px; font-family: Montserrat; font-weight: 400; line-height: 21px; word-wrap: break-word;">Diterima</button>
-            <button (click)="createFormPengajuan()"style="width: 100%; padding: 6px 12px; background: #29CC6A; border-radius: 8px; justify-content: center; align-items: center; gap: 6px; display: inline-flex; border: none; color: white; font-size: 14px; font-family: Montserrat; font-weight: 400; line-height: 21px; word-wrap: break-word;">Jancuk</button>
-            <button (click)="rejectPengajuan(form.idFormPengajuanPinjaman)"style="width: 100%; padding: 6px 12px; background: #D4352A; border-radius: 8px; justify-content: center; align-items: center; gap: 6px; display: inline-flex; border: none; color: white; font-size: 14px; font-family: Montserrat; font-weight: 400; line-height: 21px; word-wrap: break-word;">Ditolak</button>
-        </div>
+      <div class="flex flex-col grow items-start py-6 pl-6 text-xs leading-5 rounded-2xl border border-solid border-neutral-200 max-md:mt-2.5" style="width: 100%; height: 100%; padding: 24px; border-radius: 16px; border: 0.50px #E0E0E0 solid; flex-direction: column; justify-content: flex-start; align-items: center; gap: 10px; display: inline-flex">
+        <!-- Conditionally show the status text or buttons -->
+        <ng-container *ngIf="form.statusPengajuan === 'Diterima' || form.statusPengajuan === 'Ditolak'">
+          <div class="font-bold text-center text-zinc-800">Status Pengajuan</div>
+          <!-- Show the status text if 'Diterima' or 'Ditolak' -->
+          <div class="font-bold text-center text-zinc-800" style="width: 100%; padding: 6px 12px;" [ngStyle]="{
+              'color': form.statusPengajuan === 'Diterima' ? 'green' : 'red'
+            }">
+            {{ form.statusPengajuan }}
+          </div>
+        </ng-container>
+        <ng-container *ngIf="form.statusPengajuan !== 'Diterima' && form.statusPengajuan !== 'Ditolak'">
+          <div class="font-bold text-center text-zinc-800">Aksi</div>
+          <!-- Show the 'Diterima' button -->
+          <button (click)="showConfirmationModalTerima = true" class="justify-center px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]" style="width: 100%; padding: 6px 12px; background: #29CC6A;">Diterima</button>
+          <!-- Show the 'Ditolak' button -->
+          <button (click)="createFormPengajuan()"style="width: 100%; padding: 6px 12px; background: #29CC6A; #D4352A; border-radius: 8px; justify-content: center; align-items: center; gap: 6px; display: inline-flex; border: none; color: white; font-size: 14px; font-family: Montserrat; font-weight: 400; line-height: 21px; word-wrap: break-word;">Jancuk</button>
+          <button (click)="showConfirmationModalTolak = true" class="justify-center px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]" style="width: 100%; padding: 6px 12px;background: #D4352A;">Ditolak</button>
+        </ng-container>
+      </div>
     </div>
     
     

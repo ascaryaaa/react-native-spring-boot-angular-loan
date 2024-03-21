@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ModalLogout = ({ visible, onClose, navigation }) => {
   const handleLogout = () => {
@@ -9,19 +10,18 @@ const ModalLogout = ({ visible, onClose, navigation }) => {
     <View style={styles.container}>
       <View style={styles.modal}>
         <Image
-          source={require("../../../mobile-side/src/assets/illu_logout.png")}
-          style={{ width: 160, height: 160 }}
+          source={require("../../../mobile-side/src/assets/logombanking.png")}
+          style={{ width: 65, height: 65 }}
           resizeMode="stretch"
         />
         <Text style={styles.teksYakin}>Apakah anda yakin ?</Text>
         <View style={styles.pilihan}>
-          <TouchableOpacity>
-            <Text style={styles.cancel} onPress={onClose}>
-              Cancel
-            </Text>
+          <TouchableOpacity style={styles.cancel} onPress={onClose}>
+            <Text>Cancel</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={handleLogout}>
-            <Text style={styles.logout}>Log Out</Text>
+          <Text style={{width: 10}}></Text>
+          <TouchableOpacity style={styles.logout} onPress={handleLogout}>
+            <Text style={{ color: "#ffff" }}>Log Out</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -33,17 +33,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    margin: 32,
     flexDirection: "row",
+    // backgroundColor: "red"
   },
   modal: {
     justifyContent: "center",
-    alignItems: "center",
     backgroundColor: "white",
-    width: 302,
-    height: 296,
-    // marginHorizontal: 13,
-    borderRadius: 10,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    borderRadius: 4,
+    padding: 20,
+    gap: 6,
+    width: "90%"
   },
   teksYakin: {
     fontSize: 16,
@@ -52,27 +54,29 @@ const styles = StyleSheet.create({
   },
   pilihan: {
     flexDirection: "row",
+    justifyContent: "space-evenly",
   },
   cancel: {
-    backgroundColor: "#F0F0F0",
-    color: "#9E9E9E",
-    width: 95,
-    height: 34,
-    borderRadius: 20,
-    justifyContent: "center", // Mengatur teks secara vertikal ke tengah
-    textAlign: "center",
-    fontWeight: "700",
-    marginRight: 8,
+    display: "flex",
+    // width: "40%",
+    padding: 42,
+    paddingTop: 8,
+    paddingBottom: 8,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 4,
+    backgroundColor: "#F2F4F8",
   },
   logout: {
-    backgroundColor: "#D4352A",
-    color: "#ffff",
-    width: 95,
-    height: 34,
-    borderRadius: 20,
-    justifyContent: "center", // Mengatur teks secara vertikal ke tengah
-    textAlign: "center",
-    fontWeight: "700",
+    display: "flex",
+    // width: "40%",
+    padding: 42,
+    paddingTop: 8,
+    paddingBottom: 8,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 4,
+    backgroundColor: "#F68310",
   },
 });
 export default ModalLogout;

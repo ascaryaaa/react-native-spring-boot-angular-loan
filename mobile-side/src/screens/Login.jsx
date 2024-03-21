@@ -39,8 +39,37 @@ const Login = ({ navigation }) => {
       <TouchableOpacity style={styles.button} onPress={openModal}>
         <Text style={styles.text}>Login</Text>
       </TouchableOpacity>
-      {/* Modal tetap ditampilkan di dalam View utama */}
+      <View style={styles.rowFitur}>
+        <View style={styles.features}>
+          <TouchableOpacity>
+            <Image
+              source={require("../../../mobile-side/src/assets/icon_transfer.png")}
+              style={{ width: 55, height: 55 }}
+            />
+          </TouchableOpacity>
+          <Text style={{ fontSize: 12 }}>Transfer</Text>
+        </View>
+        <View style={styles.features}>
+          <TouchableOpacity>
+            <Image
+              source={require("../../../mobile-side/src/assets/menu_qris.png")}
+              style={{ width: 55, height: 55 }}
+            />
+          </TouchableOpacity>
+          <Text style={{ fontSize: 12 }}>Transfer</Text>
+        </View>
+        <View style={styles.features}>
+          <TouchableOpacity>
+            <Image
+              source={require("../../../mobile-side/src/assets/menu_lain.png")}
+              style={{ width: 55, height: 55 }}
+            />
+          </TouchableOpacity>
+          <Text style={{ fontSize: 12 }}>Transfer</Text>
+        </View>
+      </View>
 
+      {/* Modal tetap ditampilkan di dalam View utama */}
       <LoginModal
         visible={modalVisible}
         onClose={closeModal}
@@ -60,20 +89,27 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   button: {
+    display: "flex",
+    width: 360,
+    padding: 12,
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 10,
+    borderRadius: 24,
     backgroundColor: "#18C1CD",
-    padding: 5,
-    borderRadius: 5,
-    margin: 5,
-    marginTop: 2,
-    marginBottom: 100,
-    width: 380,
-    height: 50,
-    borderRadius: 30,
+    marginBottom : 28
   },
   text: {
     color: "white",
-    textAlign: "center",
     fontSize: 19,
     fontWeight: "500",
   },
+  rowFitur: {
+    flexDirection: "row",
+    justifyContent: 'space-between',
+    width: "60%",
+  },
+  features: {
+    alignItems: "center"
+  }
 });

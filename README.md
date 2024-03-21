@@ -744,3 +744,226 @@ if get error, you can using:
 ```
    npm install chart.js --force
 ```
+
+### 7. Implement Modal
+
+Generate Component: Begin by generating a new component specifically for the confirmation modal using Angular CLI's ng generate component command. This command creates all the necessary files and boilerplate code for your component.
+
+```
+ng generate component confirmation-modal
+```
+
+Confirmation Modal Component (HTML): Within the confirmation-modal.component.html file, define the structure of your modal. This includes the message asking for confirmation and buttons for user interaction.
+
+`confirmation-modal.component.html`
+```ruby
+<div class="modal">
+  <div class="modal-content">
+    <p>Are you sure you want to proceed?</p>
+    <div class="modal-actions">
+      <button (click)="confirm()">Yes</button>
+      <button (click)="cancel()">No</button>
+    </div>
+  </div>
+</div>
+```
+
+Confirmation Modal Component (TypeScript): In the confirmation-modal.component.ts file, handle user actions and emit events accordingly using Angular's EventEmitter.
+
+`confirmation-modal.component.ts`
+```ruby
+import { Component, EventEmitter, Output } from '@angular/core';
+
+@Component({
+  selector: 'app-confirmation-modal',
+  templateUrl: './confirmation-modal.component.html',
+  styleUrls: ['./confirmation-modal.component.css']
+})
+export class ConfirmationModalComponent {
+  @Output() confirmed = new EventEmitter<boolean>();
+
+  confirm() {
+    this.confirmed.emit(true);
+  }
+
+  cancel() {
+    this.confirmed.emit(false);
+  }
+this.showConfirmationModal = false;
+}
+```
+
+Usage in Parent Component: Incorporate the confirmation modal into your parent component's logic. For instance, within DetailPengajuanPinjamanComponent.ts, manage the modal's visibility and handle confirmation/cancellation actions.
+
+service of your parent component
+for example inside `DetailPengajuanPinjamanComponent.ts`
+```ruby
+showConfirmationModal = false;
+
+confirm() {
+  // Implement the logic when the user confirms the action
+  console.log('Action confirmed');
+  this.showConfirmationModal = false; // Hide the modal
+}
+
+cancel() {
+  // Implement the logic when the user cancels the action
+  console.log('Action cancelled');
+  this.showConfirmationModal = false; // Hide the modal
+}
+```
+HTML of Parent Component: Within the parent component's HTML (DetailPengajuanPinjamanComponent.html), trigger the confirmation modal based on user actions, and handle the confirmed event.
+
+html of your parent component
+example `DetailPengajuanPinjamanComponent.html`
+```ruby
+<div class="modal-container" *ngIf="showConfirmationModal">
+  <app-confirmation-modal 
+    (confirmed)="onConfirmed($event)"
+  ></app-confirmation-modal>
+</div>
+
+//
+<button (click)="confirmAction('Diterima')">Diterima</button>
+<button (click)="confirmAction('Ditolak')">Ditolak</button>
+```
+
+CSS of Parent Component: Style the modal container and adjust the z-index to ensure it appears above other content.
+
+css of your parent component
+```ruby
+/* Modal container */
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 9999; /* Ensure it's above other content */
+  }
+  
+  /* Modal */
+  app-confirmation-modal {
+    z-index: 10000; /* Ensure it's above the overlay */
+  }
+```
+
+### 8. Admin ID Parshing
+
+Parshing the Admin Id that loged in to be able to be used in fetching admin detail api-endpoint
+
+from the backend, we need to respon the id
+```ruby
+    public LoginResponse(Long id, String username, String token) {
+        this.id = id;
+        this.username = username;
+        this.token = token;
+    }
+```
+
+the login respon json example
+
+```ruby
+{
+    "id": 1,
+    "username": "Admin",
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsInJvbGUiOiJST0xFX0FETUlOIiwidXNlcm5hbWUiOiJBZG1pbiIsImlhdCI6MTcxMTAyNjk2NCwiZXhwIjoxNzExMDMwNTY0fQ.oP3ANxsV5iArNQ64MAcKvLSotLBBBsoHXEl7ZUc76nY"
+}
+```
+
+as you can see, the respon if we lgged in include the id of the user.
+
+then, in the web-side, we need to add the id to local storage:
+
+`auth.seervice.ts`
+```ruby
+  async login(form: UserForm): Promise<void> {
+    console.log('Form username:', form.username);
+    console.log('Form password:', form.password);
+
+    try {
+      const response = await axios.post('http://localhost:8083/rest/auth/login-admin', {
+        username: form.username,
+        password: form.password,
+      });
+
+      console.log('Response:', response);
+
+      if (response) {
+        localStorage.setItem('user', JSON.stringify(response.data));
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('id', response.data.id); //inser id to local storage
+        this.router.navigate(['pengajuan-pinjaman']);
+      }
+    } catch (error) {
+      console.error('Login failed!', error);
+      alert('User is not found!');
+    }
+  }
+```
+
+after we input it to the loocal storage we can use it by createing a functuin in service, then use `localStorage.getItem('id')` in component 
+for example:
+
+pengajuan-pinjaman.service.ts
+```
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class PengajuanPinjamanService {
+
+    constructor(private httpClient: HttpClient) { }
+//for authentication
+    private getHeaders(): HttpHeaders {
+      const token = localStorage.getItem('token'); // Ideally, use an AuthService to get the token
+      if (token) {
+        return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      }
+      return new HttpHeaders();
+    }
+
+//this it the function to get admin detail
+    getDetailAdmin(id: number): Observable<AdminDetailResponse> {
+      const headers = this.getHeaders(); //for authentication
+      return this.httpClient.get<AdminDetailResponse>(`${detailAdmin}${id}`, { headers })
+    }
+  }
+```
+then use the function in component like this:
+
+sidebar.component.ts
+```ruby
+  admin?: AdminDetailResponse;
+
+  constructor(
+    private pengajuanPinjamanService: PengajuanPinjamanService
+  ) {} 
+
+  refreshAdminDetail() {
+    const idString: string | null = localStorage.getItem('id');
+    if (idString === null) {
+      // Handle the case where 'id' is not found in localStorage
+      console.error('ID not found in localStorage');
+    } else {
+      const id: number = +idString;
+      this.pengajuanPinjamanService.getDetailAdmin(id).subscribe({
+        next: (dataAdmin) => {
+          this.admin = dataAdmin;
+          console.log(this.admin);
+        },
+        error: (error) => console.error('Error fetching data:', error)
+      });
+    }
+  }
+```
+
+then you can use it in html like this
+
+```
+{{ admin?.nameAdmin }}
+```
+
