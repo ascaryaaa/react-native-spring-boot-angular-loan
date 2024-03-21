@@ -1,8 +1,10 @@
+
 <aside
   id="separator-sidebar"
   class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
   aria-label="Sidebar"
 >
+
   <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
     <ul class="space-y-2 font-medium">
       <li>
@@ -84,7 +86,7 @@
     >
       <li>
         <a
-          (click)="logout()"
+          (click)="showLogoutModal = true"
           style="cursor: pointer"
           class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
         >
@@ -105,6 +107,7 @@
           </svg>
           <span class="ms-3">Logout</span>
         </a>
+        <!-- <button (click)="showLogoutModal = true"style="width: 100%; padding: 6px 12px; background: #29CC6A; border-radius: 8px; justify-content: center; align-items: center; gap: 6px; display: inline-flex; border: none; color: white; font-size: 14px; font-family: Montserrat; font-weight: 400; line-height: 21px; word-wrap: break-word;">Diterima</button> -->
       </li>
     </ul>
   </div>
@@ -120,3 +123,7 @@
 
 </aside> -->
 </aside>
+
+<div class="modal-container" *ngIf="showLogoutModal">
+  <app-logout-modal (confirmed)="onConfirmed($event)"></app-logout-modal>
+</div>

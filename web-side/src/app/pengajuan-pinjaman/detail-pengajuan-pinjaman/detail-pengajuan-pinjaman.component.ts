@@ -163,21 +163,31 @@ export class DetailPengajuanPinjamanComponent implements OnInit {
       }
     });
   }
-  showConfirmationModal = false;
 
-  // Function to handle confirmation result
-  onConfirmed(confirmed: boolean) {
+  showConfirmationModalTerima = false;
+  terima(confirmed: boolean) {
     if (confirmed) {
-      this.createMinimalPinjaman()
+      this.createPinjamanAndChangeStatus()
       console.log('Action confirmed');
     } else {
       // Cancel the action
       console.log('Action cancelled');
     }
-    this.showConfirmationModal = false;
+    this.showConfirmationModalTerima = false;
+  }
+  showConfirmationModalTolak = false;
+  tolak(confirmed: boolean) {
+    if (confirmed) {
+      this.rejectPengajuan()
+      console.log('Action confirmed');
+    } else {
+      // Cancel the action
+      console.log('Action cancelled');
+    }
+    this.showConfirmationModalTolak = false;
   }
 
-  createMinimalPinjaman() {
+  createPinjamanAndChangeStatus() {
     if (!this.form) {
       console.error("Form data is not loaded.");
       return;
@@ -239,7 +249,13 @@ export class DetailPengajuanPinjamanComponent implements OnInit {
   }
 
     
-  rejectPengajuan(id: number) {
+  rejectPengajuan() {
+    if (!this.form || !this.form.idFormPengajuanPinjaman) {
+      console.error("Form data or ID is not available.");
+      return;
+    }
+    const id: number = this.form.idFormPengajuanPinjaman;
+  
     this.pengajuanPinjamanService.getDetailPengajuanPinjaman(id).subscribe({
       next: (currentData) => {
         const updatedData = {

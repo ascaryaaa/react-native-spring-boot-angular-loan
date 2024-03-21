@@ -1,0 +1,18 @@
+/* Modal container */
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 9999; /* Ensure it's above other content */
+  }
+  
+  /* Modal */
+  app-confirmation-modal {
+    z-index: 10000; /* Ensure it's above the overlay */
+  }
