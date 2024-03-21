@@ -1,5 +1,6 @@
 export type FormResponse = FormPengajuanPinjaman[];
 export type FormDetailResponse = FormPengajuanPinjaman;
+export type AdminDetailResponse = Admin;
 
 export interface FormPengajuanPinjaman {
     idFormPengajuanPinjaman: number;
