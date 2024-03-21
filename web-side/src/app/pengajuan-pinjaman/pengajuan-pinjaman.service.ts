@@ -33,17 +33,17 @@
       const headers = this.getHeaders();
       return this.httpClient.put(detailPengajuanPinjaman + id, data, { headers });
     }
-    // createPinjaman(data: Pinjaman): Observable<Pinjaman> {
-    //   const headers = this.getHeaders();
-    //   return this.httpClient.post<Pinjaman>(createPinjamanUrl, data, { headers });
-    // }
+    createPinjamanMinimal(data: Pinjaman): Observable<Pinjaman> {
+      const headers = this.getHeaders();
+      return this.httpClient.post<Pinjaman>(createPinjamanUrl, data, { headers });
+    }
     createPengajuanPinjaman(data: any): Observable<any> {
       const headers = this.getHeaders();
       return this.httpClient.post(createPengajuanPinjamanUrl, data, { headers });
     }
-    createPinjamanMinimal(data: any): Observable<Pinjaman> {
-      const headers = this.getHeaders();
-      return this.httpClient.post<Pinjaman>(createPinjamanUrl, data, { headers });
-    }
+    // createPinjamanMinimal(data: any): Observable<any> {
+    //   const headers = this.getHeaders();
+    //   return this.httpClient.post(createPinjamanUrl, data, { headers });
+    // }
   }
 

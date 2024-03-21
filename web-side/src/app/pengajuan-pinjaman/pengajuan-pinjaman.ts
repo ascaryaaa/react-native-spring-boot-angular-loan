@@ -1,16 +1,40 @@
 export type FormResponse = FormPengajuanPinjaman[];
 export type FormDetailResponse = FormPengajuanPinjaman;
 
-export interface Pinjaman {
-    idPinjaman: number | null;
-    pinjamanToUser: User;
-    pinjamanToForm: FormPengajuanPinjaman;
-    pinjamanToAdmin: Admin | null;
-    tanggalRealisasi: Date;
-    status: string;
-    sisaTagihan: number;
-    totalBayarTagihan: number;
-    tanggalBayarTagihan: Date;
+export interface FormPengajuanPinjaman {
+    idFormPengajuanPinjaman: number;
+    formToJenis: JenisPinjaman;
+    formToUser: User;
+    formToAdmin: Admin | null;
+    formToCabang: Cabang; // Added formToCabang based on JSON
+    jenisKelamin: string;
+    tempatLahir: string | null; // Updated to allow null
+    tanggalLahir: string; // No change
+    alamatKtp: string;
+    kodePos: string;
+    kelurahan: string;
+    kecamatan: string;
+    npwp: string;
+    unitBNI: string;
+    penghasilanBersihPerbulan: number;
+    jumlahPinjaman: number;
+    jangkaWaktu: number;
+    bungaPinjaman: number;
+    maksAngsuran: number; // Changed from maksimalPinjaman
+    angsuranPerbulan: number;
+    hargaRumah: number;
+    persentaseUangMuka: number;
+    uangMuka: number | null; // Updated to allow null
+    statusPengajuan: string;
+    tanggalRealisasi: string | null; // Updated to allow null
+}
+
+export interface JenisPinjaman {
+    idJenisPinjaman: number;
+    nameJenisPinjaman: string;
+    bungaPinjaman: number;
+    gambarJenisPinjaman: string;
+    iconJenisPinjaman: string;
 }
 
 export interface User {
@@ -19,45 +43,18 @@ export interface User {
     nikUser: string;
 }
 
-export interface FormPengajuanPinjaman {
-    idFormPengajuanPinjaman: number;
-    formToJenis: JenisPinjaman;
-    formToUser: User;
-    formToAdmin: Admin;
-    jenisKelamin: string;
-    tempatLahir: string;
-    tanggalLahir: string; 
-    alamatKtp: string;
-    kodePos: string;
-    kelurahan: string;
-    kecamatan: string;
-    npwp: string;
-    unitBNI: string;
-    penghasilanBersihPerbulan: number;
-    jumlahPinjaman: number; 
-    jangkaWaktu: number;
-    bungaPinjaman: number;
-    maksimalPinjaman: number; 
-    angsuranPerbulan: number; 
-    hargaRumah: number; 
-    persentaseUangMuka: number; 
-    uangMuka: number; 
-    statusPengajuan: string | null;
-    tanggalRealisasi: string | null;
-}
-
-export interface JenisPinjaman {
-    idJenisPinjaman: number;
-    nameJenisPinjaman: string;
-    gambarJenisPinjaman: string;
-    iconJenisPinjaman: string;
-}
-
 export interface Admin {
     idAdmin: number;
     nameAdmin: string;
     nppAdmin: string;
-    usernameAdmin: string,
-    password: string,
-    profilepictAdmin: string,
+    usernameAdmin: string;
+    passwordAdmin: string;
+    profilepictAdmin: string | null;
+}
+
+export interface Cabang {
+    idCabang: number;
+    nameCabang: string;
+    kotaCabang: string;
+    kodeCabang: string;
 }
