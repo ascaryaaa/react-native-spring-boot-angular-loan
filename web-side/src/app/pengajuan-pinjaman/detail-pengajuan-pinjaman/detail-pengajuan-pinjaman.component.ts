@@ -84,6 +84,7 @@ import { PengajuanPinjamanService } from '../pengajuan-pinjaman.service';
 import { FormDetailResponse } from '../pengajuan-pinjaman';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { Pinjaman } from '../../monitoring/monitoring';
 
 @Component({
   selector: 'app-detail',
@@ -91,6 +92,7 @@ import autoTable from 'jspdf-autotable';
   styleUrls: ['./detail-pengajuan-pinjaman.component.css']
 })
 export class DetailPengajuanPinjamanComponent implements OnInit {
+[x: string]: any;
   form?: FormDetailResponse;
   showSLIKTable: boolean = false;
   slikGenerated: boolean = false;
@@ -163,35 +165,57 @@ export class DetailPengajuanPinjamanComponent implements OnInit {
     });
   }
 
-  createMinimalPinjaman() {
+  showConfirmationModalTerima = false;
+  terima(confirmed: boolean) {
+    if (confirmed) {
+      this.createPinjamanAndChangeStatus()
+      console.log('Action confirmed');
+    } else {
+      // Cancel the action
+      console.log('Action cancelled');
+    }
+    this.showConfirmationModalTerima = false;
+  }
+  showConfirmationModalTolak = false;
+  tolak(confirmed: boolean) {
+    if (confirmed) {
+      this.rejectPengajuan()
+      console.log('Action confirmed');
+    } else {
+      // Cancel the action
+      console.log('Action cancelled');
+    }
+    this.showConfirmationModalTolak = false;
+  }
+
+  createPinjamanAndChangeStatus() {
     if (!this.form) {
       console.error("Form data is not loaded.");
       return;
     }
     const id: number = +this.router.snapshot.params['id'];
 
-    const minimalPinjamanData = {
-      nameUser: this.form.formToUser.nameUser,
-      nikUser: this.form.formToUser.nikUser,
-      pinjamanToForm: {
-
-      },
-      statusTagihan: "Diterima",
+    const minimalPinjamanData: Pinjaman = {
+      idPinjaman: null,
+      pinjamanToForm: this.form,
+      nameUser: this.form?.formToUser.nameUser ?? null,
+      nikUser: this.form?.formToUser.nikUser ?? null,
+      statusTagihan: "Hijau",
       kolektabilitas: "Ok",
       deskripsiPembayaran: "test",
       amountsSisaPokok: null,
-      rebatesSisaPokok: 213213,
-      payoffsSisaPokok: 21312,
+      rebatesSisaPokok: null,
+      payoffsSisaPokok: null,
       amountsBungaBerjalan: null,
-      rebatesBungaBerjalan: 213213,
-      payoffsBungaBerjalan: 1,
-      totalAmounts: 213213,
-      totalRebates: 213213,
-      totalPayoffs: 213123,
-      sisaTagihan: 100000000,
-      totalBayarTagihan: 400000000,
-      tanggalBayarTagihan: null // If the backend expects a string format, ensure to convert `null` to a string or omit this field if it's not required.
-    };
+      rebatesBungaBerjalan: null,
+      payoffsBungaBerjalan: null,
+      totalAmounts: null,
+      totalRebates: null,
+      totalPayoffs: null,
+      sisaTagihan: null,
+      totalBayarTagihan: null,
+      tanggalBayarTagihan: null
+  };
   
     this.pengajuanPinjamanService.createPinjamanMinimal(minimalPinjamanData).subscribe({
       next: (response) => {
@@ -226,7 +250,13 @@ export class DetailPengajuanPinjamanComponent implements OnInit {
   }
 
     
-  rejectPengajuan(id: number) {
+  rejectPengajuan() {
+    if (!this.form || !this.form.idFormPengajuanPinjaman) {
+      console.error("Form data or ID is not available.");
+      return;
+    }
+    const id: number = this.form.idFormPengajuanPinjaman;
+  
     this.pengajuanPinjamanService.getDetailPengajuanPinjaman(id).subscribe({
       next: (currentData) => {
         const updatedData = {

@@ -5,6 +5,16 @@
 >
   Detail Pemohon
 </h1>
+<div class="modal-container" *ngIf="showConfirmationModalTerima">
+  <app-confirmation-modal 
+    (confirmed)="terima($event)"
+  ></app-confirmation-modal>
+</div>
+<div class="modal-container" *ngIf="showConfirmationModalTolak">
+  <app-confirmation-modal 
+    (confirmed)="tolak($event)"
+  ></app-confirmation-modal>
+</div>
 <div class="sm:ml-64">
 <div *ngIf="form">
  <div class="p-4 flex flex-col gap-4">
@@ -96,12 +106,19 @@
       </div>
     </div>
     <div class="max-md:w-full">
-      <div style="width: 100%; height: 100%; padding: 24px; border-radius: 16px; border: 0.50px #E0E0E0 solid; flex-direction: column; justify-content: flex-start; align-items: center; gap: 10px; display: inline-flex">
-        <div style="text-align: center; color: #303030; font-size: 12px; font-family: Montserrat; font-weight: 700; line-height: 18px; word-wrap: break-word">Aksi</div>
-        <div style="align-self: stretch; height: 74px; flex-direction: column; justify-content: flex-start; align-items: center; gap: 8px; display: flex">
-            <button (click)="createMinimalPinjaman()"style="width: 100%; padding: 6px 12px; background: #29CC6A; border-radius: 8px; justify-content: center; align-items: center; gap: 6px; display: inline-flex; border: none; color: white; font-size: 14px; font-family: Montserrat; font-weight: 400; line-height: 21px; word-wrap: break-word;">Diterima</button>
-            <button (click)="createFormPengajuan()"style="width: 100%; padding: 6px 12px; background: #29CC6A; border-radius: 8px; justify-content: center; align-items: center; gap: 6px; display: inline-flex; border: none; color: white; font-size: 14px; font-family: Montserrat; font-weight: 400; line-height: 21px; word-wrap: break-word;">Jancuk</button>
-            <button (click)="rejectPengajuan(form.idFormPengajuanPinjaman)"style="width: 100%; padding: 6px 12px; background: #D4352A; border-radius: 8px; justify-content: center; align-items: center; gap: 6px; display: inline-flex; border: none; color: white; font-size: 14px; font-family: Montserrat; font-weight: 400; line-height: 21px; word-wrap: break-word;">Ditolak</button>
+      <div class="flex flex-col grow items-start py-6 pl-6 text-xs leading-5 rounded-2xl border border-solid border-neutral-200 max-md:mt-2.5" style="width: 100%; height: 100%; padding: 24px; border-radius: 16px; border: 0.50px #E0E0E0 solid; flex-direction: column; justify-content: flex-start; align-items: center; gap: 10px; display: inline-flex">
+        <div class="font-bold text-center text-zinc-800">Aksi</div>
+        <div style="align-self: stretch; height: 74px; flex-direction: column; justify-content: flex-start; align-items: center; gap: 8px; display: flex; border-radius: 8px; justify-content: center; align-items: center; gap: 6px; display: inline-flex; border: none; color: white; font-size: 14px; font-weight: 400; line-height: 21px; word-wrap: break-word">
+          <div 
+            class="font-bold text-center text-zinc-800"
+            style="width: 100%; padding: 6px 12px;"
+            [ngStyle]="{
+              'color': form.statusPengajuan === 'Diterima' ? 'green' : (form.statusPengajuan === 'Ditolak' ? 'red' : 'gray')
+            }"
+          >{{form.statusPengajuan}}</div>
+            <button (click)="showConfirmationModalTerima = true"class="justify-center px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]" style="width: 100%; padding: 6px 12px; background: #29CC6A;">Diterima</button>
+            <!-- <button (click)="createFormPengajuan()"style="width: 100%; padding: 6px 12px; background: #29CC6A; #D4352A; border-radius: 8px; justify-content: center; align-items: center; gap: 6px; display: inline-flex; border: none; color: white; font-size: 14px; font-family: Montserrat; font-weight: 400; line-height: 21px; word-wrap: break-word;">Jancuk</button> -->
+            <button (click)="showConfirmationModalTolak = true"class="justify-center px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]" style="width: 100%; padding: 6px 12px;background: #D4352A;">Ditolak</button>
         </div>
     </div>
     

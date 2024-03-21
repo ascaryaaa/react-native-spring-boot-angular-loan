@@ -1,9 +1,15 @@
 package com.cuan.serverside.controller;
 
+import com.cuan.serverside.model.Account;
+import com.cuan.serverside.model.Admin;
+import com.cuan.serverside.model.User;
 import com.cuan.serverside.model.request.AccountLoginReq;
 import com.cuan.serverside.model.request.AdminLoginReq;
 import com.cuan.serverside.model.response.LoginResponse;
 import com.cuan.serverside.model.response.ErrorRes;
+import com.cuan.serverside.repository.AccountRepository;
+import com.cuan.serverside.repository.AdminRepository;
+import com.cuan.serverside.repository.UserRepository;
 import com.cuan.serverside.utils.JwtUtil;
 import com.cuan.serverside.utils.CustomAuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +26,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/rest/auth")
 public class AuthController {
 
+    private final AccountRepository accountRepository;
+    private final AdminRepository adminRepository;
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
 
     @Autowired
-    public AuthController(AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
+    public AuthController(AccountRepository accountRepository, AdminRepository adminRepository, AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
+        this.accountRepository = accountRepository;
+        this.adminRepository = adminRepository;
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
     }
@@ -42,7 +52,11 @@ public class AuthController {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
 
                 final String token = jwtUtil.createToken(adminLoginReq.getUsername(), "ROLE_ADMIN");
-                return ResponseEntity.ok(new LoginResponse(adminLoginReq.getUsername(), token));
+
+                // Initialize which Admin from admin login request's username
+                Admin admin = adminRepository.findByUsernameAdmin(adminLoginReq.getUsername());
+                // Pass the admin and put get the Id in the response
+                return ResponseEntity.ok(new LoginResponse(admin.getIdAdmin(),adminLoginReq.getUsername(), token));
             } else {
                 throw new BadCredentialsException("Invalid username or password");
             }
@@ -66,7 +80,11 @@ public class AuthController {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
 
                 final String token = jwtUtil.createToken(accountLoginReq.getUsername(), "ROLE_USER");
-                return ResponseEntity.ok(new LoginResponse(accountLoginReq.getUsername(), token));
+
+                // Initialize which Account from account login request's username
+                Account account = accountRepository.findByUsernameAccount(accountLoginReq.getUsername());
+                // Pass the account and put get the Id in the response
+                return ResponseEntity.ok(new LoginResponse(account.getAccount_Id() ,accountLoginReq.getUsername(), token));
             } else {
                 throw new BadCredentialsException("Invalid username or password");
             }
