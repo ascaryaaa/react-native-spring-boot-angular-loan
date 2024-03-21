@@ -20,7 +20,7 @@
                 <div class="flex flex-col ml-5 w-[78%] max-md:ml-0 max-md:w-full">
                   <div class="flex flex-col grow max-md:mt-8">
                     <div class="text-xl font-bold tracking-normal leading-6 text-zinc-800">
-                      {{pinjamans?.pinjamanToUser?.nameUser}}
+                      {{pinjamans?.pinjamanToForm?.formToUser?.nameUser}}
                     </div>
                     <div class="flex gap-1 mt-2 text-xs text-black">
                       <div class="flex flex-col self-start pr-3 leading-[150%]">
@@ -34,8 +34,8 @@
                         <div class="mt-2">Riwayat Pinjaman</div>
                       </div>
                       <div class="flex flex-col">
-                        <div class="leading-[150%]">: {{pinjamans?.pinjamanToUser?.idUser}}</div>
-                        <div class="mt-2 leading-[150%]">: {{pinjamans?.pinjamanToUser?.nikUser}}</div>
+                        <div class="leading-[150%]">: {{pinjamans?.pinjamanToForm?.formToUser?.nameUser}}</div>
+                        <div class="mt-2 leading-[150%]">: {{pinjamans?.pinjamanToForm?.formToUser?.nikUser}}</div>
                         <div class="mt-2 leading-[150%]">: {{pinjamans?.pinjamanToForm?.npwp}}</div>
                         <div class="mt-2 leading-[150%]">: {{pinjamans?.pinjamanToForm?.jenisKelamin}}</div>
                         <div class="mt-2 leading-[150%]">
@@ -106,10 +106,10 @@
                         {{pinjamans?.pinjamanToForm?.angsuranPerbulan}}
                       </td>
                       <td class="px-6 py-4">
-                        {{pinjamans?.pinjamanToAdmin?.nameAdmin}}
+                        {{pinjamans?.pinjamanToForm?.formToAdmin?.nameAdmin}}
                       </td>
                       <td class="px-6 py-4">
-                        {{pinjamans?.tanggalRealisasi}}
+                        {{pinjamans?.pinjamanToForm?.formToAdmin?.nameAdmin}}
                       </td>
                       <!-- <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap" >
                         {{pinjamans?.pinjamanToForm?.formToJenis?.nameJenisPinjaman}}
