@@ -28,7 +28,7 @@ export class DetailMonitoringComponent {
       next: (data) => {
         this.pinjamans = data;
         console.log(this.pinjamans); // For debugging
-        this.RenderChart(this.pinjamans.pinjamanToForm.jumlahPinjaman, this.pinjamans.sisaTagihan);
+        this.RenderChart(this.pinjamans.pinjamanToForm?.jumlahPinjaman, this.pinjamans.sisaTagihan);
       },
       error: (error) => {
         console.error('Error fetching data:', error);

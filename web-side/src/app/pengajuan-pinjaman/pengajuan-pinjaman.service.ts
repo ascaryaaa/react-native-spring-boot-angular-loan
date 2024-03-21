@@ -41,9 +41,9 @@
       const headers = this.getHeaders();
       return this.httpClient.post(createPengajuanPinjamanUrl, data, { headers });
     }
-    createPinjamanMinimal(data: any): Observable<Pinjaman> {
+    createPinjamanMinimal(data: any): Observable<any> {
       const headers = this.getHeaders();
-      return this.httpClient.post<Pinjaman>(createPinjamanUrl, data, { headers });
+      return this.httpClient.post(createPinjamanUrl, data, { headers });
     }
   }
 
