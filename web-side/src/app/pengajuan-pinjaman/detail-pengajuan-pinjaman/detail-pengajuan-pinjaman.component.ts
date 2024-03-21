@@ -167,6 +167,7 @@ export class DetailPengajuanPinjamanComponent implements OnInit {
 
   // Function to handle confirmation result
   onConfirmed(confirmed: boolean) {
+    
     if (confirmed) {
       this.createMinimalPinjaman()
       console.log('Action confirmed');
