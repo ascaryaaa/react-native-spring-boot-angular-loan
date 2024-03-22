@@ -16,6 +16,7 @@ export class LoginComponent {
   usernameError : string='';
   passwordError : string='';
   authService: any;
+error: any;
   constructor(private service: AuthService) {}
   onSubmit(form: NgForm) {
     this.usernameError = '';
