@@ -37,7 +37,7 @@ public class DetailPinjaman {
     private String statusTagihan;
 
     @Column(name = "kolektabilitas_pinjaman")
-    private String kolektabilitas;
+    private Number kolektabilitas;
 
     @Column(name = "deskripsi_pembayaran_pinjaman")
     private String deskripsiPembayaran;
