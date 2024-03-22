@@ -5,6 +5,7 @@ import { DetailPengajuanPinjamanComponent } from './detail-pengajuan-pinjaman/de
 import { ListPengajuanPinjamanComponent } from './list-pengajuan-pinjaman/list-pengajuan-pinjaman.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ConfirmationModalComponent } from "../confirmation-modal/confirmation-modal.component";
+import { RejectingModalComponent } from "../rejecting-modal/rejecting-modal.component";
 
 
 
@@ -17,7 +18,8 @@ import { ConfirmationModalComponent } from "../confirmation-modal/confirmation-m
         CommonModule,
         RoutingModule,
         HttpClientModule,
-        ConfirmationModalComponent
+        ConfirmationModalComponent,
+        RejectingModalComponent
     ]
 })
 export class PengajuanPinjamanModule { }
