@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 14 Mar 2024 pada 02.12
+-- Waktu pembuatan: 22 Mar 2024 pada 08.55
 -- Versi server: 10.4.21-MariaDB
 -- Versi PHP: 8.0.10
 
@@ -29,11 +29,17 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `account` (
   `account_id` bigint(20) NOT NULL,
-  `account_name` varchar(255) DEFAULT NULL,
-  `account_pin` varchar(255) DEFAULT NULL,
-  `mpin` varchar(255) DEFAULT NULL,
+  `mpin_account` varchar(255) DEFAULT NULL,
+  `username_account` varchar(255) DEFAULT NULL,
   `id_user` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `account`
+--
+
+INSERT INTO `account` (`account_id`, `mpin_account`, `username_account`, `id_user`) VALUES
+(1, '123456', 'SarahJ', 1);
 
 -- --------------------------------------------------------
 
@@ -46,15 +52,18 @@ CREATE TABLE `admin` (
   `name_admin` varchar(255) DEFAULT NULL,
   `password_admin` varchar(255) DEFAULT NULL,
   `npp_admin` varchar(255) DEFAULT NULL,
-  `username_admin` varchar(255) DEFAULT NULL
+  `username_admin` varchar(255) DEFAULT NULL,
+  `profilepict_admin` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `admin`
 --
 
-INSERT INTO `admin` (`id_admin`, `name_admin`, `password_admin`, `npp_admin`, `username_admin`) VALUES
-(1, 'Wahyu Khumairoh', '123456', 'T0672XX', 'admin');
+INSERT INTO `admin` (`id_admin`, `name_admin`, `password_admin`, `npp_admin`, `username_admin`, `profilepict_admin`) VALUES
+(1, 'Wahyu Khumairoh', '123456', 'T067XX1', 'admin', 'https://i.ibb.co/XV9CQW8/wahuy.jpg'),
+(2, 'Saitama Sensei', '123456', 'T067XX2', 'admin2', 'https://i.ibb.co/D9hm8rc/saitama.jpg'),
+(3, 'Dustin Tiffani', '123456', 'T067003', 'admin3', 'https://ibb.co/3sGMJ85');
 
 -- --------------------------------------------------------
 
@@ -183,21 +192,43 @@ INSERT INTO `cabang` (`id_cabang`, `kode_cabang`, `kota_cabang`, `name_cabang`) 
 CREATE TABLE `form_pengajuan` (
   `id_form_pengajuan_pinjaman` bigint(20) NOT NULL,
   `alamat_ktp_user_form_pengajuan_pinjaman` varchar(255) DEFAULT NULL,
-  `bunga_pinjaman_form_pengajuan_pinjaman` double DEFAULT NULL,
+  `angsuran_per_bulan_form_pengajuan_pinjaman` double DEFAULT NULL,
+  `harga_rumah_form_pengajuan_pinjaman` bigint(20) DEFAULT NULL,
   `jangka_waktu_form_pengajuan_pinjaman` bigint(20) DEFAULT NULL,
   `jenis_kelamin_form_pengajuan_pinjaman` varchar(255) DEFAULT NULL,
   `jumlah_pinjaman_form_pengajuan_pinjaman` bigint(20) DEFAULT NULL,
   `kecamatan_form_pengajuan_pinjaman` varchar(255) DEFAULT NULL,
   `kelurahan_user_form_pengajuan_pinjaman` varchar(255) DEFAULT NULL,
   `kode_pos_form_pengajuan_pinjaman` varchar(255) DEFAULT NULL,
+  `maks_angsuran_griya` double DEFAULT NULL,
   `npwp_form_pengajuan_pinjaman` varchar(255) DEFAULT NULL,
   `penghasilan_bersih_per_bulan_form_pengajuan_pinjaman` bigint(20) DEFAULT NULL,
+  `persentase_uang_muka_form_pengajuan_pinjaman` double DEFAULT NULL,
+  `status_form_pengajuan_pinjaman` varchar(255) DEFAULT NULL,
   `tanggal_lahir_form_pengajuan_pinjaman` varchar(255) DEFAULT NULL,
+  `tanggal_realisasi_pinjaman` datetime(6) DEFAULT NULL,
   `tempat_lahir_form_pengajuan_pinjaman` varchar(255) DEFAULT NULL,
-  `unit_bni_terderkat_form_pengajuan_pinjaman` varchar(255) DEFAULT NULL,
+  `uang_muka_form_pengajuan_pinjaman` bigint(20) DEFAULT NULL,
+  `id_admin` bigint(20) DEFAULT NULL,
   `id_jenis_pinjaman` bigint(20) DEFAULT NULL,
-  `id_user` bigint(20) DEFAULT NULL
+  `id_user` bigint(20) DEFAULT NULL,
+  `id_cabang` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `form_pengajuan`
+--
+
+INSERT INTO `form_pengajuan` (`id_form_pengajuan_pinjaman`, `alamat_ktp_user_form_pengajuan_pinjaman`, `angsuran_per_bulan_form_pengajuan_pinjaman`, `harga_rumah_form_pengajuan_pinjaman`, `jangka_waktu_form_pengajuan_pinjaman`, `jenis_kelamin_form_pengajuan_pinjaman`, `jumlah_pinjaman_form_pengajuan_pinjaman`, `kecamatan_form_pengajuan_pinjaman`, `kelurahan_user_form_pengajuan_pinjaman`, `kode_pos_form_pengajuan_pinjaman`, `maks_angsuran_griya`, `npwp_form_pengajuan_pinjaman`, `penghasilan_bersih_per_bulan_form_pengajuan_pinjaman`, `persentase_uang_muka_form_pengajuan_pinjaman`, `status_form_pengajuan_pinjaman`, `tanggal_lahir_form_pengajuan_pinjaman`, `tanggal_realisasi_pinjaman`, `tempat_lahir_form_pengajuan_pinjaman`, `uang_muka_form_pengajuan_pinjaman`, `id_admin`, `id_jenis_pinjaman`, `id_user`, `id_cabang`) VALUES
+(1, '123 Main Stree', 5400877, 1500000000, 360, 'Male', 0, 'Central District', 'Downtown', '12345', 0, '1234567890987654', 30000000, 10, 'Diterima', '1990-05-20', '2024-03-22 14:09:24.000000', 'Surabaya', NULL, 1, 1, 1, 45),
+(2, '456 Oak Avenue', 20000000, 1800000000, 120, 'Male', 0, 'Suburbia', 'Green Heights', '54321', NULL, '9876543210123456', 35000000, 15, 'Ditolak', '1985-10-15', NULL, 'Jakarta', 200000000, 1, 1, 4, 20),
+(3, '789 Elm Street', 18000000, NULL, 180, 'Female', 200000000, 'Riverside', 'Riverfront', '67890\r\n', NULL, '5432109876543210', 40000000, 20, 'Diterima', '1978-03-25', '2024-03-22 14:09:52.000000', 'Bandung', 20000000, 2, 2, 5, 10),
+(4, '123 Main Stree', 15000000, 1500000000, 360, 'Male', 0, 'Central District', 'Downtown', '12345', 2312680237.4792953, '1234567890987654', 30000000, 10, 'Diproses', '1990-05-20', NULL, 'Surabaya', NULL, NULL, 1, 1, 45),
+(5, '456 Oak Avenue', 17500000, 1800000000, 120, 'Male', 0, 'Suburbia', 'Green Heights', '54321', 1524070103.209989, '9876543210123456', 35000000, 15, 'Diproses', '1985-10-15', NULL, 'Jakarta', 200000000, NULL, 1, 4, 20),
+(6, '456 Oak Avenue', 17500000, 1800000000, 120, 'Male', 0, 'Suburbia', 'Green Heights', '54321', 1524070103.209989, '9876543210123456', 35000000, 15, 'Diproses', '1985-10-15', NULL, 'Jakarta', 200000000, NULL, 1, 4, 20),
+(7, '789 Elm Street', 20000000, NULL, 180, 'Female', 200000000, 'Riverside', 'Riverfront', '67890\r\n', 1601490056.638619, '5432109876543210', 40000000, 20, 'Diproses', '1978-03-25', NULL, 'Bandung', 20000000, NULL, 2, 5, 10),
+(8, '789 Elm Street', 20000000, NULL, 180, 'Female', 200000000, 'Riverside', 'Riverfront', '67890\r\n', 1601490056.638619, '5432109876543210', 40000000, 20, 'Diproses', '1978-03-25', NULL, 'Bandung', 20000000, NULL, 2, 5, 10),
+(9, '789 Elm Street', 20000000, NULL, 180, 'Female', 200000000, 'Riverside', 'Riverfront', '67890\r\n', 1601490056.638619, '5432109876543210', 40000000, 20, 'Diproses', '1978-03-25', NULL, 'Bandung', 20000000, NULL, 2, 5, 10);
 
 -- --------------------------------------------------------
 
@@ -209,17 +240,54 @@ CREATE TABLE `jenis_pinjaman` (
   `id_jenis_pinjaman` bigint(20) NOT NULL,
   `gambar_jenis_pinjaman` varchar(255) DEFAULT NULL,
   `icon_jenis_pinjaman` varchar(255) DEFAULT NULL,
-  `name_jenis_pinjaman` varchar(255) DEFAULT NULL
+  `name_jenis_pinjaman` varchar(255) DEFAULT NULL,
+  `bunga_jenis_pinjaman` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `jenis_pinjaman`
 --
 
-INSERT INTO `jenis_pinjaman` (`id_jenis_pinjaman`, `gambar_jenis_pinjaman`, `icon_jenis_pinjaman`, `name_jenis_pinjaman`) VALUES
-(1, 'https://i.imgur.com/Ywn2QgH.png', 'https://i.imgur.com/MEcakIH.png', 'BNI_Griya'),
-(2, 'https://i.imgur.com/NDTf5NC.png', 'https://i.imgur.com/GZWNMR7.png', 'BNI_Fleksi'),
-(3, 'https://i.imgur.com/azUnAsh.png', 'https://i.imgur.com/MrKLSHu.png', 'BNI_Fleksi_Pensiun');
+INSERT INTO `jenis_pinjaman` (`id_jenis_pinjaman`, `gambar_jenis_pinjaman`, `icon_jenis_pinjaman`, `name_jenis_pinjaman`, `bunga_jenis_pinjaman`) VALUES
+(1, 'https://i.imgur.com/Ywn2QgH.png', 'https://i.imgur.com/MEcakIH.png', 'BNI_Griya', 0.0675),
+(2, 'https://i.imgur.com/NDTf5NC.png', 'https://i.imgur.com/GZWNMR7.png', 'BNI_Fleksi', 0.1275),
+(3, 'https://i.imgur.com/azUnAsh.png', 'https://i.imgur.com/MrKLSHu.png', 'BNI_Fleksi_Pensiun', 0.1074);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pinjaman`
+--
+
+CREATE TABLE `pinjaman` (
+  `id_pinjaman` bigint(20) NOT NULL,
+  `amounts_bunga_berjalan_pinjaman` bigint(20) DEFAULT NULL,
+  `amounts_sisa_pokok_pinjaman` bigint(20) DEFAULT NULL,
+  `deskripsi_pembayaran_pinjaman` varchar(255) DEFAULT NULL,
+  `kolektabilitas_pinjaman` varbinary(255) DEFAULT NULL,
+  `name_user` varchar(255) DEFAULT NULL,
+  `nik_user` varchar(255) DEFAULT NULL,
+  `payoffs_bunga_berjalan_pinjaman` bigint(20) DEFAULT NULL,
+  `payoffs_sisa_pokok_pinjaman` bigint(20) DEFAULT NULL,
+  `rebates_bunga_berjalan_pinjaman` bigint(20) DEFAULT NULL,
+  `rebates_sisa_pokok_pinjaman` bigint(20) DEFAULT NULL,
+  `sisa_tagihan_pinjaman` bigint(20) DEFAULT NULL,
+  `status_tagihan_pinjaman` varchar(255) DEFAULT NULL,
+  `tanggal_bayar_tagihan_pinjaman` datetime(6) DEFAULT NULL,
+  `total_amounts_pinjaman` bigint(20) DEFAULT NULL,
+  `total_bayar_tagihan_pinjaman` bigint(20) DEFAULT NULL,
+  `total_payoffs_pinjaman` bigint(20) DEFAULT NULL,
+  `total_rebates_pinjaman` bigint(20) DEFAULT NULL,
+  `id_form_pengajuan_pinjaman` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `pinjaman`
+--
+
+INSERT INTO `pinjaman` (`id_pinjaman`, `amounts_bunga_berjalan_pinjaman`, `amounts_sisa_pokok_pinjaman`, `deskripsi_pembayaran_pinjaman`, `kolektabilitas_pinjaman`, `name_user`, `nik_user`, `payoffs_bunga_berjalan_pinjaman`, `payoffs_sisa_pokok_pinjaman`, `rebates_bunga_berjalan_pinjaman`, `rebates_sisa_pokok_pinjaman`, `sisa_tagihan_pinjaman`, `status_tagihan_pinjaman`, `tanggal_bayar_tagihan_pinjaman`, `total_amounts_pinjaman`, `total_bayar_tagihan_pinjaman`, `total_payoffs_pinjaman`, `total_rebates_pinjaman`, `id_form_pengajuan_pinjaman`) VALUES
+(73, NULL, NULL, 'test', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Hijau', NULL, NULL, NULL, NULL, NULL, 1),
+(74, NULL, NULL, 'test', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Hijau', NULL, NULL, NULL, NULL, NULL, 3);
 
 -- --------------------------------------------------------
 
@@ -293,14 +361,23 @@ ALTER TABLE `cabang`
 --
 ALTER TABLE `form_pengajuan`
   ADD PRIMARY KEY (`id_form_pengajuan_pinjaman`),
+  ADD KEY `FK1kd21wbrg27uurgir1y7vy7f9` (`id_admin`),
   ADD KEY `FKpkpoy9vudj1olbxjmt4g19qv2` (`id_jenis_pinjaman`),
-  ADD KEY `FKl24wnhglox9dta3tex4wggflu` (`id_user`);
+  ADD KEY `FKl24wnhglox9dta3tex4wggflu` (`id_user`),
+  ADD KEY `FKtq5h1q8xsjaghin02ie7v85wk` (`id_cabang`);
 
 --
 -- Indeks untuk tabel `jenis_pinjaman`
 --
 ALTER TABLE `jenis_pinjaman`
   ADD PRIMARY KEY (`id_jenis_pinjaman`);
+
+--
+-- Indeks untuk tabel `pinjaman`
+--
+ALTER TABLE `pinjaman`
+  ADD PRIMARY KEY (`id_pinjaman`),
+  ADD UNIQUE KEY `UK_8sp82reo3dpln8v5jovte81mf` (`id_form_pengajuan_pinjaman`);
 
 --
 -- Indeks untuk tabel `promo`
@@ -322,13 +399,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `account`
 --
 ALTER TABLE `account`
-  MODIFY `account_id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `account_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id_admin` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_admin` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `cabang`
@@ -340,13 +417,19 @@ ALTER TABLE `cabang`
 -- AUTO_INCREMENT untuk tabel `form_pengajuan`
 --
 ALTER TABLE `form_pengajuan`
-  MODIFY `id_form_pengajuan_pinjaman` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_form_pengajuan_pinjaman` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `jenis_pinjaman`
 --
 ALTER TABLE `jenis_pinjaman`
   MODIFY `id_jenis_pinjaman` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT untuk tabel `pinjaman`
+--
+ALTER TABLE `pinjaman`
+  MODIFY `id_pinjaman` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT untuk tabel `promo`
@@ -374,8 +457,16 @@ ALTER TABLE `account`
 -- Ketidakleluasaan untuk tabel `form_pengajuan`
 --
 ALTER TABLE `form_pengajuan`
+  ADD CONSTRAINT `FK1kd21wbrg27uurgir1y7vy7f9` FOREIGN KEY (`id_admin`) REFERENCES `admin` (`id_admin`),
   ADD CONSTRAINT `FKl24wnhglox9dta3tex4wggflu` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`),
-  ADD CONSTRAINT `FKpkpoy9vudj1olbxjmt4g19qv2` FOREIGN KEY (`id_jenis_pinjaman`) REFERENCES `jenis_pinjaman` (`id_jenis_pinjaman`);
+  ADD CONSTRAINT `FKpkpoy9vudj1olbxjmt4g19qv2` FOREIGN KEY (`id_jenis_pinjaman`) REFERENCES `jenis_pinjaman` (`id_jenis_pinjaman`),
+  ADD CONSTRAINT `FKtq5h1q8xsjaghin02ie7v85wk` FOREIGN KEY (`id_cabang`) REFERENCES `cabang` (`id_cabang`);
+
+--
+-- Ketidakleluasaan untuk tabel `pinjaman`
+--
+ALTER TABLE `pinjaman`
+  ADD CONSTRAINT `FKdwj9oqx8ljue34pqro43muy9j` FOREIGN KEY (`id_form_pengajuan_pinjaman`) REFERENCES `form_pengajuan` (`id_form_pengajuan_pinjaman`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
