@@ -1,0 +1,42 @@
+.not-found-container {
+    display: flex; /* Gunakan flexbox */
+    justify-content: center; /* Menengahkan secara horizontal */
+    align-items: center; /* Menengahkan secara vertikal */
+    height: 100vh;
+    text-align: center;
+    flex-direction: row;
+    
+}
+  .container {
+    display: flex; /* Gunakan flexbox */
+    justify-content: center; /* Menengahkan secara horizontal */
+    align-items: start; /* Menengahkan secara vertikal */
+    height: 100vh;
+    text-align: center;
+    flex-direction: column;
+    font-size: 32px;
+    font-weight: 400;
+    color: black;
+    font-family: Montserrat;
+  }
+  .btn-with-image {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color: #3267E3;
+    font-size: 28px;
+    font-weight: 400;
+    font-family: Montserrat;
+    
+}
+
+
+.btn-with-image svg {
+    width: 40px;
+    height: 40px;
+    margin-right: 8px;
+}
+
+  
