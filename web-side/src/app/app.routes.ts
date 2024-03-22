@@ -25,6 +25,7 @@ import { NgModule } from '@angular/core';
 import { LoginComponent } from './login/login.component';
 import { Routes, RouterModule } from '@angular/router';
 import { authGuard } from './auth/auth.guard';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -38,7 +39,9 @@ export const routes: Routes = [
     canActivate: [authGuard], // Lindungi rute ini dengan AuthGuard
     loadChildren: ()=> import('./monitoring/monitoring.module').then(m => m.MonitoringModule),
   },
+  { path: 'not-found', component: PageNotFoundComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '**', redirectTo: '/not-found', pathMatch: 'full'},
 ];
 
 
