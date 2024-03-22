@@ -60,8 +60,17 @@ public class FormPengajuanServiceImpl implements FormPengajuanService{
         // Angsuran perbulan = (Total pinjaman*(bunga/12))/((1-(1+(bunga/12))^(-jangka waktu)))
         // Calculate monthly bill amount
         Double monthly = (result * (bunga/12)) / (1 - Math.pow(1 + (bunga/12), -jangka));
+
+        // Set the values to attributes
         formPengajuan.setMaksAngsuran(result);
         formPengajuan.setAngsuranPerbulan(monthly);
+        // Save first to generate Id
+        formPengajuanRepository.save(formPengajuan);
+
+        // Generate CIF from id
+        Long idForm = formPengajuan.getIdFormPengajuanPinjaman();
+        String cif = "W" + String.format("%08d",idForm);
+        formPengajuan.setCif(cif);
         return formPengajuanRepository.save(formPengajuan);
     }
 

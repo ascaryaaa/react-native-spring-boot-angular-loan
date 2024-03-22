@@ -41,6 +41,10 @@ public class FormPengajuan {
     @OneToOne(mappedBy = "pinjamanToForm")
     private DetailPinjaman formToPinjaman;
 
+    // Generate CIF from Id
+    @Column(name = "cif")
+    private String cif;
+
     // Gender of debtor
     @Column(name = "jenis_kelamin_form_pengajuan_pinjaman")
     private String jenisKelamin;
