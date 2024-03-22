@@ -54,14 +54,14 @@ export class ListPengajuanPinjamanComponent {
   }
 
   navigateToPage(page: number): void {
-    if (page >= 1 && page <= this.totalPages) {
-      const startIndex = (page - 1) * this.pageSize;
-      const endIndex = startIndex + this.pageSize;
-      this.currentPage = page;
-      // Menggunakan data yang telah difilter sebelumnya, bukan memotong data baru
-      this.filteredForms = this.filteredForms.slice(startIndex, endIndex);
+    const totalPagesAfterChange = Math.ceil(this.filteredForms.length / this.pageSize);
+    if (page >= 1 && page <= totalPagesAfterChange) {
+        const startIndex = (page - 1) * this.pageSize;
+        const endIndex = startIndex + this.pageSize;
+        this.currentPage = page;
+        this.filteredForms = this.forms.slice(startIndex, endIndex);
     }
-  }
+}
 
   search(): void {
     this.filterForms();
