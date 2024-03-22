@@ -11,7 +11,7 @@ export class ListPengajuanPinjamanComponent {
   forms: FormPengajuanPinjaman[] = [];
   filteredForms: FormPengajuanPinjaman[] = [];
   searchText: string = '';
-
+pageSize: number = 10;
   constructor(private pengajuanPinjamanService: PengajuanPinjamanService) {}
 
   ngOnInit() {
@@ -38,5 +38,9 @@ export class ListPengajuanPinjamanComponent {
     this.filteredForms = this.forms.filter(form =>
       form.formToUser.nameUser.toLowerCase().includes(this.searchText.trim().toLowerCase())
     );
+  }
+  changePageSize(): void {
+    // Lakukan apa pun yang diperlukan saat jumlah entri per halaman berubah
+    this.refreshFormList(); // Contoh: refresh data ketika jumlah entri per halaman berubah
   }
 }
