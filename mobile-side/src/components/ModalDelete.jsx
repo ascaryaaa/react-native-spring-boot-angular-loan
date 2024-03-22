@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import {
   View,
   Text,
@@ -8,7 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-const ModalDelete = ({ navigation, modalVisible, closeModal }) => {
+const ModalDelete = ({ closeModal }) => {
   return (
     <View style={styles.container}>
       <View style={styles.modal}>

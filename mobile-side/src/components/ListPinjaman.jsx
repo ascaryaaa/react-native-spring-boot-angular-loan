@@ -19,42 +19,48 @@ const ListPinjaman = ({ navigation }) => {
   const renderItem = ({ item }) => (
     <Image style={styles.bannerImage} source={item} />
   );
+
+  const listPinjamanData = [
+    {
+      id: 1,
+      img : require("../../../mobile-side/src/assets/img_simulasi_aktif.png"),
+      title: "BNI Fleksi Aktif",
+      date: "10/03/2024",
+      period: "6 Bulan",
+      amount: "Rp 100.000.000",
+      status: "Diterima",
+    },
+    {
+      id: 2,
+      img : require("../../../mobile-side/src/assets/img_simulasi_griya.png"),
+      title: "BNI Fleksi Griya",
+      date: "10/03/2024",
+      period: "6 Bulan",
+      amount: "Rp 100.000.000",
+      status: "Diterima",
+    },
+  ];
   
   return (
     <View style={styles.container}>
-      {/* <Text style={{marginBottom: 10}}>List Pinjaman</Text> */}
-      <TouchableOpacity onPress={() => navigation.navigate("Monitoring")}>
-          <View style={{flexDirection: 'row', marginBottom: 30}}>
+      <View style={styles.shadow}>
+        {listPinjamanData.map(view => (
+          <TouchableOpacity onPress={() => navigation.navigate("Monitoring")} key={view.id} style={{flexDirection: 'row', marginBottom: 25, padding: 10, borderRadius: 5, backgroundColor: 'white' }}>
             <View style={{width: '30%', marginRight: 5}}>
-              <Image 
-              source={require("../../../mobile-side/src/assets/img_simulasi_aktif.png")}
-              style={styles.image}/>
+              <Image source={view.img} style={styles.image} />
             </View>
-            <View style={{width: '70%', flexDirection: 'column'}}>
-              <Text style={styles.textHeader}>BNI Fleksi Aktif</Text>
-              <Text style={styles.textContent}>Tanggal Pengajuan : 10/03/2024</Text>
-              <Text style={styles.textContent}>Periode Peminjaman : 6 Bulan</Text>
-              <Text style={styles.textContent}>Total Pengajuan : Rp. 100.000.000</Text>
-              <Text style={styles.textContent}>Status : Diterima</Text>
+            <View style={{flexDirection: 'column', width: '70%'}}>
+              <Text style={styles.textHeader}>{view.title}</Text>
+              <Text style={styles.textContent}>Tanggal Pengajuan : {view.date}</Text>
+              <Text style={styles.textContent}>Periode Peminjaman : {view.period}</Text>
+              <Text style={styles.textContent}>Total Pengajuan : {view.amount}</Text>
+              <View style={styles.buttonStatus}>
+                <Text style={styles.textStatus}>{view.status}</Text>
+              </View>          
             </View>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("Monitoring")}>
-          <View style={{flexDirection: 'row', }}>
-            <View style={{width: '30%', marginRight: 5}}>
-              <Image 
-              source={require("../../../mobile-side/src/assets/img_simulasi_griya.png")}
-              style={styles.image}/>
-            </View>
-            <View style={{width: '70%', flexDirection: 'column'}}>
-              <Text style={styles.textHeader}>BNI Griya</Text>
-              <Text style={styles.textContent}>Tanggal Pengajuan : 10/03/2024</Text>
-              <Text style={styles.textContent}>Periode Peminjaman : 6 Bulan</Text>
-              <Text style={styles.textContent}>Total Pengajuan : Rp. 100.000.000</Text>
-              <Text style={styles.textContent}>Status : Diterima</Text>
-            </View>
-          </View>
-        </TouchableOpacity>
+          </TouchableOpacity>
+        ))}
+      </View>
     </View>
   );
 };
@@ -63,13 +69,19 @@ export default ListPinjaman;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 18,
+    paddingHorizontal: 10,
     paddingTop: 18,
     // justifyContent: "center",
     alignItems: "center",
     // marginTop: 100,
     // backgroundColor: 'red',
 
+  },
+  shadow: {
+    shadowColor: "#ddd",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 1,
+    shadowRadius: 10,
   },
   containerTengah: {
     justifyContent: "center",
@@ -172,5 +184,18 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '400',
     marginBottom: 4,
-  }
+  },
+  textStatus: {
+    color: "white",
+    fontSize: 12,
+    fontWeight: "700",
+  },
+  buttonStatus : {
+    paddingVertical: 3,
+    paddingHorizontal: 16,
+    borderRadius: 50,
+    backgroundColor: "#04C300",
+    borderColor: "#04C300",
+    width: '35%'
+  },
 });

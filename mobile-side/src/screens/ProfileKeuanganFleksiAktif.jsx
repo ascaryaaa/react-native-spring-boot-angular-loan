@@ -29,9 +29,11 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
   ];
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [hidedButton, setHidedButton] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+    setHidedButton(true);
   };
 
   return (
@@ -93,9 +95,11 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
               value="12,75%"
             />
             <View style={styles.container1}>
-              <TouchableOpacity onPress={toggleDropdown} style={styles.button}>
-                <Text style={styles.textButton}>Simulasi Angsuran</Text>
-              </TouchableOpacity>
+              {!hidedButton && (
+                <TouchableOpacity onPress={toggleDropdown} style={styles.button}>
+                  <Text style={styles.textButton}>Simulasi Angsuran</Text>
+                </TouchableOpacity>
+              )}
               {isDropdownOpen && (
                 <View style={styles.dropdownContent}>
                   <Text style={styles.text}>Hasil</Text>
@@ -130,25 +134,25 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
                   >
                     Simulasi menggunakan suku bunga yang berlaku saat ini
                   </Text>
+                  <TouchableOpacity
+                    style={styles.button1}
+                    onPress={() => navigation.navigate("DataPemohon")}
+                  >
+                    <Text
+                      style={{
+                        textAlign: "center",
+                        paddingTop: 12,
+                        color: "white",
+                        fontWeight: "700",
+                        fontSize: 16,
+                      }}
+                    >
+                      Ajukan Pinjaman
+                    </Text>
+                  </TouchableOpacity>
                 </View>
               )}
             </View>
-            <TouchableOpacity
-              style={styles.button1}
-              onPress={() => navigation.navigate("DataPemohon")}
-            >
-              <Text
-                style={{
-                  textAlign: "center",
-                  paddingTop: 12,
-                  color: "white",
-                  fontWeight: "700",
-                  fontSize: 16,
-                }}
-              >
-                Ajukan Pinjaman
-              </Text>
-            </TouchableOpacity>
           </View>
         </ScrollView>
       </View>

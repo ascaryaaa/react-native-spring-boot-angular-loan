@@ -29,10 +29,6 @@ import Home from "./src/screens/Home";
 import KetentuanGriya from "./src/screens/KetentuanGriya";
 import KetentuanFleksiAktif from "./src/screens/KetentuanFleksiAktif";
 import KetentuanFleksiPensiun from "./src/screens/KetentuanFleksiPensiun";
-import listPinjaman from "./src/screens/ListPinjaman";
-
-// import AsyncStorage from "@react-native-async-storage/async-storage";
-// import { LoginModal } from "./src/screens/LoginModal";
 
 const Stack = createStackNavigator();
 
@@ -70,19 +66,6 @@ export default function App() {
           <Stack.Screen
             name="Login"
             component={Login}
-            options={{
-              headerTintColor: "black",
-              headerShown: false,
-              headerStyle: {
-                backgroundColor: "#FFFFFF",
-                shadowOpacity: 0,
-                elevation: 0,
-              },
-            }}
-          />
-          <Stack.Screen
-            name="ListPinjaman"
-            component={listPinjaman}
             options={{
               headerTintColor: "black",
               headerShown: false,
