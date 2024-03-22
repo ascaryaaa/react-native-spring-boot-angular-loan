@@ -11,6 +11,7 @@ export class ListPengajuanPinjamanComponent {
   forms: FormPengajuanPinjaman[] = [];
   filteredForms: FormPengajuanPinjaman[] = [];
   searchText: string = '';
+  sortDirection: 'asc' | 'desc' = 'asc'; // Default sort direction is ascending
 
   constructor(private pengajuanPinjamanService: PengajuanPinjamanService) {}
 
@@ -39,4 +40,69 @@ export class ListPengajuanPinjamanComponent {
       form.formToUser.nameUser.toLowerCase().includes(this.searchText.trim().toLowerCase())
     );
   }
+
+  sortByName(): void {
+    this.filteredForms.sort((a, b) => {
+      const nameA = a.formToUser.nameUser.toLowerCase();
+      const nameB = b.formToUser.nameUser.toLowerCase();
+      if (nameA < nameB) return this.sortDirection === 'asc' ? -1 : 1;
+      if (nameA > nameB) return this.sortDirection === 'asc' ? 1 : -1;
+      return 0;
+    });
+    // Toggle sort direction
+    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+  
+}
+sortData(column: string): void {
+  switch (column) {
+    case 'name':
+      this.filteredForms.sort((a, b) => {
+        const nameA = a.formToUser.nameUser.toLowerCase();
+        const nameB = b.formToUser.nameUser.toLowerCase();
+        if (nameA < nameB) return this.sortDirection === 'asc' ? -1 : 1;
+        if (nameA > nameB) return this.sortDirection === 'asc' ? 1 : -1;
+        return 0;})
+        this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+      break;
+    case 'cif':
+      this.filteredForms.sort((a, b) => {
+        return this.sortDirection === 'asc' ? a.idFormPengajuanPinjaman - b.idFormPengajuanPinjaman : b.idFormPengajuanPinjaman - a.idFormPengajuanPinjaman;
+      });
+      break;
+    case 'nik':
+      this.filteredForms.sort((a, b) => {
+        const nameA = a.formToUser.nikUser.toLowerCase();
+        const nameB = b.formToUser.nikUser.toLowerCase();
+        if (nameA < nameB) return this.sortDirection === 'asc' ? -1 : 1;
+        if (nameA > nameB) return this.sortDirection === 'asc' ? 1 : -1;
+        return 0;})
+        this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+      break;
+    case 'jenis_pengajuan':
+      this.filteredForms.sort((a, b) => {
+        const nameA = a.formToJenis.nameJenisPinjaman.toLowerCase();
+        const nameB = b.formToJenis.nameJenisPinjaman.toLowerCase();
+        if (nameA < nameB) return this.sortDirection === 'asc' ? -1 : 1;
+        if (nameA > nameB) return this.sortDirection === 'asc' ? 1 : -1;
+        return 0;})
+        this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+      break;
+    case 'status_pengajuan':
+      this.filteredForms.sort((a, b) => {
+        const nameA = a.statusPengajuan.toLowerCase();
+        const nameB = b.statusPengajuan.toLowerCase();
+        if (nameA < nameB) return this.sortDirection === 'asc' ? -1 : 1;
+        if (nameA > nameB) return this.sortDirection === 'asc' ? 1 : -1;
+        return 0;})
+        this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+      break;
+    case 'admin':
+     
+      break;
+    // Add cases for other columns if needed
+    default:
+      break;
+  }
+}
+
 }

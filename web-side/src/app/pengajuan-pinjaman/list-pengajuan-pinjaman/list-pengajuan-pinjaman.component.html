@@ -55,16 +55,36 @@
           <thead
             class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
           >
-            <tr>
-              <th scope="col" class="px-4 py-2">CIF</th>
-              <th scope="col" class="px-4 py-2">Nama</th>
-              <th scope="col" class="px-4 py-2">NIK</th>
-              <th scope="col" class="px-4 py-2">Jenis Pengajuan</th>
-              <th scope="col" class="px-4 py-2">Status Pengajuan</th>
-              <th scope="col" class="px-4 py-2">Admin</th>
-              <th scope="col" class="px-4 py-2">Tanggal Realisasi</th>
-              <th scope="col" class="px-4 py-2">Aksi</th>
-            </tr>
+          <tr>
+            <th scope="col" class="px-4 py-2">
+              <button type="button" (click)="sortData('cif')">CIF</button>
+            </th>
+            <button>
+              
+            </button>
+            <th scope="col" class="px-4 py-2 flex items-center">
+              <button type="button" (click)="sortData('name')" class="flex items-center">
+                <span class="mr-1">Nama</span>
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&" alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
+              </button>
+            </th>
+            
+            <th scope="col" class="px-4 py-2">
+              <button type="button" (click)="sortData('nik')">NIK</button>
+            </th>
+            <th scope="col" class="px-4 py-2">
+              <button type="button" (click)="sortData('jenis_pengajuan')">Jenis Pengajuan</button>
+            </th>
+            <th scope="col" class="px-4 py-2">
+              <button type="button" (click)="sortData('status_pengajuan')">Status Pengajuan</button>
+            </th>
+            <th scope="col" class="px-4 py-2">
+              <button type="button" (click)="sortData('admin')">Admin</button>
+            </th>
+            <th scope="col" class="px-4 py-2">Tanggal Realisasi</th>
+            <th scope="col" class="px-4 py-2">Aksi</th>
+          </tr>
+          
           </thead>
         <!-- Loading and Error Handling -->
           <tbody>
