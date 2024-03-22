@@ -98,7 +98,18 @@
      <!-- Pagination -->
      <nav class="flex items-center justify-between">
       <div class="flex flex-wrap items-center justify-center">
-        <select style="background-color: #1F96F9; color: white;" class="px-2 py-1 border border-white-300 rounded-lg" [(ngModel)]="pageSize" (change)="changePageSize()" title="Jumlah Data Per Halaman" >
+        <button class="px-2 py-1 border border-white-300 rounded-lg mr-2" (click)="previousPage()">Previous</button>
+        <!-- Looping untuk tombol halaman -->
+        <ng-container *ngFor="let page of totalPagesArray">
+          <button class="px-2 py-1 border border-white-300 rounded-lg mr-2" [class.bg-blue-500]="page === currentPage" (click)="goToPage(page)">
+            {{ page }}
+          </button>
+        </ng-container>
+        <button class="px-2 py-1 border border-white-300 rounded-lg" (click)="nextPage()">Next</button>
+      </div>
+      <div class="flex flex-wrap items-center justify-center mt-2">
+        <!-- Pilihan jumlah data per halaman -->
+        <select style="background-color: #1F96F9; color: white;" class="px-2 py-1 border border-white-300 rounded-lg" [(ngModel)]="pageSize" (change)="changePageSize()" title="Jumlah Data Per Halaman">
           <option value="5">5</option>
           <option value="10">10</option>
           <option value="20">20</option>
@@ -106,6 +117,7 @@
         </select>
       </div>
     </nav>
+    
     
     
 
