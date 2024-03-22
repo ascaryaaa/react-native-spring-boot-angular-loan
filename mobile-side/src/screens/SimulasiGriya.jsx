@@ -15,102 +15,144 @@ const SimulasiGriya = ({ navigation }) => {
     jangkaWaktu: "",
   });
 
-  const data =[
-    {id: 1, title: "Maksimal Pinjaman", content: "Rp 794.993.871,00"},
-    {id: 2, title: "Angsuran Pinjaman per Bulan", content: "Rp 4.554.761,00"}
+  const data = [
+    { id: 1, title: "Maksimal Pinjaman", content: "Rp 794.993.871,00" },
+    { id: 2, title: "Angsuran Pinjaman per Bulan", content: "Rp 4.554.761,00" },
   ];
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [hidedButton, setHidedButton] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+    setHidedButton(true);
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.navbar}>
-        {/* navbar */}
-        <TouchableOpacity
-          onPress={() => navigation.navigate("PengajuanPinjaman")}
-        >
-          <Image
-            source={require("../../../mobile-side/src/assets/Icon_leftarrow.png")}
-          />
-        </TouchableOpacity>
-
-        <Text>Digital Loan</Text>
-        <Image
-          source={require("../../../mobile-side/src/assets/Icon_homeorg.png")}
-        />
-      </View>
-      <ScrollView>
-        <View style={styles.bodyContainer}>
-          <View style={{ alignItems: "center" }}>
-            <Text style={styles.texttitle}>Simulasi BNI Griya</Text>
-            <Image
-              source={require("../../../mobile-side/src/assets/img_simulasi_griya.png")}
-              style={styles.imgSimulasi}
-            />
-            <Text>
-              Anda dapat mensimulasikan jenis pinjaman sebelum melakukan
-              pengajuan pada halaman ini
-            </Text>
-          </View>
-
-          <View style={styles.formSimulasi}>
-            <Text style={styles.textform}>Penghasilan Bersih per. Bulan</Text>
-            <TextInput
-              style={styles.input}
-              onChangeText={(text) =>
-                setInputData({ ...inputData, penghasilan: text })
-              }
-              value={setInputData.penghasilan}
-            ></TextInput>
-            <Text style={styles.textform}>Jangka Waktu</Text>
-            <TextInput
-              style={styles.input}
-              onChangeText={(number) =>
-                setInputData({ ...inputData, jangkaWaktu: number })
-              }
-              value={setInputData.jangkaWaktu}
-              placeholder="bulan"
-              textAlign="right"
-            ></TextInput>
-            <Text style={styles.textform}>Bunga Pinjaman</Text>
-            <TextInput
-              style={styles.input}
-              onChangeText={(text) =>
-                setInputData({ ...inputData, penghasilan: text })
-              }
-              value={setInputData.penghasilan}
-              placeholder="6.75%"
-              placeholderTextColor="gray"
-            ></TextInput>
-          </View>
-
-          <View style={styles.container1}>
-            <TouchableOpacity onPress={toggleDropdown} style={styles.button}>
-              <Text style={styles.textButton}>Simulasi Angsuran</Text>
-            </TouchableOpacity>
-            {isDropdownOpen && (
-              <View style={styles.dropdownContent}>
-                <Text style={styles.text}>Hasil</Text>
-                {data.map((view) => (
-                <View key={view.id} style={styles.row}>
-                  <Text style={{ flex: 1, textAlign: 'left', fontWeight: '300' }}>{view.title}</Text>
-                  <Text style={{ flex: 1,textAlign: 'right', fontWeight: '600'}}>{view.content}</Text>
-                </View>
-                ))}
-              </View>
-            )}
-          </View>
+    <View style={styles.bg}>
+      <View style={styles.shadow}>
+        <View style={styles.navbar}>
+          {/* navbar */}
           <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate("ProfileKeuanganGriya")}>
-              <Text style={styles.simulasikan}> Selanjutnya</Text>
+            onPress={() => navigation.navigate("PengajuanPinjaman")}
+          >
+            <Image
+              source={require("../../../mobile-side/src/assets/Icon_leftarrow.png")}
+            />
           </TouchableOpacity>
+
+          <Text style={{ fontSize: 16 }}>Digital Loan</Text>
+          <Image
+            source={require("../../../mobile-side/src/assets/Icon_homeorg.png")}
+          />
         </View>
-      </ScrollView>
+      </View>
+      <View style={styles.container}>
+        <ScrollView>
+          <View style={styles.bodyContainer}>
+            <View>
+              <Text style={styles.texttitle}>Simulasi BNI Griya</Text>
+              <View style={styles.centerred}>
+                <Image
+                  source={require("../../../mobile-side/src/assets/img_simulasi_griya.png")}
+                  style={styles.imgSimulasi}
+                />
+              </View>
+              <Text>
+                Anda dapat mensimulasikan jenis pinjaman sebelum melakukan
+                pengajuan pada halaman ini
+              </Text>
+            </View>
+
+            <View style={styles.formSimulasi}>
+              <Text style={styles.textform}>Penghasilan Bersih per. Bulan</Text>
+              <TextInput
+                style={styles.input}
+                keyboardType="numeric"
+                placeholder="Rp"
+                onChangeText={(text) =>
+                  setInputData({ ...inputData, penghasilan: text })
+                }
+                value={setInputData.penghasilan}
+              ></TextInput>
+              <Text style={styles.textform}>Jangka Waktu</Text>
+              <TextInput
+                style={styles.input}
+                onChangeText={(number) =>
+                  setInputData({ ...inputData, jangkaWaktu: number })
+                }
+                value={setInputData.jangkaWaktu}
+                placeholder="bulan"
+                keyboardType="numeric"
+              ></TextInput>
+              <Text style={styles.textform}>Bunga Pinjaman</Text>
+              <TextInput
+                style={styles.input}
+                onChangeText={(text) =>
+                  setInputData({ ...inputData, penghasilan: text })
+                }
+                value={setInputData.penghasilan}
+                placeholder="6.75%"
+                placeholderTextColor="gray"
+              ></TextInput>
+            </View>
+
+            <View>
+              {!hidedButton && (
+                <TouchableOpacity
+                  onPress={toggleDropdown}
+                  style={styles.button}
+                >
+                  <Text style={styles.textButton}>Simulasikan</Text>
+                </TouchableOpacity>
+              )}
+              {isDropdownOpen && (
+                <View style={styles.show}>
+                  <View style={styles.tableShadow}>
+                    <View style={styles.dropdownContent}>
+                      <Text style={styles.text}>Hasil</Text>
+                      {data.map((view) => (
+                        <View key={view.id} style={styles.row}>
+                          <View style={{ width: "60%" }}>
+                            <Text
+                              style={{
+                                flex: 1,
+                                textAlign: "left",
+                                fontWeight: "300",
+                                fontSize: 12,
+                                // backgroundColor:'yellow',
+                              }}
+                            >
+                              {view.title}
+                            </Text>
+                          </View>
+
+                          <Text
+                            style={{
+                              flex: 1,
+                              textAlign: "right",
+                              fontWeight: "500",
+                              fontSize: 14,
+                            }}
+                          >
+                            {view.content}
+                          </Text>
+                        </View>
+                      ))}
+                    </View>
+                  </View>
+                  <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => navigation.navigate("ProfileKeuanganGriya")}
+                  >
+                    <Text style={styles.simulasikan}> Selanjutnya</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
+          </View>
+        </ScrollView>
+      </View>
     </View>
   );
 };
@@ -119,47 +161,84 @@ export default SimulasiGriya;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 40,
+    marginHorizontal: 16,
+    // marginTop: 40,
+    // backgroundColor: "red"
   },
   button: {
-    padding: 5,
-    margin: 5,
-    alignSelf: "flex-end",
-    marginLeft: 80,
-    backgroundColor: "#18C1CD",
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
     borderRadius: 20,
-    width: 130,
-    height: 44,
+    backgroundColor: "#18C1CD",
+    alignSelf: "flex-end",
+    width: "40%",
+    marginBottom: 16,
+    marginTop: 16,
+  },
+  bg: {
+    backgroundColor: "white",
+    height: "100%",
+    width: "100%",
   },
   navbar: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    width: "100%",
     verticalAlign: "top",
-    paddingLeft: 20,
-    paddingRight: 20,
-    height: 48,
+    // height: 48,
+    paddingTop: 60,
+    padding: 12,
+    width: "100%",
+    backgroundColor: "#FFF",
+  },
+  shadow: {
+    shadowColor: "#ddd",
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.4,
+    shadowRadius: 10,
+  },
+  show: {
+    paddingHorizontal: 4,
+    // backgroundColor: "red",
+  },
+  tableShadow: {
+    backgroundColor: "white",
+    padding: 4,
+    borderRadius: 5,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
   },
   texttitle: {
     fontSize: 18,
     fontWeight: "600",
+    paddingTop: 24,
+    textAlign: "center",
   },
   bodyContainer: {
     width: "100%",
-    paddingHorizontal: 10,
+  },
+  centerred: {
+    alignItems: "center",
   },
   imgSimulasi: {
     width: 228,
     height: 228,
     marginTop: 16,
     marginBottom: 16,
+    backgroundColor: "red",
   },
   simulasikan: {
     color: "#fff",
     textAlign: "center",
     fontWeight: "800",
-    paddingTop: 6,
   },
   input: {
     width: "100%",
@@ -173,37 +252,31 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   formSimulasi: {
-    paddingTop: 40,
+    paddingTop: 24,
   },
   textform: {
     fontWeight: "800",
   },
-  container1: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
   textButton: {
     alignSelf: "center",
-    paddingTop: 8,
     color: "white",
-    fontWeight: "700",
-    fontSize: 14,
+    fontWeight: "800",
   },
   dropdownContent: {
-    backgroundColor: "rgba(0, 0, 0, 0.1)",
+    // backgroundColor: "rgba(0, 0, 0, 0.1)",
     padding: 10,
-    borderRadius: 5,
     marginTop: 10,
-    width: '100%',
+    width: "100%",
   },
   text: {
-    fontWeight: '700',
+    fontWeight: "700",
+    paddingBottom: 8,
   },
   row: {
-    flexDirection: 'row',
-    borderColor: '#000',
+    flexDirection: "row",
+    borderColor: "#000",
     marginBottom: 15,
-    justifyContent: 'space-between',
+    justifyContent: "space-around",
+    // backgroundColor: "red",
   },
 });
