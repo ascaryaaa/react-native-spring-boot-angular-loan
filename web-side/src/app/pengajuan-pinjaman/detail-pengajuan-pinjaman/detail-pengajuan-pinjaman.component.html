@@ -15,7 +15,12 @@
     (confirmed)="tolak($event)"
   ></app-rejecting-modal>
 </div>
-<div class="sm:ml-64">
+<div class="modal-container" *ngIf="showDownloadModal">
+  <app-notification-download-modal
+    (confirmed)="download($event)"
+  ></app-notification-download-modal>
+</div>
+<div class="sm:ml-64">  
 <div *ngIf="form">
  <div class="p-4 flex flex-col gap-4">
   <a href="#" class="block flex-1 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 flex items-center" style="pointer-events: none;">
@@ -167,7 +172,7 @@
           </tr>
         </tbody>
       </table>
-      <button (click)="downloadSLIK()" class="flex px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]" style="padding: 6px 12px;">
+      <button (click)="downloadSLIK(); showDownloadModal = true" class="flex px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]" style="padding: 6px 12px;">
         Download SLIK
       </button>
   </div>

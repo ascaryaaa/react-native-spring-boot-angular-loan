@@ -16,11 +16,11 @@
       <div
         class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4"
       >
-        <label for="table-search" class="sr-only">Search</label>
+        <label for="table-search" class="sr-only">Searc</label>
         <div class="relative">
           <div
             class="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none"
-          >
+          > 
             <svg
               class="w-5 h-5 text-gray-500 dark:text-gray-400"
               aria-hidden="true"
@@ -39,10 +39,14 @@
             type="text"
             id="table-search"
             class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Search"
+            [(ngModel)]="searchText"
+            (ngModelChange)="search()"
+            (keyup.enter)="search()"
+            placeholder="Search nama"
           />
         </div>
       </div>
+      
       <table
         class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
         style="margin-bottom: 20px"
@@ -64,7 +68,7 @@
           </thead>
         <!-- Loading and Error Handling -->
           <tbody>
-            <tr *ngFor="let form of forms">
+            <tr *ngFor="let form of filteredForms">
               <td class="px-4 py-2">{{ form.idFormPengajuanPinjaman }}</td>
               <td class="px-4 py-2">{{ form.formToUser.nameUser }}</td>
               <td class="px-4 py-2">{{ form.formToUser.nikUser }}</td>
@@ -91,44 +95,19 @@
           </tbody>
         </ng-container>
       </table>
-      <nav
-        class="flex items-center flex-column flex-wrap md:flex- justify-between pt-4"
-        aria-label="Table navigation"
-      >
-        <span
-          class="text-sm font-normal text-gray-500 dark:text-gray-400 mb-4 md:mb-0 block w-full md:inline md:w-auto"
-          >Showing
-          <span class="font-semibold text-gray-900 dark:text-white">1-10</span>
-          of
-          <span class="font-semibold text-gray-900 dark:text-white"
-            >1000</span
-          ></span
-        >
-        <ul class="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">
-          <li>
-            <a
-              href="#"
-              class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >Previous</a
-            >
-          </li>
-          <li>
-            <a
-              href="#"
-              class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >1</a
-            >
-          </li>
-          <!-- Add more pages here if needed -->
-          <li>
-            <a
-              href="#"
-              class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >Next</a
-            >
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
+     <!-- Pagination -->
+     <nav class="flex items-center justify-between">
+      <div class="flex flex-wrap items-center justify-center">
+        <select style="background-color: #1F96F9; color: white;" class="px-2 py-1 border border-white-300 rounded-lg" [(ngModel)]="pageSize" (change)="changePageSize()" title="Jumlah Data Per Halaman" >
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="100">100</option>
+        </select>
+      </div>
+    </nav>
+    
+    
 
+  </div>
+</div>

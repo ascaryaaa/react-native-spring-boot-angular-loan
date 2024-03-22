@@ -11,6 +11,10 @@ import {MonitoringService} from '../monitoring.service'
 })
 export class ListMonitoringComponent {
   pinjamans: Pinjaman[] = [];
+  filteredMonitoring: ListMonitoringComponent[] = [];
+  searchText: string = '';
+  pageSize: number = 10;
+
   
   constructor(private monitoringService: MonitoringService) { }
 
@@ -30,4 +34,6 @@ export class ListMonitoringComponent {
       console.error('Error fetching data:', error)
     }
   }
+
+  
 }
