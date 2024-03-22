@@ -6,3 +6,4 @@ export const listMonitoringPinjaman = API_URL + 'pinjaman/get-pinjamans';
 export const detailMonitoringPinjaman = API_URL + 'pinjaman/';
 export const createPinjamanUrl = API_URL + 'pinjaman/post-pinjaman';
 export const createPengajuanPinjamanUrl = API_URL + 'form/post-form';
+export const detailAdmin = API_URL + 'admin/';

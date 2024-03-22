@@ -5,15 +5,12 @@
 >
   Daftar Pengajuan Pinjaman
 </h1>
-<ng-template #loading>
-    Data tidak ada
+<ng-template #noData>
+  <div class="flex flex-col items-center justify-center self-center">
+    <img class="w-28 h-28 justify-center" src="../../../assets/img/nodata.png" alt="No Data">
+    <div class="pt-10  w-60 text-center text-2xl text-gray-400">Data Tidak Ditemukan</div>
+  </div>
 </ng-template>
-<!-- <app-sidebar/> -->
-<!-- <div
-  id="container-home"
-  class="relative overflow-x-auto sm:rounded-lg"
-  style="padding-top: 10px"
-> -->
   <div class="p-4 sm:ml-64">
     <div class="p-4 border-2 border-gray-200 rounded-lg dark:border-gray-700">
       <div
@@ -50,236 +47,49 @@
         class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
         style="margin-bottom: 20px"
       >
-        <thead
-          class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-        >
-          <tr>
-            <th scope="col" class="px-4 py-2">CIF</th>
-            <th scope="col" class="px-4 py-2">Nama</th>
-            <th scope="col" class="px-4 py-2">NIK</th>
-            <th scope="col" class="px-4 py-2">Jenis Pengajuan</th>
-            <th scope="col" class="px-4 py-2">Status Pengajuan</th>
-            <th scope="col" class="px-4 py-2">Admin</th>
-            <th scope="col" class="px-4 py-2">Tanggal Realisasi</th>
-            <th scope="col" class="px-4 py-2">Aksi</th>
-          </tr>
-        </thead>
+        <ng-container *ngIf="forms.length > 0; else noData">
+          <thead
+            class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+          >
+            <tr>
+              <th scope="col" class="px-4 py-2">CIF</th>
+              <th scope="col" class="px-4 py-2">Nama</th>
+              <th scope="col" class="px-4 py-2">NIK</th>
+              <th scope="col" class="px-4 py-2">Jenis Pengajuan</th>
+              <th scope="col" class="px-4 py-2">Status Pengajuan</th>
+              <th scope="col" class="px-4 py-2">Admin</th>
+              <th scope="col" class="px-4 py-2">Tanggal Realisasi</th>
+              <th scope="col" class="px-4 py-2">Aksi</th>
+            </tr>
+          </thead>
         <!-- Loading and Error Handling -->
-        <ng-container *ngIf="forms.length > 0; else loading">
-              <tbody>
-                <tr *ngFor="let form of forms">
-                  <td class="px-4 py-2">{{ form.idFormPengajuanPinjaman }}</td>
-                  <td class="px-4 py-2">{{ form.formToUser.nameUser }}</td>
-                  <td class="px-4 py-2">{{ form.formToUser.nikUser }}</td>
-                  <td class="px-4 py-2">{{ form.formToJenis.nameJenisPinjaman }}</td>
-                  <td class="px-4 py-2">
-                    <div
-                      class="px-4 py-2 text-white"
-                      [ngClass]="{
-                        'bg-green-500': form.statusPengajuan === 'Diterima',
-                        'bg-red-500': form.statusPengajuan === 'Ditolak',
-                        'bg-gray-500': form.statusPengajuan === 'Diproses'
-                      }"
-                    >
-                      {{ form.statusPengajuan }}
-                    </div>
-                  </td>
-                  <td class="px-4 py-2"></td>
-                  <!-- <td class="px-4 py-2">{{ form.tanggalLahir | date: 'longDate' }}</td> -->
-                  <td class="px-4 py-2"></td>
-                  <td class="px-4 py-2">
-                    <a [routerLink]="['../', form.idFormPengajuanPinjaman]" class="text-blue-600 hover:underline">View</a>
-                  </td>
-                </tr>
-              </tbody>
-          </ng-container>
-          
-          <ng-template #loading>
-            <div>Data tidak ada..</div>
-          </ng-template>
-          <!-- <tr
-            class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
-          >
-            <td
-              class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              W1832343
-            </td>
-            <td class="px-4 py-2">Gerald Marihot</td>
-            <td class="px-4 py-2">3520121000924832323</td>
-            <td class="px-4 py-2">BNI Griya</td>
-            <td class="px-4 py-2">
-              <div
-                class="justify-center p-1.5 text-sm tracking-normal leading-4 text-center text-emerald-100 whitespace-nowrap bg-red-700 rounded-xl text-ellipsis"
-              >
-                Ditolak
-              </div>
-            </td>
-            <td class="px-4 py-2">Admin</td>
-            <td class="px-4 py-2">Tanggal Realisasi</td>
-            <td class="px-4 py-2">
-              <button
-                (click)="navigateToDetail()"
-                href="#"
-                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-              >
-                View
-              </button>
-            </td>
-          </tr>
-          <tr
-            class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
-          >
-            <td
-              class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              W1832343
-            </td>
-            <td class="px-4 py-2">Gerald Marihot</td>
-            <td class="px-4 py-2">3520121000924832323</td>
-            <td class="px-4 py-2">BNI Griya</td>
-            <td class="px-4 py-2">
-              <div
-                class="justify-center p-1.5 text-sm tracking-normal leading-4 text-center text-emerald-100 whitespace-nowrap bg-yellow-500 rounded-xl text-ellipsis"
-              >
-                Diproses
-              </div>
-            </td>
-
-            <td class="px-4 py-2">Admin</td>
-            <td class="px-4 py-2">Tanggal Realisasi</td>
-            <td class="px-4 py-2">
-              <button
-                (click)="navigateToDetail()"
-                href="#"
-                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-              >
-                View
-              </button>
-            </td>
-          </tr>
-          <tr
-            class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
-          >
-            <td
-              class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              W1832343
-            </td>
-            <td class="px-4 py-2">Gerald Marihot</td>
-            <td class="px-4 py-2">3520121000924832323</td>
-            <td class="px-4 py-2">BNI Griya</td>
-            <td class="px-4 py-2">
-              <div
-                class="justify-center p-1.5 text-sm tracking-normal leading-4 text-center text-emerald-100 whitespace-nowrap bg-green-600 rounded-xl text-ellipsis"
-              >
-                Diterima
-              </div>
-            </td>
-            <td class="px-4 py-2">Admin</td>
-            <td class="px-4 py-2">Tanggal Realisasi</td>
-            <td class="px-4 py-2">
-              <button
-                (click)="navigateToDetail()"
-                href="#"
-                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-              >
-                View
-              </button>
-            </td>
-          </tr>
-          <tr
-            class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
-          >
-            <td
-              class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              W1832343
-            </td>
-            <td class="px-4 py-2">Gerald Marihot</td>
-            <td class="px-4 py-2">3520121000924832323</td>
-            <td class="px-4 py-2">BNI Griya</td>
-            <td class="px-4 py-2">
-              <div
-                class="justify-center p-1.5 text-sm tracking-normal leading-4 text-center text-emerald-100 whitespace-nowrap bg-green-600 rounded-xl text-ellipsis"
-              >
-                Diterima
-              </div>
-            </td>
-            <td class="px-4 py-2">Admin</td>
-            <td class="px-4 py-2">Tanggal Realisasi</td>
-            <td class="px-4 py-2">
-              <button
-                (click)="navigateToDetail()"
-                href="#"
-                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-              >
-                View
-              </button>
-            </td>
-          </tr>
-          <tr
-            class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
-          >
-            <td
-              class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              W1832343
-            </td>
-            <td class="px-4 py-2">Gerald Marihot</td>
-            <td class="px-4 py-2">3520121000924832323</td>
-            <td class="px-4 py-2">BNI Griya</td>
-            <td class="px-4 py-2">
-              <div
-                class="justify-center p-1.5 text-sm tracking-normal leading-4 text-center text-emerald-100 whitespace-nowrap bg-green-600 rounded-xl text-ellipsis"
-              >
-                Diterima
-              </div>
-            </td>
-            <td class="px-4 py-2">Admin</td>
-            <td class="px-4 py-2">Tanggal Realisasi</td>
-            <td class="px-4 py-2">
-              <button
-                (click)="navigateToDetail()"
-                href="#"
-                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-              >
-                View
-              </button>
-            </td>
-          </tr>
-          <tr
-            class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
-          >
-            <td
-              class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              W1832343
-            </td>
-            <td class="px-4 py-2">Gerald Marihot</td>
-            <td class="px-4 py-2">3520121000924832323</td>
-            <td class="px-4 py-2">BNI Griya</td>
-            <td class="px-4 py-2">
-              <div
-                class="justify-center p-1.5 text-sm tracking-normal leading-4 text-center text-emerald-100 whitespace-nowrap bg-green-600 rounded-xl text-ellipsis"
-              >
-                Diterima
-              </div>
-            </td>
-            <td class="px-4 py-2">Admin</td>
-            <td class="px-4 py-2">Tanggal Realisasi</td>
-            <td class="px-4 py-2">
-              <button
-                (click)="navigateToDetail()"
-                href="#"
-                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-              >
-                View
-              </button>
-            </td>
-          </tr> -->
-          <!-- Add more rows here if needed -->
-        <!-- </tbody> -->
+          <tbody>
+            <tr *ngFor="let form of forms">
+              <td class="px-4 py-2">{{ form.idFormPengajuanPinjaman }}</td>
+              <td class="px-4 py-2">{{ form.formToUser.nameUser }}</td>
+              <td class="px-4 py-2">{{ form.formToUser.nikUser }}</td>
+              <td class="px-4 py-2">{{ form.formToJenis.nameJenisPinjaman }}</td>
+              <td class="px-4 py-2">
+                <div
+                  class="px-4 py-2 text-white"
+                  [ngClass]="{
+                    'bg-green-500': form.statusPengajuan === 'Diterima',
+                    'bg-red-500': form.statusPengajuan === 'Ditolak',
+                    'bg-gray-500': form.statusPengajuan === 'Diproses'
+                  }"
+                >
+                  {{ form.statusPengajuan }}
+                </div>
+              </td>
+              <td class="px-4 py-2">{{form.formToAdmin?.nameAdmin}}</td>
+              <!-- <td class="px-4 py-2">{{ form.tanggalLahir | date: 'longDate' }}</td> -->
+              <td class="px-4 py-2"> </td>
+              <td class="px-4 py-2">
+                <a [routerLink]="['../', form.idFormPengajuanPinjaman]" class="text-blue-600 hover:underline">View</a>
+              </td>
+            </tr>
+          </tbody>
+        </ng-container>
       </table>
       <nav
         class="flex items-center flex-column flex-wrap md:flex- justify-between pt-4"

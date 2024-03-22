@@ -6,8 +6,6 @@ import {MonitoringService} from '../monitoring.service'
 
 @Component({
   selector: 'app-monitoring',
-  // standalone: true,
-  // imports: [SidebarComponent,],
   templateUrl: './list-monitoring.component.html',
   styleUrl: './list-monitoring.component.css',
 })

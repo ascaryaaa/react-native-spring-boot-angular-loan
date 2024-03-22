@@ -25,7 +25,8 @@ export class AuthService {
 
       if (response) {
         localStorage.setItem('user', JSON.stringify(response.data));
-        localStorage.setItem('token', response.data.token); // Assuming the token is directly under response.data
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('id', response.data.id);
         this.router.navigate(['pengajuan-pinjaman']);
       }
     } catch (error) {
@@ -45,12 +46,16 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('user');
-    localStorage.removeItem('token'); // Ensure token is also removed on logout
+    localStorage.removeItem('token');
+    localStorage.removeItem('id');
     this.router.navigate(['/login']);
   }
 
 
   getToken(): string | null {
     return localStorage.getItem('token');
+  }
+  getId(): string | null {
+    return localStorage.getItem('id');
   }
 }

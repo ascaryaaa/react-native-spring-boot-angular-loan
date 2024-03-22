@@ -81,7 +81,7 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { PengajuanPinjamanService } from '../pengajuan-pinjaman.service';
-import { FormDetailResponse } from '../pengajuan-pinjaman';
+import { AdminDetailResponse, FormDetailResponse } from '../pengajuan-pinjaman';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { Pinjaman } from '../../monitoring/monitoring';
@@ -92,7 +92,9 @@ import { Pinjaman } from '../../monitoring/monitoring';
   styleUrls: ['./detail-pengajuan-pinjaman.component.css']
 })
 export class DetailPengajuanPinjamanComponent implements OnInit {
+[x: string]: any;
   form?: FormDetailResponse;
+  admin?: AdminDetailResponse;
   showSLIKTable: boolean = false;
   slikGenerated: boolean = false;
   slikData: any[] = [];
@@ -106,6 +108,7 @@ export class DetailPengajuanPinjamanComponent implements OnInit {
 
   ngOnInit() {
     this.refreshFormDetail();
+    this.refreshAdminDetail();
   }
 
   refreshFormDetail() {
@@ -117,6 +120,22 @@ export class DetailPengajuanPinjamanComponent implements OnInit {
       },
       error: (error) => console.error('Error fetching data:', error)
     });
+  }
+  refreshAdminDetail() {
+    const idString: string | null = localStorage.getItem('id');
+    if (idString === null) {
+      // Handle the case where 'id' is not found in localStorage
+      console.error('ID not found in localStorage');
+    } else {
+      const id: number = +idString;
+      this.pengajuanPinjamanService.getDetailAdmin(id).subscribe({
+        next: (dataAdmin) => {
+          this.admin = dataAdmin;
+          console.log(this.admin);
+        },
+        error: (error) => console.error('Error fetching data:', error)
+      });
+    }
   }
 
   createFormPengajuan() {
@@ -223,7 +242,9 @@ export class DetailPengajuanPinjamanComponent implements OnInit {
         // Update status of pengajuan to "Diterima"
         const updatedData = {
           ...this.form,
-          statusPengajuan: "Diterima"
+          statusPengajuan: "Diterima",
+          formToAdmin: this.admin,
+          
         };
         this.pengajuanPinjamanService.updateStatusPengajuanPinjaman(id, updatedData).subscribe({
           next: (response) => {
