@@ -21,9 +21,11 @@ const SimulasiFleksiPensiun = ({ navigation }) => {
   ];
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [hidedButton, setHidedButton] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+    setHidedButton(true);
   };
 
   return (
@@ -89,9 +91,11 @@ const SimulasiFleksiPensiun = ({ navigation }) => {
           </View>
 
           <View style={styles.container1}>
-            <TouchableOpacity onPress={toggleDropdown} style={styles.button}>
-              <Text style={styles.textButton}>Simulasi Angsuran</Text>
-            </TouchableOpacity>
+            {!hidedButton && (
+              <TouchableOpacity onPress={toggleDropdown} style={styles.button}>
+                <Text style={styles.textButton}>Simulasikan</Text>
+              </TouchableOpacity>
+            )}
             {isDropdownOpen && (
               <View style={styles.dropdownContent}>
                 <Text style={styles.text}>Hasil</Text>
@@ -101,14 +105,14 @@ const SimulasiFleksiPensiun = ({ navigation }) => {
                   <Text style={{ flex: 1,textAlign: 'right', fontWeight: '600'}}>{view.content}</Text>
                 </View>
                 ))}
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => navigation.navigate("ProfileKeuanganFleksiPensiun")}>
+                  <Text style={styles.simulasikan}> Selanjutnya</Text>
+                </TouchableOpacity>
               </View>
             )}
           </View>
-          <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate("ProfileKeuanganFleksiPensiun")}>
-              <Text style={styles.simulasikan}> Selanjutnya</Text>
-          </TouchableOpacity>
         </View>
       </ScrollView>
     </View>

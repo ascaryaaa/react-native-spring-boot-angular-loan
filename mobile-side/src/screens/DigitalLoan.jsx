@@ -9,8 +9,8 @@ import {
   FlatList,
 } from "react-native";
 
-import ListPengajuanPinjaman from "./ListPengajuanPinjaman";
-import ListPinjaman from "./ListPinjaman";
+import ListPengajuanPinjaman from "../components/ListPengajuanPinjaman";
+import ListPinjaman from "../components/ListPinjaman";
 
 const DigitalLoan = ({ navigation }) => {
   const list = [
@@ -22,98 +22,103 @@ const DigitalLoan = ({ navigation }) => {
   );
 
   const [result, setResult] = useState("");
+  const [activeButton, setActiveButton] = useState("all");
   
   const handleAll = () => {
     setResult(
       <View>
-        <ListPengajuanPinjaman navigation={navigation}
-        ListPengajuanPinjaman={ListPengajuanPinjaman} />
+        <ListPengajuanPinjaman 
+          navigation={navigation}
+        />
         <ListPinjaman navigation={navigation} />
       </View>
     );
+    setActiveButton("all");
   };
 
   const handleButton1Press = () => {
     setResult(<ListPengajuanPinjaman />);
+    setActiveButton("pengajuan");
   };
 
   const handleButton2Press = () => {
     setResult(<ListPinjaman />);
+    setActiveButton("pinjaman");
   };
 
   useEffect(() => {
-    // handleButton1Press();
-    // handleButton2Press();
     handleAll();
-    // handle();
-  }, []);
+  }, []); 
+  
 
   return (
-    <View style={styles.container}>
-      {/* container atas */}
-      <View style={styles.navbar}>
-        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+    <View style={styles.bg}>
+      <View style={styles.container}>
+        {/* container atas */}
+        <View style={styles.navbar}>
+          <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+            <Image
+              source={require("../../../mobile-side/src/assets/Icon_leftarrow.png")}
+            />
+          </TouchableOpacity>
+          <Text style={{ fontSize: 16 }}>Digital Loan</Text>
           <Image
-            source={require("../../../mobile-side/src/assets/Icon_leftarrow.png")}
+            source={require("../../../mobile-side/src/assets/Icon_homeorg.png")}
           />
-        </TouchableOpacity>
-        <Text style={{ fontSize: 16 }}>Digital Loan</Text>
-        <Image
-          source={require("../../../mobile-side/src/assets/Icon_homeorg.png")}
-        />
-      </View>
-
-      {/* container tengah */}
-      <ScrollView>
-        <View style={styles.containerTengah}>
-          <View style={styles.buttonContainer}>
-            <View style={{ width: "35%", padding: 5 }}>
-              <TouchableOpacity onPress={handleAll} style={styles.button1}>
-                <Text style={styles.textButton}>List Semua Pinjaman</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={{ width: "35%", padding: 5 }}>
-              <TouchableOpacity
-                onPress={handleButton1Press}
-                style={styles.button1}
-              >
-                <Text style={styles.textButton}>List Pengajuan Pinjaman</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={{ width: "30%", padding: 5 }}>
-              <TouchableOpacity
-                onPress={handleButton2Press}
-                style={styles.button1}
-              >
-                <Text style={styles.textButton}>List Pinjaman</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-          {result !== "" && (
-            <View style={styles.resultContainer}>
-              <Text style={styles.resultText}>{result}</Text>
-            </View>
-          )}
         </View>
-      </ScrollView>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate("PengajuanPinjaman")}
-      >
-        <Text style={styles.ajukan}>Ajukan Pinjaman</Text>
-      </TouchableOpacity>
-
-      {/* container bawah */}
-      <View style={styles.containerBawah}>
-        <Text style={styles.kejutan}>Kejutan Bulan ini</Text>
-        <ScrollView horizontal={true}>
-          <FlatList
-            data={list}
-            numColumns={2}
-            renderItem={renderItem}
-          ></FlatList>
+        {/* container tengah */}
+        <ScrollView>
+          <View style={styles.containerTengah}>
+            <View style={styles.buttonContainer}>
+              <View style={{ width: "35%", padding: 5 }}>
+                <TouchableOpacity onPress={handleAll} style={styles.button1}>
+                  <Text style={[styles.textButton, activeButton === 'all' && styles.activeButtonText]}>Semua</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={{ width: "35%", padding: 5 }}>
+                <TouchableOpacity
+                  onPress={handleButton1Press}
+                  style={styles.button1}
+                >
+                  <Text style={[styles.textButton, activeButton === 'pengajuan' && styles.activeButtonText]}>Pengajuan</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={{ width: "30%", padding: 5 }}>
+                <TouchableOpacity
+                  onPress={handleButton2Press}
+                  style={styles.button1}
+                >
+                  <Text style={[styles.textButton, activeButton === 'pinjaman' && styles.activeButtonText]}>Pinjaman</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+            {result !== "" && (
+              <View style={styles.resultContainer}>
+                <Text style={styles.resultText}>{result}</Text>
+              </View>
+            )}
+          </View>
         </ScrollView>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("PengajuanPinjaman")}
+        >
+          <Text style={styles.ajukan}>Ajukan Pinjaman</Text>
+        </TouchableOpacity>
+
+        {/* container bawah */}
+        <View style={styles.containerBawah}>
+          <Text style={styles.kejutan}>Kejutan Bulan ini</Text>
+          <ScrollView horizontal={true}>
+            <FlatList
+              data={list}
+              numColumns={2}
+              renderItem={renderItem}
+            ></FlatList>
+          </ScrollView>
+        </View>
       </View>
     </View>
   );
@@ -129,10 +134,15 @@ const styles = StyleSheet.create({
     marginTop: 40,
     // backgroundColor: "red",
   },
+  bg: {
+    backgroundColor: "white",
+    height: "100%",
+    width: "100%",
+  },
   containerTengah: {
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 30,
+    marginTop: 10,
     // marginLeft: 30,
     // marginRight: 30,
     width: "100%",
@@ -156,7 +166,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     margin: 5,
     marginTop: 28,
-    width: 350,
+    width: "100%",
     height: 45,
     borderRadius: 20,
   },
@@ -181,7 +191,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     width: "100%",
     verticalAlign: "top",
-
     height: 48,
   },
   texttitle: {
@@ -215,23 +224,22 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
     marginBottom: 10,
-    marginRight: 10,
-    marginLeft: 10,
+    marginHorizontal: 16,
     color: "#F68310",
-    justifyContent: "space-around",
   },
   button1: {
-    paddingVertical: 10,
-    paddingHorizontal: 10,
-    borderWidth: 1,
-    borderRadius: 50,
-    backgroundColor: "#F68310",
+    // paddingVertical: 10,
+    // paddingHorizontal: 10,
+    borderBottomWidth: 1,
     borderColor: "#F68310",
+    // backgroundColor: 'yellow',
+    height: 40,
+    width: 75
   },
   resultContainer: {
     marginTop: 20,
-    padding: 10,
-    borderWidth: 1,
+    // padding: 10,
+    // borderWidth: 1,
     borderRadius: 5,
     // backgroundColor:'red'
   },
@@ -239,9 +247,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   textButton: {
-    color: "white",
-    fontSize: 12,
+    // color: "white",
+    fontSize: 14,
+    fontWeight: "400",
+    textAlign: "center",
+    marginTop: 20,
+  },
+  activeButtonText: {
+    fontSize: 14,
     fontWeight: "700",
     textAlign: "center",
+    marginTop: 20,
   },
 });
