@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-notification-download-modal',
@@ -8,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrl: './notification-download-modal.component.css'
 })
 export class NotificationDownloadModalComponent {
+  @Output() confirmed = new EventEmitter<boolean>();
 
+  confirm() {
+    this.confirmed.emit(true);
+  }
+
+  cancel() {
+    this.confirmed.emit(false);
+  }
 }

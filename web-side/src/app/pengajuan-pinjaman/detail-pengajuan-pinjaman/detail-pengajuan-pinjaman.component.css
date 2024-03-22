@@ -20,3 +20,7 @@
   app-rejecting-modal {
     z-index: 10000; /* Ensure it's above the overlay */
   }
+
+  app-notification-download-modal{
+    z-index: 10000; /* Ensure it's above the overlay */
+  }

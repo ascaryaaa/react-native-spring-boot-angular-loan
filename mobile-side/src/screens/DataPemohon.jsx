@@ -63,6 +63,7 @@ const DataPemohon = ({ navigation }) => {
       <View style={styles.container}>
         <ScrollView>
           <View>
+            <Text style={styles.texttitle}>Data Pemohon</Text>
             <Text style={styles.text}>Nama Lengkap (Sesuai KTP)</Text>
             <TextInput
               style={[styles.input, { padding: 10 }]}
@@ -196,7 +197,7 @@ const DataPemohon = ({ navigation }) => {
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.button}
-                onPress={() => navigation.navigate("KetentuanFleksiPensiun")}
+                onPress={() => navigation.navigate("KetentuanGriya")}
               >
                 <Text
                   style={{
@@ -222,7 +223,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginHorizontal: 16,
-    marginTop: 40,
+    // marginTop: 40,
     height: "100%",
     // margin: 10,
   },
@@ -240,13 +241,18 @@ const styles = StyleSheet.create({
     paddingTop: 60,
     padding: 12,
     backgroundColor: "#FFF",
-    marginBottom: 24,
   },
   shadow: {
     shadowColor: "#ddd",
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.25,
     shadowRadius: 15,
+  },
+  texttitle: {
+    fontSize: 18,
+    fontWeight: "600",
+    paddingTop: 24,
+    marginBottom: 20,
   },
   button: {
     padding: 5,

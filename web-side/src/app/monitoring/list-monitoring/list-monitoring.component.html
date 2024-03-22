@@ -69,13 +69,59 @@
             <td
               class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
             >
-            {{pinjaman.idPinjaman }}
+            {{pinjaman.pinjamanToForm?.idFormPengajuanPinjaman }}
             </td>
             <td class="px-4 py-2">{{pinjaman.pinjamanToForm?.formToUser?.nameUser}}</td>
             <td class="px-4 py-2">{{pinjaman.pinjamanToForm?.formToUser?.nikUser}}</td>
-            <td class="px-4 py-2">{{pinjaman.pinjamanToForm?.formToJenis?.nameJenisPinjaman}}</td>
+            <td class="px-4 py-2" *ngIf="pinjaman && pinjaman.pinjamanToForm">
+              <ng-container *ngIf="pinjaman.kolektabilitas !== null; else kolektabilitasCheck">
+                <ng-container *ngIf="pinjaman.kolektabilitas === 0; else kolektabilitasCheck2">
+                  Lancar
+                </ng-container>
+                <ng-container *ngIf="pinjaman.kolektabilitas < 30; else kolektabilitasCheck3">
+                  DPK 1
+                </ng-container>
+                <ng-container *ngIf="pinjaman.kolektabilitas < 60; else kolektabilitasCheck4">
+                  DPK 2
+                </ng-container>
+                <ng-container *ngIf="pinjaman.kolektabilitas < 90; else kolektabilitasCheck5">
+                  DPK 3
+                </ng-container>
+                <ng-container *ngIf="pinjaman.kolektabilitas < 120; else kolektabilitasCheck6">
+                  Kurang Lancar
+                </ng-container>
+                <ng-container *ngIf="pinjaman.kolektabilitas < 150; else kolektabilitasCheck7">
+                  Diragukan
+                </ng-container>
+                <ng-container *ngIf="pinjaman.kolektabilitas >= 150">
+                  Macet
+                </ng-container>
+              </ng-container>
+              <ng-template #kolektabilitasCheck>
+                Lancar
+              </ng-template>
+              <ng-template #kolektabilitasCheck2>
+                DPK 1
+              </ng-template>
+              <ng-template #kolektabilitasCheck3>
+                DPK 2
+              </ng-template>
+              <ng-template #kolektabilitasCheck4>
+                DPK 3
+              </ng-template>
+              <ng-template #kolektabilitasCheck5>
+                Kurang Lancar
+              </ng-template>
+              <ng-template #kolektabilitasCheck6>
+                Diragukan
+              </ng-template>
+              <ng-template #kolektabilitasCheck7>
+                Macet
+              </ng-template>
+            </td>
+            
             <!-- <td class="px-4 py-2">{{pinjaman.pinjamanToForm.formToJenis.nameJenisPinjaman}}</td> -->
-            <td class="px-4 py-2">{{pinjaman.statusTagihan}}</td>
+            <td class="px-4 py-2">{{pinjaman.pinjamanToForm?.formToJenis?.nameJenisPinjaman}}</td>
           
             <td class="px-4 py-2">
               <a [routerLink]="['../', pinjaman.idPinjaman]" class="text-blue-600 hover:underline">View</a>

@@ -29,9 +29,11 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
   ];
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [hidedButton, setHidedButton] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+    setHidedButton(true);
   };
 
   return (
@@ -53,7 +55,7 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
       <View style={styles.container}>
         <ScrollView>
           <View>
-            <Text style={{ fontWeight: "600", fontSize: 16, marginBottom: 13 }}>
+            <Text style={{ fontWeight: "600", fontSize: 16, marginBottom: 13, marginTop:24}}>
               Profil Keuangan
             </Text>
             <Text style={styles.text}>Penghasilan Bersih per. Bulan</Text>
@@ -93,9 +95,11 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
               value="12,75%"
             />
             <View style={styles.container1}>
-              <TouchableOpacity onPress={toggleDropdown} style={styles.button}>
-                <Text style={styles.textButton}>Simulasi Angsuran</Text>
-              </TouchableOpacity>
+              {!hidedButton && (
+                <TouchableOpacity onPress={toggleDropdown} style={styles.button}>
+                  <Text style={styles.textButton}>Simulasi Angsuran</Text>
+                </TouchableOpacity>
+              )}
               {isDropdownOpen && (
                 <View style={styles.dropdownContent}>
                   <Text style={styles.text}>Hasil</Text>
@@ -130,25 +134,25 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
                   >
                     Simulasi menggunakan suku bunga yang berlaku saat ini
                   </Text>
+                  <TouchableOpacity
+                    style={styles.button1}
+                    onPress={() => navigation.navigate("DataPemohon")}
+                  >
+                    <Text
+                      style={{
+                        textAlign: "center",
+                        paddingTop: 12,
+                        color: "white",
+                        fontWeight: "700",
+                        fontSize: 16,
+                      }}
+                    >
+                      Ajukan Pinjaman
+                    </Text>
+                  </TouchableOpacity>
                 </View>
               )}
             </View>
-            <TouchableOpacity
-              style={styles.button1}
-              onPress={() => navigation.navigate("DataPemohon")}
-            >
-              <Text
-                style={{
-                  textAlign: "center",
-                  paddingTop: 12,
-                  color: "white",
-                  fontWeight: "700",
-                  fontSize: 16,
-                }}
-              >
-                Ajukan Pinjaman
-              </Text>
-            </TouchableOpacity>
           </View>
         </ScrollView>
       </View>
@@ -184,8 +188,8 @@ const styles = StyleSheet.create({
   },
   shadow: {
     shadowColor: "#ddd",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.25,
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.40,
     shadowRadius: 15,
   },
   button1: {
@@ -205,7 +209,7 @@ const styles = StyleSheet.create({
     padding: 12,
     width: "100%",
     backgroundColor: "#FFF",
-    marginBottom: 24,
+    // marginBottom: 24,
   },
   input: {
     width: "100%",

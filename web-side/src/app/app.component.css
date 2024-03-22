@@ -1,0 +1,7 @@
+/* Import font from a CDN */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Define a global class for the font */
+.font-montserrat {
+    font-family: 'Montserrat', sans-serif;
+}

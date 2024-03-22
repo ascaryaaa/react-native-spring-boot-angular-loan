@@ -3,7 +3,7 @@
   class="p-4 sm:ml-64 text-left text-2xl mb-4 font-bold"
   style="color: #e55300; padding-top: 24px; margin-bottom: -4px"
 >
-  Daftar Pengajuan Pinjaman
+  Daftar Pengajuan Pinjamann
 </h1>
 <ng-template #noData>
   <div class="flex flex-col items-center justify-center self-center">
@@ -16,11 +16,11 @@
       <div
         class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4"
       >
-        <label for="table-search" class="sr-only">Search</label>
+        <label for="table-search" class="sr-only">Searc</label>
         <div class="relative">
           <div
             class="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none"
-          >
+          > 
             <svg
               class="w-5 h-5 text-gray-500 dark:text-gray-400"
               aria-hidden="true"
@@ -39,10 +39,14 @@
             type="text"
             id="table-search"
             class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Search"
+            [(ngModel)]="searchText"
+            (ngModelChange)="search()"
+            (keyup.enter)="search()"
+            placeholder="Search nama"
           />
         </div>
       </div>
+      <!-- // Test -->
       <table
         class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
         style="margin-bottom: 20px"
@@ -51,20 +55,38 @@
           <thead
             class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
           >
-            <tr>
-              <th scope="col" class="px-4 py-2">CIF</th>
-              <th scope="col" class="px-4 py-2">Nama</th>
-              <th scope="col" class="px-4 py-2">NIK</th>
-              <th scope="col" class="px-4 py-2">Jenis Pengajuan</th>
-              <th scope="col" class="px-4 py-2">Status Pengajuan</th>
-              <th scope="col" class="px-4 py-2">Admin</th>
-              <th scope="col" class="px-4 py-2">Tanggal Realisasi</th>
-              <th scope="col" class="px-4 py-2">Aksi</th>
-            </tr>
+          <tr>
+            <th scope="col" class="px-4 py-2">
+              <button type="button" (click)="sortData('cif')">CIF</button>
+            </th>
+           
+            <th scope="col" class="px-4 py-2 flex items-center">
+              <button type="button" (click)="sortData('name')" class="flex items-center">
+                <span class="mr-1">Nama</span>
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&" alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
+              </button>
+            </th>
+            
+            <th scope="col" class="px-4 py-2">
+              <button type="button" (click)="sortData('nik')">NIK</button>
+            </th>
+            <th scope="col" class="px-4 py-2">
+              <button type="button" (click)="sortData('jenis_pengajuan')">Jenis Pengajuan</button>
+            </th>
+            <th scope="col" class="px-4 py-2">
+              <button type="button" (click)="sortData('status_pengajuan')">Status Pengajuan</button>
+            </th>
+            <th scope="col" class="px-4 py-2">
+              <button type="button" (click)="sortData('admin')">Admin</button>
+            </th>
+            <th scope="col" class="px-4 py-2">Tanggal Realisasi</th>
+            <th scope="col" class="px-4 py-2">Aksi</th>
+          </tr>
+          
           </thead>
         <!-- Loading and Error Handling -->
           <tbody>
-            <tr *ngFor="let form of forms">
+            <tr *ngFor="let form of filteredForms">
               <td class="px-4 py-2">{{ form.idFormPengajuanPinjaman }}</td>
               <td class="px-4 py-2">{{ form.formToUser.nameUser }}</td>
               <td class="px-4 py-2">{{ form.formToUser.nikUser }}</td>
@@ -83,7 +105,7 @@
               </td>
               <td class="px-4 py-2">{{form.formToAdmin?.nameAdmin}}</td>
               <!-- <td class="px-4 py-2">{{ form.tanggalLahir | date: 'longDate' }}</td> -->
-              <td class="px-4 py-2"> </td>
+              <td class="px-4 py-2">{{ form.tanggalRealisasi | date:'yyyy-MM-dd' }}</td>
               <td class="px-4 py-2">
                 <a [routerLink]="['../', form.idFormPengajuanPinjaman]" class="text-blue-600 hover:underline">View</a>
               </td>
@@ -91,44 +113,31 @@
           </tbody>
         </ng-container>
       </table>
-      <nav
-        class="flex items-center flex-column flex-wrap md:flex- justify-between pt-4"
-        aria-label="Table navigation"
-      >
-        <span
-          class="text-sm font-normal text-gray-500 dark:text-gray-400 mb-4 md:mb-0 block w-full md:inline md:w-auto"
-          >Showing
-          <span class="font-semibold text-gray-900 dark:text-white">1-10</span>
-          of
-          <span class="font-semibold text-gray-900 dark:text-white"
-            >1000</span
-          ></span
-        >
-        <ul class="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">
-          <li>
-            <a
-              href="#"
-              class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >Previous</a
-            >
-          </li>
-          <li>
-            <a
-              href="#"
-              class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >1</a
-            >
-          </li>
-          <!-- Add more pages here if needed -->
-          <li>
-            <a
-              href="#"
-              class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >Next</a
-            >
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
+     <!-- Pagination -->
+     <nav class="flex items-center justify-between">
+      <div class="flex flex-wrap items-center justify-center">
+        <button class="px-2 py-1 border border-white-300 rounded-lg mr-2" (click)="previousPage()">Previous</button>
+        <!-- Looping untuk tombol halaman -->
+        <ng-container *ngFor="let page of totalPagesArray">
+          <button class="px-2 py-1 border border-white-300 rounded-lg mr-2" [class.bg-blue-500]="page === currentPage" (click)="goToPage(page)">
+            {{ page }}
+          </button>
+        </ng-container>
+        <button class="px-2 py-1 border border-white-300 rounded-lg" (click)="nextPage()">Next</button>
+      </div>
+      <div class="flex flex-wrap items-center justify-center mt-2">
+        <!-- Pilihan jumlah data per halaman -->
+        <select style="background-color: #1F96F9; color: white;" class="px-2 py-1 border border-white-300 rounded-lg" [(ngModel)]="pageSize" (change)="changePageSize()" title="Jumlah Data Per Halaman">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="100">100</option>
+        </select>
+      </div>
+    </nav>
+    
+    
+    
 
+  </div>
+</div>

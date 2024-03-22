@@ -29,9 +29,11 @@ export class AuthService {
         localStorage.setItem('id', response.data.id);
         this.router.navigate(['pengajuan-pinjaman']);
       }
-    } catch (error) {
+    } 
+    catch (error) {
       console.error('Login failed!', error);
-      alert('User is not found!');
+      console.log('User is not found!');
+      
     }
   }
 
