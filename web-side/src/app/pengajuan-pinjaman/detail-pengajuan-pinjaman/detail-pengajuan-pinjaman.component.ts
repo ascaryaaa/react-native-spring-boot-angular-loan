@@ -144,7 +144,7 @@ export class DetailPengajuanPinjamanComponent implements OnInit {
       nameUser: this.form?.formToUser.nameUser ?? null,
       nikUser: this.form?.formToUser.nikUser ?? null,
       statusTagihan: "Hijau",
-      kolektabilitas: "Ok",
+      kolektabilitas: 0,
       deskripsiPembayaran: "test",
       amountsSisaPokok: null,
       rebatesSisaPokok: null,
@@ -207,7 +207,8 @@ export class DetailPengajuanPinjamanComponent implements OnInit {
       next: (currentData) => {
         const updatedData = {
           ...currentData,
-          statusPengajuan: "Ditolak"
+          statusPengajuan: "Ditolak",
+          formToAdmin: this.admin,
         };
         this.pengajuanPinjamanService.updateStatusPengajuanPinjaman(id, updatedData).subscribe({
           next: (response) => {

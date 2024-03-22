@@ -7,7 +7,7 @@ export interface Pinjaman {
     nameUser: string | null; // Updated to allow null
     nikUser: string | null; // Updated to allow null
     statusTagihan: string | null; // Updated to allow null
-    kolektabilitas: string | null; // Updated to allow null
+    kolektabilitas: number | null; // Updated to allow null
     deskripsiPembayaran: string | null; // Updated to allow null
     amountsSisaPokok: number | null;
     rebatesSisaPokok: number | null;

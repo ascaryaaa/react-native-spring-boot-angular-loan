@@ -73,10 +73,6 @@ public class FormPengajuan {
     @Column(name = "NPWP_form_pengajuan_pinjaman")
     private String npwp;
 
-    // Unit affiliated with BNI (Bank Negara Indonesia) of the debtor
-    @Column(name = "unit_BNI_terderkat_form_pengajuan_pinjaman")
-    private String unitBNI;
-
     // Net monthly income of the debtor
     @Column(name = "penghasilan_bersih_perBulan_form_pengajuan_pinjaman")
     private Long penghasilanBersihPerbulan;
