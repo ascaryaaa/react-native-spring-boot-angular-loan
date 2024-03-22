@@ -6,6 +6,7 @@ import { ListPengajuanPinjamanComponent } from './list-pengajuan-pinjaman/list-p
 import { HttpClientModule } from '@angular/common/http';
 import { ConfirmationModalComponent } from "../confirmation-modal/confirmation-modal.component";
 import { RejectingModalComponent } from "../rejecting-modal/rejecting-modal.component";
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -19,7 +20,8 @@ import { RejectingModalComponent } from "../rejecting-modal/rejecting-modal.comp
         RoutingModule,
         HttpClientModule,
         ConfirmationModalComponent,
-        RejectingModalComponent
-    ]
+        RejectingModalComponent,
+        FormsModule 
+    ], bootstrap: [ListPengajuanPinjamanComponent]
 })
 export class PengajuanPinjamanModule { }
