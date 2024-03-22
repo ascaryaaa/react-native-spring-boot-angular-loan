@@ -62,10 +62,10 @@ export class ListPengajuanPinjamanComponent {
     }
 }
 
-  search(): void {
-    this.filterForms();
-    this.calculateTotalPages();
-    this.navigateToPage(1);
+   search(): void {
+    this.filteredForms = this.forms.filter(form =>
+      form.formToUser.nameUser.toLowerCase().includes(this.searchText.trim().toLowerCase())
+    );
   }
 
   changePageSize(): void {
