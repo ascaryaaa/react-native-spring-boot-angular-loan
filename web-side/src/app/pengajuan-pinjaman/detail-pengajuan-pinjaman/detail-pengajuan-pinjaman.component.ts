@@ -205,6 +205,19 @@ export class DetailPengajuanPinjamanComponent implements OnInit {
     }
     this.showConfirmationModalTolak = false;
   }
+  showDownloadModal = false; // Set to true initially to display popup
+
+  download(confirmed: boolean) {
+    if (confirmed) {
+      this.rejectPengajuan()
+      console.log('Action confirmed');
+    } else {
+      // Cancel the action
+      console.log('Action cancelled');
+    }
+    this.showDownloadModal = false; // Hide popup after download
+    // this.downloadSLIK();
+  }
 
   createPinjamanAndChangeStatus() {
     if (!this.form) {
