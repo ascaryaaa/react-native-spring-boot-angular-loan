@@ -25,7 +25,7 @@ public class Admin {
     private String hashedIdAdmin;
 
     // Admin's full name
-    @Column(name = "name_admin")
+    @Column(name = "name_admin", unique = true)
     private String nameAdmin;
 
     // Admin's NPP (Employee Id)
