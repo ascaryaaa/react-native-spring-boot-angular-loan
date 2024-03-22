@@ -11,7 +11,12 @@ export class ListPengajuanPinjamanComponent {
   forms: FormPengajuanPinjaman[] = [];
   filteredForms: FormPengajuanPinjaman[] = [];
   searchText: string = '';
-pageSize: number = 10;
+  pageSize: number = 10;
+  currentPage: number = 1; // Declare currentPage property
+  totalPages: number = 0; // Declare totalPages property
+  totalPagesArray: number[] = []; // Declare totalPagesArray property
+  sortDirection: 'asc' | 'desc' = 'asc'; // Declare sortDirection property
+  
   constructor(private pengajuanPinjamanService: PengajuanPinjamanService) {}
 
   ngOnInit() {
