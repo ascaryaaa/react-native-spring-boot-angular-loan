@@ -105,7 +105,7 @@
               </td>
               <td class="px-4 py-2">{{form.formToAdmin?.nameAdmin}}</td>
               <!-- <td class="px-4 py-2">{{ form.tanggalLahir | date: 'longDate' }}</td> -->
-              <td class="px-4 py-2"> </td>
+              <td class="px-4 py-2">{{ form.tanggalRealisasi | date:'yyyy-MM-dd' }}</td>
               <td class="px-4 py-2">
                 <a [routerLink]="['../', form.idFormPengajuanPinjaman]" class="text-blue-600 hover:underline">View</a>
               </td>

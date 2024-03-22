@@ -1,83 +1,3 @@
-// import { PengajuanPinjamanService } from '../pengajuan-pinjaman.service';
-// import { FormDetailResponse, FormPengajuanPinjaman } from '../pengajuan-pinjaman';
-// import { ActivatedRoute } from '@angular/router';
-
-// @Component({
-//   selector: 'app-detail',
-//   templateUrl: './detail-pengajuan-pinjaman.component.html',
-//   styleUrl: './detail-pengajuan-pinjaman.component.css'
-// })
-// export class DetailPengajuanPinjamanComponent {
-//   form?: FormDetailResponse;
-
-//   constructor(private router: ActivatedRoute, private pengajuanPinjamanService: PengajuanPinjamanService) { }
-
-//   async ngOnInit() {
-//     this.refreshFormDetail();
-//   }
-
-//   async refreshFormDetail() {
-//     const id: number = this.router.snapshot.params['id'];
-//     try{
-//       this.pengajuanPinjamanService.getDetailPengajuanPinjaman(id).subscribe({
-//         next: (data) => {
-//           this.form = data;
-//           console.log(this.form);
-//         },
-//       })
-//     } catch (error) {
-//       console.error('Error fetching data:', error)
-//     }
-//   }
-//   acceptPengajuan(id: number) {
-//     this.pengajuanPinjamanService.getDetailPengajuanPinjaman(id).subscribe({
-//       next: (currentData) => {
-//         const updatedData = {
-//           ...currentData,
-//           statusPengajuan: "Diterima"
-//         };
-//         this.pengajuanPinjamanService.updateStatusPengajuanPinjaman(id, updatedData).subscribe({
-//           next: (response) => {
-//             console.log("Status updated successfully", response);
-//             // Handle successful update here
-//           },
-//           error: (error) => {
-//             console.error("Error updating status:", error);
-//             // Handle error here
-//           }
-//         });
-//       },
-//       error: (error) => {
-//         console.error("Error fetching current data:", error);
-//         // Handle error here
-//       }
-//     });
-//   }
-//   rejectPengajuan(id: number) {
-//     this.pengajuanPinjamanService.getDetailPengajuanPinjaman(id).subscribe({
-//       next: (currentData) => {
-//         const updatedData = {
-//           ...currentData,
-//           statusPengajuan: "Ditolak"
-//         };
-//         this.pengajuanPinjamanService.updateStatusPengajuanPinjaman(id, updatedData).subscribe({
-//           next: (response) => {
-//             console.log("Status updated successfully", response);
-//             // Handle successful update here
-//           },
-//           error: (error) => {
-//             console.error("Error updating status:", error);
-//             // Handle error here
-//           }
-//         });
-//       },
-//       error: (error) => {
-//         console.error("Error fetching current data:", error);
-//         // Handle error here
-//       }
-//     });
-//   }
-// }
 import { ActivatedRoute } from '@angular/router';
 import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { PengajuanPinjamanService } from '../pengajuan-pinjaman.service';
@@ -98,13 +18,18 @@ export class DetailPengajuanPinjamanComponent implements OnInit {
   showSLIKTable: boolean = false;
   slikGenerated: boolean = false;
   slikData: any[] = [];
+  currentDate: Date | undefined;
+  formattedDate: string | undefined;
 
   @ViewChild('slikTable') slikTable!: ElementRef;
 
   constructor(
     private router: ActivatedRoute,
-    private pengajuanPinjamanService: PengajuanPinjamanService
-  ) { }
+    private pengajuanPinjamanService: PengajuanPinjamanService,
+  ) { 
+    this.currentDate = new Date();
+    this.formattedDate = this.currentDate.toISOString();
+  }
 
   ngOnInit() {
     this.refreshFormDetail();
@@ -232,7 +157,7 @@ export class DetailPengajuanPinjamanComponent implements OnInit {
       nameUser: this.form?.formToUser.nameUser ?? null,
       nikUser: this.form?.formToUser.nikUser ?? null,
       statusTagihan: "Hijau",
-      kolektabilitas: "Ok",
+      kolektabilitas: 0,
       deskripsiPembayaran: "test",
       amountsSisaPokok: null,
       rebatesSisaPokok: null,
@@ -257,6 +182,7 @@ export class DetailPengajuanPinjamanComponent implements OnInit {
           ...this.form,
           statusPengajuan: "Diterima",
           formToAdmin: this.admin,
+          tanggalRealisasi: this.formattedDate,
           
         };
         this.pengajuanPinjamanService.updateStatusPengajuanPinjaman(id, updatedData).subscribe({
@@ -294,7 +220,8 @@ export class DetailPengajuanPinjamanComponent implements OnInit {
       next: (currentData) => {
         const updatedData = {
           ...currentData,
-          statusPengajuan: "Ditolak"
+          statusPengajuan: "Ditolak",
+          formToAdmin: this.admin,
         };
         this.pengajuanPinjamanService.updateStatusPengajuanPinjaman(id, updatedData).subscribe({
           next: (response) => {
