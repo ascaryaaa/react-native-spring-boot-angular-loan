@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ConfirmationModalComponent } from "../confirmation-modal/confirmation-modal.component";
 import { RejectingModalComponent } from "../rejecting-modal/rejecting-modal.component";
 import { FormsModule } from '@angular/forms';
+import { NotificationDownloadModalComponent } from '../notification-download-modal/notification-download-modal.component';
 
 
 
@@ -21,6 +22,7 @@ import { FormsModule } from '@angular/forms';
         HttpClientModule,
         ConfirmationModalComponent,
         RejectingModalComponent,
+        NotificationDownloadModalComponent,
         FormsModule 
     ], bootstrap: [ListPengajuanPinjamanComponent]
 })
