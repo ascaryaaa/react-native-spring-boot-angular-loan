@@ -53,7 +53,7 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
       <View style={styles.container}>
         <ScrollView>
           <View>
-            <Text style={{ fontWeight: "600", fontSize: 16, marginBottom: 13 }}>
+            <Text style={{ fontWeight: "600", fontSize: 16, marginBottom: 13, marginTop:24}}>
               Profil Keuangan
             </Text>
             <Text style={styles.text}>Penghasilan Bersih per. Bulan</Text>
@@ -184,8 +184,8 @@ const styles = StyleSheet.create({
   },
   shadow: {
     shadowColor: "#ddd",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.25,
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.40,
     shadowRadius: 15,
   },
   button1: {
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     padding: 12,
     width: "100%",
     backgroundColor: "#FFF",
-    marginBottom: 24,
+    // marginBottom: 24,
   },
   input: {
     width: "100%",
