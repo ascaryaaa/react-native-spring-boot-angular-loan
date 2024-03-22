@@ -15,6 +15,7 @@ import com.cuan.serverside.utils.CustomAuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
@@ -69,6 +70,7 @@ public class AuthController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/login-account")
+//    @Scheduled(cron = )
     public ResponseEntity<?> loginAccount(@RequestBody AccountLoginReq accountLoginReq) {
         try {
             CustomAuthenticationToken authToken = new CustomAuthenticationToken(
