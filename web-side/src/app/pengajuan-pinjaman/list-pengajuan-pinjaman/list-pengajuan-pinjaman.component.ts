@@ -15,7 +15,7 @@ export class ListPengajuanPinjamanComponent {
   currentPage: number = 1;
   totalPages: number = 1;
   totalPagesArray: number[] = [];
-  sortDirection: 'asc' | 'desc' = 'asc';
+  sortDirection: 'asc' | 'desc' = 'asc';
   constructor(private pengajuanPinjamanService: PengajuanPinjamanService) {}
 
   ngOnInit() {
@@ -48,18 +48,27 @@ export class ListPengajuanPinjamanComponent {
   }
 
   calculateTotalPages(): void {
-    this.totalPages = Math.ceil(this.filteredForms.length / this.pageSize); // Menggunakan this.filteredForms.length
+    this.totalPages = Math.ceil(this.filteredForms.length / this.pageSize);
     this.totalPagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
+  
+//   navigateToPage(page: number): void {
+//     const totalPagesAfterChange = Math.ceil(this.filteredForms.length / this.pageSize);
+//     if (page >= 1 && page <= totalPagesAfterChange) {
+//         const startIndex = (page - 1) * this.pageSize;
+//         const endIndex = startIndex + this.pageSize;
+//         this.currentPage = page;
+//         this.filteredForms = this.forms.slice(startIndex, startIndex + this.pageSize);
+//     }
+// }
 
-  navigateToPage(page: number): void {
-    const totalPagesAfterChange = Math.ceil(this.filteredForms.length / this.pageSize);
-    if (page >= 1 && page <= totalPagesAfterChange) {
-        const startIndex = (page - 1) * this.pageSize;
-        const endIndex = startIndex + this.pageSize;
-        this.currentPage = page;
-        this.filteredForms = this.forms.slice(startIndex, endIndex);
-    }
+navigateToPage(page: number): void {
+  if (page >= 1 && page <= this.totalPages) {
+    const startIndex = (page - 1) * this.pageSize;
+    this.currentPage = page;
+    // Recalculate data slice based on updated currentPage and pageSize
+    this.filteredForms = this.forms.slice(startIndex, startIndex + this.pageSize);
+  }
 }
 
    search(): void {
@@ -69,21 +78,27 @@ export class ListPengajuanPinjamanComponent {
   }
 
   changePageSize(): void {
-    this.calculateTotalPages();
-    this.navigateToPage(1);
+    this.calculateTotalPages(); // Hitung ulang jumlah total halaman
+    this.totalPagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1); // Perbarui totalPagesArray
+    this.currentPage = 1; // Navigate to the first page after the change
+    this.navigateToPage(1); // Update the displayed data for the first page
   }
+  
+  
 
   previousPage(): void {
     if (this.currentPage > 1) {
-      this.navigateToPage(this.currentPage - 1);
+      this.currentPage -= 1; // Kurangi currentPage
+      this.navigateToPage(this.currentPage); // Perbarui tampilan ke halaman sebelumnya
     }
   }
 
   nextPage(): void {
-    if (this.currentPage < this.totalPages) {
-      this.navigateToPage(this.currentPage + 1);
-    }
+  if (this.currentPage < this.totalPages) {
+    this.currentPage += 1; // Tambahkan currentPage
+    this.navigateToPage(this.currentPage); // Perbarui tampilan ke halaman berikutnya
   }
+}
 
   goToPage(page: number): void {
     if (page >= 1 && page <= this.totalPages) {
