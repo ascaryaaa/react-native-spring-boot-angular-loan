@@ -1,21 +1,26 @@
 .not-found-container {
   display: flex;
-  justify-content: center; /* Centers horizontally in the viewport */
-  align-items: center; /* Centers vertically in the viewport */
-  height: 100vh; /* Full height of the viewport */
-  text-align: center;
-  flex-direction: column; /* Stack children vertically */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100vh;
+  text-align: left; /* Align text to the left */
+  flex-direction: row;
+  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
+  color: black; /* Set text color to black */
+  /* font-size is inherited and thus not set here to avoid altering text size */
 }
 
 .container {
   display: flex;
-  flex-direction: column; /* Aligns children (text and button) in a column */
-  justify-content: center; /* Centers container's content vertically */
-  align-items: center; /* Centers container's content horizontally */
-  font-size: 32px;
+  justify-content: center; /* Center horizontally */
+  align-items: start; /* Align items to start, affecting vertical alignment */
+  height: 100vh;
+  text-align: left; /* Align text to the left */
+  flex-direction: column;
+  /* font-size: 32px; Already defined, not changed */
   font-weight: 400;
-  color: black;
-  font-family: Montserrat;
+  color: black; /* Set text color to black */
+  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
 }
 
 .btn-with-image {
@@ -24,11 +29,9 @@
   padding: 8px 12px;
   cursor: pointer;
   transition: background-color 0.3s;
-  color: #3267E3;
-  font-size: 28px;
+  color: #3267E3; /* Button text color */
   font-weight: 400;
-  font-family: Montserrat;
-  margin-top: 20px; /* Adds some space between the text and the button */
+  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
 }
 
 .btn-with-image svg {
