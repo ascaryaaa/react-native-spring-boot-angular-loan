@@ -14,12 +14,6 @@
   </div>
 </ng-template>
 
-<ng-container *ngIf="loading">
-  <div class="flex justify-center items-center">
-    <div class="loader">Loading...</div>
-  </div>
-</ng-container>
-
 <div class="p-4 sm:ml-64">
     <div class="p-4 border-2 border-gray-200 rounded-lg dark:border-gray-700">
       <div
@@ -56,6 +50,11 @@
         class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
         style="margin-bottom: 20px"
       >
+      <ng-container *ngIf="loading">
+        <div class="flex justify-center items-center">
+          <div class="loader">Loading...</div>
+        </div>
+      </ng-container>
       <ng-container *ngIf="!loading">
       <ng-container *ngIf="pinjamans.length > 0; else noData">
         <thead
