@@ -34,11 +34,11 @@ export class AppComponent implements OnInit {
       // The event is now filtered but still needs a type guard
       if (event instanceof NavigationEnd) {
         // Now TypeScript knows `event` is definitely a NavigationEnd event
-        if (event.urlAfterRedirects === '/login') {
+        if (event.urlAfterRedirects === '/login' || event.urlAfterRedirects === '/not-found') {
           this.sidebarService.toggleSidebar(false);
         } else {
           this.sidebarService.toggleSidebar(true);
-        }
+        }        
       }
     });
   }

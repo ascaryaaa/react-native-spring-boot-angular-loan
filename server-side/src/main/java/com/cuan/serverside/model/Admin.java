@@ -21,12 +21,11 @@ public class Admin {
     @Column(name = "id_admin", updatable = false, nullable = false) // Can't be updated or null
     private Long idAdmin;
 
-//    @JsonIgnore
-//    @OneToMany(mappedBy = "formToAdmin")
-//    private List<FormPengajuan> adminToForm;
+    @Column(name = "hashed_id_admin")
+    private String hashedIdAdmin;
 
     // Admin's full name
-    @Column(name = "name_admin")
+    @Column(name = "name_admin", unique = true)
     private String nameAdmin;
 
     // Admin's NPP (Employee Id)

@@ -41,6 +41,13 @@ public class FormPengajuan {
     @OneToOne(mappedBy = "pinjamanToForm")
     private DetailPinjaman formToPinjaman;
 
+    @Column(name = "hashed_id_form_pengajuan_pinjaman")
+    private String hashedIdForm;
+
+    // Generate CIF from Id
+    @Column(name = "cif")
+    private String cif;
+
     // Gender of debtor
     @Column(name = "jenis_kelamin_form_pengajuan_pinjaman")
     private String jenisKelamin;
@@ -72,10 +79,6 @@ public class FormPengajuan {
     // Taxpayer Identification Number (NPWP) of the debtor
     @Column(name = "NPWP_form_pengajuan_pinjaman")
     private String npwp;
-
-    // Unit affiliated with BNI (Bank Negara Indonesia) of the debtor
-    @Column(name = "unit_BNI_terderkat_form_pengajuan_pinjaman")
-    private String unitBNI;
 
     // Net monthly income of the debtor
     @Column(name = "penghasilan_bersih_perBulan_form_pengajuan_pinjaman")

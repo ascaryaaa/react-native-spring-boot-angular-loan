@@ -9,6 +9,10 @@ import com.cuan.serverside.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.time.Instant;
+
 @Service // Define Service Implementation
 public class DetailPinjamanServiceImpl implements DetailPinjamanService{
     // Dependency Injection to prevent coupling
@@ -38,14 +42,43 @@ public class DetailPinjamanServiceImpl implements DetailPinjamanService{
 
     @Override
     public DetailPinjaman saveDetailPinjaman(DetailPinjaman detailPinjaman) {
-//        Long idForm = detailPinjaman.getPinjamanToForm().getIdFormPengajuanPinjaman();
-//        FormPengajuan formPengajuan = formPengajuanRepository.findById(idForm).orElse(null);
-//        Long idUser = formPengajuan.getFormToUser().getIdUser();
-//        User user = userRepository.findById(idUser).orElse(null);
-//
-//        detailPinjaman.setNameUser(user.getNameUser());
-//        detailPinjaman.setNikUser(user.getNikUser());
+        detailPinjamanRepository.save(detailPinjaman);
+        String cif = hashIdWithEpochTime(detailPinjaman.getIdPinjaman());
+        detailPinjaman.setHashedIdPinjaman(cif);
         return detailPinjamanRepository.save(detailPinjaman);
+    }
+
+    public static String hashIdWithEpochTime(Long id) {
+        try {
+            // Get current epoch time in seconds
+            long epochTime = Instant.now().getEpochSecond();
+
+            // Concatenate ID and epoch time
+            String combinedString = id + "-" + epochTime;
+
+            // Get SHA-256 MessageDigest instance
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+
+            // Compute the hash value of the combined string
+            byte[] hashBytes = digest.digest(combinedString.getBytes());
+
+            // Convert the hash bytes to a hexadecimal string
+            StringBuilder hexString = new StringBuilder();
+            for (byte hashByte : hashBytes) {
+                String hex = Integer.toHexString(0xff & hashByte);
+                if (hex.length() == 1) {
+                    hexString.append('0');
+                }
+                hexString.append(hex);
+            }
+
+            // Return the hexadecimal string as the hash
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            // Handle NoSuchAlgorithmException
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override

@@ -9,7 +9,7 @@ import {
   Pressable,
 } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import ModalDelete from "../components/ModalDelete";
+import ModalDelete from "./ModalDelete";
 
 const ListPengajuanPinjaman = ({ navigation }) => {
 
@@ -22,40 +22,56 @@ const ListPengajuanPinjaman = ({ navigation }) => {
   );
 
   const [modalVisible, setModalVisible] = useState(false);
+  const [deletedId, setDeletedId] = useState(null);
+  const [result, setResult] = useState("");
 
   const closeModal = () => {
     setModalVisible(false);
   };
 
   const openModal = () => {
+    setDeletedId();
     setModalVisible(true);
   };
+
+  const Data = [
+    {
+      id: 1,
+      img : require("../../../mobile-side/src/assets/img_simulasi_pensiun.png"),
+      title: "BNI Fleksi Pensiun",
+      date: "10/03/2024",
+      period: "6 Bulan",
+      amount: "Rp 100.000.000",
+      status: "Ditolak",
+    },
+  ];
   
   return (
     <View style={styles.container}>
-      {/* <Text style={{marginBottom: 10}}>List Pengajuan Pinjaman</Text> */}
-      {/* <TouchableOpacity onPress={openModal}> */}
-        <View style={{flexDirection: 'row', marginBottom: 15}}>
-          <View style={{width: '30%', marginRight: 5}}>
-              <Image 
-              source={require("../../../mobile-side/src/assets/img_simulasi_pensiun.png")}
-              style={styles.image}/>
-          </View>
-          <View style={{width: '70%', flexDirection: 'column'}}>
-            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <Text style={styles.textHeader}>BNI Fleksi Pensiun</Text>
-              <TouchableOpacity onPress={openModal}>
-              <Image 
-              source={require("../../../mobile-side/src/assets/icon_delete.png")}/>              
-              </TouchableOpacity>
+      <View style={styles.shadow}>
+        {Data.map(view => (
+          <View key={view.id} style={{flexDirection: 'row', marginBottom: 10, padding: 10, borderRadius: 5, backgroundColor: 'white' }}>
+            <View style={{ width: '30%', marginRight: 5}}>
+              <Image source={view.img} style={styles.image} />
             </View>
-            <Text style={styles.textContent}>Tanggal Pengajuan : 10/03/2024</Text>
-            <Text style={styles.textContent}>Periode Peminjaman : 6 Bulan</Text>
-            <Text style={styles.textContent}>Total Pengajuan : Rp. 100.000.000</Text>
-            <Text style={styles.textContent}>Status : Ditolak</Text>
+            <View style={{flexDirection: 'column', width: '70%'}}>
+              <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                <Text style={styles.textHeader}>{view.title}</Text>
+                <TouchableOpacity onPress={() => openModal(view.id)}>
+                  <Image 
+                  source={require("../../../mobile-side/src/assets/icon_delete.png")}/>              
+                </TouchableOpacity>
+              </View>
+              <Text style={styles.textContent}>Tanggal Pengajuan : {view.date}</Text>
+              <Text style={styles.textContent}>Periode Peminjaman : {view.period}</Text>
+              <Text style={styles.textContent}>Total Pengajuan : {view.amount}</Text>
+              <View style={styles.buttonStatus}>
+                <Text style={styles.textStatus}>{view.status}</Text>
+              </View>
+            </View>
           </View>
-        </View>
-      {/* </TouchableOpacity> */}
+        ))}
+      </View>
 
       <Modal
         animationType="fade"
@@ -93,8 +109,8 @@ export default ListPengajuanPinjaman;
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 18,
-    paddingHorizontal: 18,
+    // paddingTop: 18,
+    paddingHorizontal: 10,
     // justifyContent: "center",
     alignItems: "center",
     // marginTop: 100,
@@ -122,7 +138,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: "left",
   },
-
+  shadow: {
+    shadowColor: "#ddd",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.7,
+    shadowRadius: 10,
+  },
   button: {
     backgroundColor: "#18C1CD",
     padding: 5,
@@ -202,6 +223,19 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '400',
     marginBottom: 4,
+  },
+  textStatus: {
+    color: "white",
+    fontSize: 12,
+    fontWeight: "700",
+  },
+  buttonStatus : {
+    paddingVertical: 2,
+    paddingHorizontal: 15,
+    borderRadius: 50,
+    backgroundColor: "#D4352A",
+    borderColor: "#D4352A",
+    width: '30%'
   },
   modalContainer: {
     flex: 1,

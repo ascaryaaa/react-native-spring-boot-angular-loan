@@ -1,22 +1,22 @@
 package com.cuan.serverside.model.response;
 
 public class LoginResponse {
-    private Long id;
+    private String hashedId;
     private String username;
     private String token;
 
-    public LoginResponse(Long id, String username, String token) {
-        this.id = id;
+    public LoginResponse(String hashedId, String username, String token) {
+        this.hashedId = hashedId;
         this.username = username;
         this.token = token;
     }
 
-    public Long getId() {
-        return id;
+    public String getHashedId() {
+        return hashedId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setHashedId(String hashedId) {
+        this.hashedId = hashedId;
     }
 
     public String getUsername() {

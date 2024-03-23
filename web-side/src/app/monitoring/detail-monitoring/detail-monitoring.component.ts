@@ -28,7 +28,16 @@ export class DetailMonitoringComponent {
       next: (data) => {
         this.pinjamans = data;
         console.log(this.pinjamans); // For debugging
-        this.RenderChart(this.pinjamans.pinjamanToForm?.jumlahPinjaman, this.pinjamans.sisaTagihan);
+        if (this.pinjamans.pinjamanToForm?.formToJenis.idJenisPinjaman === 1) {
+          // Use hargaRumah for jenisPinjamanId 1
+          this.RenderChart(this.pinjamans.pinjamanToForm?.hargaRumah, this.pinjamans.totalAmounts);
+        } else if (this.pinjamans.pinjamanToForm?.formToJenis.idJenisPinjaman === 2 || this.pinjamans.pinjamanToForm?.formToJenis.idJenisPinjaman === 3) {
+          // Use jumlahPinjaman for jenisPinjamanId 2 or 3
+          this.RenderChart(this.pinjamans.pinjamanToForm?.jumlahPinjaman, this.pinjamans.totalAmounts);
+        } else {
+          console.error('Invalid jenisPinjamanId:', this.pinjamans.pinjamanToForm?.formToJenis.idJenisPinjaman);
+          // Handle invalid jenisPinjamanId if necessary
+        }
       },
       error: (error) => {
         console.error('Error fetching data:', error);
@@ -38,14 +47,14 @@ export class DetailMonitoringComponent {
 
   
   RenderChart(totalPinjaman: any, sisapinjaman: any) {
-    const persentaseSisaPinjaman = Math.round(((sisapinjaman / totalPinjaman) * 100));
+    const persentaseSisaPinjaman = Math.round(sisapinjaman / totalPinjaman * 100);
   
     const myChart = new Chart("RenderChart", {
       type: 'pie',
       data: {
         labels: [],
         datasets: [{
-          data: [totalPinjaman - sisapinjaman, sisapinjaman],
+          data: [sisapinjaman, totalPinjaman - sisapinjaman],
           backgroundColor: ['rgb(246, 131, 16)', 'rgb(245, 245, 245)'],
           borderColor: ['rgb(246, 131, 16)', 'rgb(245, 245, 245)'],
           borderWidth: 1,

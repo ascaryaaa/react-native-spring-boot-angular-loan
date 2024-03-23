@@ -15,6 +15,7 @@ import com.cuan.serverside.utils.CustomAuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
@@ -56,7 +57,7 @@ public class AuthController {
                 // Initialize which Admin from admin login request's username
                 Admin admin = adminRepository.findByUsernameAdmin(adminLoginReq.getUsername());
                 // Pass the admin and put get the Id in the response
-                return ResponseEntity.ok(new LoginResponse(admin.getIdAdmin(),adminLoginReq.getUsername(), token));
+                return ResponseEntity.ok(new LoginResponse(admin.getHashedIdAdmin(),adminLoginReq.getUsername(), token));
             } else {
                 throw new BadCredentialsException("Invalid username or password");
             }
@@ -69,6 +70,7 @@ public class AuthController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/login-account")
+//    @Scheduled(cron = )
     public ResponseEntity<?> loginAccount(@RequestBody AccountLoginReq accountLoginReq) {
         try {
             CustomAuthenticationToken authToken = new CustomAuthenticationToken(
@@ -84,7 +86,7 @@ public class AuthController {
                 // Initialize which Account from account login request's username
                 Account account = accountRepository.findByUsernameAccount(accountLoginReq.getUsername());
                 // Pass the account and put get the Id in the response
-                return ResponseEntity.ok(new LoginResponse(account.getAccount_Id() ,accountLoginReq.getUsername(), token));
+                return ResponseEntity.ok(new LoginResponse(account.getHashedIdAccount() ,accountLoginReq.getUsername(), token));
             } else {
                 throw new BadCredentialsException("Invalid username or password");
             }

@@ -16,10 +16,13 @@ export class ListPengajuanPinjamanComponent {
   totalPages: number = 1;
   totalPagesArray: number[] = [];
   sortDirection: 'asc' | 'desc' = 'asc';
+  loading = true;
+
   constructor(private pengajuanPinjamanService: PengajuanPinjamanService) {}
 
   ngOnInit() {
     this.refreshFormList();
+    this.loadData();
   }
 
   async refreshFormList() {
@@ -71,14 +74,11 @@ navigateToPage(page: number): void {
   }
 }
 
-
-
-
-search(): void {
-  this.filteredForms = this.forms.filter(form =>
-    form.formToUser.nameUser.toLowerCase().includes(this.searchText.trim().toLowerCase())
-  );
-}
+  search(): void {
+    this.filterForms();
+    this.calculateTotalPages();
+    this.navigateToPage(1);
+  }
 
   changePageSize(): void {
     this.totalPages = Math.ceil(this.filteredForms.length / this.pageSize);
@@ -100,7 +100,7 @@ search(): void {
     this.currentPage += 1; // Tambahkan currentPage
     this.navigateToPage(this.currentPage); // Perbarui tampilan ke halaman berikutnya
   }
-}
+  }
 
   goToPage(page: number): void {
     if (page >= 1 && page <= this.totalPages) {
@@ -121,6 +121,7 @@ search(): void {
     this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
   
 }
+
 sortData(column: string): void {
   switch (column) {
     case 'name':
@@ -188,6 +189,20 @@ sortData(column: string): void {
     default:
       break;
   }
+}
+
+loadData() {
+  this.loading = true;
+  this.pengajuanPinjamanService.getListPengajuanPinjaman().subscribe({
+    next: (response) => {
+      this.forms = response;
+      this.loading = false;
+    },
+    error: (error) => {
+      console.error('There was an error!', error);
+      this.loading = false;
+    }
+  });
 }
 
 }

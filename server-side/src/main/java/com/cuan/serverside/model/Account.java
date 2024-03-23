@@ -18,6 +18,9 @@ public class Account {
     @Column(name = "account_Id", updatable = false, nullable = false) // Can't be updated or null
     private Long account_Id;
 
+    @Column(name = "hashed_id_account")
+    private String hashedIdAccount;
+
     // PIN of account
     @Column(name = "mpin_account")
     private String passwordAccount;

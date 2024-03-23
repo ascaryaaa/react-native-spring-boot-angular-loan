@@ -10,6 +10,8 @@ public interface AdminService {
     // Define GET users by id in service
     public Admin getAdminId(Long id);
 
+    public Admin getAdminByHashedId(String hashedId);
+
     // Define POST user in service
     public Admin saveAdmin(Admin admin);
 

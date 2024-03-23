@@ -1,17 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../auth/auth.service';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router'; // Import Router dari @angular/router
+import { Router } from '@angular/router';
 import { LogoutModalComponent } from '../sidebar/logout-modal/logout-modal.component';
 import { PengajuanPinjamanService } from '../pengajuan-pinjaman/pengajuan-pinjaman.service';
 import { AdminDetailResponse } from '../pengajuan-pinjaman/pengajuan-pinjaman';
-
-export type AdminsResponse = Admin[];
-export interface Admin {
-  idAdmin: number;
-  nameAdmin: string;
-  nppAdmin: string;
-}
 
 @Component({
   selector: 'app-sidebar',
@@ -59,19 +52,17 @@ export class SidebarComponent implements OnInit {
   }
 
   refreshAdminDetail() {
-    const idString: string | null = localStorage.getItem('id');
-    if (idString === null) {
-      // Handle the case where 'id' is not found in localStorage
-      console.error('ID not found in localStorage');
-    } else {
-      const id: number = +idString;
-      this.pengajuanPinjamanService.getDetailAdmin(id).subscribe({
-        next: (dataAdmin) => {
-          this.admin = dataAdmin;
-          console.log(this.admin);
-        },
-        error: (error) => console.error('Error fetching data:', error)
-      });
+    const hashedId: string | null = this.authService.getHashedId(); // Retrieve hashedId from AuthService
+    if (!hashedId) {
+      console.error('HashedId not found in localStorage');
+      return;
     }
+    this.pengajuanPinjamanService.getDetailAdmin(hashedId).subscribe({
+      next: (dataAdmin) => {
+        this.admin = dataAdmin;
+        console.log(this.admin);
+      },
+      error: (error) => console.error('Error fetching admin data:', error)
+    });
   }
 }
