@@ -1,42 +1,38 @@
 .not-found-container {
-    display: flex; /* Gunakan flexbox */
-    justify-content: center; /* Menengahkan secara horizontal */
-    align-items: center; /* Menengahkan secara vertikal */
-    height: 100vh;
-    text-align: center;
-    flex-direction: row;
-    
-}
-  .container {
-    display: flex; /* Gunakan flexbox */
-    justify-content: center; /* Menengahkan secara horizontal */
-    align-items: start; /* Menengahkan secara vertikal */
-    height: 100vh;
-    text-align: center;
-    flex-direction: column;
-    font-size: 32px;
-    font-weight: 400;
-    color: black;
-    font-family: Montserrat;
-  }
-  .btn-with-image {
-    display: flex;
-    align-items: center;
-    padding: 8px 12px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    color: #3267E3;
-    font-size: 28px;
-    font-weight: 400;
-    font-family: Montserrat;
-    
+  display: flex;
+  justify-content: center; /* Centers horizontally in the viewport */
+  align-items: center; /* Centers vertically in the viewport */
+  height: 100vh; /* Full height of the viewport */
+  text-align: center;
+  flex-direction: column; /* Stack children vertically */
 }
 
+.container {
+  display: flex;
+  flex-direction: column; /* Aligns children (text and button) in a column */
+  justify-content: center; /* Centers container's content vertically */
+  align-items: center; /* Centers container's content horizontally */
+  font-size: 32px;
+  font-weight: 400;
+  color: black;
+  font-family: Montserrat;
+}
+
+.btn-with-image {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  color: #3267E3;
+  font-size: 28px;
+  font-weight: 400;
+  font-family: Montserrat;
+  margin-top: 20px; /* Adds some space between the text and the button */
+}
 
 .btn-with-image svg {
-    width: 40px;
-    height: 40px;
-    margin-right: 8px;
+  width: 40px;
+  height: 40px;
+  margin-right: 8px;
 }
-
-  
