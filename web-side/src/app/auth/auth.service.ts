@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import axios from 'axios';
 import { User, UserForm } from './auth';
+import { loginAdmin } from '../config/api';
 
 @Injectable({
   providedIn: 'root',
@@ -12,28 +13,25 @@ export class AuthService {
   constructor(private router: Router) {}
 
   async login(form: UserForm): Promise<void> {
-    console.log('Form username:', form.username);
-    console.log('Form password:', form.password);
-
     try {
-      const response = await axios.post('http://localhost:8083/rest/auth/login-admin', {
+      const response = await axios.post(loginAdmin, {
         username: form.username,
         password: form.password,
       });
-
-      console.log('Response:', response);
-
-      if (response) {
-        localStorage.setItem('user', JSON.stringify(response.data));
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('id', response.data.id);
-        this.router.navigate(['pengajuan-pinjaman']);
-      }
-    } 
-    catch (error) {
+      localStorage.setItem('user', JSON.stringify(response.data));
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('hashedId', response.data.hashedId);
+      this.router.navigate(['pengajuan-pinjaman']);
+      return Promise.resolve();
+    } catch (error: any) {
       console.error('Login failed!', error);
-      console.log('User is not found!');
-      
+      if (error.response && error.response.status === 401) {
+        return Promise.reject('Unauthorized');
+      } else if (error.response && error.response.status === 400) {
+        return Promise.reject('UserNotFound');
+      } else {
+        return Promise.reject('ServerError');
+      }
     }
   }
 
@@ -49,15 +47,14 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
-    localStorage.removeItem('id');
+    localStorage.removeItem('hashedId');
     this.router.navigate(['/login']);
   }
-
 
   getToken(): string | null {
     return localStorage.getItem('token');
   }
-  getId(): string | null {
-    return localStorage.getItem('id');
+  getHashedId(): string | null {
+    return localStorage.getItem('hashedId');
   }
 }

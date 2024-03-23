@@ -27,7 +27,7 @@ public class AdminController {
 
     // GET Function of API, Reads admin data from 'pengajuan' database by id
     @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public Admin getAdminById(@PathVariable Long id){
         return AdminService.getAdminId(id);
     }
@@ -36,5 +36,11 @@ public class AdminController {
     @PostMapping("/post-admin")
     public Admin saveAdmin(@RequestBody Admin Admin){
         return AdminService.saveAdmin(Admin);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/hid/{hashedId}")
+    public Admin getAdminByHashedId(@PathVariable String hashedId){
+        return AdminService.getAdminByHashedId(hashedId);
     }
 }

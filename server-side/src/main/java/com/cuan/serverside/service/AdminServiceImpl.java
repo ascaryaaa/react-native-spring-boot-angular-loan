@@ -33,6 +33,10 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public Admin getAdminByHashedId(String hashedId) {
+        return adminRepository.findByHashedIdAdmin(hashedId);
+    }
+    @Override
     public Admin saveAdmin(Admin admin) {
         adminRepository.save(admin);
         String cif = hashIdWithEpochTime(admin.getIdAdmin());

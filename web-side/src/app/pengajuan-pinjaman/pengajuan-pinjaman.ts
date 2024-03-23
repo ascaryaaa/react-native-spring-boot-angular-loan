@@ -46,6 +46,7 @@ export interface User {
 
 export interface Admin {
     idAdmin: number;
+    hashedIdAdmin: number;
     nameAdmin: string;
     nppAdmin: string;
     usernameAdmin: string;

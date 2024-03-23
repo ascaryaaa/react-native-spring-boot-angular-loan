@@ -1,9 +1,8 @@
   import { HttpClient, HttpHeaders } from '@angular/common/http';
   import { Injectable } from '@angular/core';
-  import { Admin, AdminDetailResponse, FormDetailResponse, FormResponse} from './pengajuan-pinjaman';
+  import { AdminDetailResponse, FormDetailResponse, FormResponse} from './pengajuan-pinjaman';
   import { Observable } from 'rxjs';
   import { createPengajuanPinjamanUrl, createPinjamanUrl, detailAdmin, detailPengajuanPinjaman, listPengajuanPinjaman } from '../config/api';
-  import { AuthService } from '../auth/auth.service';
   import { Pinjaman } from '../monitoring/monitoring';
 
   @Injectable({
@@ -41,9 +40,9 @@
       const headers = this.getHeaders();
       return this.httpClient.post(createPengajuanPinjamanUrl, data, { headers });
     }
-    getDetailAdmin(id: number): Observable<AdminDetailResponse> {
+    getDetailAdmin(hashedId: string): Observable<AdminDetailResponse> {
       const headers = this.getHeaders();
-      return this.httpClient.get<AdminDetailResponse>(`${detailAdmin}${id}`, { headers })
+      return this.httpClient.get<AdminDetailResponse>(`${detailAdmin}`+'hid/'+`${hashedId}`, { headers })
     }
   }
 
