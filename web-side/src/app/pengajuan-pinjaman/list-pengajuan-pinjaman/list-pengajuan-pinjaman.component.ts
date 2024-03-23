@@ -65,19 +65,22 @@ export class ListPengajuanPinjamanComponent {
 //     }
 // }
 
-  navigateToPage(page: number): void {
-    if (page >= 1 && page <= this.totalPages) {
-      const startIndex = (page - 1) * this.pageSize;
-      this.currentPage = page;
-      // Recalculate data slice based on updated currentPage and pageSize
-      this.filteredForms = this.forms.slice(startIndex, startIndex + this.pageSize);
-    }
+navigateToPage(page: number): void {
+  if (page >= 1 && page <= this.totalPages) {
+    const startIndex = (page - 1) * this.pageSize;
+    this.currentPage = page;
+    // Recalculate data slice based on updated currentPage and pageSize
+    this.filteredForms = this.forms.slice(startIndex, startIndex + this.pageSize);
   }
-
-   search(): void {
-    this.filteredForms = this.forms.filter(form =>
-      form.formToUser.nameUser.toLowerCase().includes(this.searchText.trim().toLowerCase())
-    );
+}
+// search(): void {
+//   this.filteredForms = this.forms.filter(form =>
+//     form.formToUser.nameUser.toLowerCase().includes(this.searchText.trim().toLowerCase())
+//   );
+  search(): void {
+    this.filterForms();
+    this.calculateTotalPages();
+    this.navigateToPage(1);
   }
 
   changePageSize(): void {
@@ -121,6 +124,7 @@ export class ListPengajuanPinjamanComponent {
     this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
   
 }
+
 sortData(column: string): void {
   switch (column) {
     case 'name':
@@ -188,7 +192,6 @@ sortData(column: string): void {
     default:
       break;
   }
-
 }
 
 loadData() {
@@ -204,5 +207,5 @@ loadData() {
     }
   });
 }
-
 }
+
