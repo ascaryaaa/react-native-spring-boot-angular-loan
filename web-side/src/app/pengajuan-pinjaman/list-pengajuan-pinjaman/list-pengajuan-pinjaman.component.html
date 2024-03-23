@@ -66,21 +66,39 @@
                 <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&" alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
               </button>
             </th>
-            
             <th scope="col" class="px-4 py-2">
-              <button type="button" (click)="sortData('nik')">NIK</button>
+              <button type="button" (click)="sortData('nik')" class="flex items-center">
+                <span class="mr-1">NIK</span>
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&" alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
+              </button>
             </th>
             <th scope="col" class="px-4 py-2">
-              <button type="button" (click)="sortData('jenis_pengajuan')">Jenis Pengajuan</button>
+              <button type="button" (click)="sortData('jenis_pengajuan')" class="flex items-center">
+                <span class="mr-1">Jenis Pengajuan</span>
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&" alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
+              </button>
             </th>
             <th scope="col" class="px-4 py-2">
-              <button type="button" (click)="sortData('status_pengajuan')">Status Pengajuan</button>
+              <button type="button" (click)="sortData('status_pengajuan')" class="flex items-center">
+                <span class="mr-1">Status Pengajuan</span>
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&" alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
+              </button>
             </th>
             <th scope="col" class="px-4 py-2">
-              <button type="button" (click)="sortData('admin')">Admin</button>
+              <button type="button" (click)="sortData('admin')" class="flex items-center">
+                <span class="mr-1">Admin</span>
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&" alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
+              </button>
             </th>
-            <th scope="col" class="px-4 py-2">Tanggal Realisasi</th>
-            <th scope="col" class="px-4 py-2">Aksi</th>
+            <th scope="col" class="px-4 py-2">
+              <button type="button" (click)="sortData('tanggal_realisasi')" class="flex items-center">
+                <span class="mr-1">Tanggal Realisasi</span>
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&" alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
+              </button>
+            </th>
+            <!-- <th scope="col" class="px-4 py-2">
+              Tanggal Realisasi</th>
+            <th scope="col" class="px-4 py-2">Aksi</th> -->
           </tr>
           
           </thead>
@@ -104,7 +122,7 @@
                 </div>
               </td>
               <td class="px-4 py-2">{{form.formToAdmin?.nameAdmin}}</td>
-              <!-- <td class="px-4 py-2">{{ form.tanggalLahir | date: 'longDate' }}</td> -->
+              <td class="px-4 py-2">{{ form.tanggalLahir | date: 'longDate' }}</td>
               <td class="px-4 py-2"> </td>
               <td class="px-4 py-2">
                 <a [routerLink]="['../', form.idFormPengajuanPinjaman]" class="text-blue-600 hover:underline">View</a>
@@ -135,9 +153,5 @@
         </select>
       </div>
     </nav>
-    
-    
-    
-
   </div>
 </div>

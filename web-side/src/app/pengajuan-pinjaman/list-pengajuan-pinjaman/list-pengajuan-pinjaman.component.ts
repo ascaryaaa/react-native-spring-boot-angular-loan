@@ -11,7 +11,7 @@ export class ListPengajuanPinjamanComponent {
   forms: FormPengajuanPinjaman[] = [];
   filteredForms: FormPengajuanPinjaman[] = [];
   searchText: string = '';
-  pageSize: number = 10;
+  pageSize: number = 5;
   currentPage: number = 1;
   totalPages: number = 1;
   totalPagesArray: number[] = [];
@@ -71,21 +71,23 @@ navigateToPage(page: number): void {
   }
 }
 
-  search(): void {
-    this.filterForms();
-    this.calculateTotalPages();
-    this.navigateToPage(1);
-  }
+
+
+
+search(): void {
+  this.filteredForms = this.forms.filter(form =>
+    form.formToUser.nameUser.toLowerCase().includes(this.searchText.trim().toLowerCase())
+  );
+}
 
   changePageSize(): void {
-    this.calculateTotalPages(); // Hitung ulang jumlah total halaman
-    this.totalPagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1); // Perbarui totalPagesArray
-    this.currentPage = 1; // Navigate to the first page after the change
-    this.navigateToPage(1); // Update the displayed data for the first page
+    this.totalPages = Math.ceil(this.filteredForms.length / this.pageSize);
+    // Check for remaining data... (existing code)
+    this.totalPagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+    this.currentPage = 1; // Reset current page to 1
+    this.navigateToPage(1); // Update data for the first page
   }
   
-  
-
   previousPage(): void {
     if (this.currentPage > 1) {
       this.currentPage -= 1; // Kurangi currentPage
@@ -163,7 +165,24 @@ sortData(column: string): void {
         this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
       break;
     case 'admin':
-     
+        this.filteredForms.sort((a, b) => {
+          const nameA = (a.formToAdmin?.nameAdmin || '').toLowerCase(); // Use empty string as default value
+          const nameB = (b.formToAdmin?.nameAdmin || '').toLowerCase(); // Use empty string as default value
+          if (nameA < nameB) return this.sortDirection === 'asc' ? -1 : 1;
+          if (nameA > nameB) return this.sortDirection === 'asc' ? 1 : -1;
+          return 0;
+        });
+        this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+      break;
+      case 'tanggal_realisasi':
+        this.filteredForms.sort((a, b) => {
+          const nameA = (a.tanggalRealisasi || '').toLowerCase(); // Use empty string as default value
+          const nameB = (b.tanggalRealisasi || '').toLowerCase(); // Use empty string as default value
+          if (nameA < nameB) return this.sortDirection === 'asc' ? -1 : 1;
+          if (nameA > nameB) return this.sortDirection === 'asc' ? 1 : -1;
+          return 0;
+        });
+        this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
       break;
     // Add cases for other columns if needed
     default:
