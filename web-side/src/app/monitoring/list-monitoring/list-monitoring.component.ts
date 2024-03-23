@@ -14,12 +14,13 @@ export class ListMonitoringComponent {
   filteredMonitoring: ListMonitoringComponent[] = [];
   searchText: string = '';
   pageSize: number = 10;
-
+  loading = true;
   
   constructor(private monitoringService: MonitoringService) { }
 
   async ngOnInit() {
     this.refreshFormList();
+    this.loadData();
   }
 
   async refreshFormList() {
@@ -34,6 +35,17 @@ export class ListMonitoringComponent {
       console.error('Error fetching data:', error)
     }
   }
-
-  
+  loadData() {
+    this.loading = true;
+    this.monitoringService.getListMonitoringPinjaman().subscribe({
+      next: (response) => {
+        this.pinjamans = response;
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('There was an error!', error);
+        this.loading = false;
+      }
+    });
+  }
 }
