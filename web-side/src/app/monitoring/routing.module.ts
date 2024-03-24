@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { ListMonitoringComponent } from './list-monitoring/list-monitoring.component';
 import { DetailMonitoringComponent } from './detail-monitoring/detail-monitoring.component';
+import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
 
 
 const routes: Routes = [
@@ -11,8 +12,12 @@ const routes: Routes = [
     path: 'list',
     component: ListMonitoringComponent
   },
-  { path: ':id', 
+  { path: 'id/:id', 
     component: DetailMonitoringComponent
+  },
+  { path:'**', redirectTo:'not-found', pathMatch: 'full'},
+  { path: 'not-found', 
+    component: PageNotFoundComponent 
   }
 ];
 

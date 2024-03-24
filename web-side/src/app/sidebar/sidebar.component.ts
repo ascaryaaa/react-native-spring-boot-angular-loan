@@ -44,7 +44,7 @@ export class SidebarComponent implements OnInit {
 
   navigateToListPengajuanPinjaman() {
     // Menggunakan Router untuk melakukan navigasi ke path /home
-    this.router.navigate(['/pengajuan-pinjaman']);
+    this.router.navigate(['/pengajuan-pinjaman/list']);
   }
   navigateToMonitoring() {
     // Menggunakan Router untuk melakukan navigasi ke path /monitoring

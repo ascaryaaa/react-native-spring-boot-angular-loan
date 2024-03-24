@@ -21,7 +21,7 @@ export class AuthService {
       localStorage.setItem('user', JSON.stringify(response.data));
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('hashedId', response.data.hashedId);
-      this.router.navigate(['pengajuan-pinjaman']);
+      this.router.navigate(['pengajuan-pinjaman/list']);
       return Promise.resolve();
     } catch (error: any) {
       console.error('Login failed!', error);
