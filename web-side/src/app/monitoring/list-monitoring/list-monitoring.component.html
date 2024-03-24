@@ -1,9 +1,6 @@
 <!-- <p>list-monitoring works!</p> -->
-<h1
-  id="judul"
-  class="p-4 sm:ml-64 text-left text-2xl mb-4 font-bold"
-  style="color: #e55300; padding-top: 24px; margin-bottom: -4px"
->
+<h1 id="judul" class="p-4 sm:ml-64 text-left text-2xl mb-4 font-bold"
+  style="color: #e55300; padding-top: 24px; margin-bottom: -4px">
   Daftar Debitur
 </h1>
 
@@ -15,169 +12,168 @@
 </ng-template>
 
 <div class="p-4 sm:ml-64">
-    <div class="p-4 border-2 border-gray-200 rounded-lg dark:border-gray-700">
-      <div
-        class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4"
-      >
-        <label for="table-search" class="sr-only">Search</label>
-        <div class="relative">
-          <div
-            class="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none"
-          >
-            <svg
-              class="w-5 h-5 text-gray-500 dark:text-gray-400"
-              aria-hidden="true"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
-          </div>
-          <input
-            type="text"
-            id="table-search"
-            class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Search"
-          />
+  <div class="p-4 border-2 border-gray-200 rounded-lg dark:border-gray-700">
+    <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
+      <label for="table-search" class="sr-only">Search</label>
+      <div class="relative">
+        <div class="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none">
+          <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor"
+            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+              clip-rule="evenodd"></path>
+          </svg>
         </div>
+        <input type="text" id="table-search"
+          class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          [(ngModel)]="searchText" 
+          (ngModelChange)="search()" 
+          (keyup.enter)="search()"
+          placeholder="Cari Data Berdasarkan Nama dan NIK" />
       </div>
-      <table
-        class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
-        style="margin-bottom: 20px"
-      >
+    </div>
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400" style="margin-bottom: 20px">
       <ng-container *ngIf="loading">
         <div class="flex justify-center items-center">
           <div class="loader">Loading...</div>
         </div>
       </ng-container>
       <ng-container *ngIf="!loading">
-      <ng-container *ngIf="pinjamans.length > 0; else noData">
-        <thead
-          class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-        >
-          <tr>
-            <th scope="col" class="px-4 py-2">CIF</th>
-            <th scope="col" class="px-4 py-2">Nama</th>
-            <th scope="col" class="px-4 py-2">NIK</th>
-            <th scope="col" class="px-4 py-2">Kolektabilitas</th>
-            <th scope="col" class="px-4 py-2">Jenis Pengajuan</th>
+        <ng-container *ngIf="pinjamans.length > 0; else noData">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th scope="col" class="px-4 py-2 flex items-center">
+                <button type="button" (click)="sortData('cif')" class="flex items-center">
+                  <span class="mr-1">CIF</span>
+                  <img
+                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&"
+                    alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
+                </button>
+              </th>
 
-            <th scope="col" class="px-4 py-2">Aksi</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let pinjaman of pinjamans"
-            class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
-          >
-            <td
-              class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-            {{pinjaman.pinjamanToForm?.idFormPengajuanPinjaman }}
-            </td>
-            <td class="px-4 py-2">{{pinjaman.pinjamanToForm?.formToUser?.nameUser}}</td>
-            <td class="px-4 py-2">{{pinjaman.pinjamanToForm?.formToUser?.nikUser}}</td>
-            <td class="px-4 py-2" *ngIf="pinjaman && pinjaman.pinjamanToForm">
-              <ng-container *ngIf="pinjaman.kolektabilitas !== null; else kolektabilitasCheck">
-                <ng-container *ngIf="pinjaman.kolektabilitas === 0; else kolektabilitasCheck2">
+              <th scope="col" class="px-4 py-2">
+                <button type="button" (click)="sortData('name')" class="flex items-center">
+                  <span class="mr-1">Nama</span>
+                  <img
+                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&"
+                    alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
+                </button>
+              </th>
+              <th scope="col" class="px-4 py-2">
+                <button type="button" (click)="sortData('nik')" class="flex items-center">
+                  <span class="mr-1">NIK</span>
+                  <img
+                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&"
+                    alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
+                </button>
+              </th>
+              <th scope="col" class="px-4 py-2">
+                <button type="button" (click)="sortData('kolektabilitas')" class="flex items-center">
+                  <span class="mr-1">kolektabilitas</span>
+                  <img
+                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&"
+                    alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
+                </button>
+              </th>
+              <th scope="col" class="px-4 py-2">
+                <button type="button" (click)="sortData('jenis_pengajuan')" class="flex items-center">
+                  <span class="mr-1">Status Pengajuan</span>
+                  <img
+                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&"
+                    alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
+                </button>
+              </th>
+
+              <th scope="col" class="px-4 py-2">Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pinjaman of filteredPinjaman">
+              <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                {{pinjaman.pinjamanToForm?.idFormPengajuanPinjaman }}
+              </td>
+              <td class="px-4 py-2">{{pinjaman.pinjamanToForm?.formToUser?.nameUser}}</td>
+              <td class="px-4 py-2">{{pinjaman.pinjamanToForm?.formToUser?.nikUser}}</td>
+              <td class="px-4 py-2" *ngIf="pinjaman && pinjaman.pinjamanToForm">
+                <ng-container *ngIf="pinjaman.kolektabilitas !== null; else kolektabilitasCheck">
+                  <ng-container *ngIf="pinjaman.kolektabilitas === 0; else kolektabilitasCheck2">
+                    Lancar
+                  </ng-container>
+                  <ng-container *ngIf="pinjaman.kolektabilitas < 30; else kolektabilitasCheck3">
+                    DPK 1
+                  </ng-container>
+                  <ng-container *ngIf="pinjaman.kolektabilitas < 60; else kolektabilitasCheck4">
+                    DPK 2
+                  </ng-container>
+                  <ng-container *ngIf="pinjaman.kolektabilitas < 90; else kolektabilitasCheck5">
+                    DPK 3
+                  </ng-container>
+                  <ng-container *ngIf="pinjaman.kolektabilitas < 120; else kolektabilitasCheck6">
+                    Kurang Lancar
+                  </ng-container>
+                  <ng-container *ngIf="pinjaman.kolektabilitas < 150; else kolektabilitasCheck7">
+                    Diragukan
+                  </ng-container>
+                  <ng-container *ngIf="pinjaman.kolektabilitas >= 150">
+                    Macet
+                  </ng-container>
+                </ng-container>
+                <ng-template #kolektabilitasCheck>
                   Lancar
-                </ng-container>
-                <ng-container *ngIf="pinjaman.kolektabilitas < 30; else kolektabilitasCheck3">
+                </ng-template>
+                <ng-template #kolektabilitasCheck2>
                   DPK 1
-                </ng-container>
-                <ng-container *ngIf="pinjaman.kolektabilitas < 60; else kolektabilitasCheck4">
+                </ng-template>
+                <ng-template #kolektabilitasCheck3>
                   DPK 2
-                </ng-container>
-                <ng-container *ngIf="pinjaman.kolektabilitas < 90; else kolektabilitasCheck5">
+                </ng-template>
+                <ng-template #kolektabilitasCheck4>
                   DPK 3
-                </ng-container>
-                <ng-container *ngIf="pinjaman.kolektabilitas < 120; else kolektabilitasCheck6">
+                </ng-template>
+                <ng-template #kolektabilitasCheck5>
                   Kurang Lancar
-                </ng-container>
-                <ng-container *ngIf="pinjaman.kolektabilitas < 150; else kolektabilitasCheck7">
+                </ng-template>
+                <ng-template #kolektabilitasCheck6>
                   Diragukan
-                </ng-container>
-                <ng-container *ngIf="pinjaman.kolektabilitas >= 150">
+                </ng-template>
+                <ng-template #kolektabilitasCheck7>
                   Macet
-                </ng-container>
-              </ng-container>
-              <ng-template #kolektabilitasCheck>
-                Lancar
-              </ng-template>
-              <ng-template #kolektabilitasCheck2>
-                DPK 1
-              </ng-template>
-              <ng-template #kolektabilitasCheck3>
-                DPK 2
-              </ng-template>
-              <ng-template #kolektabilitasCheck4>
-                DPK 3
-              </ng-template>
-              <ng-template #kolektabilitasCheck5>
-                Kurang Lancar
-              </ng-template>
-              <ng-template #kolektabilitasCheck6>
-                Diragukan
-              </ng-template>
-              <ng-template #kolektabilitasCheck7>
-                Macet
-              </ng-template>
-            </td>
-            
-            <!-- <td class="px-4 py-2">{{pinjaman.pinjamanToForm.formToJenis.nameJenisPinjaman}}</td> -->
-            <td class="px-4 py-2">{{pinjaman.pinjamanToForm?.formToJenis?.nameJenisPinjaman}}</td>
-          
-            <td class="px-4 py-2">
-              <a [routerLink]="['../', pinjaman.idPinjaman]" class="text-blue-600 hover:underline">View</a>
-            </td>
-          </tr>
-          <!-- Add more rows here if needed -->
-        </tbody>
-      </ng-container>
-      </ng-container>
-      </table>
-      <nav
-        class="flex items-center flex-column flex-wrap md:flex- justify-between pt-4"
-        aria-label="Table navigation"
-      >
-        <span
-          class="text-sm font-normal text-gray-500 dark:text-gray-400 mb-4 md:mb-0 block w-full md:inline md:w-auto"
-          >Showing
-          <span class="font-semibold text-gray-900 dark:text-white">1-10</span>
-          of
-          <span class="font-semibold text-gray-900 dark:text-white"
-            >1000</span
-          ></span
-        >
-        <ul class="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">
-          <li>
-            <a
-              href="#"
-              class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >Previous</a
-            >
-          </li>
-          <li>
-            <a
-              href="#"
-              class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >1</a
-            >
-          </li>
-          <!-- Add more pages here if needed -->
-          <li>
-            <a
-              href="#"
-              class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >Next</a
-            >
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
+                </ng-template>
+              </td>
 
+              <!-- <td class="px-4 py-2">{{pinjaman.pinjamanToForm.formToJenis.nameJenisPinjaman}}</td> -->
+              <td class="px-4 py-2">{{pinjaman.pinjamanToForm?.formToJenis?.nameJenisPinjaman}}</td>
+
+              <td class="px-4 py-2">
+                <a [routerLink]="['../', pinjaman.idPinjaman]" class="text-blue-600 hover:underline">View</a>
+              </td>
+            </tr>
+            <!-- Add more rows here if needed -->
+          </tbody>
+        </ng-container>
+      </ng-container>
+    </table>
+    <!-- Pagination -->
+    <nav class="flex items-center justify-between">
+      <div class="flex flex-wrap items-center justify-center">
+        <button class="px-2 py-1 border border-white-300 rounded-lg mr-2" (click)="previousPage()">Previous</button>
+        <!-- Looping untuk tombol halaman -->
+        <ng-container *ngFor="let page of totalPagesArray">
+          <button class="px-2 py-1 border border-white-300 rounded-lg mr-2" [class.bg-blue-500]="page === currentPage" (click)="goToPage(page)">
+            {{ page }}
+          </button>
+        </ng-container>
+        <button class="px-2 py-1 border border-white-300 rounded-lg" (click)="nextPage()">Next</button>
+      </div>
+      <div class="flex flex-wrap items-center justify-center mt-2">
+        <!-- Pilihan jumlah data per halaman -->
+        <select style="background-color: #1F96F9; color: white;" class="px-2 py-1 border border-white-300 rounded-lg" [(ngModel)]="pageSize" (change)="changePageSize()" title="Jumlah Data Per Halaman">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="100">100</option>
+        </select>
+      </div>
+    </nav>
+  </div>
+</div>

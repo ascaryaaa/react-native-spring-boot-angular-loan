@@ -18,7 +18,7 @@
       <div
         class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4"
       >
-        <label for="table-search" class="sr-only">Searc</label>
+        <label for="table-search" class="sr-only">search</label>
         <div class="relative">
           <div
             class="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none"
@@ -44,7 +44,7 @@
             [(ngModel)]="searchText"
             (ngModelChange)="search()"
             (keyup.enter)="search()"
-            placeholder="Search nama"
+            placeholder="Cari Data Berdasarkan Nama dan NIK"
           />
         </div>
       </div>
@@ -64,11 +64,14 @@
             class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
           >
           <tr>
-            <th scope="col" class="px-4 py-2">
-              <button type="button" (click)="sortData('cif')">CIF</button>
+            <th scope="col" class="px-4 py-2 flex items-center">
+              <button type="button" (click)="sortData('cif')" class="flex items-center">
+                <span class="mr-1">CIF</span>
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&" alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
+              </button>
             </th>
            
-            <th scope="col" class="px-4 py-2 flex items-center">
+            <th scope="col" class="px-4 py-2 ">
               <button type="button" (click)="sortData('name')" class="flex items-center">
                 <span class="mr-1">Nama</span>
                 <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&" alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
@@ -104,9 +107,13 @@
                 <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&" alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
               </button>
             </th>
+            <th scope="col" class="px-4 py-2">Aksi</th>
             <!-- <th scope="col" class="px-4 py-2">
-              Tanggal Realisasi</th>
-            <th scope="col" class="px-4 py-2">Aksi</th> -->
+              <button type="button" (click)="sortData('tanggal_realisasi')" class="flex items-center">
+                <span class="mr-1">Aksi</span>
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&" alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
+              </button>
+            </th> -->
           </tr>
           
           </thead>

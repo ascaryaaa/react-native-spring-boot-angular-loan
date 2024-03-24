@@ -1,5 +1,6 @@
 export type ListPinjamanResponse = Pinjaman[];
 export type DetailPinjamanResponse = Pinjaman;
+export type AdminDetailResponse = Admin;
 
 export interface Pinjaman {
     idPinjaman: number | null;
