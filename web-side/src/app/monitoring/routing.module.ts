@@ -15,10 +15,7 @@ const routes: Routes = [
   { path: 'id/:id', 
     component: DetailMonitoringComponent
   },
-  { path:'**', redirectTo:'not-found', pathMatch: 'full'},
-  { path: 'not-found', 
-    component: PageNotFoundComponent 
-  }
+  { path:'**', redirectTo:'..', pathMatch: 'full'},
 ];
 
 @NgModule({
