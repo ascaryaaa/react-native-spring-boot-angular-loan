@@ -11,7 +11,7 @@ export class ListPengajuanPinjamanComponent {
   forms: FormPengajuanPinjaman[] = [];
   filteredForms: FormPengajuanPinjaman[] = [];
   searchText: string = '';
-  pageSize: number = 10;
+  pageSize: number = 5;
   currentPage: number = 1;
   totalPages: number = 1;
   totalPagesArray: number[] = [];
@@ -65,30 +65,32 @@ export class ListPengajuanPinjamanComponent {
 //     }
 // }
 
-  navigateToPage(page: number): void {
-    if (page >= 1 && page <= this.totalPages) {
-      const startIndex = (page - 1) * this.pageSize;
-      this.currentPage = page;
-      // Recalculate data slice based on updated currentPage and pageSize
-      this.filteredForms = this.forms.slice(startIndex, startIndex + this.pageSize);
-    }
+navigateToPage(page: number): void {
+  if (page >= 1 && page <= this.totalPages) {
+    const startIndex = (page - 1) * this.pageSize;
+    this.currentPage = page;
+    // Recalculate data slice based on updated currentPage and pageSize
+    this.filteredForms = this.forms.slice(startIndex, startIndex + this.pageSize);
   }
-
-   search(): void {
-    this.filteredForms = this.forms.filter(form =>
-      form.formToUser.nameUser.toLowerCase().includes(this.searchText.trim().toLowerCase())
-    );
+}
+// search(): void {
+//   this.filteredForms = this.forms.filter(form =>
+//     form.formToUser.nameUser.toLowerCase().includes(this.searchText.trim().toLowerCase())
+//   );
+  search(): void {
+    this.filterForms();
+    this.calculateTotalPages();
+    this.navigateToPage(1);
   }
 
   changePageSize(): void {
-    this.calculateTotalPages(); // Hitung ulang jumlah total halaman
-    this.totalPagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1); // Perbarui totalPagesArray
-    this.currentPage = 1; // Navigate to the first page after the change
-    this.navigateToPage(1); // Update the displayed data for the first page
+    this.totalPages = Math.ceil(this.filteredForms.length / this.pageSize);
+    // Check for remaining data... (existing code)
+    this.totalPagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+    this.currentPage = 1; // Reset current page to 1
+    this.navigateToPage(1); // Update data for the first page
   }
   
-  
-
   previousPage(): void {
     if (this.currentPage > 1) {
       this.currentPage -= 1; // Kurangi currentPage
@@ -121,72 +123,89 @@ export class ListPengajuanPinjamanComponent {
     // Toggle sort direction
     this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
   
-  }
-
-  sortData(column: string): void {
-    switch (column) {
-      case 'name':
-        this.filteredForms.sort((a, b) => {
-          const nameA = a.formToUser.nameUser.toLowerCase();
-          const nameB = b.formToUser.nameUser.toLowerCase();
-          if (nameA < nameB) return this.sortDirection === 'asc' ? -1 : 1;
-          if (nameA > nameB) return this.sortDirection === 'asc' ? 1 : -1;
-          return 0;})
-          this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
-        break;
-      case 'cif':
-        this.filteredForms.sort((a, b) => {
-          return this.sortDirection === 'asc' ? a.idFormPengajuanPinjaman - b.idFormPengajuanPinjaman : b.idFormPengajuanPinjaman - a.idFormPengajuanPinjaman;
-        });
-        break;
-      case 'nik':
-        this.filteredForms.sort((a, b) => {
-          const nameA = a.formToUser.nikUser.toLowerCase();
-          const nameB = b.formToUser.nikUser.toLowerCase();
-          if (nameA < nameB) return this.sortDirection === 'asc' ? -1 : 1;
-          if (nameA > nameB) return this.sortDirection === 'asc' ? 1 : -1;
-          return 0;})
-          this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
-        break;
-      case 'jenis_pengajuan':
-        this.filteredForms.sort((a, b) => {
-          const nameA = a.formToJenis.nameJenisPinjaman.toLowerCase();
-          const nameB = b.formToJenis.nameJenisPinjaman.toLowerCase();
-          if (nameA < nameB) return this.sortDirection === 'asc' ? -1 : 1;
-          if (nameA > nameB) return this.sortDirection === 'asc' ? 1 : -1;
-          return 0;})
-          this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
-        break;
-      case 'status_pengajuan':
-        this.filteredForms.sort((a, b) => {
-          const nameA = a.statusPengajuan.toLowerCase();
-          const nameB = b.statusPengajuan.toLowerCase();
-          if (nameA < nameB) return this.sortDirection === 'asc' ? -1 : 1;
-          if (nameA > nameB) return this.sortDirection === 'asc' ? 1 : -1;
-          return 0;})
-          this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
-        break;
-      case 'admin':
-      
-        break;
-      // Add cases for other columns if needed
-      default:
-        break;
-    }
-  }
-
-  loadData() {
-    this.loading = true;
-    this.pengajuanPinjamanService.getListPengajuanPinjaman().subscribe({
-      next: (response) => {
-        this.forms = response;
-        this.loading = false;
-      },
-      error: (error) => {
-        console.error('There was an error!', error);
-        this.loading = false;
-      }
-    });
-  }
-
 }
+
+sortData(column: string): void {
+  switch (column) {
+    case 'name':
+      this.filteredForms.sort((a, b) => {
+        const nameA = a.formToUser.nameUser.toLowerCase();
+        const nameB = b.formToUser.nameUser.toLowerCase();
+        if (nameA < nameB) return this.sortDirection === 'asc' ? -1 : 1;
+        if (nameA > nameB) return this.sortDirection === 'asc' ? 1 : -1;
+        return 0;})
+        this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+      break;
+    case 'cif':
+      this.filteredForms.sort((a, b) => {
+        return this.sortDirection === 'asc' ? a.idFormPengajuanPinjaman - b.idFormPengajuanPinjaman : b.idFormPengajuanPinjaman - a.idFormPengajuanPinjaman;
+      });
+      break;
+    case 'nik':
+      this.filteredForms.sort((a, b) => {
+        const nameA = a.formToUser.nikUser.toLowerCase();
+        const nameB = b.formToUser.nikUser.toLowerCase();
+        if (nameA < nameB) return this.sortDirection === 'asc' ? -1 : 1;
+        if (nameA > nameB) return this.sortDirection === 'asc' ? 1 : -1;
+        return 0;})
+        this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+      break;
+    case 'jenis_pengajuan':
+      this.filteredForms.sort((a, b) => {
+        const nameA = a.formToJenis.nameJenisPinjaman.toLowerCase();
+        const nameB = b.formToJenis.nameJenisPinjaman.toLowerCase();
+        if (nameA < nameB) return this.sortDirection === 'asc' ? -1 : 1;
+        if (nameA > nameB) return this.sortDirection === 'asc' ? 1 : -1;
+        return 0;})
+        this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+      break;
+    case 'status_pengajuan':
+      this.filteredForms.sort((a, b) => {
+        const nameA = a.statusPengajuan.toLowerCase();
+        const nameB = b.statusPengajuan.toLowerCase();
+        if (nameA < nameB) return this.sortDirection === 'asc' ? -1 : 1;
+        if (nameA > nameB) return this.sortDirection === 'asc' ? 1 : -1;
+        return 0;})
+        this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+      break;
+    case 'admin':
+        this.filteredForms.sort((a, b) => {
+          const nameA = (a.formToAdmin?.nameAdmin || '').toLowerCase(); // Use empty string as default value
+          const nameB = (b.formToAdmin?.nameAdmin || '').toLowerCase(); // Use empty string as default value
+          if (nameA < nameB) return this.sortDirection === 'asc' ? -1 : 1;
+          if (nameA > nameB) return this.sortDirection === 'asc' ? 1 : -1;
+          return 0;
+        });
+        this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+      break;
+      case 'tanggal_realisasi':
+        this.filteredForms.sort((a, b) => {
+          const nameA = (a.tanggalRealisasi || '').toLowerCase(); // Use empty string as default value
+          const nameB = (b.tanggalRealisasi || '').toLowerCase(); // Use empty string as default value
+          if (nameA < nameB) return this.sortDirection === 'asc' ? -1 : 1;
+          if (nameA > nameB) return this.sortDirection === 'asc' ? 1 : -1;
+          return 0;
+        });
+        this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+      break;
+    // Add cases for other columns if needed
+    default:
+      break;
+  }
+}
+
+loadData() {
+  this.loading = true;
+  this.pengajuanPinjamanService.getListPengajuanPinjaman().subscribe({
+    next: (response) => {
+      this.forms = response;
+      this.loading = false;
+    },
+    error: (error) => {
+      console.error('There was an error!', error);
+      this.loading = false;
+    }
+  });
+}
+}
+
