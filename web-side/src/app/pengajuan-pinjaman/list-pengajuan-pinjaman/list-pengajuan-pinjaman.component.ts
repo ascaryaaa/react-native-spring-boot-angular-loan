@@ -73,15 +73,20 @@ navigateToPage(page: number): void {
     this.filteredForms = this.forms.slice(startIndex, startIndex + this.pageSize);
   }
 }
-// search(): void {
-//   this.filteredForms = this.forms.filter(form =>
-//     form.formToUser.nameUser.toLowerCase().includes(this.searchText.trim().toLowerCase())
-//   );
-  search(): void {
-    this.filterForms();
-    this.calculateTotalPages();
-    this.navigateToPage(1);
-  }
+
+search(): void {
+  this.filteredForms = this.forms.filter(form =>
+  
+      form.formToUser.nameUser.toLowerCase().includes(this.searchText.trim().toLowerCase()) ||
+      // form.idFormPengajuanPinjaman.toString().includes(this.searchText.trim()) || // Pencarian berdasarkan CIF
+      form.formToUser.nikUser.toLowerCase().includes(this.searchText.trim().toLowerCase()) // Pencarian berdasarkan NIK
+    )
+  }
+  // search(): void {
+  //   this.filterForms();
+  //   this.calculateTotalPages();
+  //   this.navigateToPage(1);
+  // }
 
   changePageSize(): void {
     this.totalPages = Math.ceil(this.filteredForms.length / this.pageSize);
@@ -123,7 +128,7 @@ navigateToPage(page: number): void {
     // Toggle sort direction
     this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
   
-}
+  }
 
 sortData(column: string): void {
   switch (column) {
@@ -136,10 +141,15 @@ sortData(column: string): void {
         return 0;})
         this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
       break;
-    case 'cif':
-      this.filteredForms.sort((a, b) => {
-        return this.sortDirection === 'asc' ? a.idFormPengajuanPinjaman - b.idFormPengajuanPinjaman : b.idFormPengajuanPinjaman - a.idFormPengajuanPinjaman;
-      });
+      case 'cif':
+        this.filteredForms.sort((a, b) => {
+          const nameA = (a.idFormPengajuanPinjaman || '').toString().toLowerCase();
+          const nameB = (b.idFormPengajuanPinjaman || '').toString().toLowerCase();
+          if (nameA < nameB) return this.sortDirection === 'asc' ? -1 : 1;
+          if (nameA > nameB) return this.sortDirection === 'asc' ? 1 : -1;
+          return 0;
+        });
+        this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
       break;
     case 'nik':
       this.filteredForms.sort((a, b) => {
