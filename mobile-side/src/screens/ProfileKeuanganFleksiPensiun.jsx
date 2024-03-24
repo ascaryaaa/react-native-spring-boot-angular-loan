@@ -11,9 +11,15 @@ import { ScrollView } from "react-native-gesture-handler";
 
 const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
   const [inputData, setInputData] = useState({
-    penghasilanBersih: " ",
-    jumlahPinjaman: " ",
-    jangkaWaktu: " ",
+    penghasilanBersih: "",
+    jumlahPinjaman: "",
+    jangkaWaktu: "",
+  });
+
+  const [inputErrors, setInputErrors] = useState({
+    penghasilanBersih: false,
+    jumlahPinjaman: false,
+    jangkaWaktu: false,
   });
 
   const data = [
@@ -31,16 +37,37 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [hidedButton, setHidedButton] = useState(false);
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-    setHidedButton(true);
+  const validateInputs = () => {
+    const errors = {};
+    let isValid = true;
+    for (const key in inputData) {
+      if (!inputData[key]) {
+        errors[key] = true;
+        isValid = false;
+      }
+    }
+    setInputErrors(errors);
+    return isValid;
   };
 
+  const handleNext = () => {
+    if (validateInputs()) {
+      // Proceed to the next step
+      console.log("Test");
+    }
+  };
+
+  const toggleDropdown = () => {
+    if (validateInputs()) {
+      setIsDropdownOpen(!isDropdownOpen);
+      setHidedButton(true);
+    }
+  };
   return (
     <View style={styles.bg}>
       <View style={styles.shadow}>
         <View style={styles.navbar}>
-          <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <Image
               source={require("../../../mobile-side/src/assets/Icon_leftarrow.png")}
             />
@@ -56,46 +83,65 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
           <Text style={{ fontWeight: "600", fontSize: 16, marginBottom: 16 }}>
             Profil Keuangan
           </Text>
+
           <Text style={styles.text}>Penghasilan Bersih per. Bulan</Text>
           <TextInput
-            style={styles.input}
-            placeholder="Penghasilan Bersih per. Bulan"
+            style={[
+              styles.input,
+              inputErrors.penghasilanBersih && styles.inputError,
+            ]}
             value={inputData.penghasilanBersih}
+            keyboardType="numeric"
             onChangeText={(number) =>
               setInputData({ ...inputData, penghasilanBersih: number })
             }
           />
+          {inputErrors.penghasilanBersih && (
+            <Text style={styles.errorText}>Field ini wajib diisi</Text>
+          )}
+
           <Text style={styles.text}>Jumlah Pinjaman yang Diajukan</Text>
           <TextInput
-            style={styles.input}
-            placeholder="Jumlah Pinjaman yang Diajukan"
+            style={[
+              styles.input,
+              inputErrors.jumlahPinjaman && styles.inputError,
+            ]}
             value={inputData.jumlahPinjaman}
+            keyboardType="numeric"
             onChangeText={(number) =>
               setInputData({ ...inputData, jumlahPinjaman: number })
             }
           />
+          {inputErrors.jumlahPinjaman && (
+            <Text style={styles.errorText}>Field ini wajib diisi</Text>
+          )}
+
           <Text style={styles.text}>Jangka Waktu</Text>
           <TextInput
-            style={styles.inputJW}
-            placeholder="Jangka Waktu"
+            style={[styles.input, inputErrors.jangkaWaktu && styles.inputError]}
             value={inputData.jangkaWaktu}
+            keyboardType="numeric"
             onChangeText={(number) =>
               setInputData({ ...inputData, jangkaWaktu: number })
             }
           />
+          {inputErrors.jangkaWaktu && (
+            <Text style={styles.errorText}>Field ini wajib diisi</Text>
+          )}
           <Text style={{ fontSize: 10, marginBottom: 16 }}>
             *Maksimal 180 Bulan
           </Text>
+
           <Text style={styles.text}>Bunga Pinjaman</Text>
           <TextInput
             style={styles.input}
             placeholder="10,74%"
             placeholderTextColor="gray"
-            keyboardType="numeric"
+            editable={false}
           />
           <View style={styles.container1}>
             {!hidedButton && (
-              <TouchableOpacity onPress={toggleDropdown} style={styles.button}>
+              <TouchableOpacity onPress={handleNext} style={styles.button}>
                 <Text style={styles.textButton}>Simulasi Angsuran</Text>
               </TouchableOpacity>
             )}
@@ -202,16 +248,9 @@ const styles = StyleSheet.create({
     borderColor: "#1394AD",
     borderWidth: 1,
   },
-  inputJW: {
-    width: "100%",
-    height: 40,
-    borderWidth: 1,
-    marginTop: 8,
+  inputError: {
+    borderColor: "red",
     marginBottom: 8,
-    paddingHorizontal: 10,
-    borderRadius: 8,
-    borderColor: "#1394AD",
-    borderWidth: 1,
   },
   dropdownContent: {
     // backgroundColor: "rgba(0, 0, 0, 0.1)",
@@ -259,5 +298,10 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#FFF",
     marginBottom: 24,
+  },
+  errorText: {
+    color: "red",
+    fontSize: 12,
+    marginBottom: 8,
   },
 });
