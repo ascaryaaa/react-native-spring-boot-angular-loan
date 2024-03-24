@@ -23,6 +23,9 @@ export class ListPengajuanPinjamanComponent {
   ngOnInit() {
     this.refreshFormList();
     this.loadData();
+    
+    // Call search() on initialization to ensure proper data display
+    this.search();
   }
 
   async refreshFormList() {
@@ -32,14 +35,17 @@ export class ListPengajuanPinjamanComponent {
           this.forms = data;
           this.filterForms(); // Memfilter data sebelum perhitungan jumlah halaman dan navigasi
           this.calculateTotalPages();
-          this.navigateToPage(this.currentPage); // Hapus pemanggilan ini
+          this.navigateToPage(1); // Perbarui tampilan ke halaman pertama setelah perubahan data
+          this.loading = false; // Hentikan loading setelah selesai mengambil data
         },
         error: (error) => {
           console.error('Error fetching data:', error);
+          this.loading = false; // Hentikan loading jika terjadi kesalahan
         }
       });
     } catch (error) {
       console.error('Error fetching data:', error);
+      this.loading = false; // Hentikan loading jika terjadi kesalahan
     }
   }
   
@@ -55,46 +61,50 @@ export class ListPengajuanPinjamanComponent {
     this.totalPagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
   
-//   navigateToPage(page: number): void {
-//     const totalPagesAfterChange = Math.ceil(this.filteredForms.length / this.pageSize);
-//     if (page >= 1 && page <= totalPagesAfterChange) {
-//         const startIndex = (page - 1) * this.pageSize;
-//         const endIndex = startIndex + this.pageSize;
-//         this.currentPage = page;
-//         this.filteredForms = this.forms.slice(startIndex, startIndex + this.pageSize);
-//     }
-// }
-
-navigateToPage(page: number): void {
-  if (page >= 1 && page <= this.totalPages) {
-    const startIndex = (page - 1) * this.pageSize;
-    this.currentPage = page;
-    // Recalculate data slice based on updated currentPage and pageSize
-    this.filteredForms = this.forms.slice(startIndex, startIndex + this.pageSize);
-  }
-}
-
-search(): void {
-  this.filteredForms = this.forms.filter(form =>
+  navigateToPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      const startIndex = (page - 1) * this.pageSize;
+      let endIndex = startIndex + this.pageSize;
   
-      form.formToUser.nameUser.toLowerCase().includes(this.searchText.trim().toLowerCase()) ||
-      // form.idFormPengajuanPinjaman.toString().includes(this.searchText.trim()) || // Pencarian berdasarkan CIF
-      form.formToUser.nikUser.toLowerCase().includes(this.searchText.trim().toLowerCase()) // Pencarian berdasarkan NIK
-    )
-  }
-  // search(): void {
-  //   this.filterForms();
-  //   this.calculateTotalPages();
-  //   this.navigateToPage(1);
-  // }
+      // Adjust endIndex if it exceeds the length of filteredForms
+      endIndex = Math.min(endIndex, this.filteredForms.length);
+  
+      this.currentPage = page;
+  
+      // Recalculate data slice based on updated currentPage and pageSize
+      this.filteredForms = this.filteredForms.slice(startIndex, endIndex);
+    }
+  }
+  
+  search(): void {
+    if (this.searchText.trim() !== '') {
+      this.filteredForms = this.forms.filter(form =>
+        form.formToUser.nameUser.toLowerCase().includes(this.searchText.trim().toLowerCase()) ||
+        form.formToUser.nikUser.toLowerCase().includes(this.searchText.trim().toLowerCase())
+      );
+    } else {
+      // Jika input pencarian kosong, tampilkan semua data
+      this.filteredForms = this.forms;
+    }
+  
+    // Setelah memfilter data, perbarui jumlah halaman dan navigasi
+    this.calculateTotalPages();
+    this.navigateToPage(1); // Navigasikan ke halaman pertama setelah pencarian
+  }
 
   changePageSize(): void {
     this.totalPages = Math.ceil(this.filteredForms.length / this.pageSize);
-    // Check for remaining data... (existing code)
     this.totalPagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1);
-    this.currentPage = 1; // Reset current page to 1
-    this.navigateToPage(1); // Update data for the first page
+    // Ensure current page is valid after changing page size
+    if (this.currentPage > this.totalPages) {
+      this.currentPage = this.totalPages;
+    }
+    this.navigateToPage(this.currentPage);
+    
+    // Call search() whenever pageSize changes
+    this.search();
   }
+  
   
   previousPage(): void {
     if (this.currentPage > 1) {
