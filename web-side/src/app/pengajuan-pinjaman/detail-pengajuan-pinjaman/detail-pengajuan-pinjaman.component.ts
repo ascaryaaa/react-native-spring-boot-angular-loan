@@ -159,7 +159,7 @@ export class DetailPengajuanPinjamanComponent implements OnInit {
       nameUser: this.form?.formToUser.nameUser ?? null,
       nikUser: this.form?.formToUser.nikUser ?? null,
       statusTagihan: "Hijau",
-      kolektabilitas: 0,
+      kolektabilitas: null,
       deskripsiPembayaran: "test",
       amountsSisaPokok: null,
       rebatesSisaPokok: null,
