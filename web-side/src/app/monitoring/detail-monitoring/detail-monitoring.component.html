@@ -31,7 +31,6 @@
                         <div class="mt-2">Tempat, Tanggal Lahir</div>
                         <div class="mt-2 leading-5">Alamat</div>
                         <div class="mt-2">Kantor Cabang</div>
-                        <div class="mt-2">Riwayat Pinjaman</div>
                       </div>
                       <div class="flex flex-col">
                         <div class="leading-[150%]">: {{pinjamans?.pinjamanToForm?.formToUser?.nameUser}}</div>
@@ -44,13 +43,7 @@
                         <div class="mt-2 leading-5">
                           : {{pinjamans?.pinjamanToForm?.alamatKtp}}
                         </div>
-                        <div class="mt-2 leading-[150%]">: {{pinjamans?.pinjamanToForm?.unitBNI}}</div>
-                        <div class="flex gap-0 mt-2">
-                          <div class="self-start leading-[150%]">:</div>
-                          <div class="leading-5">
-                            {{pinjamans?.pinjamanToForm?.formToJenis?.nameJenisPinjaman}}
-                          </div>
-                        </div>
+                        <div class="mt-2 leading-[150%]">: {{pinjamans?.pinjamanToForm?.formToCabang?.nameCabang}}</div>
                       </div>
                     </div>
                   </div>
@@ -126,7 +119,12 @@
                       <div class="flex flex-col justify-center my-auto">
                         <div class="text-xs text-neutral-500">Total pinjaman</div>
                         <div class="mt-1 text-xs leading-4 text-center text-zinc-800">
-                          {{pinjamans?.pinjamanToForm?.jumlahPinjaman}}
+                          <ng-container *ngIf="pinjamans?.pinjamanToForm?.idFormPengajuanPinjaman === 1">
+                            {{ pinjamans?.pinjamanToForm?.hargaRumah }}
+                          </ng-container>
+                          <ng-container *ngIf="pinjamans?.pinjamanToForm?.idFormPengajuanPinjaman !== 1">
+                            {{ pinjamans?.pinjamanToForm?.jumlahPinjaman }}
+                          </ng-container>
                         </div>
                       </div>
                     </div>
