@@ -27,7 +27,7 @@ export function LoginModal({ visible, onClose, navigation }) {
           {/* ModalAwal tetap berada di dalam View */}
         </Pressable>
         <View style={styles.button}>
-          <ModalAwal navigation={navigation} />
+          <ModalAwal onClose={onClose} navigation={navigation} />
         </View>
       </View>
     </Modal>

@@ -7,13 +7,12 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
-import { FontAwesome } from "@expo/vector-icons"; // Import FontAwesome from @expo/vector-icons
+import { FontAwesome } from "@expo/vector-icons";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useNavigation } from "@react-navigation/native";
+import Constant from "../utils/Constant";
 
-const ModalAwal = ({}) => {
-  const navigation = useNavigation();
+const ModalAwal = ({ onClose, navigation }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -26,8 +25,7 @@ const ModalAwal = ({}) => {
   const handleLogin = async () => {
     try {
       const response = await axios.post(
-        "http://192.168.209.213:8083/rest/auth/login-account",
-
+        Constant.loginAccount,
         {
           username,
           password,
@@ -35,7 +33,7 @@ const ModalAwal = ({}) => {
       );
       const { token } = response.data;
       await AsyncStorage.setItem("token", token);
-
+      if(onClose) onClose();
       navigation.navigate("Home");
     } catch (error) {
       console.error(error);

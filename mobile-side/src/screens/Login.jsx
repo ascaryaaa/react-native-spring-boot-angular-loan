@@ -7,7 +7,6 @@ import {
   Image,
   ImageBackground,
 } from "react-native";
-import ModalAwal from "../components/ModalAwal";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LoginModal } from "./LoginModal";
 
@@ -29,6 +28,11 @@ const Login = ({ navigation }) => {
 
   const closeModal = () => {
     setModalVisible(false);
+  };
+
+  const handleSuccessfulLogin = () => {
+    setModalVisible(false); // Close modal
+    navigation.navigate("Home"); // Navigate to home
   };
 
   return (
@@ -73,6 +77,7 @@ const Login = ({ navigation }) => {
       <LoginModal
         visible={modalVisible}
         onClose={closeModal}
+        onLoginSuccess={handleSuccessfulLogin}
         navigation={navigation}
       />
     </ImageBackground>
