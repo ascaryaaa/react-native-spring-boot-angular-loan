@@ -23,10 +23,10 @@ error: any;
 
     if (!form.valid) {
       if (form.controls['username'].errors?.['required']) {
-        this.usernameError = 'Username harus diisi.';
+        this.usernameError = 'Username tidak boleh kosong';
       }
       if (form.controls['password'].errors?.['required']) {
-        this.passwordError = 'Password harus diisi.';
+        this.passwordError = 'Password tidak boleh kosong';
       }
       return;
     }
@@ -38,7 +38,7 @@ error: any;
         if (error === 'Unauthorized') {
           this.passwordError = 'Password tidak sesuai';
         } else if (error === 'UserNotFound') {
-          this.usernameError = 'Username belum terdaftar';
+          this.usernameError = 'Username tidak terdaftar';
         } else {
           console.log('Terjadi kesalahan saat login. Silakan coba lagi.');
         }
