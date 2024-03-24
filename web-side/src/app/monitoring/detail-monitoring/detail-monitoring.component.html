@@ -143,8 +143,51 @@
                         class="shrink-0 w-10 aspect-square fill-indigo-50" />
                       <div class="flex flex-col justify-center my-auto">
                         <div class="text-xs text-neutral-500">Kolektabilitas</div>
-                        <div class="mt-1 text-xs leading-4 text-center text-zinc-800">
-                          {{pinjamans?.kolektabilitas}}
+                        <div class="mt-1 text-xs leading-4 text-center text-zinc-800" *ngIf="pinjamans && pinjamans.pinjamanToForm">
+                          <ng-container *ngIf="pinjamans.kolektabilitas !== null; else kolektabilitasCheck">
+                            <ng-container *ngIf="pinjamans.kolektabilitas === 0; else kolektabilitasCheck2">
+                              Lancar
+                            </ng-container>
+                            <ng-container *ngIf="pinjamans.kolektabilitas < 30; else kolektabilitasCheck3">
+                              DPK 1
+                            </ng-container>
+                            <ng-container *ngIf="pinjamans.kolektabilitas < 60; else kolektabilitasCheck4">
+                              DPK 2
+                            </ng-container>
+                            <ng-container *ngIf="pinjamans.kolektabilitas < 90; else kolektabilitasCheck5">
+                              DPK 3
+                            </ng-container>
+                            <ng-container *ngIf="pinjamans.kolektabilitas < 120; else kolektabilitasCheck6">
+                              Kurang Lancar
+                            </ng-container>
+                            <ng-container *ngIf="pinjamans.kolektabilitas < 150; else kolektabilitasCheck7">
+                              Diragukan
+                            </ng-container>
+                            <ng-container *ngIf="pinjamans.kolektabilitas >= 150">
+                              Macet
+                            </ng-container>
+                          </ng-container>
+                          <ng-template #kolektabilitasCheck>
+                            Lancar
+                          </ng-template>
+                          <ng-template #kolektabilitasCheck2>
+                            DPK 1
+                          </ng-template>
+                          <ng-template #kolektabilitasCheck3>
+                            DPK 2
+                          </ng-template>
+                          <ng-template #kolektabilitasCheck4>
+                            DPK 3
+                          </ng-template>
+                          <ng-template #kolektabilitasCheck5>
+                            Kurang Lancar
+                          </ng-template>
+                          <ng-template #kolektabilitasCheck6>
+                            Diragukan
+                          </ng-template>
+                          <ng-template #kolektabilitasCheck7>
+                            Macet
+                          </ng-template>
                         </div>
                       </div>
                     </div>
