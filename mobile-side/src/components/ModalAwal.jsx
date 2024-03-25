@@ -24,16 +24,13 @@ const ModalAwal = ({ onClose, navigation }) => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post(
-        Constant.loginAccount,
-        {
-          username,
-          password,
-        }
-      );
+      const response = await axios.post(Constant.loginAccount, {
+        username,
+        password,
+      });
       const { token } = response.data;
       await AsyncStorage.setItem("token", token);
-      if(onClose) onClose();
+      if (onClose) onClose();
       navigation.navigate("Home");
     } catch (error) {
       console.error(error);
@@ -47,10 +44,12 @@ const ModalAwal = ({ onClose, navigation }) => {
         <View
           style={{ width: "100%", alignItems: "flex-end", marginRight: 10 }}
         >
-          <Image
-            source={require("../../../mobile-side/src/assets/icon_x.png")}
-            style={styles.iconx}
-          />
+          <TouchableOpacity onPress={onClose}>
+            <Image
+              source={require("../../../mobile-side/src/assets/icon_x.png")}
+              style={styles.iconx}
+            />
+          </TouchableOpacity>
         </View>
 
         <View style={styles.form}>
@@ -117,8 +116,8 @@ const styles = StyleSheet.create({
     // justifyContent: "center",
     // alignItems: "center",
     backgroundColor: "white",
-    width: 380,
-    height: 450,
+    width: 360,
+    height: 440,
     marginHorizontal: 13,
     borderRadius: 10,
   },
