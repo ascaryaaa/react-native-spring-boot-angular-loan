@@ -14,7 +14,7 @@
   .modal-content {
     background-color: white; /* Background color of the modal */
     padding: 20px; /* Adjust padding as needed */
-    border-radius: 8px; /* Rounded corners */
+    border-radius: 8px; /* Rounded corners */ 
   }
   
   .modal-actions {
