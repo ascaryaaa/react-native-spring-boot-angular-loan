@@ -33,3 +33,27 @@ export const fetchJenisPinjamanData = async () => {
     return null;
   }
 };
+
+// Function to make authorized GET request to account API by hashed ID
+export const fetchAccountData = async (hashedId) => {
+    try {
+      const token = await getToken();
+      if (token) {
+        const response = await axios.get(`${Constant.getUserDetailByHashedId}${hashedId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log(response.data)
+        return response.data;
+      } else {
+        console.error("Token not found in AsyncStorage");
+        return null;
+      }
+    } catch (error) {
+      console.error("Error fetching account data:", error);
+      return null;
+    }
+};
+  
+export default { fetchAccountData };
