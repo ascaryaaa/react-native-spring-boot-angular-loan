@@ -33,7 +33,7 @@ const SyaratKetentuan = ({ navigation }) => {
     <View style={styles.bg}>
       <View style={styles.shadow}>
         <View style={styles.navbar}>
-          <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <Image
               source={require("../../../mobile-side/src/assets/Icon_leftarrow.png")}
             />
@@ -56,79 +56,115 @@ const SyaratKetentuan = ({ navigation }) => {
           >
             Syarat dan Ketentuan
           </Text>
-          <View style={{marginBottom: 5}}>
-            <Text style={styles.textContent}>Dengan menekan tombol “Ajukan Pinjaman” di bawah ini, saya menyetujui hal-hal sebagai berikut</Text>
+          <View style={{ marginBottom: 5 }}>
+            <Text style={styles.textContent}>
+              Dengan menekan tombol “Ajukan Pinjaman” di bawah ini, saya
+              menyetujui hal-hal sebagai berikut
+            </Text>
           </View>
           <View style={styles.rowContent}>
-            <View style={{width: '5%'}}>
+            <View style={{ width: "5%" }}>
               <Text style={styles.poin}>1.</Text>
             </View>
-            <View style={{width: '95%'}}>
-              <Text style={styles.textContent}>Data dan informasi yang saya berikan dalam pengajuan ini adalah sesuai keadaaan yang sebenar-benarnya.</Text>
+            <View style={{ width: "95%" }}>
+              <Text style={styles.textContent}>
+                Data dan informasi yang saya berikan dalam pengajuan ini adalah
+                sesuai keadaaan yang sebenar-benarnya.
+              </Text>
             </View>
           </View>
           <View style={styles.rowContent}>
-            <View style={{width: '5%'}}>
+            <View style={{ width: "5%" }}>
               <Text style={styles.poin}>2.</Text>
             </View>
-            <View style={{width: '95%'}}>
-              <Text style={styles.textContent}>Saya menyetujui bahwa PT. Bank Rakyat Indonesia (Persero), Tok, selanjutnya disebut Bank, berwenang untuk:</Text>
+            <View style={{ width: "95%" }}>
+              <Text style={styles.textContent}>
+                Saya menyetujui bahwa PT. Bank Rakyat Indonesia (Persero), Tok,
+                selanjutnya disebut Bank, berwenang untuk:
+              </Text>
             </View>
           </View>
           <View style={styles.rowContent}>
-            <View style={{width: '9%'}}>
+            <View style={{ width: "9%" }}>
               <Text style={styles.poinValue}>a.</Text>
             </View>
-            <View style={{width: '91%'}}>
-              <Text style={styles.textContent}>Memeriksa kebenaran data yang saya sampaikan dalam pengajuan ini.</Text>
+            <View style={{ width: "91%" }}>
+              <Text style={styles.textContent}>
+                Memeriksa kebenaran data yang saya sampaikan dalam pengajuan
+                ini.
+              </Text>
             </View>
           </View>
           <View style={styles.rowContent}>
-            <View style={{width: '9%'}}>
+            <View style={{ width: "9%" }}>
               <Text style={styles.poinValue}>b.</Text>
             </View>
-            <View style={{width: '91%'}}>
-              <Text style={styles.textContent}>Mencari dan memperoleh keterangan dan referensi dari sumber manapun dengan cara yang dianggap sah oleh Bank.</Text>
+            <View style={{ width: "91%" }}>
+              <Text style={styles.textContent}>
+                Mencari dan memperoleh keterangan dan referensi dari sumber
+                manapun dengan cara yang dianggap sah oleh Bank.
+              </Text>
             </View>
           </View>
           <View style={styles.rowContent}>
-            <View style={{width: '9%'}}>
+            <View style={{ width: "9%" }}>
               <Text style={styles.poinValue}>c.</Text>
             </View>
-            <View style={{width: '91%'}}>
-              <Text style={styles.textContent}>Menyetujui atau menolak pengajuan pinjaman saya berdasarkan analisa Bank.</Text>
+            <View style={{ width: "91%" }}>
+              <Text style={styles.textContent}>
+                Menyetujui atau menolak pengajuan pinjaman saya berdasarkan
+                analisa Bank.
+              </Text>
             </View>
           </View>
           <View style={styles.rowContent}>
-            <View style={{width: '9%'}}>
+            <View style={{ width: "9%" }}>
               <Text style={styles.poinValue}>d.</Text>
             </View>
-            <View style={{width: '91%'}}>
-              <Text style={styles.textContent}>Tidak mengembalikan seluruh dokumen yang telah saya serahkan kepada Bank.</Text>
+            <View style={{ width: "91%" }}>
+              <Text style={styles.textContent}>
+                Tidak mengembalikan seluruh dokumen yang telah saya serahkan
+                kepada Bank.
+              </Text>
             </View>
           </View>
           <View style={styles.rowContent}>
-            <View style={{width: '9%'}}>
+            <View style={{ width: "9%" }}>
               <Text style={styles.poinValue}>e.</Text>
             </View>
-            <View style={{width: '91%'}}>
-              <Text style={styles.textContent}>Memberikan secara terbatas dan/atau tidak terbatas data yang telah saya sampaikan dalam pengajuan ini kepada pihak ketiga dalam rangka kepentingan pemrosesan pengajuan pinjaman.</Text>
+            <View style={{ width: "91%" }}>
+              <Text style={styles.textContent}>
+                Memberikan secara terbatas dan/atau tidak terbatas data yang
+                telah saya sampaikan dalam pengajuan ini kepada pihak ketiga
+                dalam rangka kepentingan pemrosesan pengajuan pinjaman.
+              </Text>
             </View>
           </View>
           <View style={styles.rowContent}>
-            <View style={{width: '5%'}}>
+            <View style={{ width: "5%" }}>
               <Text style={styles.poin}>3.</Text>
             </View>
-            <View style={{width: '95%'}}>
-              <Text style={styles.textContent}>Saya memahami dan mengerti bahwa Bank tidak berkewajiban untuk memberikan fasilitas kredit kepada saya hingga saya memenuhi semua persyaratan yang berlaku pada Bank dan telah menandatangani dokumen yang diperlukan Bank dalam pemberian kredit.</Text>
+            <View style={{ width: "95%" }}>
+              <Text style={styles.textContent}>
+                Saya memahami dan mengerti bahwa Bank tidak berkewajiban untuk
+                memberikan fasilitas kredit kepada saya hingga saya memenuhi
+                semua persyaratan yang berlaku pada Bank dan telah
+                menandatangani dokumen yang diperlukan Bank dalam pemberian
+                kredit.
+              </Text>
             </View>
           </View>
           <View style={styles.rowContent}>
-            <View style={{width: '5%'}}>
+            <View style={{ width: "5%" }}>
               <Text style={styles.poin}>4.</Text>
             </View>
-            <View style={{width: '95%'}}>
-              <Text style={styles.textContent}>Apabila ternyata data dan informasi, serta pernyataan yang saya berikan/buat tidak sesuai dengan keadaan yang sebenarnya, maka segala risiko dan konsekuensi yang diakibatkannya menjadi sepenuhnya tanggung jawab saya.</Text>
+            <View style={{ width: "95%" }}>
+              <Text style={styles.textContent}>
+                Apabila ternyata data dan informasi, serta pernyataan yang saya
+                berikan/buat tidak sesuai dengan keadaan yang sebenarnya, maka
+                segala risiko dan konsekuensi yang diakibatkannya menjadi
+                sepenuhnya tanggung jawab saya.
+              </Text>
             </View>
           </View>
           <TouchableOpacity
@@ -144,11 +180,15 @@ const SyaratKetentuan = ({ navigation }) => {
               size={20}
               color="#D9D9D9"
             />
-            <Text style={{ marginLeft: 5, fontSize: 12, fontWeight: '400' }}>
+            <Text style={{ marginLeft: 5, fontSize: 12, fontWeight: "400" }}>
               Saya menyetujui syarat dan ketentuan ini
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, !checked && { opacity: 0.5 }]} onPress={openModal} disabled={!checked}>
+          <TouchableOpacity
+            style={[styles.button, !checked && { opacity: 0.5 }]}
+            onPress={openModal}
+            disabled={!checked}
+          >
             <Text
               style={{
                 textAlign: "center",
@@ -235,19 +275,19 @@ const styles = StyleSheet.create({
   poin: {
     lineHeight: 18,
     fontSize: 14,
-    fontWeight: '400'
+    fontWeight: "400",
   },
   poinValue: {
-    textAlign: 'right',
+    textAlign: "right",
     lineHeight: 18,
     fontSize: 14,
-    fontWeight: '400'
+    fontWeight: "400",
   },
   textContent: {
-    textAlign: 'justify',
+    textAlign: "justify",
     lineHeight: 18,
     fontSize: 14,
-    fontWeight: '400'
+    fontWeight: "400",
   },
   rowContent: {
     flexDirection: "row",
