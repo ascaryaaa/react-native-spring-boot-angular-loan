@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
   Image,
-  onSelect,
+  ActivityIndicator,
 } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { getJenisPinjamans } from "../reducers/JenisPinjaman";
 
 const PengajuanPinjaman = ({ navigation }) => {
+  const jenisPinjamanState = useSelector((state) => state.jenisPinjaman);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // fetchInfo();
+    dispatch(getJenisPinjamans());
+  }, [dispatch]);
+
   return (
     <View style={styles.bg}>
       <View style={styles.shadow}>
@@ -24,6 +34,7 @@ const PengajuanPinjaman = ({ navigation }) => {
           />
         </View>
       </View>
+
       <View style={styles.container}>
         <View style={styles.headertxt}>
           <Text style={styles.texttitle}>Pengajuan Pinjaman</Text>
@@ -32,37 +43,49 @@ const PengajuanPinjaman = ({ navigation }) => {
             dengan kebutuhan
           </Text>
         </View>
-        <TouchableOpacity onPress={() => navigation.navigate("SimulasiGriya")}>
-          <View style={styles.cardContainer}>
-            <Image
-              source={require("../../../mobile-side/src/assets/icon_griya.png")}
-              style={styles.productImage}
-            />
-            <Text style={styles.titleText}>BNI Griya</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("SimulasiFleksiAktif")}
-        >
-          <View style={styles.cardContainer}>
-            <Image
-              source={require("../../../mobile-side/src/assets/icon_fleksi_aktif.png")}
-              style={styles.productImage}
-            />
-            <Text style={styles.titleText}>BNI Fleksi Aktif</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("SimulasiFleksiPensiun")}
-        >
-          <View style={styles.cardContainer}>
-            <Image
-              source={require("../../../mobile-side/src/assets/icon_fleksi_pensiun.png")}
-              style={styles.productImage}
-            />
-            <Text style={styles.titleText}>BNI Fleksi Pensiun</Text>
-          </View>
-        </TouchableOpacity>
+
+        <View style={styles.row}>
+          {jenisPinjamanState.loading ? (
+            <ActivityIndicator />
+          ) : (
+            jenisPinjamanState?.data?.map((jenisPinjaman, index) => {
+              // Menghilangkan underscore dari nameJenisPinjaman
+              const formattedName = jenisPinjaman.nameJenisPinjaman.replace(
+                /_/g,
+                " "
+              );
+
+              return (
+                <TouchableOpacity
+                  style={styles.cardContainer}
+                  onPress={() => {
+                    // Menentukan navigasi berdasarkan index atau jenisPinjaman tertentu
+                    switch (index) {
+                      case 0:
+                        navigation.navigate("SimulasiGriya");
+                        break;
+                      case 1:
+                        navigation.navigate("SimulasiFleksiAktif");
+                        break;
+                      case 2:
+                        navigation.navigate("SimulasiFleksiPensiun");
+                        break;
+                      default:
+                        break;
+                    }
+                  }}
+                  key={index} // Pastikan setiap TouchableOpacity memiliki key yang unik
+                >
+                  <Image
+                    source={{ uri: jenisPinjaman.iconJenisPinjaman }}
+                    style={styles.productImage}
+                  />
+                  <Text style={styles.textJenisPinjaman}>{formattedName}</Text>
+                </TouchableOpacity>
+              );
+            })
+          )}
+        </View>
       </View>
     </View>
   );
@@ -94,7 +117,7 @@ const styles = StyleSheet.create({
   shadow: {
     shadowColor: "#ddd",
     shadowOffset: { width: 0, height: 5 },
-    shadowOpacity: 0.40,
+    shadowOpacity: 0.4,
     shadowRadius: 15,
   },
   headertxt: {
@@ -132,9 +155,10 @@ const styles = StyleSheet.create({
   },
   textJenisPinjaman: {
     color: "white",
-    fontSize: 13,
-    fontWeight: "500",
-    fontFamily: "Montserrat-Regular",
+    fontSize: 14,
+    fontWeight: "600",
+    // fontFamily: "Montserrat-Regular",
+    marginLeft: 12,
   },
   buttonJenis: {
     backgroundColor: "white",
@@ -159,7 +183,7 @@ const styles = StyleSheet.create({
   cardContent: {
     flexDirection: "row",
     gap: 12,
-    alignItems: "center", 
+    alignItems: "center",
   },
   productImage: {
     width: 39,
@@ -191,5 +215,15 @@ const styles = StyleSheet.create({
     fontFamily: "Montserrat, sans-serif",
     fontSize: 12,
     fontWeight: "700",
+  },
+  row: {
+    flexWrap: "wrap",
+    alignItems: "center",
+    // backgroundColor: "green",
+  },
+  image: {
+    width: 115,
+    height: 160,
+    alignSelf: "flex-Start",
   },
 });

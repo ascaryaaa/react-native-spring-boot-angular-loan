@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -7,7 +7,10 @@ import {
   Image,
   TextInput,
   ScrollView,
+  ActivityIndicator,
 } from "react-native";
+import { getJenisPinjamans } from "../reducers/JenisPinjaman";
+import { useDispatch, useSelector } from "react-redux";
 
 const SimulasiFleksiPensiun = ({ navigation }) => {
   const [inputData, setInputData] = useState({
@@ -28,6 +31,9 @@ const SimulasiFleksiPensiun = ({ navigation }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [hidedButton, setHidedButton] = useState(false);
 
+  const jenisPinjamanState = useSelector((state) => state.jenisPinjaman);
+  const dispatch = useDispatch();
+
   const validateInputs = () => {
     const errors = {};
     let isValid = true;
@@ -41,6 +47,8 @@ const SimulasiFleksiPensiun = ({ navigation }) => {
     return isValid;
   };
 
+  const idToDisplay = 3;
+
   const handleNext = () => {
     if (validateInputs()) {
       // Proceed to the next step
@@ -52,6 +60,11 @@ const SimulasiFleksiPensiun = ({ navigation }) => {
     setIsDropdownOpen(!isDropdownOpen);
     setHidedButton(true);
   };
+
+  useEffect(() => {
+    // fetchInfo();
+    dispatch(getJenisPinjamans());
+  }, [dispatch]);
 
   return (
     <View style={styles.container}>
@@ -74,10 +87,24 @@ const SimulasiFleksiPensiun = ({ navigation }) => {
         <View style={styles.bodyContainer}>
           <View style={{ alignItems: "center" }}>
             <Text style={styles.texttitle}>Simulasi BNI Fleksi Pensiun</Text>
-            <Image
-              source={require("../../../mobile-side/src/assets/img_simulasi_pensiun.png")}
-              style={styles.imgSimulasi}
-            />
+            <View>
+              {jenisPinjamanState.loading ? (
+                <ActivityIndicator />
+              ) : (
+                jenisPinjamanState?.data
+                  // Filter data berdasarkan idJenisPinjaman
+                  .filter(
+                    (jenisPinjaman) =>
+                      jenisPinjaman.idJenisPinjaman === idToDisplay
+                  )
+                  .map((jenisPinjaman, index) => (
+                    <Image
+                      style={styles.imgSimulasi}
+                      source={{ uri: jenisPinjaman.gambarJenisPinjaman }}
+                    />
+                  ))
+              )}
+            </View>
             <Text>
               Anda dapat mensimulasikan jenis pinjaman sebelum melakukan
               pengajuan pada halaman ini
