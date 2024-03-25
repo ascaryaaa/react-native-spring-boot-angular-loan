@@ -20,20 +20,23 @@ const jenisPinjamanSlice = createSlice({
     initialState: {
         data: [],
         loading: false,
+        error: null,
     },
     reducer: {},
     extraReducers: (builder) => {
-        builder.addCase(getJenisPinjamans.pending, (state, action) => {
-            state.loading = true
+        builder
+        .addCase(getJenisPinjamans.pending, (state) => {
+            state.loading = true;
+            state.error = null;
         })
-        builder.addCase(getJenisPinjamans.fulfilled, (state, action) => {
-            state.data = action.payload
-            state.loading = false
-        })
-        builder.addCase(getJenisPinjamans.rejected, (state, action) => {
-            Alert.alert(action.payload);
+        .addCase(getJenisPinjamans.fulfilled, (state, action) => {
+            state.data = action.payload;
             state.loading = false;
         })
+        .addCase(getJenisPinjamans.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message;
+        });
     }
 })
 
