@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 const CONNECTION = "192.168.193.54";
+=======
+const CONNECTION = "192.168.209.162";
+>>>>>>> 4757c36ab5955c950876994bb746697f7e11ad6c
 
 const PORT = "8083";
 const MAIN_URL = `http://${CONNECTION}:${PORT}/loan/v1/`;

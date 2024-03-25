@@ -67,7 +67,7 @@ export class ListPengajuanPinjamanComponent {
       let endIndex = startIndex + this.pageSize;
   
       // Adjust endIndex if it exceeds the length of filteredForms
-      endIndex = Math.min(endIndex, this.filteredForms.length);
+      // endIndex = Math.min(endIndex, this.filteredForms.length);
   
       this.currentPage = page;
   
@@ -75,6 +75,8 @@ export class ListPengajuanPinjamanComponent {
       this.filteredForms = this.filteredForms.slice(startIndex, endIndex);
     }
   }
+
+  
   
   search(): void {
     if (this.searchText.trim() !== '') {
@@ -105,6 +107,23 @@ export class ListPengajuanPinjamanComponent {
     this.search();
   }
   
+  
+  // search(): void {
+  //   this.filteredForms = this.forms.filter(form =>
+    
+  //       form.formToUser.nameUser.toLowerCase().includes(this.searchText.trim().toLowerCase()) ||
+  //       // form.idFormPengajuanPinjaman.toString().includes(this.searchText.trim()) || // Pencarian berdasarkan CIF
+  //       form.formToUser.nikUser.toLowerCase().includes(this.searchText.trim().toLowerCase()) // Pencarian berdasarkan NIK
+  //     )
+  //   }
+  
+  //   changePageSize(): void {
+  //     this.totalPages = Math.ceil(this.filteredForms.length / this.pageSize);
+  //     // Check for remaining data... (existing code)
+  //     this.totalPagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+  //     this.currentPage = 1; // Reset current page to 1
+  //     this.navigateToPage(1); // Update data for the first page
+  //   }
   
   previousPage(): void {
     if (this.currentPage > 1) {

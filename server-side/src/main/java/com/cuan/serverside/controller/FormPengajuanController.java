@@ -1,7 +1,5 @@
 package com.cuan.serverside.controller;
 
-import com.cuan.serverside.dto.UpdateStatusRequest;
-import com.cuan.serverside.model.DetailPinjaman;
 import com.cuan.serverside.model.FormPengajuan;
 import com.cuan.serverside.service.FormPengajuanService;
 import org.springframework.beans.factory.annotation.Autowired;
