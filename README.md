@@ -967,3 +967,214 @@ then you can use it in html like this
 {{ admin?.nameAdmin }}
 ```
 
+### 9. Redux Fetching for Account Detail
+
+Understanding the API Endpoint.
+lets implement this api-endpoint:
+```
+http://localhost:8083/loan/v1/account/hid/{{hashedId}}
+```
+
+JSON Response:
+```
+{
+    "account_Id": 3,
+    "hashedIdAccount": "f02afd85",
+    "passwordAccount": "123456",
+    "usernameAccount": "SarahJ",
+    "accountToUser": {
+        "idUser": 1,
+        "nameUser": "Sarah Johnson",
+        "nikUser": "4829610329478516"
+    }
+}
+```
+
+To do that:
+
+a. Setup in Component
+
+In your component file (e.g., SANDBOX.jsx), you'll:
+
+Import the getAccountByHashedId action from the Account reducer.
+Use useState to manage the hashed ID state.
+Utilize useEffect to fetch the hashed ID from AsyncStorage and dispatch the getAccountByHashedId action.
+
+```ruby
+import { getAccountByHashedId } from '../reducers/Account';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+  const [hashedId, setHashedId] = useState(null);
+
+  const jenisPinjamanState = useSelector((state) => state.jenisPinjaman)
+  const dispatch = useDispatch()
+
+  const accountState = useSelector((state) => state.account);
+  const dispatchAccount = useDispatch();
+
+useEffect(() => {
+    // Fetch hashed ID from AsyncStorage and fetch account data
+    const fetchHashedId = async () => {
+      try {
+        const storedHashedId = await AsyncStorage.getItem("hashedId");
+        if (storedHashedId) {
+          setHashedId(storedHashedId);
+          dispatchAccount(getAccountByHashedId(storedHashedId));
+        }
+      } catch (error) {
+        console.error('Error fetching hashed ID from AsyncStorage:', error);
+      }
+    };
+
+    fetchHashedId();
+
+  }, [dispatchAccount]);
+
+return (
+         <View style={styles.accountContainer}>
+            <Text>ID account: {accountState.data?.account_Id}</Text>
+            <Text>Username account: {accountState.data?.usernameAccount}</Text>
+            <Text>ID user: {accountState.data?.accountToUser.idUser}</Text>
+            <Text>Name User: {accountState.data?.accountToUser.nameUser}</Text>
+            <Text>NIK User: {accountState.data?.accountToUser.nikUser}</Text>
+          </View>
+)
+```
+
+b. Reducer Configuration
+
+In the reducers/Account.jsx file:
+
+Define an async thunk getAccountByHashedId to handle fetching account data by hashed ID.
+Create a slice for the account state using createSlice.
+Set up reducers for pending, fulfilled, and rejected states of the async thunk.
+
+```
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { fetchAccountData } from "../utils/apiUtils";
+
+// Async thunk to fetch account data by hashed ID
+export const getAccountByHashedId = createAsyncThunk(
+  'account/getByHashedId',
+  async (hashedId, { rejectWithValue }) => {
+    try {
+      const response = await fetchAccountData(hashedId); // Assuming fetchAccountData takes hashedId as an argument
+      console.log(response)
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.response);
+    }
+  }
+);
+
+// Slice for account state
+const accountSlice = createSlice({
+  name: 'account',
+  initialState: {
+    data: null,
+    loading: false,
+    error: null
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(getAccountByHashedId.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getAccountByHashedId.fulfilled, (state, action) => {
+        state.loading = false;
+        state.data = action.payload;
+      })
+      .addCase(getAccountByHashedId.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+  }
+});
+
+// Export actions and reducer
+export const accountActions = accountSlice.actions;
+export default accountSlice.reducer;
+```
+
+c. Store Configuration
+
+In the Store.jsx file:
+
+Configure the Redux store using configureStore.
+Combine reducers from different slices, including accountReducer and others.
+
+```ruby
+import { configureStore } from "@reduxjs/toolkit";
+import jenisPinjamanReducer from './JenisPinjaman';
+import accountReducer from "./Account";
+
+export default configureStore({
+    reducer: {
+        account: accountReducer,
+        jenisPinjaman: jenisPinjamanReducer
+    }
+})
+```
+
+d. API Utility Functions
+
+In the utils/apiUtils.jsx file:
+
+Implement functions like getToken to retrieve the token from AsyncStorage and fetchAccountData to fetch account data using Axios.
+
+```
+export const getToken = async () => {
+  try {
+    const token = await AsyncStorage.getItem("token");
+    return token;
+  } catch (error) {
+    console.error("Error retrieving token from AsyncStorage:", error);
+    return null;
+  }
+};
+
+export const fetchAccountData = async (hashedId) => {
+    try {
+      const token = await getToken();
+      if (token) {
+        const response = await axios.get(`${Constant.getUserDetailByHashedId}${hashedId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log(response.data)
+        return response.data;
+      } else {
+        console.error("Token not found in AsyncStorage");
+        return null;
+      }
+    } catch (error) {
+      console.error("Error fetching account data:", error);
+      return null;
+    }
+};
+  
+export default { fetchAccountData };
+```
+
+e. Constants Setup
+
+In the constants/Constant.jsx file:
+
+Define constants like CONNECTION, PORT, and MAIN_URL to construct the API endpoint URL.
+
+```
+const CONNECTION = "192.168.193.54";
+
+const PORT = "8083";
+const MAIN_URL = `http://${CONNECTION}:${PORT}/loan/v1/`;
+
+const urls = {
+  getUserDetailByHashedId: `${MAIN_URL}account/hid/`,
+};
+
+export default urls;
+
+```
