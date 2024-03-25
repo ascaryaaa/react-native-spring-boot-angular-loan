@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 const SANDBOX = () => {
   const [data, setData] = useState([]);
   const [dataJenisPinjaman, setDataJenisPinjaman] = useState([]);
+
   const jenisPinjamanState = useSelector((state) => state.jenisPinjaman)
   const dispatch = useDispatch()
 

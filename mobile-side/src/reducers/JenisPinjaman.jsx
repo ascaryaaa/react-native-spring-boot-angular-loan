@@ -1,17 +1,10 @@
 import { createAsyncThunk, createSlice} from "@reduxjs/toolkit"
-import { Alert} from "react-native"
-import axios from "axios"
-import Constant from '../utils/Constant';
+import { fetchJenisPinjamanData } from "../utils/apiUtils";
 
 export const getJenisPinjamans = createAsyncThunk(
-    'get-jenis-pinjaman',
-    async (payload, thunkApi) => {
-        try {
-            const response = await axios.get(Constant.getJenisPinjamans)
-            return thunkApi.fulfillWithValue(response.data)
-        } catch (error) {
-
-        }
+    'jenisPinjaman/getJenisPinjamans',
+    async () => {
+        return fetchJenisPinjamanData(); // Reuse the API utility function
     }
 )
 
@@ -40,6 +33,4 @@ const jenisPinjamanSlice = createSlice({
     }
 })
 
-const jenisPinjamanReducer = jenisPinjamanSlice.reducer
-
-export default jenisPinjamanReducer
+export default jenisPinjamanSlice.reducer;
