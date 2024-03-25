@@ -24,7 +24,8 @@ public class AccountController {
     }
 
     // GET Function of API, Reads account data from 'pengajuan' database by id
-    @GetMapping("/{id}")
+
+    @GetMapping("/id/{id}")
     public Account getAccountById(@PathVariable Long id){
         return accountService.getAccountId(id);
     }

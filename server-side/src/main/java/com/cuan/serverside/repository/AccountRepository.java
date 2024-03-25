@@ -1,6 +1,7 @@
 package com.cuan.serverside.repository;
 
 import com.cuan.serverside.model.Account;
+import com.cuan.serverside.model.Admin;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
