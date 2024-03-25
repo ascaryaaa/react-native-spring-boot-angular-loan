@@ -81,7 +81,7 @@ const ProfileKeuanganGriya = ({ navigation }) => {
       <View style={styles.container}>
         <ScrollView>
           <View>
-            <Text style={styles.title}>Profile Keuangan</Text>
+            <Text style={styles.title}>Profil Keuangan</Text>
             <Text style={styles.text}>Harga Rumah</Text>
             <TextInput
               style={[styles.input, inputErrors.hargaRumah && styles.inputError ]}
@@ -223,11 +223,6 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
   },
-  container1: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
   button: {
     padding: 5,
     margin: 5,
@@ -259,6 +254,18 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginTop: 8,
     marginBottom: 16,
+    marginTop: 10,
+    marginBottom: 20,
+    paddingHorizontal: 10,
+    borderRadius: 8,
+    borderColor: "#1394AD",
+    borderWidth: 1,
+  },
+  input2: {
+    width: "100%",
+    height: 40,
+    borderWidth: 1,
+    marginTop: 10,
     paddingHorizontal: 10,
     borderRadius: 8,
     borderColor: "#1394AD",

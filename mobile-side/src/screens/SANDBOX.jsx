@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 const SANDBOX = () => {
   const [data, setData] = useState([]);
   const [dataJenisPinjaman, setDataJenisPinjaman] = useState([]);
+
   const jenisPinjamanState = useSelector((state) => state.jenisPinjaman)
   const dispatch = useDispatch()
 
@@ -54,6 +55,21 @@ const SANDBOX = () => {
                           style={styles.image}
                           source={{uri: jenisPinjaman.gambarJenisPinjaman}}
                       />
+                  </TouchableOpacity>
+              ))
+          }
+        </View>
+        <View style={styles.row}>
+          {
+              jenisPinjamanState.loading 
+              ? <ActivityIndicator/>
+              : jenisPinjamanState?.data?.map(jenisPinjaman => (
+                  <TouchableOpacity style={styles.imagecontainer}>
+                      <Image 
+                          style={styles.image}
+                          source={{uri: jenisPinjaman.iconJenisPinjaman}}
+                      />
+                      <Text>{jenisPinjaman.nameJenisPinjaman}</Text>
                   </TouchableOpacity>
               ))
           }

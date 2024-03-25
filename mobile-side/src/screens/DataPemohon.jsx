@@ -259,16 +259,7 @@ const DataPemohon = ({ navigation }) => {
                 style={styles.button}
                 onPress={() => navigation.goBack()}
               >
-                <Text
-                  style={{
-                    alignSelf: "center",
-                    paddingTop: 8,
-                    color: "white",
-                    fontWeight: "900",
-                  }}
-                >
-                  Sebelumnya
-                </Text>
+                <Text style={styles.sebelumnya}>Sebelumnya</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.button}
@@ -389,9 +380,10 @@ const styles = StyleSheet.create({
     borderColor: "red",
     marginBottom: 8,
   },
-  errorText: {
-    color: "red",
-    fontSize: 12,
-    marginBottom: 8,
+  sebelumnya: {
+    alignSelf: "center",
+    paddingTop: 8,
+    color: "white",
+    fontWeight: "900",
   },
 });

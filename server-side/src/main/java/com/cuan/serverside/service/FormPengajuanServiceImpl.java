@@ -25,10 +25,6 @@ public class FormPengajuanServiceImpl implements FormPengajuanService{
         this.jenisPinjamanRepository = jenisPinjamanRepository;
     }
 
-//    public FormPengajuanServiceImpl(JenisPinjamanRepository jenisPinjamanRepository) {
-//        this.jenisPinjamanRepository = jenisPinjamanRepository;
-//    }
-
     @Override
     public Iterable<FormPengajuan> getAllForm() {
         return formPengajuanRepository.findAll();
@@ -57,9 +53,18 @@ public class FormPengajuanServiceImpl implements FormPengajuanService{
         // Set angsruan perbulan
         formPengajuan.setAngsuranPerbulan(angsuranPerbulan);
 
-        String cif = generateCifToOblivion(formPengajuan);
-        formPengajuan.setHashedIdForm(cif);
-        formPengajuan.setCif("W"+cif);
+        // Save first to generate Id
+        formPengajuanRepository.save(formPengajuan);
+
+        // Generate CIF from id
+        Long idForm = formPengajuan.getIdFormPengajuanPinjaman();
+        Hashids hashids = new Hashids(String.format("%d",idForm));
+        String hashedId = hashids.encode(1L);
+
+        String cif = generateCif(hashedId);
+        String hashedIdEpoch = hashIdWithEpochTime(formPengajuan.getIdFormPengajuanPinjaman());
+        formPengajuan.setHashedIdForm(hashedIdEpoch);
+        formPengajuan.setCif(cif);
         return formPengajuanRepository.save(formPengajuan);
     }
 
@@ -92,14 +97,7 @@ public class FormPengajuanServiceImpl implements FormPengajuanService{
         return (result * (bunga / 12)) / (1 - Math.pow(1 + (bunga / 12), -jangka));
     }
 
-    private String generateCifToOblivion(FormPengajuan formPengajuan) {
-        // Save first to generate Id
-        formPengajuanRepository.save(formPengajuan);
-
-        // Generate CIF from id
-        Long idForm = formPengajuan.getIdFormPengajuanPinjaman();
-        Hashids hashids = new Hashids(String.format("%d",idForm));
-        String hashedId = hashids.encode(1L);
+    private String generateCif(String hashedId) {
 
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -116,15 +114,53 @@ public class FormPengajuanServiceImpl implements FormPengajuanService{
             }
 
             // Truncate to 8 characters
-            String truncatedHash = hexString.substring(0, 8);
+//            String truncatedHash = hexString.substring(0, 8);
+//
+//            int number = Integer.parseInt(truncatedHash, 16);
+//            return String.format("W"+"%08d", number);
 
-            int number = Integer.parseInt(truncatedHash, 16);
-            return String.format("%08d", number);
+            // Generate CIF from the hexadecimal string
+            String cif = hexString.toString().substring(0, 8); // Use the first 8 characters
+            return "W" + cif; // Prefix with 'W' as CIF usually starts with letters
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
             return  null;
         }
 
+    }
+
+    public static String hashIdWithEpochTime(Long id) {
+        try {
+            // Get current epoch time in seconds
+            long epochTime = Instant.now().getEpochSecond();
+
+            // Concatenate ID and epoch time
+            String combinedString = id + "-" + epochTime;
+
+            // Get SHA-256 MessageDigest instance
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+
+            // Compute the hash value of the combined string
+            byte[] hashBytes = digest.digest(combinedString.getBytes());
+
+            // Convert the hash bytes to a hexadecimal string
+            StringBuilder hexString = new StringBuilder();
+            for (byte hashByte : hashBytes) {
+                String hex = Integer.toHexString(0xff & hashByte);
+                if (hex.length() == 1) {
+                    hexString.append('0');
+                }
+                hexString.append(hex);
+            }
+
+            // Take the first 8 characters as the truncated hash
+            String truncatedHash = hexString.substring(0, 8);
+            return truncatedHash;
+        } catch (NoSuchAlgorithmException e) {
+            // Handle NoSuchAlgorithmException
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
@@ -135,5 +171,10 @@ public class FormPengajuanServiceImpl implements FormPengajuanService{
     @Override
     public void deleteFormById(Long id) {
         formPengajuanRepository.deleteById(id);
+    }
+
+    @Override
+    public FormPengajuan getFormByHashedId(String hashedId) {
+        return formPengajuanRepository.findByHashedIdForm(hashedId);
     }
 }

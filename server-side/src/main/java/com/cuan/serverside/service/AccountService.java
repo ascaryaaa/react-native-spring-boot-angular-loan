@@ -1,10 +1,12 @@
 package com.cuan.serverside.service;
 
 import com.cuan.serverside.model.Account;
+import com.cuan.serverside.model.Admin;
 
 import java.util.Optional;
 
 public interface AccountService {
+
     // Define GET all accounts in service
     public Iterable<Account> getAllAccount();
 
@@ -16,6 +18,9 @@ public interface AccountService {
 
     // Define DELETE account by id in service
     public void deleteAccountById(Long id);
+
+    // Define GET accounts by hashed id in service
+    public Account getAccountByHashedId(String hashedId);
 
     Optional<Account> findByUsernameAccount(String username);
 }

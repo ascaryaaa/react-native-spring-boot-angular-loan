@@ -51,4 +51,10 @@ public class DetailPinjamanController {
     public void deleteDetailPinjaman(@PathVariable Long id) {
         detailPinjamanService.deleteDetailPinjamanById(id);
     }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/hid/{hashedId}")
+    public DetailPinjaman getDetailPinjamanByHashedId(@PathVariable String hashedId){
+        return detailPinjamanService.getDetailPinjamanByHashedId(hashedId);
+    }
 }
