@@ -80,6 +80,11 @@ public class AccountServiceImpl implements AccountService{
     }
 
     @Override
+    public Account getAccountByHashedId(String hashedId) {
+        return accountRepository.findByHashedIdAccount(hashedId);
+    }
+
+    @Override
     public Optional<Account> findByUsernameAccount(String username) {
         return Optional.ofNullable(accountRepository.findByUsernameAccount(username));
     }
