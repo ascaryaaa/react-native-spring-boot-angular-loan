@@ -79,12 +79,6 @@ public class AccountServiceImpl implements AccountService{
 
         accountRepository.deleteById(id);
     }
-
-    @Override
-    public Account getAccountByHashedId(String hashedId) {
-        return accountRepository.findByHashedIdAccount(hashedId);
-    }
-
     @Override
     public Optional<Account> findByUsernameAccount(String username) {
         return Optional.ofNullable(accountRepository.findByUsernameAccount(username));
