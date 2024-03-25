@@ -8,7 +8,6 @@ const urls = {
   getUsers: `${MAIN_URL}user/get-users`,
   getAdmins: `${MAIN_URL}admin/get-admins`,
   getJenisPinjamans: `${MAIN_URL}jenis-pinjaman/get-jenis-pinjamans`,
-  getJenisPinjamans: `${MAIN_URL}jenis-pinjaman/`,
   getPromos: `${MAIN_URL}promo/get-promos`,
   getAccounts: `${MAIN_URL}accounts/get-accounts`,
   loginAccount: `${LOGIN_URL}login-account`,
