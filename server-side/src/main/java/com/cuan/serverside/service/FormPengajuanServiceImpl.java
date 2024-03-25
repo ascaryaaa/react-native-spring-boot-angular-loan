@@ -25,10 +25,6 @@ public class FormPengajuanServiceImpl implements FormPengajuanService{
         this.jenisPinjamanRepository = jenisPinjamanRepository;
     }
 
-//    public FormPengajuanServiceImpl(JenisPinjamanRepository jenisPinjamanRepository) {
-//        this.jenisPinjamanRepository = jenisPinjamanRepository;
-//    }
-
     @Override
     public Iterable<FormPengajuan> getAllForm() {
         return formPengajuanRepository.findAll();
@@ -118,10 +114,14 @@ public class FormPengajuanServiceImpl implements FormPengajuanService{
             }
 
             // Truncate to 8 characters
-            String truncatedHash = hexString.substring(0, 8);
+//            String truncatedHash = hexString.substring(0, 8);
+//
+//            int number = Integer.parseInt(truncatedHash, 16);
+//            return String.format("W"+"%08d", number);
 
-            int number = Integer.parseInt(truncatedHash, 16);
-            return String.format("W"+"%08d", number);
+            // Generate CIF from the hexadecimal string
+            String cif = hexString.toString().substring(0, 8); // Use the first 8 characters
+            return "W" + cif; // Prefix with 'W' as CIF usually starts with letters
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
             return  null;
