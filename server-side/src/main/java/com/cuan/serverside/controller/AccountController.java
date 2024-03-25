@@ -1,9 +1,7 @@
 package com.cuan.serverside.controller;
 
 import com.cuan.serverside.model.Account;
-import com.cuan.serverside.model.User;
 import com.cuan.serverside.service.AccountService;
-import com.cuan.serverside.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -19,9 +17,6 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-//    @Autowired
-//    private UserService userService;
-
     // GET Function of API, Reads account data from 'pengajuan' database
     @GetMapping("/get-accounts")
     public Iterable<Account> getAllAccount(){
@@ -30,7 +25,7 @@ public class AccountController {
 
     // GET Function of API, Reads account data from 'pengajuan' database by id
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public Account getAccountById(@PathVariable Long id){
         return accountService.getAccountId(id);
     }
@@ -38,8 +33,6 @@ public class AccountController {
     // POST Function of API, Creates account data into 'pengajuan' database
     @PostMapping("/post-account")
     public Account saveAccount(@RequestBody Account account){
-//        User savedUser = userService.saveUser(account.getUser());
-//        account.setUser(savedUser);
         return accountService.saveAccount(account);
     }
 
@@ -54,6 +47,13 @@ public class AccountController {
     @DeleteMapping("/delete-account-id/{id}")
     public void deleteAccount(@PathVariable Long id) {
         accountService.deleteAccountById(id);
+    }
+
+    // GET Function of API, Reads account data from 'pengajuan' database by hashed id
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/hid/{hashedId}")
+    public Account getAccountByHashedId(@PathVariable String hashedId){
+        return accountService.getAccountByHashedId(hashedId);
     }
 
 }

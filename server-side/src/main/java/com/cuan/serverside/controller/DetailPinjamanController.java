@@ -1,5 +1,6 @@
 package com.cuan.serverside.controller;
 
+import com.cuan.serverside.model.Account;
 import com.cuan.serverside.model.DetailPinjaman;
 import com.cuan.serverside.service.DetailPinjamanService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,5 +51,11 @@ public class DetailPinjamanController {
     @DeleteMapping("/delete-pinjaman-id/{id}")
     public void deleteDetailPinjaman(@PathVariable Long id) {
         detailPinjamanService.deleteDetailPinjamanById(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/hid/{hashedId}")
+    public DetailPinjaman getDetailPinjamanByHashedId(@PathVariable String hashedId){
+        return detailPinjamanService.getDetailPinjamanByHashedId(hashedId);
     }
 }

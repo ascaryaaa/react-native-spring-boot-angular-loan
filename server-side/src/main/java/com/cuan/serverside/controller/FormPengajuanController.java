@@ -1,6 +1,7 @@
 package com.cuan.serverside.controller;
 
 import com.cuan.serverside.dto.UpdateStatusRequest;
+import com.cuan.serverside.model.DetailPinjaman;
 import com.cuan.serverside.model.FormPengajuan;
 import com.cuan.serverside.service.FormPengajuanService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,12 @@ public class FormPengajuanController {
     @DeleteMapping("/delete-form-id/{id}")
     public void deleteForm(@PathVariable Long id) {
         formPengajuanService.deleteFormById(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/hid/{hashedId}")
+    public FormPengajuan getFormPengajuanByHashedId(@PathVariable String hashedId){
+        return formPengajuanService.getFormByHashedId(hashedId);
     }
 }
 
