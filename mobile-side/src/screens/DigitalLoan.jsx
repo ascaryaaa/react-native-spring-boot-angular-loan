@@ -37,12 +37,12 @@ const DigitalLoan = ({ navigation }) => {
   };
 
   const handleButton1Press = () => {
-    setResult(<ListPengajuanPinjaman />);
+    setResult(<ListPengajuanPinjaman navigation={navigation}/>);
     setActiveButton("pengajuan");
   };
 
   const handleButton2Press = () => {
-    setResult(<ListPinjaman />);
+    setResult(<ListPinjaman navigation={navigation} />);
     setActiveButton("pinjaman");
   };
 

@@ -11,15 +11,40 @@ import {
 
 const ProfileKeuanganGriya = ({ navigation }) => {
   const [inputData, setInputData] = useState({
-    hargaRumah: " ",
-    penghasilanBersih: " ",
-    jumlahPinjaman: " ",
-    jangkaWaktu: " ",
-    uangMuka: " ",
+    hargaRumah: "",
+    penghasilanBersih: "",
+    jangkaWaktu: "",
+    uangMuka: "",
+  });
+
+  const [inputErrors, setInputErrors] = useState({
+    hargaRumah: false,
+    jangkaWaktu: false,
+    uangMuka: false,
+    penghasilanBersih: false,
   });
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [hidedButton, setHidedButton] = useState(false);
+
+  const validateInputs = () => {
+    const errors = {};
+    let isValid = true;
+    for (const key in inputData) {
+      if (!inputData[key]) {
+        errors[key] = true;
+        isValid = false;
+      }
+    }
+    setInputErrors(errors);
+    return isValid;
+  };
+
+  const handleNext = () => {
+    if (validateInputs()) {
+      toggleDropdown();
+    }
+  };
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -59,60 +84,73 @@ const ProfileKeuanganGriya = ({ navigation }) => {
             <Text style={styles.title}>Profil Keuangan</Text>
             <Text style={styles.text}>Harga Rumah</Text>
             <TextInput
-              style={styles.input}
-              placeholder="Harga Rumah"
+              style={[styles.input, inputErrors.hargaRumah && styles.inputError ]}
+              keyboardType="numeric"
               value={inputData.hargaRumah}
               onChangeText={(number) =>
                 setInputData({ ...inputData, hargaRumah: number })
               }
             />
+            {inputErrors.hargaRumah && (
+              <Text style={styles.errorText}>Mohon isikan data dengan benar</Text>
+            )}
 
             <Text style={styles.text}>Jangka Waktu</Text>
             <TextInput
-              style={styles.input2}
-              placeholder="Jangka Waktu"
+              style={[styles.input, inputErrors.jangkaWaktu && styles.inputError ]}
+              keyboardType="numeric"
               value={inputData.jangkaWaktu}
               onChangeText={(number) =>
                 setInputData({ ...inputData, jangkaWaktu: number })
               }
             />
+            {inputErrors.jangkaWaktu && (
+              <Text style={styles.errorText}>Mohon isikan data dengan benar</Text>
+            )}
             <Text style={{ marginBottom: 10, fontSize: 10 }}>
               *Maksimal 360 Bulan
             </Text>
+
             <Text style={styles.text}>Presentase Uang Muka (%)</Text>
             <TextInput
-              style={styles.input}
-              placeholder="Presentase Uang Muka"
+              style={[styles.input, inputErrors.uangMuka && styles.inputError]}
+              keyboardType="numeric"
               value={inputData.uangMuka}
               onChangeText={(number) =>
                 setInputData({ ...inputData, uangMuka: number })
               }
             />
+            {inputErrors.uangMuka && (
+              <Text style={styles.errorText}>Mohon isikan data dengan benar</Text>
+            )}
 
             <Text style={styles.text}>Penghasilan Bersih per. Bulan</Text>
             <TextInput
-              style={styles.input}
-              placeholder="Bulan"
+              style={[styles.input, inputErrors.penghasilanBersih && styles.inputError]}
+              keyboardType="numeric"
               value={inputData.penghasilanBersih}
               onChangeText={(number) =>
                 setInputData({ ...inputData, penghasilanBersih: number })
               }
             />
+            {inputErrors.penghasilanBersih && (
+              <Text style={styles.errorText}>Mohon isikan data dengan benar</Text>
+            )}
 
             <Text style={styles.text}>Bunga Pinjaman</Text>
             <TextInput
               style={styles.input}
               placeholder="6,75"
               placeholderTextColor="gray"
-              keyboardType="numeric"
+              editable={false}
             />
             <View>
               {!hidedButton && (
                 <TouchableOpacity
-                  onPress={toggleDropdown}
+                  onPress={handleNext}
                   style={styles.button}
                 >
-                  <Text style={styles.textButton}>Simulasikan</Text>
+                  <Text style={styles.textButton}>Simulasi Angsuran</Text>
                 </TouchableOpacity>
               )}
               {isDropdownOpen && (
@@ -186,17 +224,16 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   button: {
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "row",
-    borderRadius: 20,
-    backgroundColor: "#18C1CD",
+    padding: 5,
+    margin: 5,
     alignSelf: "flex-end",
-    width: "40%",
-    marginBottom: 16,
-    marginTop: 16,
+    marginLeft: 80,
+    backgroundColor: "#18C1CD",
+    justifyContent: "center",
+    borderRadius: 20,
+    width: 160,
+    height: 44,
+    marginTop: 10,
   },
   button1: {
     marginTop: 10,
@@ -215,6 +252,8 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 40,
     borderWidth: 1,
+    marginTop: 8,
+    marginBottom: 16,
     marginTop: 10,
     marginBottom: 20,
     paddingHorizontal: 10,
@@ -290,5 +329,14 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.1,
     shadowRadius: 8,
+  },
+  inputError: {
+    borderColor: "red",
+    marginBottom: 8,
+  },
+  errorText: {
+    color: "red",
+    fontSize: 12,
+    marginBottom: 8,
   },
 });
