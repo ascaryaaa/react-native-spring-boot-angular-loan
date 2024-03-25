@@ -72,8 +72,9 @@ public class DetailPinjamanServiceImpl implements DetailPinjamanService{
                 hexString.append(hex);
             }
 
-            // Return the hexadecimal string as the hash
-            return hexString.toString();
+            // Take the first 8 characters as the truncated hash
+            String truncatedHash = hexString.substring(0, 8);
+            return truncatedHash;
         } catch (NoSuchAlgorithmException e) {
             // Handle NoSuchAlgorithmException
             e.printStackTrace();
