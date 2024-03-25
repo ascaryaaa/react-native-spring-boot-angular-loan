@@ -971,12 +971,14 @@ then you can use it in html like this
 
 Understanding the API Endpoint.
 lets implement this api-endpoint:
+
 ```
 http://localhost:8083/loan/v1/account/hid/{{hashedId}}
 ```
 
 JSON Response:
-```
+
+```ruby
 {
     "account_Id": 3,
     "hashedIdAccount": "f02afd85",
@@ -1049,7 +1051,7 @@ Define an async thunk getAccountByHashedId to handle fetching account data by ha
 Create a slice for the account state using createSlice.
 Set up reducers for pending, fulfilled, and rejected states of the async thunk.
 
-```
+```ruby
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchAccountData } from "../utils/apiUtils";
 
@@ -1124,7 +1126,7 @@ In the utils/apiUtils.jsx file:
 
 Implement functions like getToken to retrieve the token from AsyncStorage and fetchAccountData to fetch account data using Axios.
 
-```
+```ruby
 export const getToken = async () => {
   try {
     const token = await AsyncStorage.getItem("token");
@@ -1165,7 +1167,7 @@ In the constants/Constant.jsx file:
 
 Define constants like CONNECTION, PORT, and MAIN_URL to construct the API endpoint URL.
 
-```
+```ruby
 const CONNECTION = "192.168.193.54";
 
 const PORT = "8083";
