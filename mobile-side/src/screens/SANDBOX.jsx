@@ -59,6 +59,21 @@ const SANDBOX = () => {
               ))
           }
         </View>
+        <View style={styles.row}>
+          {
+              jenisPinjamanState.loading 
+              ? <ActivityIndicator/>
+              : jenisPinjamanState?.data?.map(jenisPinjaman => (
+                  <TouchableOpacity style={styles.imagecontainer}>
+                      <Image 
+                          style={styles.image}
+                          source={{uri: jenisPinjaman.iconJenisPinjaman}}
+                      />
+                      <Text>{jenisPinjaman.nameJenisPinjaman}</Text>
+                  </TouchableOpacity>
+              ))
+          }
+        </View>
         <Text style={styles.heading}>Jenis Pinjaman List</Text>
         <View style={styles.dataPinjamanContainer}>
           <FlatList

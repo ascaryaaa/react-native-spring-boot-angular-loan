@@ -113,7 +113,7 @@ const HomeFeatures = ({ navigation }) => {
           <Text style={{ fontSize: 12 }}>Rekeningku</Text>
         </View>
         <View style={styles.featuresKanan}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("SANDBOX")}>
             <Image
               source={require("../../../mobile-side/src/assets/icon_menuLain.png")}
               style={{ width: 55, height: 55 }}
