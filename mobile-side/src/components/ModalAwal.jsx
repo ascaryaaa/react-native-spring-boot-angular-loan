@@ -31,8 +31,9 @@ const ModalAwal = ({ onClose, navigation }) => {
           password,
         }
       );
-      const { token } = response.data;
-      await AsyncStorage.setItem("token", token);
+      await AsyncStorage.setItem("user", response.data);
+      AsyncStorage.setItem("token", response.data.token);
+      AsyncStorage.setItem("hashedId", response.data.hashedId);
       if(onClose) onClose();
       navigation.navigate("Home");
     } catch (error) {
