@@ -228,6 +228,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 12,
     fontWeight: "700",
+    textAlign:'center'
   },
   buttonStatus : {
     paddingVertical: 2,

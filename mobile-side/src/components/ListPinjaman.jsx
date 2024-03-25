@@ -16,7 +16,7 @@ const ListPinjaman = ({ navigation }) => {
     require("../../../mobile-side/src/assets/ban_kejutan1.png"),
     require("../../../mobile-side/src/assets/ban_kejutan2.png"),
   ];
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item, navigation }) => (
     <Image style={styles.bannerImage} source={item} />
   );
 
@@ -75,7 +75,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     // marginTop: 100,
     // backgroundColor: 'red',
-
   },
   shadow: {
     shadowColor: "#ddd",
@@ -189,6 +188,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 12,
     fontWeight: "700",
+    textAlign: 'center'
   },
   buttonStatus : {
     paddingVertical: 3,
@@ -196,6 +196,6 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     backgroundColor: "#04C300",
     borderColor: "#04C300",
-    width: '35%'
+    width: '30%'
   },
 });

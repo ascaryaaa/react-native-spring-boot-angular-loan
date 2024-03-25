@@ -88,7 +88,7 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
           <TextInput
             style={[
               styles.input,
-              inputErrors.penghasilanBersih && styles.inputError,
+              inputErrors.penghasilanBersih && styles.inputError
             ]}
             value={inputData.penghasilanBersih}
             keyboardType="numeric"
