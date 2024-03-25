@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 // Initialize repository by extending functions to CrudRepository
 @Repository
 public interface DetailPinjamanRepository extends CrudRepository<DetailPinjaman, Long> {
+    // public Admin findByHashedIdAdmin(String hashedId);
+    public DetailPinjaman findByHashedIdPinjaman(String hashedId);
 }

@@ -17,4 +17,6 @@ public interface FormPengajuanService {
 
     // Define DELETE account by id in service
     public void deleteFormById(Long id);
+
+    public FormPengajuan getFormByHashedId(String hashedId);
 }

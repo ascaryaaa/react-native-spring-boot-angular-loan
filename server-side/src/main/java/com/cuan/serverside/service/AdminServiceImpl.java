@@ -69,9 +69,8 @@ public class AdminServiceImpl implements AdminService {
                 hexString.append(hex);
             }
 
-            // Take the first 8 characters as the truncated hash
-            String truncatedHash = hexString.substring(0, 8);
-            return truncatedHash;
+            // Return the hexadecimal string as the hash
+            return hexString.toString();
         } catch (NoSuchAlgorithmException e) {
             // Handle NoSuchAlgorithmException
             e.printStackTrace();

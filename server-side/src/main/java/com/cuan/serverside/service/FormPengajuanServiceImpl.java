@@ -66,7 +66,8 @@ public class FormPengajuanServiceImpl implements FormPengajuanService{
         String hashedId = hashids.encode(1L);
 
         String cif = generateCif(hashedId);
-//        formPengajuan.setHashedIdForm(cif);
+        String hashedIdEpoch = hashIdWithEpochTime(formPengajuan.getIdFormPengajuanPinjaman());
+        formPengajuan.setHashedIdForm(hashedIdEpoch);
         formPengajuan.setCif(cif);
         return formPengajuanRepository.save(formPengajuan);
     }
@@ -128,6 +129,40 @@ public class FormPengajuanServiceImpl implements FormPengajuanService{
 
     }
 
+    public static String hashIdWithEpochTime(Long id) {
+        try {
+            // Get current epoch time in seconds
+            long epochTime = Instant.now().getEpochSecond();
+
+            // Concatenate ID and epoch time
+            String combinedString = id + "-" + epochTime;
+
+            // Get SHA-256 MessageDigest instance
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+
+            // Compute the hash value of the combined string
+            byte[] hashBytes = digest.digest(combinedString.getBytes());
+
+            // Convert the hash bytes to a hexadecimal string
+            StringBuilder hexString = new StringBuilder();
+            for (byte hashByte : hashBytes) {
+                String hex = Integer.toHexString(0xff & hashByte);
+                if (hex.length() == 1) {
+                    hexString.append('0');
+                }
+                hexString.append(hex);
+            }
+
+            // Take the first 8 characters as the truncated hash
+            String truncatedHash = hexString.substring(0, 8);
+            return truncatedHash;
+        } catch (NoSuchAlgorithmException e) {
+            // Handle NoSuchAlgorithmException
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     @Override
     public FormPengajuan updateForm(FormPengajuan formPengajuan) {
         return formPengajuanRepository.save(formPengajuan);
@@ -136,5 +171,10 @@ public class FormPengajuanServiceImpl implements FormPengajuanService{
     @Override
     public void deleteFormById(Long id) {
         formPengajuanRepository.deleteById(id);
+    }
+
+    @Override
+    public FormPengajuan getFormByHashedId(String hashedId) {
+        return formPengajuanRepository.findByHashedIdForm(hashedId);
     }
 }

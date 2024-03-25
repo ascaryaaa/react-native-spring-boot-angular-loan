@@ -41,6 +41,11 @@ public class DetailPinjamanServiceImpl implements DetailPinjamanService{
     }
 
     @Override
+    public DetailPinjaman getDetailPinjamanByHashedId(String hashedId) {
+        return detailPinjamanRepository.findByHashedIdPinjaman(hashedId);
+    }
+
+    @Override
     public DetailPinjaman saveDetailPinjaman(DetailPinjaman detailPinjaman) {
         detailPinjamanRepository.save(detailPinjaman);
         String cif = hashIdWithEpochTime(detailPinjaman.getIdPinjaman());
