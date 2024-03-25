@@ -11,11 +11,16 @@ import { ScrollView } from "react-native-gesture-handler";
 
 const ProfileKeuanganFleksiAktif = ({ navigation }) => {
   const [inputData, setInputData] = useState({
-    penghasilanBersih: " ",
-    jumlahPinjaman: " ",
-    jangkaWaktu: " ",
+    penghasilanBersih: "",
+    jumlahPinjaman: "",
+    jangkaWaktu: "",
   });
 
+  const [inputErrors, setInputErrors] = useState({
+    penghasilanBersih: false,
+    jumlahPinjaman: false,
+    jangkaWaktu: false,
+  });
   const data = [
     {
       id: 1,
@@ -31,6 +36,25 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [hidedButton, setHidedButton] = useState(false);
 
+  const validateInputs = () => {
+    const errors = {};
+    let isValid = true;
+    for (const key in inputData) {
+      if (!inputData[key]) {
+        errors[key] = true;
+        isValid = false;
+      }
+    }
+    setInputErrors(errors);
+    return isValid;
+  };
+
+  const handleNext = () => {
+    if (validateInputs()) {
+      toggleDropdown();
+    }
+  };
+
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
     setHidedButton(true);
@@ -40,9 +64,7 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
     <View style={styles.bg}>
       <View style={styles.shadow}>
         <View style={styles.navbar}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("PengajuanPinjaman")}
-          >
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <Image
               source={require("../../../mobile-side/src/assets/Icon_leftarrow.png")}
             />
@@ -60,31 +82,60 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
             <Text style={styles.title}>Profil Keuangan</Text>
             <Text style={styles.text}>Penghasilan Bersih per. Bulan</Text>
             <TextInput
-              style={styles.input}
-              placeholder="Penghasilan Bersih per. Bulan"
+              style={[
+                styles.input,
+                inputErrors.penghasilanBersih && styles.inputError,
+              ]}
+              // placeholder="Penghasilan Bersih per. Bulan"
+              keyboardType="numeric"
               value={inputData.penghasilanBersih}
               onChangeText={(number) =>
                 setInputData({ ...inputData, penghasilanBersih: number })
               }
             />
+            {inputErrors.penghasilanBersih && (
+              <Text style={styles.errorText}>
+                Mohon isikan data dengan benar
+              </Text>
+            )}
+
             <Text style={styles.text}>Jumlah Pinjaman yang Diajukan</Text>
             <TextInput
-              style={styles.input}
-              placeholder="Jumlah Pinjaman yang Diajukan"
+              style={[
+                styles.input,
+                inputErrors.jumlahPinjaman && styles.inputError,
+              ]}
+              // placeholder="Jumlah Pinjaman yang Diajukan"
               value={inputData.jumlahPinjaman}
+              keyboardType="numeric"
               onChangeText={(number) =>
                 setInputData({ ...inputData, jumlahPinjaman: number })
               }
             />
+            {inputErrors.jumlahPinjaman && (
+              <Text style={styles.errorText}>
+                Mohon isikan data dengan benar
+              </Text>
+            )}
+
             <Text style={styles.text}>Jangka Waktu</Text>
             <TextInput
-              style={styles.input2}
-              placeholder="Jangka Waktu"
+              style={[
+                styles.input,
+                inputErrors.jangkaWaktu && styles.inputError,
+              ]}
+              // placeholder="Jangka Waktu"
               value={inputData.jangkaWaktu}
+              keyboardType="numeric"
               onChangeText={(number) =>
                 setInputData({ ...inputData, jangkaWaktu: number })
               }
             />
+            {inputErrors.jangkaWaktu && (
+              <Text style={styles.errorText}>
+                Mohon isikan data dengan benar
+              </Text>
+            )}
             <Text style={{ marginBottom: 10, fontSize: 10 }}>
               *Maksimal 360 Bulan
             </Text>
@@ -92,14 +143,12 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
             <TextInput
               style={styles.input}
               placeholder="Persediaan Per Tahun"
+              editable={false}
               value="12,75%"
             />
             <View>
               {!hidedButton && (
-                <TouchableOpacity
-                  onPress={toggleDropdown}
-                  style={styles.button}
-                >
+                <TouchableOpacity onPress={handleNext} style={styles.button}>
                   <Text style={styles.textButton}>Simulasikan</Text>
                 </TouchableOpacity>
               )}
@@ -287,5 +336,14 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.1,
     shadowRadius: 8,
+  },
+  errorText: {
+    color: "red",
+    fontSize: 12,
+    marginBottom: 8,
+  },
+  inputError: {
+    borderColor: "red",
+    marginBottom: 8,
   },
 });
