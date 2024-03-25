@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -7,12 +7,20 @@ import {
   Image,
   TextInput,
   ScrollView,
+  ActivityIndicator,
 } from "react-native";
+import { getJenisPinjamans } from "../reducers/JenisPinjaman";
+import { useDispatch, useSelector } from "react-redux";
 
 const SimulasiFleksiAktif = ({ navigation }) => {
   const [inputData, setInputData] = useState({
     penghasilan: "",
     jangkaWaktu: "",
+  });
+
+  const [inputErrors, setInputErrors] = useState({
+    penghasilan: false,
+    jangkaWaktu: false,
   });
 
   const data = [
@@ -23,10 +31,40 @@ const SimulasiFleksiAktif = ({ navigation }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [hidedButton, setHidedButton] = useState(false);
 
+  const jenisPinjamanState = useSelector((state) => state.jenisPinjaman);
+  const dispatch = useDispatch();
+
+  const idToDisplay = 2;
+
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
     setHidedButton(true);
   };
+
+  const validateInputs = () => {
+    const errors = {};
+    let isValid = true;
+    for (const key in inputData) {
+      if (!inputData[key]) {
+        errors[key] = true;
+        isValid = false;
+      }
+    }
+    setInputErrors(errors);
+    return isValid;
+  };
+
+  const handleNext = () => {
+    if (validateInputs()) {
+      // Proceed to the next step
+      toggleDropdown();
+    }
+  };
+
+  useEffect(() => {
+    // fetchInfo();
+    dispatch(getJenisPinjamans());
+  }, [dispatch]);
 
   return (
     <View style={styles.bg}>
@@ -53,10 +91,24 @@ const SimulasiFleksiAktif = ({ navigation }) => {
             <View>
               <Text style={styles.texttitle}>Simulasi BNI Fleksi Aktif</Text>
               <View style={styles.centerred}>
-                <Image
-                  source={require("../../../mobile-side/src/assets/img_simulasi_aktif.png")}
-                  style={styles.imgSimulasi}
-                />
+                <View>
+                  {jenisPinjamanState.loading ? (
+                    <ActivityIndicator />
+                  ) : (
+                    jenisPinjamanState?.data
+                      // Filter data berdasarkan idJenisPinjaman
+                      .filter(
+                        (jenisPinjaman) =>
+                          jenisPinjaman.idJenisPinjaman === idToDisplay
+                      )
+                      .map((jenisPinjaman, index) => (
+                        <Image
+                          style={styles.imgSimulasi}
+                          source={{ uri: jenisPinjaman.gambarJenisPinjaman }}
+                        />
+                      ))
+                  )}
+                </View>
               </View>
               <Text>
                 Anda dapat mensimulasikan jenis pinjaman sebelum melakukan
@@ -67,22 +119,41 @@ const SimulasiFleksiAktif = ({ navigation }) => {
             <View style={styles.formSimulasi}>
               <Text style={styles.textform}>Penghasilan Bersih per. Bulan</Text>
               <TextInput
-                style={styles.input}
-                onChangeText={(text) =>
-                  setInputData({ ...inputData, penghasilan: text })
+                style={[
+                  styles.input,
+                  inputErrors.penghasilan && styles.inputError,
+                ]}
+                keyboardType="numeric"
+                onChangeText={(number) =>
+                  setInputData({ ...inputData, penghasilan: number })
                 }
-                value={setInputData.penghasilan}
-              ></TextInput>
+                value={inputData.penghasilan}
+              />
+              {inputErrors.penghasilan && (
+                <Text style={styles.errorText}>
+                  Mohon isikan data dengan benar
+                </Text>
+              )}
+
               <Text style={styles.textform}>Jangka Waktu</Text>
               <TextInput
-                style={styles.input}
+                style={[
+                  styles.input,
+                  inputErrors.jangkaWaktu && styles.inputError,
+                ]}
+                keyboardType="numeric"
                 onChangeText={(number) =>
                   setInputData({ ...inputData, jangkaWaktu: number })
                 }
                 value={setInputData.jangkaWaktu}
                 placeholder="bulan"
-                textAlign="right"
+                // textAlign="right"
               ></TextInput>
+              {inputErrors.jangkaWaktu && (
+                <Text style={styles.errorText}>
+                  Mohon isikan data dengan benar
+                </Text>
+              )}
               <Text style={styles.textform}>Bunga Pinjaman</Text>
               <TextInput
                 style={styles.input}
@@ -97,10 +168,7 @@ const SimulasiFleksiAktif = ({ navigation }) => {
 
             <View>
               {!hidedButton && (
-                <TouchableOpacity
-                  onPress={toggleDropdown}
-                  style={styles.button}
-                >
+                <TouchableOpacity onPress={handleNext} style={styles.button}>
                   <Text style={styles.textButton}>Simulasikan</Text>
                 </TouchableOpacity>
               )}
@@ -274,5 +342,14 @@ const styles = StyleSheet.create({
     borderColor: "#000",
     marginBottom: 15,
     justifyContent: "space-around",
+  },
+  errorText: {
+    color: "red",
+    fontSize: 12,
+    marginBottom: 8,
+  },
+  inputError: {
+    borderColor: "red",
+    marginBottom: 8,
   },
 });

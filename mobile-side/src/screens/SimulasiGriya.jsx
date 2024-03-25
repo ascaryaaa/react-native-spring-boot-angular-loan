@@ -15,6 +15,11 @@ const SimulasiGriya = ({ navigation }) => {
     jangkaWaktu: "",
   });
 
+  const [inputErrors, setInputErrors] = useState({
+    penghasilan: false,
+    jangkaWaktu: false,
+  })
+
   const data = [
     { id: 1, title: "Maksimal Pinjaman", content: "Rp 794.993.871,00" },
     { id: 2, title: "Angsuran Pinjaman per Bulan", content: "Rp 4.554.761,00" },
@@ -22,6 +27,25 @@ const SimulasiGriya = ({ navigation }) => {
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [hidedButton, setHidedButton] = useState(false);
+
+  const validateInputs = () => {
+    const errors = {};
+    let isValid = true;
+    for (const key in inputData) {
+      if (!inputData[key]) {
+        errors[key] = true;
+        isValid = false;
+      }
+    }
+    setInputErrors(errors);
+    return isValid;
+  };
+
+  const handleNext = () => {
+    if (validateInputs()) {
+      toggleDropdown();
+    }
+  }
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -67,7 +91,7 @@ const SimulasiGriya = ({ navigation }) => {
             <View style={styles.formSimulasi}>
               <Text style={styles.textform}>Penghasilan Bersih per. Bulan</Text>
               <TextInput
-                style={styles.input}
+                style={[styles.input, inputErrors.penghasilan && styles.inputError]}
                 keyboardType="numeric"
                 placeholder="Rp"
                 onChangeText={(text) =>
@@ -75,9 +99,13 @@ const SimulasiGriya = ({ navigation }) => {
                 }
                 value={setInputData.penghasilan}
               ></TextInput>
+              {inputErrors.penghasilan && (
+                <Text style={styles.errorText}>Mohon isikan data dengan benar</Text>
+              )}
+
               <Text style={styles.textform}>Jangka Waktu</Text>
               <TextInput
-                style={styles.input}
+                style={[styles.input, inputErrors.jangkaWaktu && styles.inputError]}
                 onChangeText={(number) =>
                   setInputData({ ...inputData, jangkaWaktu: number })
                 }
@@ -85,22 +113,23 @@ const SimulasiGriya = ({ navigation }) => {
                 placeholder="bulan"
                 keyboardType="numeric"
               ></TextInput>
+              {inputErrors.jangkaWaktu && (
+                <Text style={styles.errorText}>Mohon isikan data dengan benar</Text>
+              )}
+
               <Text style={styles.textform}>Bunga Pinjaman</Text>
               <TextInput
                 style={styles.input}
-                onChangeText={(text) =>
-                  setInputData({ ...inputData, penghasilan: text })
-                }
-                value={setInputData.penghasilan}
                 placeholder="6.75%"
                 placeholderTextColor="gray"
+                editable={false}
               ></TextInput>
             </View>
 
             <View>
               {!hidedButton && (
                 <TouchableOpacity
-                  onPress={toggleDropdown}
+                  onPress={handleNext}
                   style={styles.button}
                 >
                   <Text style={styles.textButton}>Simulasikan</Text>
@@ -278,5 +307,14 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     justifyContent: "space-around",
     // backgroundColor: "red",
+  },
+  inputError: {
+    borderColor: "red",
+    marginBottom: 8,
+  },
+  errorText: {
+    color: "red",
+    fontSize: 12,
+    marginBottom: 8,
   },
 });

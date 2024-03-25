@@ -23,13 +23,11 @@ const DigitalLoan = ({ navigation }) => {
 
   const [result, setResult] = useState("");
   const [activeButton, setActiveButton] = useState("all");
-  
+
   const handleAll = () => {
     setResult(
       <View>
-        <ListPengajuanPinjaman 
-          navigation={navigation}
-        />
+        <ListPengajuanPinjaman navigation={navigation} />
         <ListPinjaman navigation={navigation} />
       </View>
     );
@@ -37,23 +35,22 @@ const DigitalLoan = ({ navigation }) => {
   };
 
   const handleButton1Press = () => {
-    setResult(<ListPengajuanPinjaman />);
+    setResult(<ListPengajuanPinjaman navigation={navigation}/>);
     setActiveButton("pengajuan");
   };
 
   const handleButton2Press = () => {
-    setResult(<ListPinjaman />);
+    setResult(<ListPinjaman navigation={navigation} />);
     setActiveButton("pinjaman");
   };
 
   useEffect(() => {
     handleAll();
-  }, []); 
-  
+  }, []);
 
   return (
     <View style={styles.bg}>
-      <View style={styles.container}>
+      <View style={styles.shadow}>
         {/* container atas */}
         <View style={styles.navbar}>
           <TouchableOpacity onPress={() => navigation.navigate("Home")}>
@@ -66,40 +63,62 @@ const DigitalLoan = ({ navigation }) => {
             source={require("../../../mobile-side/src/assets/Icon_homeorg.png")}
           />
         </View>
-
-        {/* container tengah */}
-        <ScrollView>
-          <View style={styles.containerTengah}>
-            <View style={styles.buttonContainer}>
-              <View style={{ width: "35%", padding: 5 }}>
-                <TouchableOpacity onPress={handleAll} style={styles.button1}>
-                  <Text style={[styles.textButton, activeButton === 'all' && styles.activeButtonText]}>Semua</Text>
-                </TouchableOpacity>
-              </View>
-              <View style={{ width: "35%", padding: 5 }}>
-                <TouchableOpacity
-                  onPress={handleButton1Press}
-                  style={styles.button1}
-                >
-                  <Text style={[styles.textButton, activeButton === 'pengajuan' && styles.activeButtonText]}>Pengajuan</Text>
-                </TouchableOpacity>
-              </View>
-              <View style={{ width: "30%", padding: 5 }}>
-                <TouchableOpacity
-                  onPress={handleButton2Press}
-                  style={styles.button1}
-                >
-                  <Text style={[styles.textButton, activeButton === 'pinjaman' && styles.activeButtonText]}>Pinjaman</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
+      </View>
+      {/* container tengah */}
+      <View style={styles.container}>
+        <View style={styles.buttonContainer}>
+          <View>
+            <TouchableOpacity onPress={handleAll} style={styles.button1}>
+              <Text
+                style={[
+                  styles.textButton,
+                  activeButton === "all" && styles.activeButtonText,
+                ]}
+              >
+                Semua
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View>
+            <TouchableOpacity
+              onPress={handleButton1Press}
+              style={styles.button1}
+            >
+              <Text
+                style={[
+                  styles.textButton,
+                  activeButton === "pengajuan" && styles.activeButtonText,
+                ]}
+              >
+                Pengajuan
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View>
+            <TouchableOpacity
+              onPress={handleButton2Press}
+              style={styles.button1}
+            >
+              <Text
+                style={[
+                  styles.textButton,
+                  activeButton === "pinjaman" && styles.activeButtonText,
+                ]}
+              >
+                Pinjaman
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.containerTengah}>
+          <ScrollView>
             {result !== "" && (
               <View style={styles.resultContainer}>
                 <Text style={styles.resultText}>{result}</Text>
               </View>
             )}
-          </View>
-        </ScrollView>
+          </ScrollView>
+        </View>
 
         <TouchableOpacity
           style={styles.button}
@@ -129,10 +148,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // justifyContent: "center",
-    alignItems: "center",
-    marginHorizontal: 16,
-    marginTop: 40,
-    // backgroundColor: "red",
+    // alignItems: "left",
+    paddingHorizontal: 16,
+    // backgroundColor: "blue",
   },
   bg: {
     backgroundColor: "white",
@@ -141,11 +159,12 @@ const styles = StyleSheet.create({
   },
   containerTengah: {
     justifyContent: "center",
-    alignItems: "center",
-    marginTop: 10,
+    alignItems: "left",
+    // marginTop: 10,
     // marginLeft: 30,
     // marginRight: 30,
     width: "100%",
+    // backgroundColor: "red",
   },
   containerBawah: {
     justifyContent: "center",
@@ -189,9 +208,18 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    width: "100%",
     verticalAlign: "top",
-    height: 48,
+    // height: 48,
+    paddingTop: 60,
+    padding: 12,
+    width: "100%",
+    backgroundColor: "#FFF",
+  },
+  shadow: {
+    shadowColor: "#ddd",
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.4,
+    shadowRadius: 10,
   },
   texttitle: {
     fontSize: 18,
@@ -220,28 +248,26 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent background over image
     padding: 5,
   },
-
   buttonContainer: {
     flexDirection: "row",
-    marginBottom: 10,
-    marginHorizontal: 16,
+    marginTop: 16,
     color: "#F68310",
+    justifyContent: "flex-start",
+    // backgroundColor: "yellow",
   },
   button1: {
-    // paddingVertical: 10,
-    // paddingHorizontal: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    // justifyContent: "space-between",
+    alignItems: "left",
     borderBottomWidth: 1,
     borderColor: "#F68310",
-    // backgroundColor: 'yellow',
-    height: 40,
-    width: 75
+    // backgroundColor: "pink",
+    width: "100%",
   },
   resultContainer: {
-    marginTop: 20,
-    // padding: 10,
-    // borderWidth: 1,
+    marginTop: 16,
     borderRadius: 5,
-    // backgroundColor:'red'
   },
   resultText: {
     fontSize: 16,
@@ -251,12 +277,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "400",
     textAlign: "center",
-    marginTop: 20,
   },
   activeButtonText: {
     fontSize: 14,
     fontWeight: "700",
     textAlign: "center",
-    marginTop: 20,
   },
 });
