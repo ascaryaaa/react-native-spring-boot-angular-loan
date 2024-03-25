@@ -1,7 +1,6 @@
 package com.cuan.serverside.controller;
 
 import com.cuan.serverside.model.Admin;
-import com.cuan.serverside.model.User;
 import com.cuan.serverside.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

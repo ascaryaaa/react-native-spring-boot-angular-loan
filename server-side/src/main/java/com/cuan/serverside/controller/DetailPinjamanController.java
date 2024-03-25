@@ -1,6 +1,5 @@
 package com.cuan.serverside.controller;
 
-import com.cuan.serverside.model.Account;
 import com.cuan.serverside.model.DetailPinjaman;
 import com.cuan.serverside.service.DetailPinjamanService;
 import org.springframework.beans.factory.annotation.Autowired;
