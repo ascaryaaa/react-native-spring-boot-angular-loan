@@ -59,7 +59,6 @@ const Home = ({ navigation }) => {
   return (
     <View style={styles.bg}>
       <View style={styles.container}>
-        <ScrollView>
           <View style={styles.header}>
             <Image
               style={{ width: 86, height: 32 }}
@@ -84,6 +83,7 @@ const Home = ({ navigation }) => {
               ></LogoutModal>
             </View>
           </View>
+          <ScrollView showsVerticalScrollIndicator={false}>
           <View style={{ flexDirection: "row" }}>
             <Image
               style={{ width: 61, height: 61, marginRight: 21 }}
@@ -147,6 +147,7 @@ const Home = ({ navigation }) => {
                   ))
                 }
             </ScrollView>
+            <View style={{marginBottom:190}}/>
           </View>
         </ScrollView>
       </View>
