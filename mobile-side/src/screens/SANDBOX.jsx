@@ -19,15 +19,10 @@ const SANDBOX = () => {
   const [data, setData] = useState([]);
   const [dataJenisPinjaman, setDataJenisPinjaman] = useState([]);
 
-<<<<<<< HEAD
-  const jenisPinjamanState = useSelector((state) => state.jenisPinjaman);
-  const dispatch = useDispatch();
-=======
   const [hashedId, setHashedId] = useState(null);
 
   const jenisPinjamanState = useSelector((state) => state.jenisPinjaman)
   const dispatch = useDispatch()
->>>>>>> scaa
 
   const accountState = useSelector((state) => state.account);
   const dispatchAccount = useDispatch();
@@ -45,31 +40,24 @@ const SANDBOX = () => {
     }
   };
 
+  const fetchHashedId = async () => {
+    try {
+      const storedHashedId = await AsyncStorage.getItem("hashedId");
+      if (storedHashedId) {
+        setHashedId(storedHashedId);
+        dispatchAccount(getAccountByHashedId(storedHashedId));
+      }
+    } catch (error) {
+      console.error('Error fetching hashed ID from AsyncStorage:', error);
+    }
+  };
+
   useEffect(() => {
     fetchInfo();
-<<<<<<< HEAD
-    dispatch(getJenisPinjamans());
-  }, [dispatch]);
-=======
     dispatch(getJenisPinjamans())
-
-    // Fetch hashed ID from AsyncStorage and fetch account data
-    const fetchHashedId = async () => {
-      try {
-        const storedHashedId = await AsyncStorage.getItem("hashedId");
-        if (storedHashedId) {
-          setHashedId(storedHashedId);
-          dispatchAccount(getAccountByHashedId(storedHashedId));
-        }
-      } catch (error) {
-        console.error('Error fetching hashed ID from AsyncStorage:', error);
-      }
-    };
-
     fetchHashedId();
 
   }, [dispatch, dispatchAccount]);
->>>>>>> scaa
 
   const renderItem = ({ item }) => (
     <View style={{ flex: 1, flexDirection: "row", marginVertical: 10 }}>

@@ -15,20 +15,38 @@ import Constant from '../utils/Constant';
 import { getPromos } from "../reducers/Promos";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../reducers/User";
+import { getAccountByHashedId } from '../reducers/Account';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Home = ({ navigation }) => {
+  const accountState = useSelector((state) => state.account);
+  const dispatchAccount = useDispatch();
+
+  const [hashedId, setHashedId] = useState(null);
+
   const [modalVisible, setModalVisible] = useState(false);
 
   const promoState = useSelector((state) => state.promo)
   // const userState = useSelector((state) => state.user)
   const dispatch = useDispatch()
 
+  const fetchHashedId = async () => {
+    try {
+      const storedHashedId = await AsyncStorage.getItem("hashedId");
+      if (storedHashedId) {
+        setHashedId(storedHashedId);
+        dispatchAccount(getAccountByHashedId(storedHashedId));
+      }
+    } catch (error) {
+      console.error('Error fetching hashed ID from AsyncStorage:', error);
+    }
+  };
 
   useEffect(() => {
     // fetchInfo();
     dispatch(getPromos())
-    // dispatch(getUsers())
-  }, [dispatch]);
+    fetchHashedId();
+  }, [dispatch, dispatchAccount]);
 
   const closeModal = () => {
     setModalVisible(false);
@@ -66,7 +84,6 @@ const Home = ({ navigation }) => {
               ></LogoutModal>
             </View>
           </View>
-
           <View style={{ flexDirection: "row" }}>
             <Image
               style={{ width: 61, height: 61, marginRight: 21 }}
@@ -75,16 +92,20 @@ const Home = ({ navigation }) => {
             />
             <View style={{ flexDirection: "column", justifyContent: "center" }}>
               <Text style={{ fontSize: 16 }}>Selamat Datang,</Text>
-              <Text
+              {accountState.loading ? (
+              <ActivityIndicator />
+              ) : accountState.error ? (
+              <Text>Error: {accountState.error}</Text>
+              ) : (<Text
                 style={{
                   fontWeight: "800",
                   fontSize: 16,
                   marginTop: 2,
                 }}
-                // key = {userState?.data?.idUser}
               >
-                Wahyu Khumairoh
+                {accountState.data?.accountToUser.nameUser}
               </Text>
+              )}
             </View>
           </View>
           <Image

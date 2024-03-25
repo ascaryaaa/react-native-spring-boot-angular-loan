@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-const CONNECTION = "192.168.209.183";
-=======
 const CONNECTION = "192.168.193.54";
->>>>>>> scaa
 
 const PORT = "8083";
 const MAIN_URL = `http://${CONNECTION}:${PORT}/loan/v1/`;

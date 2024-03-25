@@ -55,7 +55,6 @@ export const fetchJenisPinjamanData = async () => {
   }
 };
 
-<<<<<<< HEAD
 // Function to make authorized GET request to promo banner API
 export const fetchPromoData = async () => {
   try {
@@ -76,7 +75,6 @@ export const fetchPromoData = async () => {
     return null;
   }
 };
-=======
 // Function to make authorized GET request to account API by hashed ID
 export const fetchAccountData = async (hashedId) => {
     try {
@@ -100,4 +98,3 @@ export const fetchAccountData = async (hashedId) => {
 };
   
 export default { fetchAccountData };
->>>>>>> scaa
