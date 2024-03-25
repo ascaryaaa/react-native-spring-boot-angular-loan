@@ -4,17 +4,32 @@ import {
   Image,
   StyleSheet,
   ScrollView,
-  FlatList,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
-import FontLoader from "./FontLoader";
 import HomeFeatures from "../components/HomeFeatures";
 import FooterHome from "../components/FooterHome";
-import { useState } from "react";
+import React,{ useState, useEffect } from "react";
 import { LogoutModal } from "../components/LogoutModal";
+import Constant from '../utils/Constant';
+import { getPromos } from "../reducers/Promos";
+import { useDispatch, useSelector } from "react-redux";
+import { getUsers } from "../reducers/User";
 
 const Home = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
+
+  const promoState = useSelector((state) => state.promo)
+  // const userState = useSelector((state) => state.user)
+  const dispatch = useDispatch()
+
+
+  useEffect(() => {
+    // fetchInfo();
+    dispatch(getPromos())
+    // dispatch(getUsers())
+  }, [dispatch]);
+
   const closeModal = () => {
     setModalVisible(false);
   };
@@ -22,15 +37,6 @@ const Home = ({ navigation }) => {
   const openModal = () => {
     setModalVisible(true);
   };
-
-  const list = [
-    require("../../../mobile-side/src/assets/ban_kejutan1.png"),
-    require("../../../mobile-side/src/assets/ban_kejutan2.png"),
-  ];
-
-  const renderItem = ({ item }) => (
-    <Image style={styles.bannerImage} source={item} />
-  );
 
   return (
     <View style={styles.bg}>
@@ -75,6 +81,7 @@ const Home = ({ navigation }) => {
                   fontSize: 16,
                   marginTop: 2,
                 }}
+                // key = {userState?.data?.idUser}
               >
                 Wahyu Khumairoh
               </Text>
@@ -106,11 +113,18 @@ const Home = ({ navigation }) => {
           <View style={styles.banner}>
             <Text style={styles.kejutan}>Promo & Informasi</Text>
             <ScrollView horizontal={true}>
-              <FlatList
-                data={list}
-                numColumns={2}
-                renderItem={renderItem}
-              ></FlatList>
+              
+              {
+                  promoState.loading ? <ActivityIndicator/> : promoState?.data?.map(promo => (
+                    <TouchableOpacity>
+                      <Image
+                          key = {promo.idPromo} 
+                          style={styles.bannerImage}
+                          source={{uri: promo.gambarPromo}}
+                      />
+                    </TouchableOpacity>
+                  ))
+                }
             </ScrollView>
           </View>
         </ScrollView>
@@ -141,6 +155,7 @@ const styles = StyleSheet.create({
   },
   banner: {
     justifyContent: "center",
+    // backgroundColor: "red"
     // alignItems: "center",
   },
   kejutan: {
@@ -156,6 +171,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 110,
     resizeMode: "cover",
+    // backgroundColor: "pink"
   },
 });
 export default Home;

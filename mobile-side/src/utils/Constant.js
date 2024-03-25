@@ -1,4 +1,4 @@
-const CONNECTION = "192.168.209.162";
+const CONNECTION = "192.168.209.183";
 
 const PORT = "8083";
 const MAIN_URL = `http://${CONNECTION}:${PORT}/loan/v1/`;
@@ -8,6 +8,7 @@ const urls = {
   getUsers: `${MAIN_URL}user/get-users`, // Use backticks and ${} correctly
   getAdmins: `${MAIN_URL}admin/get-admins`,
   getJenisPinjamans: `${MAIN_URL}jenis-pinjaman/get-jenis-pinjamans`,
+  getJenisPinjamans: `${MAIN_URL}jenis-pinjaman/`,
   getPromos: `${MAIN_URL}promo/get-promos`,
   getAccounts: `${MAIN_URL}accounts/get-accounts`,
   loginAccount: `${LOGIN_URL}login-account`,
