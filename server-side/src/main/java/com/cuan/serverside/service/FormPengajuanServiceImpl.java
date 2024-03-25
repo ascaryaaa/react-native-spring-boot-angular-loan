@@ -57,9 +57,17 @@ public class FormPengajuanServiceImpl implements FormPengajuanService{
         // Set angsruan perbulan
         formPengajuan.setAngsuranPerbulan(angsuranPerbulan);
 
-        String cif = generateCifToOblivion(formPengajuan);
-        formPengajuan.setHashedIdForm(cif);
-        formPengajuan.setCif("W"+cif);
+        // Save first to generate Id
+        formPengajuanRepository.save(formPengajuan);
+
+        // Generate CIF from id
+        Long idForm = formPengajuan.getIdFormPengajuanPinjaman();
+        Hashids hashids = new Hashids(String.format("%d",idForm));
+        String hashedId = hashids.encode(1L);
+
+        String cif = generateCif(hashedId);
+//        formPengajuan.setHashedIdForm(cif);
+        formPengajuan.setCif(cif);
         return formPengajuanRepository.save(formPengajuan);
     }
 
@@ -92,14 +100,7 @@ public class FormPengajuanServiceImpl implements FormPengajuanService{
         return (result * (bunga / 12)) / (1 - Math.pow(1 + (bunga / 12), -jangka));
     }
 
-    private String generateCifToOblivion(FormPengajuan formPengajuan) {
-        // Save first to generate Id
-        formPengajuanRepository.save(formPengajuan);
-
-        // Generate CIF from id
-        Long idForm = formPengajuan.getIdFormPengajuanPinjaman();
-        Hashids hashids = new Hashids(String.format("%d",idForm));
-        String hashedId = hashids.encode(1L);
+    private String generateCif(String hashedId) {
 
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -119,7 +120,7 @@ public class FormPengajuanServiceImpl implements FormPengajuanService{
             String truncatedHash = hexString.substring(0, 8);
 
             int number = Integer.parseInt(truncatedHash, 16);
-            return String.format("%08d", number);
+            return String.format("W"+"%08d", number);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
             return  null;

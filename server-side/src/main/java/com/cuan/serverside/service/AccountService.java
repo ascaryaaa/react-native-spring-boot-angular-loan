@@ -20,5 +20,8 @@ public interface AccountService {
     // Define DELETE account by id in service
     public void deleteAccountById(Long id);
 
+    // Define GET accounts by hashed id in service
+    public Account getAccountByHashedId(String hashedId);
+
     Optional<Account> findByUsernameAccount(String username);
 }
