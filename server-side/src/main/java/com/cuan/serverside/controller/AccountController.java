@@ -1,6 +1,7 @@
 package com.cuan.serverside.controller;
 
 import com.cuan.serverside.model.Account;
+import com.cuan.serverside.model.Admin;
 import com.cuan.serverside.model.User;
 import com.cuan.serverside.service.AccountService;
 import com.cuan.serverside.service.UserService;
@@ -30,7 +31,7 @@ public class AccountController {
 
     // GET Function of API, Reads account data from 'pengajuan' database by id
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public Account getAccountById(@PathVariable Long id){
         return accountService.getAccountId(id);
     }
@@ -54,6 +55,11 @@ public class AccountController {
     @DeleteMapping("/delete-account-id/{id}")
     public void deleteAccount(@PathVariable Long id) {
         accountService.deleteAccountById(id);
+    }
+
+    @GetMapping("/hid/{hashedId}")
+    public Account getAccountByHashedId(@PathVariable String hashedId){
+        return accountService.getAccountByHashedId(hashedId);
     }
 
 }

@@ -1,10 +1,13 @@
 package com.cuan.serverside.service;
 
 import com.cuan.serverside.model.Account;
+import com.cuan.serverside.model.Admin;
 
 import java.util.Optional;
 
 public interface AccountService {
+    public Account getAccountByHashedId(String hashedId);
+
     // Define GET all accounts in service
     public Iterable<Account> getAllAccount();
 
