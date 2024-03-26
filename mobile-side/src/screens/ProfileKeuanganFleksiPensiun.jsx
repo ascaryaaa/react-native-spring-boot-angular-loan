@@ -53,11 +53,8 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
   const handleNext = () => {
     if (validateInputs()) {
       // Proceed to the next step
-<<<<<<< HEAD
-      console.log("Test");
-=======
+
       toggleDropdown();
->>>>>>> 5a1f540030c04829f43814d234d4172f4cb572fc
     }
   };
 
