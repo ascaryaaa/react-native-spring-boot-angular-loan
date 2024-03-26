@@ -22,6 +22,7 @@ export interface Pinjaman {
     sisaTagihan: number | null;
     totalBayarTagihan: number | null;
     tanggalBayarTagihan: string | null;
+    hashedIdPinjaman: string | null;
 }
 
 export interface FormPengajuanPinjaman {
@@ -50,6 +51,7 @@ export interface FormPengajuanPinjaman {
     uangMuka: number | null; // Updated to allow null
     statusPengajuan: string;
     tanggalRealisasi: string | null; // Updated to allow null
+    hashedIdForm: string;
 }
 
 export interface User {
