@@ -16,7 +16,7 @@ const ListPinjaman = ({ navigation }) => {
     require("../../../mobile-side/src/assets/ban_kejutan1.png"),
     require("../../../mobile-side/src/assets/ban_kejutan2.png"),
   ];
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item, navigation }) => (
     <Image style={styles.bannerImage} source={item} />
   );
 
@@ -45,8 +45,8 @@ const ListPinjaman = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.shadow}>
         {listPinjamanData.map(view => (
-          <TouchableOpacity onPress={() => navigation.navigate("Monitoring")} key={view.id} style={{flexDirection: 'row', marginBottom: 25, padding: 10, borderRadius: 5, backgroundColor: 'white' }}>
-            <View style={{width: '30%', marginRight: 5}}>
+          <TouchableOpacity onPress={() => navigation.navigate("Monitoring")} key={view.id} style={styles.card}>
+            <View style={{width: '35%'}}>
               <Image source={view.img} style={styles.image} />
             </View>
             <View style={{flexDirection: 'column', width: '70%'}}>
@@ -69,13 +69,21 @@ export default ListPinjaman;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 10,
-    paddingTop: 18,
+    paddingHorizontal: 16,
     // justifyContent: "center",
     alignItems: "center",
     // marginTop: 100,
     // backgroundColor: 'red',
-
+    alignItems: "center"
+  },
+  card: {
+    flexDirection: 'row', 
+    padding: 10, 
+    borderRadius: 5, 
+    backgroundColor: 'white',
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+    marginBottom: 16
   },
   shadow: {
     shadowColor: "#ddd",
@@ -83,62 +91,61 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 10,
   },
-  containerTengah: {
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 30,
-    marginLeft: 30,
-    marginRight: 30,
-    // backgroundColor: 'blue',
-  },
-  containerBawah: {
-    // justifyContent: "center",
-    // alignItems: "center",
-    marginTop: 30,
-    marginLeft: 5,
-    marginRight: 5,
-    paddingTop: 10,
-  },
-  kejutan: {
-    fontWeight: "700",
-    fontSize: 14,
-    textAlign: "left",
-  },
-
-  button: {
-    backgroundColor: "#18C1CD",
-    padding: 5,
-    borderRadius: 5,
-    margin: 5,
-    marginTop: 10,
-    width: 350,
-    height: 45,
-    borderRadius: 20,
-  },
-  amico: {
-    padding: 5,
-    borderRadius: 5,
-    margin: 5,
-    height: 173,
-    width: 175,
-  },
-  ajukan: {
-    color: "white",
-    textAlign: "center",
-    paddingTop: 5,
-    fontWeight: "700",
-  },
-  texttitle: {
-    fontSize: 18,
-    fontWeight: "600",
-    paddingTop: 20,
-  },
-  textbody: {
-    fontSize: 13,
-    textAlign: "center",
-    paddingTop: 20,
-    paddingBottom: 25,
-  },
+  // containerTengah: {
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   marginTop: 30,
+  //   marginLeft: 30,
+  //   marginRight: 30,
+  //   // backgroundColor: 'blue',
+  // },
+  // containerBawah: {
+  //   // justifyContent: "center",
+  //   // alignItems: "center",
+  //   marginTop: 30,
+  //   marginLeft: 5,
+  //   marginRight: 5,
+  //   paddingTop: 10,
+  // },
+  // kejutan: {
+  //   fontWeight: "700",
+  //   fontSize: 14,
+  //   textAlign: "left",
+  // },
+  // button: {
+  //   backgroundColor: "#18C1CD",
+  //   padding: 5,
+  //   borderRadius: 5,
+  //   margin: 5,
+  //   marginTop: 10,
+  //   width: 350,
+  //   height: 45,
+  //   borderRadius: 20,
+  // },
+  // amico: {
+  //   padding: 5,
+  //   borderRadius: 5,
+  //   margin: 5,
+  //   height: 173,
+  //   width: 175,
+  // },
+  // ajukan: {
+  //   color: "white",
+  //   textAlign: "center",
+  //   paddingTop: 5,
+  //   fontWeight: "700",
+  // },
+  // texttitle: {
+  //   fontSize: 18,
+  //   fontWeight: "600",
+  //   paddingTop: 20,
+  // },
+  // textbody: {
+  //   fontSize: 13,
+  //   textAlign: "center",
+  //   paddingTop: 20,
+  //   paddingBottom: 25,
+  // },
   bannerImage: {
     marginTop: 15,
     marginHorizontal: 5,
@@ -147,30 +154,30 @@ const styles = StyleSheet.create({
     height: 110,
     resizeMode: "cover",
   },
-  bannerText: {
-    position: "absolute",
-    bottom: 10,
-    left: 10,
-    color: "#fff",
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent background over image
-    padding: 5,
-  },
-  detailButton: {
-    marginTop: 15,
-    marginBottom: 8,
-    backgroundColor:'#F68310',
-    borderRadius: 50,
-    borderColor: '#F68310',
-    width: 70,
-    height: 40,
-  },
-  textButton: {
-    color: 'white',
-    fontWeight: '600',
-    fontSize: 14,
-    textAlign: 'center',
-    paddingTop: 10,
-  },
+  // bannerText: {
+  //   position: "absolute",
+  //   bottom: 10,
+  //   left: 10,
+  //   color: "#fff",
+  //   backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent background over image
+  //   padding: 5,
+  // },
+  // detailButton: {
+  //   marginTop: 15,
+  //   marginBottom: 8,
+  //   backgroundColor:'#F68310',
+  //   borderRadius: 50,
+  //   borderColor: '#F68310',
+  //   width: 70,
+  //   height: 40,
+  // },
+  // textButton: {
+  //   color: 'white',
+  //   fontWeight: '600',
+  //   fontSize: 14,
+  //   textAlign: 'center',
+  //   // paddingTop: 10,
+  // },
   image: {
     width: 95,
     height: 95,
@@ -189,13 +196,13 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 12,
     fontWeight: "700",
+    textAlign: 'center'
   },
   buttonStatus : {
     paddingVertical: 3,
-    paddingHorizontal: 16,
+    // paddingHorizontal: 16,
     borderRadius: 50,
+    width: "35%",
     backgroundColor: "#04C300",
-    borderColor: "#04C300",
-    width: '35%'
   },
 });

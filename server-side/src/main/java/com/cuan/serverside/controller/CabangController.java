@@ -1,8 +1,6 @@
 package com.cuan.serverside.controller;
 
 import com.cuan.serverside.model.Cabang;
-import com.cuan.serverside.model.Cabang;
-import com.cuan.serverside.service.CabangService;
 import com.cuan.serverside.service.CabangService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

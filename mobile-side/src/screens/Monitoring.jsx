@@ -18,7 +18,7 @@ const Monitoring = ({ navigation}) => {
     <View style={styles.bg}>
       <View style={styles.shadow}>
         <View style={styles.navbar}>
-          <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <Image
               source={require("../../../mobile-side/src/assets/Icon_leftarrow.png")}
             />

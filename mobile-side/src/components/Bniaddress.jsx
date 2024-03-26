@@ -12,6 +12,7 @@ const Bniaddress = () => {
         { label: '9149 - BNI KC Kota Tua', value: '9149' },
         { label: '9000 - BNI KC Head Office', value: '9000' },
       ]}
+      placeholder={{ label: 'Pilih unit kerja BNI terdekat...', value: null }}
       value={selectedValue}
     />
   );

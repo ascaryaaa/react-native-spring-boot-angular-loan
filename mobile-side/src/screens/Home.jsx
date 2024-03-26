@@ -4,17 +4,50 @@ import {
   Image,
   StyleSheet,
   ScrollView,
-  FlatList,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
-import FontLoader from "./FontLoader";
 import HomeFeatures from "../components/HomeFeatures";
 import FooterHome from "../components/FooterHome";
-import { useState } from "react";
+import React,{ useState, useEffect } from "react";
 import { LogoutModal } from "../components/LogoutModal";
+import Constant from '../utils/Constant';
+import { getPromos } from "../reducers/Promos";
+import { useDispatch, useSelector } from "react-redux";
+import { getUsers } from "../reducers/User";
+import { getAccountByHashedId } from '../reducers/Account';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Home = ({ navigation }) => {
+  const accountState = useSelector((state) => state.account);
+  const dispatchAccount = useDispatch();
+
+  const [hashedId, setHashedId] = useState(null);
+
   const [modalVisible, setModalVisible] = useState(false);
+
+  const promoState = useSelector((state) => state.promo)
+  // const userState = useSelector((state) => state.user)
+  const dispatch = useDispatch()
+
+  const fetchHashedId = async () => {
+    try {
+      const storedHashedId = await AsyncStorage.getItem("hashedId");
+      if (storedHashedId) {
+        setHashedId(storedHashedId);
+        dispatchAccount(getAccountByHashedId(storedHashedId));
+      }
+    } catch (error) {
+      console.error('Error fetching hashed ID from AsyncStorage:', error);
+    }
+  };
+
+  useEffect(() => {
+    // fetchInfo();
+    dispatch(getPromos())
+    fetchHashedId();
+  }, [dispatch, dispatchAccount]);
+
   const closeModal = () => {
     setModalVisible(false);
   };
@@ -23,19 +56,9 @@ const Home = ({ navigation }) => {
     setModalVisible(true);
   };
 
-  const list = [
-    require("../../../mobile-side/src/assets/ban_kejutan1.png"),
-    require("../../../mobile-side/src/assets/ban_kejutan2.png"),
-  ];
-
-  const renderItem = ({ item }) => (
-    <Image style={styles.bannerImage} source={item} />
-  );
-
   return (
     <View style={styles.bg}>
       <View style={styles.container}>
-        <ScrollView>
           <View style={styles.header}>
             <Image
               style={{ width: 86, height: 32 }}
@@ -60,7 +83,7 @@ const Home = ({ navigation }) => {
               ></LogoutModal>
             </View>
           </View>
-
+          <ScrollView showsVerticalScrollIndicator={false}>
           <View style={{ flexDirection: "row" }}>
             <Image
               style={{ width: 61, height: 61, marginRight: 21 }}
@@ -69,15 +92,20 @@ const Home = ({ navigation }) => {
             />
             <View style={{ flexDirection: "column", justifyContent: "center" }}>
               <Text style={{ fontSize: 16 }}>Selamat Datang,</Text>
-              <Text
+              {accountState.loading ? (
+              <ActivityIndicator />
+              ) : accountState.error ? (
+              <Text>Error: {accountState.error}</Text>
+              ) : (<Text
                 style={{
                   fontWeight: "800",
                   fontSize: 16,
                   marginTop: 2,
                 }}
               >
-                Wahyu Khumairoh
+                {accountState.data?.accountToUser.nameUser}
               </Text>
+              )}
             </View>
           </View>
           <Image
@@ -106,12 +134,20 @@ const Home = ({ navigation }) => {
           <View style={styles.banner}>
             <Text style={styles.kejutan}>Promo & Informasi</Text>
             <ScrollView horizontal={true}>
-              <FlatList
-                data={list}
-                numColumns={2}
-                renderItem={renderItem}
-              ></FlatList>
+              
+              {
+                  promoState.loading ? <ActivityIndicator/> : promoState?.data?.map(promo => (
+                    <TouchableOpacity>
+                      <Image
+                          key = {promo.idPromo} 
+                          style={styles.bannerImage}
+                          source={{uri: promo.gambarPromo}}
+                      />
+                    </TouchableOpacity>
+                  ))
+                }
             </ScrollView>
+            <View style={{marginBottom:190}}/>
           </View>
         </ScrollView>
       </View>
@@ -141,6 +177,7 @@ const styles = StyleSheet.create({
   },
   banner: {
     justifyContent: "center",
+    // backgroundColor: "red"
     // alignItems: "center",
   },
   kejutan: {
@@ -156,6 +193,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 110,
     resizeMode: "cover",
+    // backgroundColor: "pink"
   },
 });
 export default Home;

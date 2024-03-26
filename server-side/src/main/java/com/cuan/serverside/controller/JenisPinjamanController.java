@@ -1,7 +1,6 @@
 package com.cuan.serverside.controller;
 
 import com.cuan.serverside.model.JenisPinjaman;
-import com.cuan.serverside.service.AdminService;
 import com.cuan.serverside.service.JenisPinjamanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

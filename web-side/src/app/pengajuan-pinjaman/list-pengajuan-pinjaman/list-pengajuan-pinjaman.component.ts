@@ -61,22 +61,31 @@ export class ListPengajuanPinjamanComponent {
     this.totalPagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
   
-  navigateToPage(page: number): void {
+  searchTopage(page: number): void {
     if (page >= 1 && page <= this.totalPages) {
       const startIndex = (page - 1) * this.pageSize;
       let endIndex = startIndex + this.pageSize;
   
-      // Adjust endIndex if it exceeds the length of filteredForms
-      // endIndex = Math.min(endIndex, this.filteredForms.length);
+      // Adjust endIndex to prevent out-of-bounds access
+      endIndex = Math.min(endIndex, this.filteredForms.length);
   
       this.currentPage = page;
   
-      // Recalculate data slice based on updated currentPage and pageSize
+      // Preserve filtered data and slice appropriately
       this.filteredForms = this.filteredForms.slice(startIndex, endIndex);
+      // this.filteredForms = this.forms.slice(startIndex, startIndex + this.pageSize);
     }
   }
-
   
+
+  navigateToPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      const startIndex = (page - 1) * this.pageSize;
+      this.currentPage = page;
+      // Recalculate data slice based on updated currentPage and pageSize
+      this.filteredForms = this.forms.slice(startIndex, startIndex + this.pageSize);
+    }
+  }
   
   search(): void {
     if (this.searchText.trim() !== '') {
@@ -91,7 +100,7 @@ export class ListPengajuanPinjamanComponent {
   
     // Setelah memfilter data, perbarui jumlah halaman dan navigasi
     this.calculateTotalPages();
-    this.navigateToPage(1); // Navigasikan ke halaman pertama setelah pencarian
+    this.searchTopage(1); // Navigasikan ke halaman pertama setelah pencarian
   }
 
   changePageSize(): void {
@@ -106,24 +115,6 @@ export class ListPengajuanPinjamanComponent {
     // Call search() whenever pageSize changes
     this.search();
   }
-  
-  
-  // search(): void {
-  //   this.filteredForms = this.forms.filter(form =>
-    
-  //       form.formToUser.nameUser.toLowerCase().includes(this.searchText.trim().toLowerCase()) ||
-  //       // form.idFormPengajuanPinjaman.toString().includes(this.searchText.trim()) || // Pencarian berdasarkan CIF
-  //       form.formToUser.nikUser.toLowerCase().includes(this.searchText.trim().toLowerCase()) // Pencarian berdasarkan NIK
-  //     )
-  //   }
-  
-  //   changePageSize(): void {
-  //     this.totalPages = Math.ceil(this.filteredForms.length / this.pageSize);
-  //     // Check for remaining data... (existing code)
-  //     this.totalPagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1);
-  //     this.currentPage = 1; // Reset current page to 1
-  //     this.navigateToPage(1); // Update data for the first page
-  //   }
   
   previousPage(): void {
     if (this.currentPage > 1) {

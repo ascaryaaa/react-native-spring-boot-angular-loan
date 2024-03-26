@@ -7,12 +7,12 @@ const transactionHistory =[
   {id: 3, date: '25 Februari 2024', time: '00.01 WIB', title: 'Auto Grab Fund', amount: '-Rp 1.556.882,98'},
 ]
 
-const Riwayat = () => {
+const Riwayat = ({navigation}) => {
     return (
       <View style={styles.bg}>
         <View style={styles.shadow}>
           <View style={styles.navbar}>
-            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
               <Image
                 source={require("../../../mobile-side/src/assets/Icon_leftarrow.png")}
               />

@@ -12,19 +12,57 @@ import Buttonjk from "../components/Buttonjk";
 import Bniaddress from "../components/Bniaddress";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
+
 const DataPemohon = ({ navigation }) => {
   const [inputData, setInputData] = useState({
-    nama: " ",
-    nik: " ",
-    tempatLahir: " ",
-    tanggalLahir: " ",
-    alamat: " ",
-    kodePos: " ",
-    kelurahan: " ",
-    kecamatan: " ",
-    npwp: " ",
-    alamatBni: " ",
+    // nama: " ",
+    // nik: " ",
+    tempatLahir: "",
+    tanggalLahir: "",
+    alamat: "",
+    kodePos: "",
+    kelurahan: "",
+    kecamatan: "",
+    npwp: "",
+    alamatBni: "",
   });
+
+  const [inputErrors, setInputErrors] = useState ({
+    tempatLahir: false,
+    tanggalLahir: false,
+    alamat: false,
+    kodePos: false,
+    kelurahan: false,
+    kecamatan: false,
+    npwp: false,
+    alamatBni: false,
+  });
+
+  const validateInputs = () => {
+    const errors = {};
+    let isValid = true;
+    for (const key in inputData) {
+      if (!inputData[key]) {
+        errors[key] = true;
+        isValid = false;
+      }
+    }
+    if (!selectedDate) {
+      errors["tanggalLahir"] = true;
+      isValid = false;
+    } else {
+      errors["tanggalLahir"] = false;
+    }
+    setInputErrors(errors);
+    return isValid;
+  };  
+
+  const handleNext = () => {
+    if (validateInputs()) {
+      navigation.navigate('KetentuanGriya');
+    }
+  }
+
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [selectedDate, setSelectedDate] = useState("");
 
@@ -77,7 +115,7 @@ const DataPemohon = ({ navigation }) => {
               editable={false}
             />
             <Text style={styles.text}>Jenis Kelamin</Text>
-            <Buttonjk />
+            <Buttonjk/>
 
             <View
               style={{ flexDirection: "row", justifyContent: "space-between" }}
@@ -91,31 +129,27 @@ const DataPemohon = ({ navigation }) => {
               >
                 <Text style={{ flex: 1, fontWeight: "800" }}>Tempat Lahir</Text>
                 <TextInput
-                  style={styles.input1}
+                  style={[styles.input1, inputErrors.tempatLahir && styles.inputError]}
                   value={inputData.tempatLahir}
                   onChangeText={(text) =>
                     setInputData({ ...inputData, tempatLahir: text })
                   }
                 />
+                {inputErrors.tempatLahir && (
+                  <Text style={styles.errorText}>Mohon isikan data dengan benar</Text>
+                )}
               </View>
               <View
                 style={{
                   flexDirection: "column",
-                  // backgroundColor: "yellow",
                   width: "47%",
                 }}
               >
                 <Text style={{ fontWeight: "800" }}>Tanggal Lahir</Text>
 
                 <TouchableOpacity
-                  style={styles.input2}
+                  style={[styles.input2, inputErrors.tanggalLahir && styles.inputError]}
                   onPress={showDatePicker}
-
-                  // placeholder="Tanggal Lahir"
-                  // value={inputData.tanggalLahir}
-                  // onChangeText={(text) =>
-                  //   setInputData({ ...inputData, tempatLahir: text })
-                  // }
                 >
                   <Text style={{ fontSize: 12 }}>{selectedDate}</Text>
                   <Image
@@ -124,6 +158,9 @@ const DataPemohon = ({ navigation }) => {
                     //   resizeMode="contain"
                   />
                 </TouchableOpacity>
+                {inputErrors.tanggalLahir && (
+                  <Text style={styles.errorText}>Mohon isikan data dengan benar</Text>
+                )}
                 <DateTimePickerModal
                   isVisible={isDatePickerVisible}
                   mode="date"
@@ -135,69 +172,102 @@ const DataPemohon = ({ navigation }) => {
 
             <Text style={styles.text}>Alamat (Sesuai KTP)</Text>
             <TextInput
-              style={styles.input}
+              style={[styles.input, inputErrors.alamat && styles.inputError]}
               value={inputData.alamat}
               onChangeText={(text) =>
                 setInputData({ ...inputData, alamat: text })
               }
             />
+            {inputErrors.alamat && (
+              <Text style={styles.errorText}>Mohon isi data dengan benar</Text>
+            )}
+
             <Text style={styles.text}>Kode Pos</Text>
             <TextInput
-              style={styles.input}
+              style={[styles.input, inputErrors.kodePos && styles.inputError]}
               keyboardType="numeric"
               value={inputData.kodePos}
               onChangeText={(text) =>
                 setInputData({ ...inputData, kodePos: text })
               }
             />
+            {inputErrors.kodePos && (
+              <Text style={styles.errorText}>Mohon isikan data dengan benar</Text>
+            )}
+
             <Text style={styles.text}>Kelurahan</Text>
             <TextInput
-              style={styles.input}
+              style={[styles.input, inputErrors.kelurahan && styles.inputError]}
               value={inputData.kelurahan}
               onChangeText={(text) =>
                 setInputData({ ...inputData, kelurahan: text })
               }
             />
+            {inputErrors.kelurahan && (
+              <Text style={styles.errorText}>Mohon isikan data dengan benar</Text>
+            )}
+
             <Text style={styles.text}>Kecamatan</Text>
             <TextInput
-              style={styles.input}
+              style={[styles.input, inputErrors.kecamatan && styles.inputError]}
               value={inputData.kecamatan}
               onChangeText={(text) =>
                 setInputData({ ...inputData, kecamatan: text })
               }
             />
+            {inputErrors.kecamatan && (
+              <Text style={styles.errorText}>Mohon isikan data dengan benar</Text>
+            )}
+
             <Text style={styles.text}>NPWP</Text>
             <TextInput
-              style={styles.input}
+              style={[styles.input, inputErrors.npwp && styles.inputError]}
               keyboardType="numeric"
               value={inputData.npwp}
               onChangeText={(number) =>
                 setInputData({ ...inputData, npwp: number })
               }
             />
+            {inputErrors.npwp && (
+              <Text style={styles.errorText}>Mohon isikan data dengan benar</Text>
+            )}
+
             <Text style={styles.text}>Unit Kerja BNI Terdekat</Text>
-            <View style={styles.input}>
+            <View style={[styles.input, inputErrors.alamatBni && styles.inputError]}>
               <Bniaddress />
             </View>
+            {inputErrors.alamatBni && (
+              <Text style={styles.errorText}>Mohon isikan data dengan benar</Text>
+            )}
+
+            {/* <Text style={styles.text}>Unit Kerja BNI Terdekat</Text>
+            <View style={[styles.input, !selectedBniAddress && styles.inputError]}>
+
+              <RNPickerSelect
+                onValueChange={handleBniAddressChange}
+                items={[
+                  { label: 'Alamat 1', value: 'Alamat 1' },
+                  { label: 'Alamat 2', value: 'Alamat 2' },
+                  // Tambahkan item lainnya sesuai kebutuhan
+                ]}
+                placeholder={{ label: 'Pilih alamat BNI terdekat...', value: null }}
+                value={selectedBniAddress}
+              />
+            </View> */}
+            {/* {!selectedBniAddress && (
+              <Text style={styles.errorText}>Mohon pilih alamat BNI terdekat</Text>
+            )} */}
+
             <View style={styles.bawah}>
               <TouchableOpacity
                 style={styles.button}
                 onPress={() => navigation.goBack()}
               >
-                <Text
-                  style={{
-                    alignSelf: "center",
-                    paddingTop: 8,
-                    color: "white",
-                    fontWeight: "900",
-                  }}
-                >
-                  Sebelumnya
-                </Text>
+                <Text style={styles.sebelumnya}>Sebelumnya</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.button}
-                onPress={() => navigation.navigate("KetentuanGriya")}
+                onPress={handleNext}
               >
                 <Text
                   style={{
@@ -270,7 +340,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     justifyContent: "center",
     marginBottom: 24,
-    // paddingHorizontal: 10,
+    paddingHorizontal: 10,
     borderRadius: 8,
     borderColor: "#1394AD",
     borderWidth: 1,
@@ -309,5 +379,24 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "flex-end",
     marginBottom: 20,
+  },
+  inputError: {
+    borderColor: "red",
+    marginBottom: 8,
+  },
+  sebelumnya: {
+    alignSelf: "center",
+    paddingTop: 8,
+    color: "white",
+    fontWeight: "900",
+  },
+  inputError: {
+    borderColor: "red",
+    marginBottom: 8,
+  },
+  errorText: {
+    color: "red",
+    fontSize: 12,
+    marginBottom: 8,
   },
 });

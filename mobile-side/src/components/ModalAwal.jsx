@@ -40,8 +40,15 @@ const ModalAwal = ({ onClose, navigation }) => {
         username,
         password,
       });
-      const { token } = response.data;
-      await AsyncStorage.setItem("token", token);
+      await AsyncStorage.setItem('user', JSON.stringify(response.data));
+      AsyncStorage.setItem('token', response.data.token);
+      AsyncStorage.setItem('hashedId', response.data.hashedId);
+      const user = await AsyncStorage.getItem('user');
+      const token = await AsyncStorage.getItem('token');
+      const hashedId = await AsyncStorage.getItem('hashedId');
+      console.log('User:', user);
+      console.log('Token:', token);
+      console.log('HashedId:', hashedId);
       if (onClose) onClose();
 >>>>>>> 5a1f540030c04829f43814d234d4172f4cb572fc
       navigation.navigate("Home");

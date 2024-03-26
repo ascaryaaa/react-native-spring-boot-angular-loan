@@ -17,7 +17,7 @@ const KetentuanGriya = ({ navigation }) => {
     <View style={styles.bg}>
       <View style={styles.shadow}>
         <View style={styles.navbar}>
-          <TouchableOpacity onPress={() => navigation.navigate("DataPemohon")}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <Image
               source={require("../../../mobile-side/src/assets/Icon_leftarrow.png")}
             />
@@ -96,17 +96,16 @@ const KetentuanGriya = ({ navigation }) => {
             >
               <TouchableOpacity
                 style={styles.buttonSebelumnya}
-                onPress={() =>
-                  navigation.navigate("ProfileKeuanganFleksiAktif")
+                onPress={() =>navigation.goBack()
                 }
               >
-                <Text style={styles.sebelumnya}> Sebelumnya</Text>
+                <Text style={styles.textBack}> Sebelumnya</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.buttonSelanjutnya}
                 onPress={() => navigation.navigate("SyaratKetentuan")}
               >
-                <Text style={styles.selanjutnya}> Selanjutnya</Text>
+                <Text style={styles.textBack}> Selanjutnya</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -164,24 +163,30 @@ const styles = StyleSheet.create({
     fontWeight: "800",
   },
   buttonSelanjutnya: {
+    padding: 5,
+    margin: 5,
+    alignSelf: "flex-end",
+    // marginLeft: 80,
     backgroundColor: "#18C1CD",
     borderRadius: 20,
-    padding: 10,
-    alignItems: "center",
-    marginTop: 10,
-    marginLeft: 8,
+    width: 130,
+    height: 44,
   },
   buttonSebelumnya: {
-    backgroundColor: "#DDEAF3",
+    padding: 5,
+    margin: 5,
+    alignSelf: "flex-end",
+    // marginLeft: 80,
+    backgroundColor: "#18C1CD",
     borderRadius: 20,
-    padding: 10,
-    alignItems: "center",
-    marginTop: 10,
+    width: 130,
+    height: 44,
   },
-  sebelumnya: {
-    color: "#757575",
-    textAlign: "center",
-    fontWeight: "800",
+  textBack: {
+    alignSelf: "center",
+    paddingTop: 8,
+    color: "white",
+    fontWeight: "900",
   },
 });
 
