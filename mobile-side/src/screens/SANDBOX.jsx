@@ -12,13 +12,20 @@ import Constant from "../utils/Constant";
 import { ScrollView } from "react-native-gesture-handler";
 import { getJenisPinjamans } from "../reducers/JenisPinjaman";
 import { useDispatch, useSelector } from "react-redux";
+import { getAccountByHashedId } from '../reducers/Account';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const SANDBOX = () => {
   const [data, setData] = useState([]);
   const [dataJenisPinjaman, setDataJenisPinjaman] = useState([]);
 
-  const jenisPinjamanState = useSelector((state) => state.jenisPinjaman);
-  const dispatch = useDispatch();
+  const [hashedId, setHashedId] = useState(null);
+
+  const jenisPinjamanState = useSelector((state) => state.jenisPinjaman)
+  const dispatch = useDispatch()
+
+  const accountState = useSelector((state) => state.account);
+  const dispatchAccount = useDispatch();
 
   const fetchInfo = async () => {
     try {
@@ -33,10 +40,24 @@ const SANDBOX = () => {
     }
   };
 
+  const fetchHashedId = async () => {
+    try {
+      const storedHashedId = await AsyncStorage.getItem("hashedId");
+      if (storedHashedId) {
+        setHashedId(storedHashedId);
+        dispatchAccount(getAccountByHashedId(storedHashedId));
+      }
+    } catch (error) {
+      console.error('Error fetching hashed ID from AsyncStorage:', error);
+    }
+  };
+
   useEffect(() => {
     fetchInfo();
-    dispatch(getJenisPinjamans());
-  }, [dispatch]);
+    dispatch(getJenisPinjamans())
+    fetchHashedId();
+
+  }, [dispatch, dispatchAccount]);
 
   const renderItem = ({ item }) => (
     <View style={{ flex: 1, flexDirection: "row", marginVertical: 10 }}>
@@ -105,6 +126,22 @@ const SANDBOX = () => {
             </View>
           ))}
         </View>
+
+        <Text style={styles.heading}>Account Details</Text>
+        {accountState.loading ? (
+          <ActivityIndicator />
+        ) : accountState.error ? (
+          <Text>Error: {accountState.error}</Text>
+        ) : (
+          <View style={styles.accountContainer}>
+            <Text>ID account: {accountState.data?.account_Id}</Text>
+            <Text>Username account: {accountState.data?.usernameAccount}</Text>
+            <Text>ID user: {accountState.data?.accountToUser.idUser}</Text>
+            <Text>Name User: {accountState.data?.accountToUser.nameUser}</Text>
+            <Text>NIK User: {accountState.data?.accountToUser.nikUser}</Text>
+          </View>
+        )}
+
       </ScrollView>
     </View>
   );

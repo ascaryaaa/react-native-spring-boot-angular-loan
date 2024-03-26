@@ -24,6 +24,7 @@ const ModalAwal = ({ onClose, navigation }) => {
 
   const handleLogin = async () => {
     try {
+
       const response = await axios.post(Constant.loginAccount, {
         username,
         password,
