@@ -24,6 +24,18 @@ const ModalAwal = ({ onClose, navigation }) => {
 
   const handleLogin = async () => {
     try {
+<<<<<<< HEAD
+      const response = await axios.post(
+        Constant.loginAccount,
+        {
+          username,
+          password,
+        }
+      );
+      const { token } = response.data;
+      await AsyncStorage.setItem("token", token);
+      if(onClose) onClose();
+=======
       const response = await axios.post(Constant.loginAccount, {
         username,
         password,
@@ -38,6 +50,7 @@ const ModalAwal = ({ onClose, navigation }) => {
       console.log('Token:', token);
       console.log('HashedId:', hashedId);
       if (onClose) onClose();
+>>>>>>> 5a1f540030c04829f43814d234d4172f4cb572fc
       navigation.navigate("Home");
     } catch (error) {
       console.error(error);
