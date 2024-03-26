@@ -84,8 +84,8 @@
           </thead>
           <tbody>
             <tr *ngFor="let pinjaman of filteredPinjaman">
-              <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                {{pinjaman.pinjamanToForm?.idFormPengajuanPinjaman }}
+              <td class="px-4 py-2">
+                {{pinjaman.pinjamanToForm?.cif |uppercase }}
               </td>
               <td class="px-4 py-2">{{pinjaman.pinjamanToForm?.formToUser?.nameUser}}</td>
               <td class="px-4 py-2">{{pinjaman.pinjamanToForm?.formToUser?.nikUser}}</td>

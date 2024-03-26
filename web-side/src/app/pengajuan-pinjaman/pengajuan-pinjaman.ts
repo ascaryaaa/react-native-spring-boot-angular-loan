@@ -29,6 +29,7 @@ export interface FormPengajuanPinjaman {
     statusPengajuan: string;
     tanggalRealisasi: string | null; // Updated to allow null
     hashedIdForm: string;
+    cif: string;
 }
 
 export interface JenisPinjaman {
