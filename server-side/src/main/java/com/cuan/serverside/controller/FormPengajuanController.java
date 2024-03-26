@@ -26,6 +26,12 @@ public class FormPengajuanController {
         return formPengajuanService.getAllForm();
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/get-user-form/{userId}")
+    public Iterable<FormPengajuan> getAllFormsByUserId(@PathVariable Long userId){
+        return formPengajuanService.getAllFormsByUserId(userId);
+    }
+
     // GET Function of API, Reads form pengajuan data from 'pengajuan' database by id
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/{id}")
@@ -53,6 +59,13 @@ public class FormPengajuanController {
         formPengajuanService.deleteFormById(id);
     }
 
+    // Soft DELETE Function of API, Soft deletes form pengajuan data by setting value deleted to true in 'pengajuan' database
+    @DeleteMapping("/soft-delete-form/{id}")
+    public void softDeleteForm(@PathVariable Long id) {
+        formPengajuanService.softDeleteById(id);
+    }
+
+    // GET Function of API, Reads form pengajuan data from 'pengajuan' database by hashed id
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/hid/{hashedId}")
     public FormPengajuan getFormPengajuanByHashedId(@PathVariable String hashedId){

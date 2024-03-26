@@ -23,8 +23,8 @@ export class MonitoringService {
     const headers = this.getHeaders();
     return this.httpClient.get<ListPinjamanResponse>(listMonitoringPinjaman, { headers });
   }
-  getDetailMonitoringPinjaman(id: number): Observable<DetailPinjamanResponse> {
+  getDetailMonitoringPinjaman(hashedId: string): Observable<DetailPinjamanResponse> {
     const headers = this.getHeaders();
-    return this.httpClient.get<DetailPinjamanResponse>(detailMonitoringPinjaman + id, { headers });
+    return this.httpClient.get<DetailPinjamanResponse>(`${detailMonitoringPinjaman}`+'hid/'+`${hashedId}`, { headers });
   }
 }

@@ -11,16 +11,13 @@
   <app-confirmation-modal 
     (confirmed)="terima($event)"
   ></app-confirmation-modal>
+
 </div>
 <div class="modal-container" *ngIf="showConfirmationModalTolak">
-  <app-rejecting-modal 
-    (confirmed)="tolak($event)"
-  ></app-rejecting-modal>
+  <app-rejecting-modal (confirmed)="tolak($event)"></app-rejecting-modal>
 </div>
 <div class="modal-container" *ngIf="showDownloadModal">
-  <app-notification-download-modal
-    (confirmed)="download($event)"
-  ></app-notification-download-modal>
+  <app-notification-download-modal (confirmed)="download($event)"></app-notification-download-modal>
 </div>
 <div class="sm:ml-64">  
 <div *ngIf="form" style="padding: 16px;">
@@ -62,13 +59,46 @@
                 <div class="mt-2">Jenis Kelamin</div>
                 <div class="mt-2">Tempat, Tanggal Lahir</div>
                 <div class="mt-2">Kantor Cabang</div>
+
               </div>
-              <div class="flex flex-col">
-                <div>: {{ form.idFormPengajuanPinjaman }} </div>
-                <div class="mt-2 max-md:mr-2">: {{ form.formToUser.nikUser }}</div>
-                <div class="mt-2">: {{ form.jenisKelamin }}</div>
-                <div class="mt-2">: {{ form.tempatLahir }}, {{ form.tanggalLahir }}</div>
-                <div class="mt-2">: {{form.formToCabang.nameCabang}}</div>
+            </div>
+            <div class="flex flex-col w-[33%] max-md:w-full">
+              <div
+                class="flex flex-col grow items-start py-6 pl-6 text-xs leading-5 rounded-2xl border border-solid border-neutral-200 max-md:mt-2.5">
+                <div class="font-bold text-center text-zinc-800">Riwayat Pinjaman (On Prgress)</div>
+                <div class="font-bold mt-2 tracking-normal leading-[120%]">
+                  1. BNI Griya
+                </div>
+                <div class="mt-2">Angsuran per Bulan : Rp. 5.000.000</div>
+                <div class="font-bold mt-2 tracking-normal leading-[120%]">
+                  2. BNI Fleksi Aktif
+                </div>
+                <div class="mt-2">Angsuran per Bulan : Rp. 2.500.000</div>
+              </div>
+            </div>
+            <div class="flex flex-col w-[33%] max-md:w-full">
+              <div
+                class="flex flex-col grow items-start py-6 pl-6 text-xs leading-5 rounded-2xl border border-solid border-neutral-200 max-md:mt-2.5">
+                <div class="font-bold text-center text-zinc-800">Detail SLIK</div>
+                <div class="flex gap-1 mt-2.5 text-black">
+                  <div class="flex flex-col whitespace-nowrap">
+                    <div>Nama</div>
+                    <div class="mt-2">NIK</div>
+                    <div class="mt-2">NPWP</div>
+                  </div>
+                  <div class="flex flex-col">
+                    <div>: {{ form.formToUser.nameUser }}</div>
+                    <div class="mt-2">: {{ form.formToUser.nikUser }}</div>
+                    <div class="mt-2">: {{ form.npwp }}</div>
+                  </div>
+                </div>
+                <button (click)="generateSLIK()"
+                  class="justify-center px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]"
+                  style="padding: 6px 12px;">
+                  Generate SLIK
+                </button>
+
+
               </div>
             </div>
           </div>
@@ -118,18 +148,25 @@
           <!-- Show the status text if 'Diterima' or 'Ditolak' -->
           <div class="font-bold text-center text-zinc-800" style="width: 100%; padding: 6px 12px;" [ngStyle]="{
               'color': form.statusPengajuan === 'Diterima' ? '#04C300' : '#D4352A'
+
             }">
-            {{ form.statusPengajuan }}
+                {{ form.statusPengajuan }}
+              </div>
+            </ng-container>
+            <ng-container *ngIf="form.statusPengajuan !== 'Diterima' && form.statusPengajuan !== 'Ditolak'">
+              <div class="font-bold text-center text-zinc-800">Aksi</div>
+              <!-- Show the 'Diterima' button -->
+              <button (click)="showConfirmationModalTerima = true"
+                class="justify-center px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]"
+                style="width: 100%; padding: 6px 12px; background: #29CC6A;">Diterima</button>
+              <!-- Show the 'Ditolak' button -->
+
+              <button (click)="showConfirmationModalTolak = true"
+                class="justify-center px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]"
+                style="width: 100%; padding: 6px 12px;background: #D4352A;">Ditolak</button>
+            </ng-container>
           </div>
-        </ng-container>
-        <ng-container *ngIf="form.statusPengajuan !== 'Diterima' && form.statusPengajuan !== 'Ditolak'">
-          <div class="font-bold text-center text-zinc-800">Aksi</div>
-          <!-- Show the 'Diterima' button -->
-          <button (click)="showConfirmationModalTerima = true" class="justify-center px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]" style="width: 100%; padding: 6px 12px; background: #29CC6A;">Diterima</button>
-          <!-- Show the 'Ditolak' button -->
-          
-          <button (click)="showConfirmationModalTolak = true" class="justify-center px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]" style="width: 100%; padding: 6px 12px;background: #D4352A;">Ditolak</button>
-        </ng-container>
+        </div>
       </div>
     </div>
   </div>
@@ -142,6 +179,7 @@
   <div *ngIf="showSLIKTable" >
     <div class="px-6 pt-6 pb-56 mt-2.5 w-full text-xs leading-5 text-center rounded-2xl border border-solid border-neutral-200 text-zinc-800 max-md:px-5 max-md:pb-10 max-md:max-w-full">
       <div class="flex text-xs text-center font-bold text-zinc-800 mb-4">SLIK Pemohon</div>
+
       <table #slikTable id="slik-debitur" class="w-full text-sm text-left rtl:text-right">
         <thead class="text-xs text-white bg-orange-400">
           <tr>
@@ -179,9 +217,14 @@
       <button (click)="downloadSLIK(); showDownloadModal = true" class="flex px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]" style="padding: 6px 12px;">
         Download SLIK
       </button>
+    </div>
+    <ng-template #noSLIKData>
+      <div class="flex text-xs text-center font-bold text-zinc-800 mb-4">Detail Keterangan SLIK</div>
+    </ng-template>
   </div>
-</div>
-</div>
+  
+  
+
 
 
 

@@ -2,8 +2,10 @@ package com.cuan.serverside.service;
 
 import com.cuan.serverside.model.FormPengajuan;
 import com.cuan.serverside.model.JenisPinjaman;
+import com.cuan.serverside.model.User;
 import com.cuan.serverside.repository.FormPengajuanRepository;
 import com.cuan.serverside.repository.JenisPinjamanRepository;
+import com.cuan.serverside.repository.UserRepository;
 import org.hashids.Hashids;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
+import java.time.LocalDate;
 
 @Service
 public class FormPengajuanServiceImpl implements FormPengajuanService{
@@ -20,9 +23,12 @@ public class FormPengajuanServiceImpl implements FormPengajuanService{
     private FormPengajuanRepository formPengajuanRepository;
     @Autowired
     private JenisPinjamanRepository jenisPinjamanRepository;
-    public FormPengajuanServiceImpl(FormPengajuanRepository formPengajuanRepository, JenisPinjamanRepository jenisPinjamanRepository) {
+    @Autowired
+    private UserRepository userRepository;
+    public FormPengajuanServiceImpl(FormPengajuanRepository formPengajuanRepository, JenisPinjamanRepository jenisPinjamanRepository, UserRepository userRepository) {
         this.formPengajuanRepository = formPengajuanRepository;
         this.jenisPinjamanRepository = jenisPinjamanRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -38,6 +44,8 @@ public class FormPengajuanServiceImpl implements FormPengajuanService{
     @Override
     public FormPengajuan saveForm(FormPengajuan formPengajuan) {
         formPengajuan.setStatusPengajuan("Diproses");
+        formPengajuan.setTanggalPengajuan(LocalDate.now());
+        formPengajuan.setDeleted(false);
 
         // Get formToJenis idJenisPinjaman to get-jenis-pinjaman
         Long idJenis = formPengajuan.getFormToJenis().getIdJenisPinjaman();
@@ -177,4 +185,20 @@ public class FormPengajuanServiceImpl implements FormPengajuanService{
     public FormPengajuan getFormByHashedId(String hashedId) {
         return formPengajuanRepository.findByHashedIdForm(hashedId);
     }
+
+    @Override
+    public Iterable<FormPengajuan> getAllFormsByUserId(Long userId) {
+        // Call the repository method to retrieve all FormPengajuan by User ID
+        return formPengajuanRepository.findByFormToUserIdUser(userId);
+    }
+
+    @Override
+    public void softDeleteById(Long id) {
+        FormPengajuan formPengajuan = formPengajuanRepository.findById(id).orElse(null);
+        if (formPengajuan != null) {
+            formPengajuan.setDeleted(true);
+            formPengajuanRepository.save(formPengajuan);
+        }
+    }
+
 }

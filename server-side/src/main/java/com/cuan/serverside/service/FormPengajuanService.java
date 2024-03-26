@@ -1,22 +1,29 @@
 package com.cuan.serverside.service;
 
-import com.cuan.serverside.model.Account;
 import com.cuan.serverside.model.FormPengajuan;
 
 public interface FormPengajuanService {
-    // Define GET all accounts in service
+    // Define GET all form in service
     public Iterable<FormPengajuan> getAllForm();
 
-    // Define GET accounts by id in service
+    // Define GET form by id in service
     public FormPengajuan getFormId(Long id);
 
-    // Define POST account in service
+    // Define POST form in service
     public FormPengajuan saveForm(FormPengajuan formPengajuan);
 
+    // Define UPDATE form in service
     public FormPengajuan updateForm(FormPengajuan formPengajuan);
 
-    // Define DELETE account by id in service
+    // Define DELETE form by id in service
     public void deleteFormById(Long id);
 
+    // Define GET form by hashed id in service
     public FormPengajuan getFormByHashedId(String hashedId);
+
+    // Define GET forms by user id
+    public Iterable<FormPengajuan> getAllFormsByUserId(Long userId);
+
+    // Define Soft Delete status in form service
+    public void softDeleteById(Long id);
 }

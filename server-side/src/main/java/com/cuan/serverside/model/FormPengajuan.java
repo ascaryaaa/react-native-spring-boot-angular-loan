@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity // Define database class
@@ -119,4 +120,11 @@ public class FormPengajuan {
     @Column(name = "tanggal_realisasi_pinjaman")
     private Date tanggalRealisasi;
 
+    // Date of loan realization
+    @Column(name = "tanggal_pengajuan")
+    private LocalDate tanggalPengajuan;
+
+    // Soft delete status FE!N
+    @Column(name = "is_deleted")
+    private boolean deleted;
 }

@@ -39,10 +39,11 @@ export class DetailPengajuanPinjamanComponent implements OnInit {
   }
 
   refreshFormDetail() {
-    const id: number = +this.router.snapshot.params['id'];
-    this.pengajuanPinjamanService.getDetailPengajuanPinjaman(id).subscribe({
+    const hashedIdForm: string = this.router.snapshot.params['hashedId'];
+    this.pengajuanPinjamanService.getDetailPengajuanPinjaman(hashedIdForm).subscribe({
       next: (data) => {
         this.form = data;
+        console.log(this.form);
         console.log(this.form);
       },
       error: (error) => console.error('Error fetching form data:', error)
@@ -95,7 +96,8 @@ export class DetailPengajuanPinjamanComponent implements OnInit {
       persentaseUangMuka: this.form.persentaseUangMuka,
       uangMuka: this.form.uangMuka,
       statusPengajuan: "New", // Set the status to a default value for new form
-      tanggalRealisasi: null // Set to null or omit if not applicable for new form
+      tanggalRealisasi: null, // Set to null or omit if not applicable for new form
+      hashedIdForm: this.form.hashedIdForm,
     };
   
     this.pengajuanPinjamanService.createPengajuanPinjaman(data).subscribe({
@@ -151,7 +153,7 @@ export class DetailPengajuanPinjamanComponent implements OnInit {
       console.error("Form data is not loaded.");
       return;
     }
-    const id: number = +this.router.snapshot.params['id'];
+    const id: number = +this.form.idFormPengajuanPinjaman
 
     const minimalPinjamanData: Pinjaman = {
       idPinjaman: null,
@@ -172,7 +174,8 @@ export class DetailPengajuanPinjamanComponent implements OnInit {
       totalPayoffs: null,
       sisaTagihan: null,
       totalBayarTagihan: null,
-      tanggalBayarTagihan: null
+      tanggalBayarTagihan: null,
+      hashedIdPinjaman: null,
   };
   
     this.pengajuanPinjamanService.createPinjamanMinimal(minimalPinjamanData).subscribe({
@@ -213,8 +216,9 @@ export class DetailPengajuanPinjamanComponent implements OnInit {
       return;
     }
     const id: number = this.form.idFormPengajuanPinjaman;
+    const hashedId: string = this.form.hashedIdForm;
   
-    this.pengajuanPinjamanService.getDetailPengajuanPinjaman(id).subscribe({
+    this.pengajuanPinjamanService.getDetailPengajuanPinjaman(hashedId).subscribe({
       next: (currentData) => {
         const updatedData = {
           ...currentData,

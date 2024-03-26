@@ -1,5 +1,6 @@
 package com.cuan.serverside.service;
 
+import com.cuan.serverside.model.FormPengajuan;
 import com.cuan.serverside.model.User;
 import com.cuan.serverside.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,4 +42,10 @@ public class UserServiceImpl implements UserService {
     public Optional<User> findUserByName(String name) {
         return userRepository.findByNameUser(name);
     }
+
+//    @Override
+//    public Iterable<FormPengajuan> getAllFormsByUserId(Long id) {
+//
+//        return null;
+//    }
 }
