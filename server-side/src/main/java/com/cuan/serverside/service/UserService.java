@@ -1,5 +1,6 @@
 package com.cuan.serverside.service;
 
+import com.cuan.serverside.model.FormPengajuan;
 import com.cuan.serverside.model.User;
 
 import java.util.Optional;
@@ -19,4 +20,6 @@ public interface UserService {
 
     // Define GET users by name in service
     public Optional<User> findUserByName(String name);
+
+//    public Iterable<FormPengajuan> getAllFormsByUserId(Long id);
 }

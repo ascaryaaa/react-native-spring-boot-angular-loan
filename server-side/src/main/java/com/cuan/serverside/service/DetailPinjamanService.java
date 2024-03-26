@@ -9,6 +9,7 @@ public interface DetailPinjamanService {
     // Define GET detail pinjaman by id in service
     public DetailPinjaman getDetailPinjamanId(Long id);
 
+    // Define GET detail pinjaman by hashed id in service
     public DetailPinjaman getDetailPinjamanByHashedId(String hashedId);
 
     // Define POST detail pinjaman in service

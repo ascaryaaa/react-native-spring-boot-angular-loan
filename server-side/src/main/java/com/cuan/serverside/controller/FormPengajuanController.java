@@ -26,6 +26,12 @@ public class FormPengajuanController {
         return formPengajuanService.getAllForm();
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/get-user-form/{userId}")
+    public Iterable<FormPengajuan> getAllFormsByUserId(@PathVariable Long userId){
+        return formPengajuanService.getAllFormsByUserId(userId);
+    }
+
     // GET Function of API, Reads form pengajuan data from 'pengajuan' database by id
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/{id}")
