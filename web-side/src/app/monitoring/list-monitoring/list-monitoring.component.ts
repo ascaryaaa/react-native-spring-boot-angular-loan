@@ -71,8 +71,8 @@ export class ListMonitoringComponent {
       pinjaman.pinjamanToForm?.formToUser.nameUser.toLowerCase().includes(this.searchText.trim().toLowerCase()) ||
         // form.idFormPengajuanPinjaman.toString().includes(this.searchText.trim()) || // Pencarian berdasarkan CIF
       pinjaman.pinjamanToForm?.formToUser.nikUser.toLowerCase().includes(this.searchText.trim().toLowerCase()) // Pencarian berdasarkan NIK
-      )
-    }
+    )
+  }
 
   changePageSize(): void {
     this.totalPages = Math.ceil(this.filteredPinjaman.length / this.pageSize);
