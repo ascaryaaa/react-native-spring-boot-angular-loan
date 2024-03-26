@@ -35,7 +35,7 @@ const DigitalLoan = ({ navigation }) => {
   };
 
   const handleButton1Press = () => {
-    setResult(<ListPengajuanPinjaman navigation={navigation}/>);
+    setResult(<ListPengajuanPinjaman navigation={navigation} />);
     setActiveButton("pengajuan");
   };
 
@@ -68,7 +68,10 @@ const DigitalLoan = ({ navigation }) => {
       <View style={styles.container}>
         <View style={styles.buttonContainer}>
           <View>
-            <TouchableOpacity onPress={handleAll} style={styles.button1}>
+            <TouchableOpacity
+              onPress={handleAll}
+              style={[activeButton === "all" && styles.activeButtonText]}
+            >
               <Text
                 style={[
                   styles.textButton,
@@ -82,7 +85,7 @@ const DigitalLoan = ({ navigation }) => {
           <View>
             <TouchableOpacity
               onPress={handleButton1Press}
-              style={styles.button1}
+              style={[activeButton === "pengajuan" && styles.activeButtonText]}
             >
               <Text
                 style={[
@@ -97,7 +100,7 @@ const DigitalLoan = ({ navigation }) => {
           <View>
             <TouchableOpacity
               onPress={handleButton2Press}
-              style={styles.button1}
+              style={[activeButton === "pinjaman" && styles.activeButtonText]}
             >
               <Text
                 style={[
@@ -240,31 +243,32 @@ const styles = StyleSheet.create({
     height: 110,
     resizeMode: "cover",
   },
-  bannerText: {
-    position: "absolute",
-    bottom: 10,
-    left: 10,
-    color: "#fff",
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent background over image
-    padding: 5,
-  },
+  // bannerText: {
+  //   position: "absolute",
+  //   bottom: 10,
+  //   left: 10,
+  //   color: "#fff",
+  //   backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent background over image
+  //   padding: 5,
+  // },
   buttonContainer: {
     flexDirection: "row",
     marginTop: 16,
-    color: "#F68310",
+    paddingHorizontal: 16,
     justifyContent: "flex-start",
     // backgroundColor: "yellow",
   },
-  button1: {
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    // justifyContent: "space-between",
-    alignItems: "left",
-    borderBottomWidth: 1,
-    borderColor: "#F68310",
-    // backgroundColor: "pink",
-    width: "100%",
-  },
+  // button1: {
+  //   paddingVertical: 10,
+  //   paddingHorizontal: 16,
+  //   // justifyContent: "space-between",
+  //   alignItems: "left",
+  //   // backgroundColor: "pink",
+  //   width: "100%",
+
+  //   //  borderBottomColor:'red',
+  //   //  borderBottomWidth: 4
+  // },
   resultContainer: {
     marginTop: 16,
     borderRadius: 5,
@@ -273,14 +277,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   textButton: {
-    // color: "white",
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    alignItems: "left",
+    width: "100%",
     fontSize: 14,
     fontWeight: "400",
-    textAlign: "center",
   },
   activeButtonText: {
-    fontSize: 14,
-    fontWeight: "700",
-    textAlign: "center",
+    fontWeight: "bold",
+    borderBottomWidth: 2,
+    borderColor: "#F68310",
   },
 });

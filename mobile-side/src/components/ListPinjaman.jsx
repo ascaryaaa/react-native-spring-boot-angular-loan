@@ -16,9 +16,9 @@ const ListPinjaman = ({ navigation }) => {
     require("../../../mobile-side/src/assets/ban_kejutan1.png"),
     require("../../../mobile-side/src/assets/ban_kejutan2.png"),
   ];
-  const renderItem = ({ item, navigation }) => (
-    <Image style={styles.bannerImage} source={item} />
-  );
+  // const renderItem = ({ item, navigation }) => (
+  //   <Image style={styles.bannerImage} source={item} />
+  // );
 
   const listPinjamanData = [
     {

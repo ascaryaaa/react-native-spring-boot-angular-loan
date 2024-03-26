@@ -16,9 +16,9 @@ const ListPengajuanPinjaman = ({ navigation }) => {
     require("../../../mobile-side/src/assets/ban_kejutan1.png"),
     require("../../../mobile-side/src/assets/ban_kejutan2.png"),
   ];
-  const renderItem = ({ item }) => (
-    <Image style={styles.bannerImage} source={item} />
-  );
+  // const renderItem = ({ item }) => (
+  //   <Image style={styles.bannerImage} source={item} />
+  // );
 
   const [modalVisible, setModalVisible] = useState(false);
   const [deletedId, setDeletedId] = useState(null);
@@ -64,10 +64,11 @@ const ListPengajuanPinjaman = ({ navigation }) => {
                 <TouchableOpacity onPress={() => openModal(view.id)}>
                   <Image
                     source={require("../../../mobile-side/src/assets/icon_delete.png")}
-                    style={{ justifyContent: "flex-start" }}
+                    style={{justifyContent:"flex-start", marginRight: 8}}
                   />
                 </TouchableOpacity>
               </View>
+
               <Text style={styles.textContent}>
                 Tanggal Pengajuan : {view.date}
               </Text>
@@ -133,6 +134,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 16,
     marginBottom: 16,
+    // width: "95%",
     // backgroundColor: 'blue'
   },
   shadow: {
@@ -167,7 +169,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 12,
     fontWeight: "700",
-    textAlign:'center'
+    textAlign: "center",
   },
   buttonStatus: {
     paddingVertical: 3,
