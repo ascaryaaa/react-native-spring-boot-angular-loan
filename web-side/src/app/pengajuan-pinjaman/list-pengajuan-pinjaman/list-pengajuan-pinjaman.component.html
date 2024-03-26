@@ -1,11 +1,12 @@
-<h1
-  id="judul"
-  class="p-4 sm:ml-64 text-left text-2xl mb-4 font-bold"
-  style="color: #e55300; padding-top: 24px; margin-bottom: -4px"
->
-  Daftar Pengajuan Pinjamann
-</h1>
-
+<div class="modal">
+  <div class="header-bar"></div>
+  <h1
+    id="judul"
+    class="p-4 sm:ml-64 text-left text-2xl mb-4 font-bold"
+    style="color: #e55300; padding-top: 111px;padding-bottom: 1px; margin-bottom: -4px"
+  >
+  Daftar Pengajuan Pinjaman
+  </h1>
 <!-- <ng-template #noData>
   <div class="flex flex-col items-center justify-center self-center">
     <img class="w-28 h-28 justify-center" src="../../../assets/img/nodata.png" alt="No Data">
@@ -13,8 +14,8 @@
   </div>
 </ng-template> -->
 
-  <div class="p-4 sm:ml-64">
-    <div class="p-4 border-2 border-gray-200 rounded-lg dark:border-gray-700">
+  <div class="p-4 sm:ml-64" style="padding: px;">
+    <div class="p-4 border-2 border-gray-200 rounded-lg dark:border-gray-700" style=" background-color: #fff;">
       <div
         class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4"
       >
@@ -124,10 +125,10 @@
               <td class="px-4 py-2">{{ form.idFormPengajuanPinjaman }}</td>
               <td class="px-4 py-2">{{ form.formToUser.nameUser }}</td>
               <td class="px-4 py-2">{{ form.formToUser.nikUser }}</td>
-              <td class="px-4 py-2">{{ form.formToJenis.nameJenisPinjaman }}</td>
+              <td class="px-4 py-2 text-center">{{ form.formToJenis.nameJenisPinjaman }}</td>
               <td class="px-4 py-2">
-                <div
-                  class="px-4 py-2 text-white"
+                <div 
+                  class="px-4 py-2 text-white text-center" 
                   [ngClass]="{
                     'bg-green-500': form.statusPengajuan === 'Diterima',
                     'bg-red-500': form.statusPengajuan === 'Ditolak',
@@ -139,7 +140,7 @@
               </td>
               <td class="px-4 py-2">{{form.formToAdmin?.nameAdmin}}</td>
               <!-- <td class="px-4 py-2">{{ form.tanggalLahir | date: 'longDate' }}</td> -->
-              <td class="px-4 py-2">{{ form.tanggalRealisasi | date:'yyyy-MM-dd' }}</td>
+              <td class="px-4 py-2 text-center">{{ form.tanggalRealisasi | date:'yyyy/MM/dd' }}</td>
               <td class="px-4 py-2">
                 <a [routerLink]="['../id/', form.idFormPengajuanPinjaman]" class="text-blue-600 hover:underline">View</a>
               </td>
@@ -177,4 +178,6 @@
       </div>
     </nav>
   </div>
+</div>
+
 </div>
