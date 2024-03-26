@@ -67,11 +67,7 @@ export class ListPengajuanPinjamanComponent {
       let endIndex = startIndex + this.pageSize;
   
       // Adjust endIndex if it exceeds the length of filteredForms
-<<<<<<< HEAD
-      endIndex = Math.min(endIndex, this.filteredForms.length);
-=======
       // endIndex = Math.min(endIndex, this.filteredForms.length);
->>>>>>> 5a1f540030c04829f43814d234d4172f4cb572fc
   
       this.currentPage = page;
   
@@ -79,11 +75,8 @@ export class ListPengajuanPinjamanComponent {
       this.filteredForms = this.filteredForms.slice(startIndex, endIndex);
     }
   }
-<<<<<<< HEAD
-=======
 
   
->>>>>>> 5a1f540030c04829f43814d234d4172f4cb572fc
   
   search(): void {
     if (this.searchText.trim() !== '') {
@@ -115,8 +108,6 @@ export class ListPengajuanPinjamanComponent {
   }
   
   
-<<<<<<< HEAD
-=======
   // search(): void {
   //   this.filteredForms = this.forms.filter(form =>
     
@@ -134,7 +125,6 @@ export class ListPengajuanPinjamanComponent {
   //     this.navigateToPage(1); // Update data for the first page
   //   }
   
->>>>>>> 5a1f540030c04829f43814d234d4172f4cb572fc
   previousPage(): void {
     if (this.currentPage > 1) {
       this.currentPage -= 1; // Kurangi currentPage

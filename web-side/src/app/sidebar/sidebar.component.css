@@ -16,3 +16,17 @@
   app-confirmation-modal {
     z-index: 10000; /* Ensure it's above the overlay */
   }
+
+
+.active-border {
+    /* border: 2px solid blue; Ganti warna dan ketebalan sesuai keinginan */
+    background-color: #FEF2E6;
+    border-left-color:#1394AD;
+    border-left-width:4px ;
+
+  
+}
+.active-text{
+  color: #1394AD;
+}
+
