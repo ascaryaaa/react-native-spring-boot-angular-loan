@@ -17,4 +17,7 @@ public interface DetailPinjamanService {
 
     // Define DELETE detail pinjaman by id in service
     public void deleteDetailPinjamanById(Long id);
+
+    // Define Soft Delete status in form service
+    public void softDeleteById(Long id);
 }

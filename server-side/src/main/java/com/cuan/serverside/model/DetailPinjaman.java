@@ -75,4 +75,8 @@
         // Date of next payment
         @Column(name = "tanggal_bayar_tagihan_pinjaman")
         private Date tanggalBayarTagihan;
+
+        // Soft delete status FE!N
+        @Column(name = "is_deleted")
+        private boolean deleted;
     }

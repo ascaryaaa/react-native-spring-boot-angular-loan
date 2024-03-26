@@ -21,5 +21,9 @@ public interface FormPengajuanService {
     // Define GET form by hashed id in service
     public FormPengajuan getFormByHashedId(String hashedId);
 
+    // Define GET forms by user id
     public Iterable<FormPengajuan> getAllFormsByUserId(Long userId);
+
+    // Define Soft Delete status in form service
+    public void softDeleteById(Long id);
 }

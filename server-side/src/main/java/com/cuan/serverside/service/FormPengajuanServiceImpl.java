@@ -45,6 +45,7 @@ public class FormPengajuanServiceImpl implements FormPengajuanService{
     public FormPengajuan saveForm(FormPengajuan formPengajuan) {
         formPengajuan.setStatusPengajuan("Diproses");
         formPengajuan.setTanggalPengajuan(LocalDate.now());
+        formPengajuan.setDeleted(false);
 
         // Get formToJenis idJenisPinjaman to get-jenis-pinjaman
         Long idJenis = formPengajuan.getFormToJenis().getIdJenisPinjaman();
@@ -189,6 +190,15 @@ public class FormPengajuanServiceImpl implements FormPengajuanService{
     public Iterable<FormPengajuan> getAllFormsByUserId(Long userId) {
         // Call the repository method to retrieve all FormPengajuan by User ID
         return formPengajuanRepository.findByFormToUserIdUser(userId);
+    }
+
+    @Override
+    public void softDeleteById(Long id) {
+        FormPengajuan formPengajuan = formPengajuanRepository.findById(id).orElse(null);
+        if (formPengajuan != null) {
+            formPengajuan.setDeleted(true);
+            formPengajuanRepository.save(formPengajuan);
+        }
     }
 
 }

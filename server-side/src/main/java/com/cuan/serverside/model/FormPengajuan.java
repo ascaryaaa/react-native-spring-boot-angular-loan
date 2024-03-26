@@ -123,4 +123,8 @@ public class FormPengajuan {
     // Date of loan realization
     @Column(name = "tanggal_pengajuan")
     private LocalDate tanggalPengajuan;
+
+    // Soft delete status FE!N
+    @Column(name = "is_deleted")
+    private boolean deleted;
 }

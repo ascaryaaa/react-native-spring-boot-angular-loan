@@ -52,6 +52,12 @@ public class DetailPinjamanController {
         detailPinjamanService.deleteDetailPinjamanById(id);
     }
 
+    // Soft DELETE Function of API, Soft deletes detail pinjaman data by setting value deleted to true in 'pengajuan' database
+    @DeleteMapping("/soft-delete-pinjaman/{id}")
+    public void softDeletePinjaman(@PathVariable Long id) {
+        detailPinjamanService.softDeleteById(id);
+    }
+
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/hid/{hashedId}")
     public DetailPinjaman getDetailPinjamanByHashedId(@PathVariable String hashedId){
