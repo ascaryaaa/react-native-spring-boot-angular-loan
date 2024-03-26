@@ -121,7 +121,7 @@
         <!-- Loading and Error Handling -->
           <tbody>
             <tr *ngFor="let form of filteredForms">
-              <td class="px-4 py-2">{{ form.idFormPengajuanPinjaman }}</td>
+              <td class="px-4 py-2">{{ form.cif |uppercase }}</td>
               <td class="px-4 py-2">{{ form.formToUser.nameUser }}</td>
               <td class="px-4 py-2">{{ form.formToUser.nikUser }}</td>
               <td class="px-4 py-2">{{ form.formToJenis.nameJenisPinjaman }}</td>
@@ -141,7 +141,7 @@
               <!-- <td class="px-4 py-2">{{ form.tanggalLahir | date: 'longDate' }}</td> -->
               <td class="px-4 py-2">{{ form.tanggalRealisasi | date:'yyyy-MM-dd' }}</td>
               <td class="px-4 py-2">
-                <a [routerLink]="['../id/', form.idFormPengajuanPinjaman]" class="text-blue-600 hover:underline">View</a>
+                <a [routerLink]="['../id/', form.hashedIdForm]" class="text-blue-600 hover:underline">View</a>
               </td>
             </tr>
           </tbody>

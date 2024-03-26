@@ -14,7 +14,10 @@ Chart.register(...registerables)
 })
 export class DetailMonitoringComponent {
   pinjamans?: DetailPinjamanResponse;
-  constructor(private router: ActivatedRoute, private monitoringService: MonitoringService ) { }
+  constructor(
+    private router: ActivatedRoute, 
+    private monitoringService: MonitoringService
+  ) { }
 
   async ngOnInit() {
     this.refreshFormList();
@@ -23,8 +26,9 @@ export class DetailMonitoringComponent {
 
 
   refreshFormList() {
-    const id: number = this.router.snapshot.params['id'];
-    this.monitoringService.getDetailMonitoringPinjaman(id).subscribe({
+    const hashedId: string = this.router.snapshot.params['hashedId'];
+    console.log(this.router.snapshot.params['hashedId'] + "UHUY")
+    this.monitoringService.getDetailMonitoringPinjaman(hashedId).subscribe({
       next: (data) => {
         this.pinjamans = data;
         console.log(this.pinjamans); // For debugging
