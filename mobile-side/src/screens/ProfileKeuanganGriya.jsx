@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -8,6 +8,8 @@ import {
   ScrollView,
   Image,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 const ProfileKeuanganGriya = ({ navigation }) => {
   const [inputData, setInputData] = useState({
@@ -51,15 +53,37 @@ const ProfileKeuanganGriya = ({ navigation }) => {
     setHidedButton(true);
   };
 
+  const jumlahUangMuka = (inputData.uangMuka/100)*inputData.hargaRumah
+  const totalPinjaman = inputData.hargaRumah-jumlahUangMuka
+  const angsuranPerbulan = (totalPinjaman*(0.0675/12))/(1-Math.pow(1+(0.0675/12),-inputData.jangkaWaktu));
+
   const data = [
-    { id: 1, title: "Harga Rumah", content: "Rp 500.000.000,00" },
-    { id: 2, title: "Jangka Waktu", content: "120 Bulan" },
-    { id: 3, title: "Presentase Uang Muka (%)", content: "10%" },
-    { id: 4, title: "Uang Muka", content: "Rp 50.000.000,00" },
+    { id: 1, title: "Harga Rumah", content: `Rp ${inputData.hargaRumah.toLocaleString('id-ID', {maximumFractionDigits: 2})}` },
+    { id: 2, title: "Jangka Waktu", content: `${inputData.jangkaWaktu} bulan` },
+    { id: 3, title: "Presentase Uang Muka (%)", content: `${inputData.uangMuka}%` },
+    { id: 4, title: "Uang Muka", content: `Rp ${jumlahUangMuka.toLocaleString('id-ID', {maximumFractionDigits: 2})}` },
     { id: 5, title: "Suku Bunga per Tahun", content: "6,75%" },
-    { id: 6, title: "Total Pinjaman", content: "Rp 450.000.000,00" },
-    { id: 7, title: "Angsuran Pinjaman per Bulan", content: "Rp 5.167.445,22" },
+    { id: 6, title: "Total Pinjaman", content: `Rp ${totalPinjaman.toLocaleString('id-ID', {maximumFractionDigits: 2})}` },
+    { id: 7, title: "Angsuran Pinjaman per Bulan", content: `Rp ${angsuranPerbulan.toLocaleString('id-ID', {maximumFractionDigits: 2})}` },
   ];
+
+  const taruhData = async () => {
+    if (validateInputs()) {
+      try {
+        // Stringify and save inputData to AsyncStorage
+        await AsyncStorage.setItem('inputDataProfile', JSON.stringify(inputData));
+        // AsyncStorage.setItem('max', (inputData.penghasilan/2)*((1-((1+(0.0675/12))^(-inputData.jangkaWaktu)))/(0.0675/12)));
+        // Retrieve and log the saved item
+        const savedData = await AsyncStorage.getItem('inputDataProfile');
+        console.log(JSON.parse(savedData)); // Make sure to parse the JSON string
+        // console.log(angsuranPerbulan);
+        // console.log(maksAngsuran);
+        navigation.navigate("ProfileKeuanganGriya")
+      } catch (error) {
+        console.error('Failed to save or retrieve the data from AsyncStorage', error);
+      }
+    }
+  };
 
   return (
     <View style={styles.bg}>

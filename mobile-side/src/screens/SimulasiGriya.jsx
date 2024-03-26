@@ -21,9 +21,14 @@ const SimulasiGriya = ({ navigation }) => {
     jangkaWaktu: false,
   })
 
+  const maksAngsuran = (inputData.penghasilan/2)
+  const maksPinjaman = maksAngsuran*(1-Math.pow(1+(0.0675/12),-inputData.jangkaWaktu))/(0.0675/12);
+
   const data = [
-    { id: 1, title: "Maksimal Pinjaman", content: "Rp 794.993.871,00" },
-    { id: 2, title: "Angsuran Pinjaman per Bulan", content: "Rp 4.554.761,00" },
+    { id: 1, title: "Maksimal Pinjaman", content: `Rp ${maksPinjaman.toLocaleString('id-ID', {
+      maximumFractionDigits: 2})}`},
+    { id: 2, title: "Angsuran Pinjaman per Bulan", content: `Rp ${maksAngsuran.toLocaleString('id-ID', {
+      maximumFractionDigits: 2})}`},
   ];
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -42,19 +47,31 @@ const SimulasiGriya = ({ navigation }) => {
     return isValid;
   };
 
-  const handleNext = async () => {
+  const taruhData = async () => {
     if (validateInputs()) {
       try {
         // Stringify and save inputData to AsyncStorage
         await AsyncStorage.setItem('inputDataSimulasi', JSON.stringify(inputData));
-        //AsyncStorage.setItem('max', inputData.jangkaWaktu X inputData.penghasilan); gpt help me
+        AsyncStorage.setItem('simulasiPinjaman', JSON.stringify(maksPinjaman));
+        // AsyncStorage.setItem('max', (inputData.penghasilan/2)*((1-((1+(0.0675/12))^(-inputData.jangkaWaktu)))/(0.0675/12)));
         // Retrieve and log the saved item
         const savedData = await AsyncStorage.getItem('inputDataSimulasi');
         console.log(JSON.parse(savedData)); // Make sure to parse the JSON string
-        toggleDropdown();
+        const savedData2 = await AsyncStorage.getItem('simulasiPinjaman');
+        console.log(JSON.parse(savedData2));
+        // console.log(maksPinjaman);
+        // console.log(maksAngsuran);
+        // navigation.navigate("ProfileKeuanganGriya")
+        navigation.navigate("ProfileKeuanganGriya");
       } catch (error) {
         console.error('Failed to save or retrieve the data from AsyncStorage', error);
       }
+    }
+  };
+
+  const handleNext = async () => {
+    if (validateInputs()) {
+      toggleDropdown();
     }
   };
 
@@ -183,7 +200,7 @@ const SimulasiGriya = ({ navigation }) => {
                   </View>
                   <TouchableOpacity
                     style={styles.button}
-                    onPress={() => navigation.navigate("ProfileKeuanganGriya")}
+                    onPress={taruhData}
                   >
                     <Text style={styles.simulasikan}> Selanjutnya</Text>
                   </TouchableOpacity>

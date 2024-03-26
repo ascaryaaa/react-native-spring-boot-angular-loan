@@ -11,6 +11,8 @@ import {
 import Buttonjk from "../components/Buttonjk";
 import Bniaddress from "../components/Bniaddress";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import RNPickerSelect from 'react-native-picker-select';
+
 
 
 const DataPemohon = ({ navigation }) => {
@@ -65,6 +67,11 @@ const DataPemohon = ({ navigation }) => {
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [selectedDate, setSelectedDate] = useState("");
+  const [selectedBniAddress, setSelectedBniAddress] = useState(null); // State untuk menyimpan nilai terpilih
+
+  const handleBniAddressChange = (value) => {
+    setSelectedBniAddress(value); // Perbarui nilai terpilih saat terjadi perubahan
+  };
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -232,15 +239,15 @@ const DataPemohon = ({ navigation }) => {
               <Text style={styles.errorText}>Mohon isikan data dengan benar</Text>
             )}
 
-            <Text style={styles.text}>Unit Kerja BNI Terdekat</Text>
+            {/* <Text style={styles.text}>Unit Kerja BNI Terdekat</Text>
             <View style={[styles.input, inputErrors.alamatBni && styles.inputError]}>
               <Bniaddress />
             </View>
             {inputErrors.alamatBni && (
               <Text style={styles.errorText}>Mohon isikan data dengan benar</Text>
-            )}
+            )} */}
 
-            {/* <Text style={styles.text}>Unit Kerja BNI Terdekat</Text>
+            <Text style={styles.text}>Unit Kerja BNI Terdekat</Text>
             <View style={[styles.input, !selectedBniAddress && styles.inputError]}>
 
               <RNPickerSelect
@@ -253,10 +260,10 @@ const DataPemohon = ({ navigation }) => {
                 placeholder={{ label: 'Pilih alamat BNI terdekat...', value: null }}
                 value={selectedBniAddress}
               />
-            </View> */}
-            {/* {!selectedBniAddress && (
+            </View>
+            {!selectedBniAddress && (
               <Text style={styles.errorText}>Mohon pilih alamat BNI terdekat</Text>
-            )} */}
+            )}
 
             <View style={styles.bawah}>
               <TouchableOpacity
