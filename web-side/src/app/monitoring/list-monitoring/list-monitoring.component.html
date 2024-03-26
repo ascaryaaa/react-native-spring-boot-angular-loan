@@ -33,6 +33,7 @@
           <div class="loader">Loading...</div>
         </div>
       </ng-container>
+      <ng-container *ngIf="!loading">
       <ng-container *ngIf="!loading && filteredPinjaman.length > 0; else noData">
        
           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -195,7 +196,7 @@
             <!-- Add more rows here if needed -->
           </tbody>
         </ng-container>
-   
+      </ng-container>
     </table>
     <!-- Pagination -->
     <nav class="flex items-center justify-between">
