@@ -29,9 +29,9 @@ public class User {
     @Column(name = "nik_user")
     private String nikUser;
 
-    // User's wallet amount
-    @Column(name = "wallet")
-    private Long wallet;
+//    // User's wallet amount
+//    @Column(name = "wallet")
+//    private Long wallet;
 
     // Introduce Json Ignore to prevent recursion
     @JsonIgnore
