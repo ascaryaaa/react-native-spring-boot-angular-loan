@@ -1,4 +1,4 @@
-const CONNECTION = "192.168.209.105";
+const CONNECTION = "192.168.209.110";
 
 const PORT = "8083";
 const MAIN_URL = `http://${CONNECTION}:${PORT}/loan/v1/`;

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   View,
   TextInput,
@@ -7,14 +8,20 @@ import {
   TouchableOpacity,
   ScrollView,
   Image,
+  ActivityIndicator,
 } from "react-native";
 import Buttonjk from "../components/Buttonjk";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import RNPickerSelect from 'react-native-picker-select';
-
-
+import RNPickerSelect from "react-native-picker-select";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getAccountByHashedId } from "../reducers/Account";
 
 const DataPemohon = ({ navigation }) => {
+  const accountState = useSelector((state) => state.account);
+  const dispatchAccount = useDispatch();
+  const dispatch = useDispatch();
+  const [hashedId, setHashedId] = useState(null);
+
   const [inputData, setInputData] = useState({
     tempatLahir: "",
     tanggalLahir: "",
@@ -23,10 +30,10 @@ const DataPemohon = ({ navigation }) => {
     kelurahan: "",
     kecamatan: "",
     npwp: "",
-    alamatBni: ""
+    alamatBni: "",
   });
 
-  const [inputErrors, setInputErrors] = useState ({
+  const [inputErrors, setInputErrors] = useState({
     tempatLahir: false,
     tanggalLahir: false,
     alamat: false,
@@ -34,7 +41,8 @@ const DataPemohon = ({ navigation }) => {
     kelurahan: false,
     kecamatan: false,
     npwp: false,
-    alamatBni: false
+    alamatBni: false,
+    selectedOption: false,
   });
 
   const validateInputs = () => {
@@ -53,7 +61,14 @@ const DataPemohon = ({ navigation }) => {
       errors["tanggalLahir"] = false;
     }
 
-    if(!selectedBniAddress){
+    // if (!selectedOption) {
+    //   errors["selectedOption"] = true;
+    //   isValid = false;
+    // } else {
+    //   errors["selectedOption"] = false;
+    // }
+
+    if (!selectedBniAddress) {
       errors["alamatBni"] = true;
       isValid = false;
     } else {
@@ -61,13 +76,13 @@ const DataPemohon = ({ navigation }) => {
     }
     setInputErrors(errors);
     return isValid;
-  };  
+  };
 
   const handleNext = () => {
     if (validateInputs()) {
-      navigation.navigate('KetentuanGriya');
+      navigation.navigate("KetentuanGriya");
     }
-  }
+  };
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [selectedDate, setSelectedDate] = useState("");
@@ -94,6 +109,23 @@ const DataPemohon = ({ navigation }) => {
     hideDatePicker();
   };
 
+  const fetchHashedId = async () => {
+    try {
+      const storedHashedId = await AsyncStorage.getItem("hashedId");
+      if (storedHashedId) {
+        setHashedId(storedHashedId);
+        dispatchAccount(getAccountByHashedId(storedHashedId));
+      }
+    } catch (error) {
+      console.error("Error fetching hashed ID from AsyncStorage:", error);
+    }
+  };
+  useEffect(() => {
+    // fetchInfo();
+    // dispatch(getPromos());
+    fetchHashedId();
+  }, [dispatch, dispatchAccount]);
+
   return (
     <View style={styles.bg}>
       <View style={styles.shadow}>
@@ -116,17 +148,25 @@ const DataPemohon = ({ navigation }) => {
             <Text style={styles.text}>Nama Lengkap (Sesuai KTP)</Text>
             <TextInput
               style={[styles.input, { padding: 10 }]}
-              placeholder="Sarah Johnson"
+              placeholder={accountState.data?.accountToUser.nameUser}
               editable={false}
             />
             <Text style={styles.text}>NIK</Text>
             <TextInput
               style={[styles.input, { padding: 10 }]}
-              placeholder="4829610329478516"
+              placeholder={accountState.data?.accountToUser.nikUser}
               editable={false}
             />
             <Text style={styles.text}>Jenis Kelamin</Text>
-            <Buttonjk/>
+            <Buttonjk
+              errorMessage={inputErrors?.selectedOption}
+              onOptionChange={(value) =>
+                setInputData((prevState) => ({
+                  ...prevState,
+                  selectedOption: value,
+                }))
+              }
+            />
 
             <View
               style={{ flexDirection: "row", justifyContent: "space-between" }}
@@ -140,14 +180,19 @@ const DataPemohon = ({ navigation }) => {
               >
                 <Text style={{ flex: 1, fontWeight: "800" }}>Tempat Lahir</Text>
                 <TextInput
-                  style={[styles.input1, inputErrors.tempatLahir && styles.inputError]}
+                  style={[
+                    styles.input1,
+                    inputErrors.tempatLahir && styles.inputError,
+                  ]}
                   value={inputData.tempatLahir}
                   onChangeText={(text) =>
                     setInputData({ ...inputData, tempatLahir: text })
                   }
                 />
                 {inputErrors.tempatLahir && (
-                  <Text style={styles.errorText}>Mohon isikan data dengan benar</Text>
+                  <Text style={styles.errorText}>
+                    Mohon isikan data dengan benar
+                  </Text>
                 )}
               </View>
               <View
@@ -159,7 +204,10 @@ const DataPemohon = ({ navigation }) => {
                 <Text style={{ fontWeight: "800" }}>Tanggal Lahir</Text>
 
                 <TouchableOpacity
-                  style={[styles.input2, inputErrors.tanggalLahir && styles.inputError]}
+                  style={[
+                    styles.input2,
+                    inputErrors.tanggalLahir && styles.inputError,
+                  ]}
                   onPress={showDatePicker}
                 >
                   <Text style={{ fontSize: 12 }}>{selectedDate}</Text>
@@ -170,7 +218,9 @@ const DataPemohon = ({ navigation }) => {
                   />
                 </TouchableOpacity>
                 {inputErrors.tanggalLahir && (
-                  <Text style={styles.errorText}>Mohon isikan data dengan benar</Text>
+                  <Text style={styles.errorText}>
+                    Mohon isikan data dengan benar
+                  </Text>
                 )}
                 <DateTimePickerModal
                   isVisible={isDatePickerVisible}
@@ -203,7 +253,9 @@ const DataPemohon = ({ navigation }) => {
               }
             />
             {inputErrors.kodePos && (
-              <Text style={styles.errorText}>Mohon isikan data dengan benar</Text>
+              <Text style={styles.errorText}>
+                Mohon isikan data dengan benar
+              </Text>
             )}
 
             <Text style={styles.text}>Kelurahan</Text>
@@ -215,7 +267,9 @@ const DataPemohon = ({ navigation }) => {
               }
             />
             {inputErrors.kelurahan && (
-              <Text style={styles.errorText}>Mohon isikan data dengan benar</Text>
+              <Text style={styles.errorText}>
+                Mohon isikan data dengan benar
+              </Text>
             )}
 
             <Text style={styles.text}>Kecamatan</Text>
@@ -227,7 +281,9 @@ const DataPemohon = ({ navigation }) => {
               }
             />
             {inputErrors.kecamatan && (
-              <Text style={styles.errorText}>Mohon isikan data dengan benar</Text>
+              <Text style={styles.errorText}>
+                Mohon isikan data dengan benar
+              </Text>
             )}
 
             <Text style={styles.text}>NPWP</Text>
@@ -240,7 +296,9 @@ const DataPemohon = ({ navigation }) => {
               }
             />
             {inputErrors.npwp && (
-              <Text style={styles.errorText}>Mohon isikan data dengan benar</Text>
+              <Text style={styles.errorText}>
+                Mohon isikan data dengan benar
+              </Text>
             )}
 
             {/* <Text style={styles.text}>Unit Kerja BNI Terdekat</Text>
@@ -252,21 +310,27 @@ const DataPemohon = ({ navigation }) => {
             )} */}
 
             <Text style={styles.text}>Unit Kerja BNI Terdekat</Text>
-            <View style={[styles.input, inputErrors.alamatBni && styles.inputError]}>
-
+            <View
+              style={[styles.input, inputErrors.alamatBni && styles.inputError]}
+            >
               <RNPickerSelect
                 onValueChange={handleBniAddressChange}
                 items={[
-                  { label: 'Wow', value: "Test" },
-                  { label: 'Alamat 2', value: "res" },
+                  { label: "Wow", value: "Test" },
+                  { label: "Alamat 2", value: "res" },
                   // Tambahkan item lainnya sesuai kebutuhan
                 ]}
-                placeholder={{ label: 'Pilih alamat BNI terdekat...', value: null}}
+                placeholder={{
+                  label: "Pilih alamat BNI terdekat...",
+                  value: null,
+                }}
                 value={selectedBniAddress}
               />
             </View>
             {inputErrors.alamatBni && (
-              <Text style={styles.errorText}>Mohon pilih alamat BNI terdekat</Text>
+              <Text style={styles.errorText}>
+                Mohon pilih alamat BNI terdekat
+              </Text>
             )}
 
             <View style={styles.bawah}>
@@ -276,10 +340,7 @@ const DataPemohon = ({ navigation }) => {
               >
                 <Text style={styles.sebelumnya}>Sebelumnya</Text>
               </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.button}
-                onPress={handleNext}
-              >
+              <TouchableOpacity style={styles.button} onPress={handleNext}>
                 <Text
                   style={{
                     alignSelf: "center",
