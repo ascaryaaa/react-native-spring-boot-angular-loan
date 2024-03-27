@@ -1,13 +1,14 @@
 <div class="modal">
   <div class="header-bar"></div>
-  <h1
+<h1
   id="judul"
   class="p-4 sm:ml-64 text-left text-2xl mb-4 font-bold"
-  style="color: #e55300; padding-top: 111px;padding-bottom: 1px; margin-bottom: -4px"
+  style="color: #e55300;  padding-top: 111px;padding-bottom: 1px; margin-bottom: -4px"
 >
   Detail Pemohon
 </h1>
-<div class="modal-container " *ngIf="showConfirmationModalTerima">
+
+<div class="modal-container" *ngIf="showConfirmationModalTerima">
   <app-confirmation-modal 
     (confirmed)="terima($event)"
   ></app-confirmation-modal>
@@ -23,11 +24,11 @@
   ></app-notification-download-modal>
 </div>
 <div class="sm:ml-64">  
-<div *ngIf="form" style="padding: 16px;">
- <div class="flex flex-col px-6 pt-6 pb-14 bg-white rounded-xl">
-  
-  <a href="#" class="block flex-1 flex items-center" style="pointer-events: none;">
-    <div class="flex flex-col justify-between">
+  <div *ngIf="form" style="padding: 16px;">
+   <div class="flex flex-col px-6 pt-6 pb-14 bg-white rounded-xl">
+    
+    <a href="#" class="block p-8 flex-1 flex items-center" style="pointer-events: none;">
+      <div class="flex flex-col justify-between">
       <div>
         <h5 id="nama" class="text-xl font-bold tracking-normal leading-6 text-zinc-800">
           {{ form.formToUser.nameUser }}
@@ -51,7 +52,7 @@
   
   <div class="flex flex-wrap gap-4 max-md:flex-col">
     <div class="flex-auto max-md:w-full">
-      <div class="flex gap-5 pt-7">
+      <div class="flex gap-5">
         <div class="flex flex-col w-[33%] max-md:w-full">
           <div class="flex flex-col grow items-start py-6 pl-6 text-xs leading-5 rounded-2xl border border-solid border-neutral-200 max-md:mt-2.5">
             <div class="font-bold text-center text-zinc-800">Informasi Debitur</div>
@@ -64,7 +65,7 @@
                 <div class="mt-2">Kantor Cabang</div>
               </div>
               <div class="flex flex-col">
-                <div>: {{ form.idFormPengajuanPinjaman }} </div>
+                <div>: {{ form.cif |uppercase }} </div>
                 <div class="mt-2 max-md:mr-2">: {{ form.formToUser.nikUser }}</div>
                 <div class="mt-2">: {{ form.jenisKelamin }}</div>
                 <div class="mt-2">: {{ form.tempatLahir }}, {{ form.tanggalLahir }}</div>
@@ -110,14 +111,14 @@
         </div>
       </div>
     </div>
-    <div class="max-md:w-full pt-7">
-      <div class="flex flex-col grow items-start py-6 pl-6 text-xs leading-5 rounded-2xl border border-solid border-neutral-200 max-md:mt-2.5 " style="width: 100%; height: 100%; padding: 24px; border-radius: 16px; border: 0.50px #E0E0E0 solid; flex-direction: column; justify-content: flex-start; align-items: center; gap: 10px; display: inline-flex ">
+    <div class="max-md:w-full">
+      <div class="flex flex-col grow items-start py-6 pl-6 text-xs leading-5 rounded-2xl border border-solid border-neutral-200 max-md:mt-2.5" style="width: 100%; height: 100%; padding: 24px; border-radius: 16px; border: 0.50px #E0E0E0 solid; flex-direction: column; justify-content: flex-start; align-items: center; gap: 10px; display: inline-flex">
         <!-- Conditionally show the status text or buttons -->
         <ng-container *ngIf="form.statusPengajuan === 'Diterima' || form.statusPengajuan === 'Ditolak'">
           <div class="font-bold text-center text-zinc-800">Status Pengajuan</div>
           <!-- Show the status text if 'Diterima' or 'Ditolak' -->
           <div class="font-bold text-center text-zinc-800" style="width: 100%; padding: 6px 12px;" [ngStyle]="{
-              'color': form.statusPengajuan === 'Diterima' ? '#04C300' : '#D4352A'
+              'color': form.statusPengajuan === 'Diterima' ? 'green' : 'red'
             }">
             {{ form.statusPengajuan }}
           </div>
@@ -132,7 +133,6 @@
         </ng-container>
       </div>
     </div>
-  </div>
     
     
       
@@ -140,17 +140,17 @@
   </div>
 
   <div *ngIf="showSLIKTable" >
-    <div class="px-6 pt-6 pb-56 mt-2.5 w-full text-xs leading-5 text-center rounded-2xl border border-solid border-neutral-200 text-zinc-800 max-md:px-5 max-md:pb-10 max-md:max-w-full">
-      <div class="flex text-xs text-center font-bold text-zinc-800 mb-4">SLIK Pemohon</div>
+    <div class=" bg-white  px-6 pt-6 pb-56 mt-2.5 w-full text-xs leading-5 text-center rounded-2xl border border-solid border-neutral-200 text-zinc-800 max-md:px-5 max-md:pb-10 max-md:max-w-full">
+      <div class="flex text-xs text-center font-bold text-zinc-800 mb-4">SLIK Debitur</div>
       <table #slikTable id="slik-debitur" class="w-full text-sm text-left rtl:text-right">
         <thead class="text-xs text-white bg-orange-400">
           <tr>
-            <th scope="col" class="px-3 py-6 text-center">Fasilitas</th>
-            <th scope="col" class="px-3 py-6 text-center">Kredit/Pembayaran (Dalam IDR)</th>
-            <th scope="col" class="px-3 py-6 text-center">Irrevocable L/C (Dalam IDR)</th>
-            <th scope="col" class="px-3 py-6 text-center">Fasilitas Lain (Dalam IDR)</th>
-            <th scope="col" class="px-3 py-6 text-center">Total (Dalam IDR)</th>
-            <th scope="col" class="px-3 py-6 text-center">Kualitas Terburuk / Bulan Data</th>
+            <th scope="col" class="px-3 py-6">Fasilitas</th>
+            <th scope="col" class="px-3 py-6">Kredit/Pembayaran (Dalam IDR)</th>
+            <th scope="col" class="px-3 py-6">Irrevocable L/C (Dalam IDR)</th>
+            <th scope="col" class="px-3 py-6">Fasilitas Lain (Dalam IDR)</th>
+            <th scope="col" class="px-3 py-6">Total (Dalam IDR)</th>
+            <th scope="col" class="px-3 py-6">Kualitas Terburuk / Bulan Data</th>
           </tr>
         </thead>
         <tbody>
@@ -158,19 +158,19 @@
             <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
               {{ item.fasilitas }}
             </th>
-            <td class="px-6 py-4 text-center">
+            <td class="px-6 py-4">
               {{ item.kredit }}
             </td>
-            <td class="px-6 py-4 text-center">
+            <td class="px-6 py-4">
               {{ item.lc }}
             </td>
-            <td class="px-6 py-4 text-center">
+            <td class="px-6 py-4">
               {{ item.fasilitasLain }}
             </td>
-            <td class="px-6 py-4 text-center">
+            <td class="px-6 py-4">
               {{ item.total }}
             </td>
-            <td class="px-6 py-4 text-center">
+            <td class="px-6 py-4">
               {{ item.kualitas }}
             </td>
           </tr>
@@ -182,7 +182,5 @@
   </div>
 </div>
 </div>
-
-
 
 
