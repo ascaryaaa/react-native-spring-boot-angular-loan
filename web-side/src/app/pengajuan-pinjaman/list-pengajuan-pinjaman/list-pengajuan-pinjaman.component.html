@@ -29,24 +29,30 @@
         <div
           class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4"
         >
-          <div class="relative">
-            <label
-              for="status-pengajuan"
-              style="font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: bold;"
-              >Status Pengajuan</label
-            >
-            <select
-              id="status-pengajuan"
-              [(ngModel)]="selectedStatus"
-              (change)="filterByStatus()"
-              class="block p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            >
-              <option value="" disabled selected>Pilih Status</option>
-              <option value="Diterima">Diterima</option>
-              <option value="Ditolak">Ditolak</option>
-              <option value="Diproses">Diproses</option>
-            </select>
-          </div>
+        <div class="relative">
+          <label
+            for="status-pengajuan"
+            style="font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: bold; display: block; margin-bottom: 4px;"
+            >Status Pengajuan</label
+          >
+          
+          <select
+            id="status-pengajuan"
+            [(ngModel)]="selectedStatus"
+            (change)="filterByStatus()"
+            class="block p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          >
+            <!-- <option value="" disabled selected>Pilih Status</option> -->
+            <option value="">Semua</option>
+            <option value="Diterima">Diterima</option>
+            <option value="Ditolak">Ditolak</option>
+            <option value="Diproses">Diproses</option>
+          </select>
+
+        
+          
+        </div>
+        
           <div class="relative">
             <input
               type="text"
@@ -296,5 +302,3 @@
     </div>
   </div>
 </div>
-
-
