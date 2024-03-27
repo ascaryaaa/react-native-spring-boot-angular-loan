@@ -29,6 +29,7 @@ public class User {
     @Column(name = "nik_user")
     private String nikUser;
 
+//    // User's wallet amount
 //    @Column(name = "wallet")
 //    private Long wallet;
 

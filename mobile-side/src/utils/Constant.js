@@ -13,6 +13,7 @@ const urls = {
   loginAccount: `${LOGIN_URL}login-account`,
   getUserDetailByHashedId: `${MAIN_URL}account/hid/`,
   getFormListUser: `${MAIN_URL}form/get-user-form/`,
+  postForm: `${MAIN_URL}form/post-form`,
 };
 
 export default urls;

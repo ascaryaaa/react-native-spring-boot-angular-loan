@@ -6,9 +6,11 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { number } from "yup";
 
 const ProfileKeuanganFleksiAktif = ({ navigation }) => {
   const [inputData, setInputData] = useState({
@@ -16,6 +18,8 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
     jumlahPinjaman: "",
     jangkaWaktu: "",
   });
+
+  const [maksAngsuran, setmaksAngsuran] = useState()
 
   const [inputErrors, setInputErrors] = useState({
     penghasilan: false,
@@ -40,9 +44,7 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
     {
       id: 4,
       title: "Total Pinjaman",
-      content: `Rp ${inputData.jumlahPinjaman.toLocaleString("id-ID", {
-        maximumFractionDigits: 2,
-      })}`,
+      content: `Rp ${inputData.jumlahPinjaman}`,
     },
     {
       id: 5,
@@ -74,6 +76,7 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
       toggleDropdown();
     }
   };
+
 
   const taruhData = async () => {
     if (validateInputs()) {
@@ -127,12 +130,17 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
         // Mengambil data dari AsyncStorage
         const penghasilanData = await AsyncStorage.getItem("penghasilan");
         const jangkaWaktuData = await AsyncStorage.getItem("jangkaWaktu");
+        const simulasiPinjamanData = await AsyncStorage.getItem("simulasiPinjaman");
 
         // Parse the retrieved data
         const penghasilan =
           penghasilanData !== null ? JSON.parse(penghasilanData) : "";
         const jangkaWaktu =
           jangkaWaktuData !== null ? JSON.parse(jangkaWaktuData) : "";
+        const simulasiPinjaman =
+          simulasiPinjamanData !== null ? parseFloat(simulasiPinjamanData) : "";
+
+        // console.log(simulasiPinjaman)
 
         // Set the parsed data to the state
         setInputData({
@@ -140,6 +148,10 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
           jumlahPinjaman: "",
           jangkaWaktu: jangkaWaktu,
         });
+
+        setmaksAngsuran(simulasiPinjaman)
+        // console.log(inputData.jangkaWaktu)
+        // console.log(maksAngsuran)
       } catch (error) {
         console.error("Failed to fetch data from AsyncStorage", error);
       }
@@ -147,7 +159,20 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
 
     // Panggil fungsi untuk mengambil data saat komponen dimuat
     getData();
-  }, []);
+  }, [maksAngsuran]);
+
+  
+  // Handle validasi maksimal jumlah pinjaman
+  const handleNumberChange = (input) => {
+    // Check if the input is within the acceptable range
+    if (parseInt(input) <= maksAngsuran) {
+      setInputData({ ...inputData, jumlahPinjaman: input });
+    } else {
+      // Display an error message if the input exceeds the maximum allowed value
+      Alert.alert('Error', 'Maximum number allowed is '+maksAngsuran);
+    }
+    
+  };
 
   return (
     <View style={styles.bg}>
@@ -223,18 +248,13 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
                 inputErrors.jumlahPinjaman && styles.inputError,
               ]}
               value={
-                inputData.jumlahPinjaman === ""
-                  ? ""
-                  : inputData.jumlahPinjaman.toString()
+                inputData.jumlahPinjaman
               }
               keyboardType="numeric"
-              onChangeText={(number) => {
-                const parsedNumber = parseInt(number);
-                setInputData({
-                  ...inputData,
-                  jumlahPinjaman: isNaN(parsedNumber) ? "" : parsedNumber,
-                });
-              }}
+              onChangeText={
+                // (number) => setInputData({ ...inputData, jumlahPinjaman: number })
+                handleNumberChange
+                }
             />
             {inputErrors.jumlahPinjaman && (
               <Text style={styles.errorText}>
