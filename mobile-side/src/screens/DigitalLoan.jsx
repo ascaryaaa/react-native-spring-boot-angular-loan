@@ -169,14 +169,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "left",
     width: "100%",
-    backgroundColor: "red",
+    //backgroundColor: "red",
   },
   containerBawah: {
     justifyContent: "center",
     marginTop: 20,
     width: "100%",
     marginBottom: 20,
-    backgroundColor: "red",
+    // backgroundColor: "red",
   },
   kejutan: {
     fontWeight: "600",
@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
     paddingHorizontal: 16,
     justifyContent: "flex-start",
-    backgroundColor: "grey",
+    // backgroundColor: "grey",
   },
   resultContainer: {
     marginTop: 16,

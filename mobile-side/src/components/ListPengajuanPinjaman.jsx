@@ -62,7 +62,6 @@ const ListPengajuanPinjaman = ({ navigation }) => {
                   <Text>Tanggal Pengajuan: {form.tanggalPengajuan}</Text>
                   <Text>Periode Pinjaman: {form.jangkaWaktu} Bulan</Text>
                   <Text>Periode Pinjaman: {form.jumlahPinjaman}</Text>
-                  <Text>Status: {form.statusPengajuan}</Text>
                   <View style={styles.cardStatus}>
                     <Text style={styles.textStatus}>{form.statusPengajuan}</Text>
                   </View>
@@ -82,6 +81,7 @@ const styles = StyleSheet.create({
   container: {
     flex:1,
     alignItems: "center",
+    //backgroundColor: "green"
   },
   card: {
     flexDirection: "row",
@@ -92,15 +92,15 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     marginBottom: 16,
     // width: "95%",
-    backgroundColor: 'yellow'
+    //backgroundColor: 'yellow'
   },
   infoContainer: {
     flexDirection: "column", 
-    backgroundColor: "cyan",
+    //backgroundColor: "cyan",
     width: "70%",
   },
   info: {
-    backgroundColor: "orange",
+    //backgroundColor: "orange",
     marginHorizontal: 10,
     width:"90%",
   },
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   image: {
     width: 120,
     height: 120,
-    backgroundColor: "pink"
+    //backgroundColor: "pink"
   },
   textHeader: {
     fontSize: 14,
@@ -140,3 +140,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
   }
 });
+
