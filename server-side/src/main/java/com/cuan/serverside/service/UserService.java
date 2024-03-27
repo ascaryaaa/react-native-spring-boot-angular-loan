@@ -19,4 +19,6 @@ public interface UserService {
 
     // Define GET users by name in service
     public Optional<User> findUserByName(String name);
+
+//    public Iterable<FormPengajuan> getAllFormsByUserId(Long id);
 }

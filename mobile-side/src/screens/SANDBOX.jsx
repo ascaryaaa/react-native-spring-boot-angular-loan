@@ -13,6 +13,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { getJenisPinjamans } from "../reducers/JenisPinjaman";
 import { useDispatch, useSelector } from "react-redux";
 import { getAccountByHashedId } from '../reducers/Account';
+import { fetchFormListById } from '../reducers/Form';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const SANDBOX = () => {
@@ -26,6 +27,15 @@ const SANDBOX = () => {
 
   const accountState = useSelector((state) => state.account);
   const dispatchAccount = useDispatch();
+
+  const formDetailsState = useSelector((state) => state.forms);
+
+  const initializeData = async () => {
+    const hashedId = await AsyncStorage.getItem("hashedId");
+    if (hashedId) {
+      await dispatch(getAccountByHashedId(hashedId));
+    }
+  };
 
   const fetchInfo = async () => {
     try {
@@ -56,8 +66,16 @@ const SANDBOX = () => {
     fetchInfo();
     dispatch(getJenisPinjamans())
     fetchHashedId();
-
+    initializeData();
   }, [dispatch, dispatchAccount]);
+
+  useEffect(() => {
+    // Once the accountState is updated and contains the user's ID, dispatch the fetchFormListById
+    const userId = accountState.data?.accountToUser?.idUser;
+    if (userId) {
+      dispatch(fetchFormListById(userId));
+    }
+  }, [dispatch, accountState.data?.accountToUser?.idUser]);
 
   const renderItem = ({ item }) => (
     <View style={{ flex: 1, flexDirection: "row", marginVertical: 10 }}>
@@ -142,6 +160,22 @@ const SANDBOX = () => {
           </View>
         )}
 
+        <Text style={styles.heading}>Form Details</Text>
+        {formDetailsState.loading ? (
+          <ActivityIndicator size="large" />
+        ) : formDetailsState.error ? (
+          <Text>Error fetching forms: {formDetailsState.error}</Text>
+        ) : (
+          formDetailsState.data?.map((form, index) => (
+            <View key={index} style={styles.formContainer}>
+              <Text>ID Form: {form.idFormPengajuanPinjaman}</Text>
+              <Text>User Name: {form.formToUser?.nameUser}</Text>
+              <Text>NIK User: {form.formToUser?.nikUser}</Text>
+              {/* Display more details as needed */}
+            </View>
+          ))
+        )}
+
       </ScrollView>
     </View>
   );
@@ -187,6 +221,17 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     alignItems: "center",
     backgroundColor: "green",
+  },
+  heading: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 20,
+  },
+  formContainer: {
+    marginBottom: 15,
+    padding: 10,
+    borderRadius: 5,
+    backgroundColor: "#f0f0f0",
   },
 });
 

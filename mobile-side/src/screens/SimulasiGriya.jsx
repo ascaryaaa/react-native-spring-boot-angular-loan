@@ -8,7 +8,6 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const SimulasiGriya = ({ navigation }) => {
   const [inputData, setInputData] = useState({
@@ -67,7 +66,7 @@ const SimulasiGriya = ({ navigation }) => {
         console.error('Failed to save or retrieve the data from AsyncStorage', error);
       }
     }
-  };
+  }
 
   const handleNext = async () => {
     if (validateInputs()) {

@@ -33,50 +33,110 @@
           <div class="loader">Loading...</div>
         </div>
       </ng-container>
+      <ng-container *ngIf="!loading">
       <ng-container *ngIf="!loading && filteredPinjaman.length > 0; else noData">
        
-          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <thead class="text-xs text-gray-700  bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" class="px-4 py-2 flex items-center">
-                <button type="button" (click)="sortData('cif')" class="flex items-center">
+                <div  class="flex items-center">
                   <span class="mr-1">CIF</span>
+                  <button type="button" (click)="sortData('cif')">
                   <img
                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&"
                     alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
-                </button>
+                  </button>
+                  </div>
               </th>
 
               <th scope="col" class="px-4 py-2">
-                <button type="button" (click)="sortData('name')" class="flex items-center">
+                <div class="flex items-center">
                   <span class="mr-1">Nama</span>
+                  <button type="button" (click)="sortData('name')" >
                   <img
                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&"
                     alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
-                </button>
+                  </button>
+                  </div>
               </th>
               <th scope="col" class="px-4 py-2">
-                <button type="button" (click)="sortData('nik')" class="flex items-center">
+                <div class="flex items-center">
                   <span class="mr-1">NIK</span>
+                  <button type="button" (click)="sortData('nik')" >
                   <img
                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&"
                     alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
-                </button>
+                  </button>
+                  </div>
               </th>
-              <th scope="col" class="px-4 py-2">
+              <div class="relative">
                 <button type="button" (click)="sortData('kolektabilitas')" class="flex items-center">
-                  <span class="mr-1">kolektabilitas</span>
+                  <span class="mr-1 font-bold">Kolektabilitas</span>
                   <img
-                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&"
-                    alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
+  
+  src="https://cdn.builder.io/api/v1/image/assets/TEMP/a441188ee5f1abfeed255c690980a8571275bd357621b922dff244ec0c95bcd2?"
+  class="w-full aspect-square fill-neutral-950 max-w-[15px]"
+/>
+
                 </button>
-              </th>
+                <div class="tooltip hidden absolute top-0 left-0 mt-8 py-2 px-4 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
+                  <ol class="list-decimal pl-5">
+                    <div class="flexrelative self-stretch font-bold text-left text-black">
+                      Informasi Kolektabilitas
+                    </div>
+                    <li>
+                      <div class="relative mt-1.5">Lancar</div>
+                    </li>
+                    <div class="relative mt-2">Jumlah hari tunggakan 0 hari</div>
+                    <li>
+                      <div class="relative self-stretch mt-4">DPK 1</div>
+                    </li>
+                    <div class="relative self-stretch mt-2">
+                      0 hari &lt; Jumlah hari tunggakan ≥ 30 hari
+                    </div>
+                    <li>
+                      <div class="relative mt-4">DPK 2</div>
+                    </li>
+                    <div class="relative mt-2">
+                      31 hari &lt; Jumlah hari tunggakan ≥ 60 hari
+                    </div>
+                    <li>
+                      <div class="relative mt-4">DPK 3</div>
+                    </li>
+                    <div class="relative mt-2">
+                      61 hari &lt; Jumlah hari tunggakan ≥ 90 hari
+                    </div>
+                    <li>
+                      <div class="relative mt-4">Kurang Lancar</div>
+                    </li>
+                    <div class="relative mt-1.5">
+                      91 hari &lt; Jumlah hari tunggakan ≥ 120 hari
+                    </div>
+                    <li>
+                      <div class="relative mt-4">Diragukan</div>
+                    </li>
+                    <div class="relative mt-1.5">
+                      121 hari &lt; Jumlah hari tunggakan ≥ 150 hari
+                    </div>
+                    <li>
+                      <div class="relative self-stretch mt-4">Macet</div>
+                    </li>
+                    <div class="relative mt-1.5">
+                      Jumlah hari tunggakan &gt; 150
+                    </div>
+                  </ol>
+                </div>
+              </div>
+                            
               <th scope="col" class="px-4 py-2">
-                <button type="button" (click)="sortData('jenis_pengajuan')" class="flex items-center">
-                  <span class="mr-1">Status Pengajuan</span>
+                <div  class="flex items-center">
+                  <span class="mr-1">Jenis Pengajuan</span>
+                  <button type="button" (click)="sortData('jenis_pengajuan')">
                   <img
                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&"
                     alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
-                </button>
+                  </button>
+                  </div>
               </th>
 
               <th scope="col" class="px-4 py-2">Aksi</th>
@@ -84,8 +144,8 @@
           </thead>
           <tbody>
             <tr *ngFor="let pinjaman of filteredPinjaman">
-              <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                {{pinjaman.pinjamanToForm?.idFormPengajuanPinjaman }}
+              <td class="px-4 py-2">
+                {{pinjaman.pinjamanToForm?.cif |uppercase }}
               </td>
               <td class="px-4 py-2">{{pinjaman.pinjamanToForm?.formToUser?.nameUser}}</td>
               <td class="px-4 py-2">{{pinjaman.pinjamanToForm?.formToUser?.nikUser}}</td>
@@ -140,14 +200,14 @@
               <td class="px-4 py-2">{{pinjaman.pinjamanToForm?.formToJenis?.nameJenisPinjaman}}</td>
 
               <td class="px-4 py-2">
-                <a [routerLink]="['../id/', pinjaman.idPinjaman]" class="text-blue-600 hover:underline">View</a>
+                <a [routerLink]="['../id/', pinjaman.hashedIdPinjaman]" class="text-blue-600 hover:underline">View</a>
               </td>
             </tr>
             
             <!-- Add more rows here if needed -->
           </tbody>
         </ng-container>
-   
+      </ng-container>
     </table>
     <!-- Pagination -->
     <nav class="flex items-center justify-between">

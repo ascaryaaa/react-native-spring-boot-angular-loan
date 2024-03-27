@@ -1,8 +1,6 @@
 package com.cuan.serverside.service;
 
 import com.cuan.serverside.model.DetailPinjaman;
-import com.cuan.serverside.model.FormPengajuan;
-import com.cuan.serverside.model.User;
 import com.cuan.serverside.repository.DetailPinjamanRepository;
 import com.cuan.serverside.repository.FormPengajuanRepository;
 import com.cuan.serverside.repository.UserRepository;
@@ -47,6 +45,7 @@ public class DetailPinjamanServiceImpl implements DetailPinjamanService{
 
     @Override
     public DetailPinjaman saveDetailPinjaman(DetailPinjaman detailPinjaman) {
+        detailPinjaman.setDeleted(false);
         detailPinjamanRepository.save(detailPinjaman);
         String cif = hashIdWithEpochTime(detailPinjaman.getIdPinjaman());
         detailPinjaman.setHashedIdPinjaman(cif);
@@ -90,5 +89,14 @@ public class DetailPinjamanServiceImpl implements DetailPinjamanService{
     @Override
     public void deleteDetailPinjamanById(Long id) {
         detailPinjamanRepository.deleteById(id);
+    }
+
+    @Override
+    public void softDeleteById(Long id) {
+        DetailPinjaman detailPinjaman = detailPinjamanRepository.findById(id).orElse(null);
+        if (detailPinjaman != null) {
+            detailPinjaman.setDeleted(true);
+            detailPinjamanRepository.save(detailPinjaman);
+        }
     }
 }
