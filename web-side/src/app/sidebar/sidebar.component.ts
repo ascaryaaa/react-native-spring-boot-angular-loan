@@ -65,14 +65,27 @@ export class SidebarComponent implements OnInit {
       error: (error) => console.error('Error fetching admin data:', error)
     });
   }
-  isActive: boolean = false;
+  isActive1: boolean = false;
   isActive2: boolean = false;
   isActive3: boolean = false;
 
-
-  toggleBorder() {
-    this.isActive = !this.isActive;
-    this.isActive2 = !this.isActive;
-    this.isActive3 = !this.isActive;
+  toggleBorder(buttonNumber: number) {
+    if (buttonNumber === 1) {
+     this.isActive1 = !this.isActive1;
+    } else if (buttonNumber === 2) {
+      this.isActive2 = !this.isActive2;
+    } else if (buttonNumber === 3) {
+      this.isActive3 = !this.isActive3;
+    }
+    if(buttonNumber !== 1) {
+      this.isActive1 = false;
   }
+  if(buttonNumber !== 2) {
+      this.isActive2 = false;
+  }
+  if(buttonNumber !== 3) {
+      this.isActive3 = false;
+  }
+  
+}
 }

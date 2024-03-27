@@ -1,158 +1,150 @@
-<h1 id="judul" class="p-4 sm:ml-64 text-left text-2xl mb-4 font-bold"
-  style="color: #e55300; padding-top: 24px; margin-bottom: -4px">
+<div class="modal">
+  <div class="header-bar"></div>
+  <h1
+  id="judul"
+  class="p-4 sm:ml-64 text-left text-2xl mb-4 font-bold"
+  style="color: #e55300; padding-top: 111px;padding-bottom: 1px; margin-bottom: -4px"
+>
   Detail Pemohon
 </h1>
-<div class="modal-container" *ngIf="showConfirmationModalTerima">
-  <app-confirmation-modal (confirmed)="terima($event)"></app-confirmation-modal>
+<div class="modal-container " *ngIf="showConfirmationModalTerima">
+  <app-confirmation-modal 
+    (confirmed)="terima($event)"
+  ></app-confirmation-modal>
 </div>
 <div class="modal-container" *ngIf="showConfirmationModalTolak">
-  <app-rejecting-modal (confirmed)="tolak($event)"></app-rejecting-modal>
+  <app-rejecting-modal 
+    (confirmed)="tolak($event)"
+  ></app-rejecting-modal>
 </div>
 <div class="modal-container" *ngIf="showDownloadModal">
-  <app-notification-download-modal (confirmed)="download($event)"></app-notification-download-modal>
+  <app-notification-download-modal
+    (confirmed)="download($event)"
+  ></app-notification-download-modal>
 </div>
-<div class="sm:ml-64">
-  <div *ngIf="form">
-    <div class="p-4 flex flex-col gap-4">
-      <a href="#"
-        class="block flex-1 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 flex items-center"
-        style="pointer-events: none;">
-        <div class="flex flex-col justify-between">
-          <div>
-            <h5 id="nama" class="text-xl font-bold tracking-normal leading-6 text-zinc-800">
-              {{ form.formToUser.nameUser }}
-            </h5>
-            <div class="flex gap-1 mt-2">
-              <img id="alamat"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/6f97584209bb4e19cde38f704f49cebe787e69b77c2eec4ef56c6320264d07a7?"
-                class="shrink-0 w-5 aspect-square" />
-              <div class="flex-auto">
-                {{ form.alamatKtp }}
-                {{ form.kelurahan }},
-                {{ form.kecamatan }},
-                {{ form.kodePos }}
-              </div>
-            </div>
-            <div class="flex gap-1 mt-2">
-              <img id="kantor" loading="lazy"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/d09122466aea09fa7e57204962507c6c35c995a041d6e7c5c729816a253cb76b?"
-                class="shrink-0 w-5 aspect-square" />
-              <div class="flex-auto">Kantor Cabang Terdekat : {{form.formToCabang.nameCabang}}</div>
-            </div>
+<div class="sm:ml-64">  
+<div *ngIf="form" style="padding: 16px;">
+ <div class="flex flex-col px-6 pt-6 pb-14 bg-white rounded-xl">
+  
+  <a href="#" class="block flex-1 flex items-center" style="pointer-events: none;">
+    <div class="flex flex-col justify-between">
+      <div>
+        <h5 id="nama" class="text-xl font-bold tracking-normal leading-6 text-zinc-800">
+          {{ form.formToUser.nameUser }}
+        </h5>
+        <div class="flex gap-1 mt-2">
+          <img id="alamat" src="https://cdn.builder.io/api/v1/image/assets/TEMP/6f97584209bb4e19cde38f704f49cebe787e69b77c2eec4ef56c6320264d07a7?" class="shrink-0 w-5 aspect-square" />
+          <div class="flex-auto">
+            {{ form.alamatKtp }} 
+            {{ form.kelurahan }}, 
+            {{ form.kecamatan }}, 
+            {{ form.kodePos }}
           </div>
         </div>
-      </a>
-
-      <div class="flex flex-wrap gap-4 max-md:flex-col">
-        <div class="flex-auto max-md:w-full">
-          <div class="flex gap-5">
-            <div class="flex flex-col w-[33%] max-md:w-full">
-              <div
-                class="flex flex-col grow items-start py-6 pl-6 text-xs leading-5 rounded-2xl border border-solid border-neutral-200 max-md:mt-2.5">
-                <div class="font-bold text-center text-zinc-800">Informasi Debitur</div>
-                <div class="flex gap-1 mt-2 text-black">
-                  <div class="flex flex-col pr-3">
-                    <div>CIF Number</div>
-                    <div class="mt-2">No. KTP</div>
-                    <div class="mt-2">Jenis Kelamin</div>
-                    <div class="mt-2">Tempat, Tanggal Lahir</div>
-                    <div class="mt-2">Kantor Cabang</div>
-                  </div>
-                  <div class="flex flex-col">
-                    <div>: {{ form.cif |uppercase }} </div>
-                    <div class="mt-2 max-md:mr-2">: {{ form.formToUser.nikUser }}</div>
-                    <div class="mt-2">: {{ form.jenisKelamin }}</div>
-                    <div class="mt-2">: {{ form.tempatLahir }}, {{ form.tanggalLahir }}</div>
-                    <div class="mt-2">: {{form.formToCabang.nameCabang}}</div>
-                  </div>
-                </div>
+        <div class="flex gap-1 mt-2">
+          <img id="kantor" loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/d09122466aea09fa7e57204962507c6c35c995a041d6e7c5c729816a253cb76b?" class="shrink-0 w-5 aspect-square" />
+          <div class="flex-auto">Kantor Cabang Terdekat : {{form.formToCabang.nameCabang}}</div>
+        </div>
+      </div>
+    </div>
+  </a>
+  
+  <div class="flex flex-wrap gap-4 max-md:flex-col">
+    <div class="flex-auto max-md:w-full">
+      <div class="flex gap-5 pt-7">
+        <div class="flex flex-col w-[33%] max-md:w-full">
+          <div class="flex flex-col grow items-start py-6 pl-6 text-xs leading-5 rounded-2xl border border-solid border-neutral-200 max-md:mt-2.5">
+            <div class="font-bold text-center text-zinc-800">Informasi Debitur</div>
+            <div class="flex gap-1 mt-2 text-black">
+              <div class="flex flex-col pr-3">
+                <div>CIF Number</div>
+                <div class="mt-2">No. KTP</div>
+                <div class="mt-2">Jenis Kelamin</div>
+                <div class="mt-2">Tempat, Tanggal Lahir</div>
+                <div class="mt-2">Kantor Cabang</div>
               </div>
-            </div>
-            <div class="flex flex-col w-[33%] max-md:w-full">
-              <div
-                class="flex flex-col grow items-start py-6 pl-6 text-xs leading-5 rounded-2xl border border-solid border-neutral-200 max-md:mt-2.5">
-                <div class="font-bold text-center text-zinc-800">Riwayat Pinjaman (On Prgress)</div>
-                <div class="font-bold mt-2 tracking-normal leading-[120%]">
-                  1. BNI Griya
-                </div>
-                <div class="mt-2">Angsuran per Bulan : Rp. 5.000.000</div>
-                <div class="font-bold mt-2 tracking-normal leading-[120%]">
-                  2. BNI Fleksi Aktif
-                </div>
-                <div class="mt-2">Angsuran per Bulan : Rp. 2.500.000</div>
-              </div>
-            </div>
-            <div class="flex flex-col w-[33%] max-md:w-full">
-              <div
-                class="flex flex-col grow items-start py-6 pl-6 text-xs leading-5 rounded-2xl border border-solid border-neutral-200 max-md:mt-2.5">
-                <div class="font-bold text-center text-zinc-800">Detail SLIK</div>
-                <div class="flex gap-1 mt-2.5 text-black">
-                  <div class="flex flex-col whitespace-nowrap">
-                    <div>Nama</div>
-                    <div class="mt-2">NIK</div>
-                    <div class="mt-2">NPWP</div>
-                  </div>
-                  <div class="flex flex-col">
-                    <div>: {{ form.formToUser.nameUser }}</div>
-                    <div class="mt-2">: {{ form.formToUser.nikUser }}</div>
-                    <div class="mt-2">: {{ form.npwp }}</div>
-                  </div>
-                </div>
-                <button (click)="generateSLIK()"
-                  class="justify-center px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]"
-                  style="padding: 6px 12px;">
-                  Generate SLIK
-                </button>
-
-
+              <div class="flex flex-col">
+                <div>: {{ form.idFormPengajuanPinjaman }} </div>
+                <div class="mt-2 max-md:mr-2">: {{ form.formToUser.nikUser }}</div>
+                <div class="mt-2">: {{ form.jenisKelamin }}</div>
+                <div class="mt-2">: {{ form.tempatLahir }}, {{ form.tanggalLahir }}</div>
+                <div class="mt-2">: {{form.formToCabang.nameCabang}}</div>
               </div>
             </div>
           </div>
         </div>
-        <div class="max-md:w-full">
-          <div
-            class="flex flex-col grow items-start py-6 pl-6 text-xs leading-5 rounded-2xl border border-solid border-neutral-200 max-md:mt-2.5"
-            style="width: 100%; height: 100%; padding: 24px; border-radius: 16px; border: 0.50px #E0E0E0 solid; flex-direction: column; justify-content: flex-start; align-items: center; gap: 10px; display: inline-flex">
-            <!-- Conditionally show the status text or buttons -->
-            <ng-container *ngIf="form.statusPengajuan === 'Diterima' || form.statusPengajuan === 'Ditolak'">
-              <div class="font-bold text-center text-zinc-800">Status Pengajuan</div>
-              <!-- Show the status text if 'Diterima' or 'Ditolak' -->
-              <div class="font-bold text-center text-zinc-800" style="width: 100%; padding: 6px 12px;" [ngStyle]="{
-              'color': form.statusPengajuan === 'Diterima' ? 'green' : 'red'
-            }">
-                {{ form.statusPengajuan }}
+        <div class="flex flex-col w-[33%] max-md:w-full">
+          <div class="flex flex-col grow items-start py-6 pl-6 text-xs leading-5 rounded-2xl border border-solid border-neutral-200 max-md:mt-2.5">
+            <div class="font-bold text-center text-zinc-800">Riwayat Pinjaman (On Prgress)</div>
+            <div class="font-bold mt-2 tracking-normal leading-[120%]">
+              1. BNI Griya
+            </div>
+            <div class="mt-2">Angsuran per Bulan : Rp. 5.000.000</div>
+            <div class="font-bold mt-2 tracking-normal leading-[120%]">
+              2. BNI Fleksi Aktif
+            </div>
+            <div class="mt-2">Angsuran per Bulan : Rp. 2.500.000</div>
+          </div>
+        </div>
+        <div class="flex flex-col w-[33%] max-md:w-full">
+          <div class="flex flex-col grow items-start py-6 pl-6 text-xs leading-5 rounded-2xl border border-solid border-neutral-200 max-md:mt-2.5">
+            <div class="font-bold text-center text-zinc-800">Detail SLIK</div>
+            <div class="flex gap-1 mt-2.5 text-black">
+              <div class="flex flex-col whitespace-nowrap">
+                <div>Nama</div>
+                <div class="mt-2">NIK</div>
+                <div class="mt-2">NPWP</div>
               </div>
-            </ng-container>
-            <ng-container *ngIf="form.statusPengajuan !== 'Diterima' && form.statusPengajuan !== 'Ditolak'">
-              <div class="font-bold text-center text-zinc-800">Aksi</div>
-              <!-- Show the 'Diterima' button -->
-              <button (click)="showConfirmationModalTerima = true"
-                class="justify-center px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]"
-                style="width: 100%; padding: 6px 12px; background: #29CC6A;">Diterima</button>
-              <!-- Show the 'Ditolak' button -->
-
-              <button (click)="showConfirmationModalTolak = true"
-                class="justify-center px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]"
-                style="width: 100%; padding: 6px 12px;background: #D4352A;">Ditolak</button>
-            </ng-container>
+              <div class="flex flex-col">
+                <div>: {{ form.formToUser.nameUser }}</div>
+                <div class="mt-2">: {{ form.formToUser.nikUser }}</div>
+                <div class="mt-2">: {{ form.npwp }}</div>
+              </div>
+            </div>
+            <button (click)="generateSLIK()" class="justify-center px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]" style="padding: 6px 12px;">
+              Generate SLIK
+            </button>
+          
+          
           </div>
         </div>
       </div>
     </div>
+    <div class="max-md:w-full pt-7">
+      <div class="flex flex-col grow items-start py-6 pl-6 text-xs leading-5 rounded-2xl border border-solid border-neutral-200 max-md:mt-2.5 " style="width: 100%; height: 100%; padding: 24px; border-radius: 16px; border: 0.50px #E0E0E0 solid; flex-direction: column; justify-content: flex-start; align-items: center; gap: 10px; display: inline-flex ">
+        <!-- Conditionally show the status text or buttons -->
+        <ng-container *ngIf="form.statusPengajuan === 'Diterima' || form.statusPengajuan === 'Ditolak'">
+          <div class="font-bold text-center text-zinc-800">Status Pengajuan</div>
+          <!-- Show the status text if 'Diterima' or 'Ditolak' -->
+          <div class="font-bold text-center text-zinc-800" style="width: 100%; padding: 6px 12px;" [ngStyle]="{
+              'color': form.statusPengajuan === 'Diterima' ? '#04C300' : '#D4352A'
+            }">
+            {{ form.statusPengajuan }}
+          </div>
+        </ng-container>
+        <ng-container *ngIf="form.statusPengajuan !== 'Diterima' && form.statusPengajuan !== 'Ditolak'">
+          <div class="font-bold text-center text-zinc-800">Aksi</div>
+          <!-- Show the 'Diterima' button -->
+          <button (click)="showConfirmationModalTerima = true" class="justify-center px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]" style="width: 100%; padding: 6px 12px; background: #29CC6A;">Diterima</button>
+          <!-- Show the 'Ditolak' button -->
+          
+          <button (click)="showConfirmationModalTolak = true" class="justify-center px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]" style="width: 100%; padding: 6px 12px;background: #D4352A;">Ditolak</button>
+        </ng-container>
+      </div>
+    </div>
   </div>
-  <div class="px-6 pt-6 pb-56 mt-2.5 w-full text-xs leading-5 text-center rounded-2xl border border-solid border-neutral-200 text-zinc-800 max-md:px-5 max-md:pb-10 max-md:max-w-full">
     
-    <div *ngIf="showSLIKTable; else noSLIKData " >
+    <div *ngIf="showSLIKTable; else noSLIKData" >
       <div  class="flex text-xs text-center font-bold text-zinc-800 mb-4">SLIK Debitur</div>
       <table #slikTable id="slik-debitur" class="w-full text-sm text-left rtl:text-right">
         <thead class="text-xs text-white bg-orange-400">
           <tr>
-            <th scope="col" class="px-3 py-6">Fasilitas</th>
-            <th scope="col" class="px-3 py-6">Kredit/Pembayaran (Dalam IDR)</th>
-            <th scope="col" class="px-3 py-6">Irrevocable L/C (Dalam IDR)</th>
-            <th scope="col" class="px-3 py-6">Fasilitas Lain (Dalam IDR)</th>
-            <th scope="col" class="px-3 py-6">Total (Dalam IDR)</th>
-            <th scope="col" class="px-3 py-6">Kualitas Terburuk / Bulan Data</th>
+            <th scope="col" class="px-3 py-6 text-center">Fasilitas</th>
+            <th scope="col" class="px-3 py-6 text-center">Kredit/Pembayaran (Dalam IDR)</th>
+            <th scope="col" class="px-3 py-6 text-center">Irrevocable L/C (Dalam IDR)</th>
+            <th scope="col" class="px-3 py-6 text-center">Fasilitas Lain (Dalam IDR)</th>
+            <th scope="col" class="px-3 py-6 text-center">Total (Dalam IDR)</th>
+            <th scope="col" class="px-3 py-6 text-center">Kualitas Terburuk / Bulan Data</th>
           </tr>
         </thead>
         <tbody>
@@ -160,19 +152,19 @@
             <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
               {{ item.fasilitas }}
             </th>
-            <td class="px-6 py-4">
+            <td class="px-6 py-4 text-center">
               {{ item.kredit }}
             </td>
-            <td class="px-6 py-4">
+            <td class="px-6 py-4 text-center">
               {{ item.lc }}
             </td>
-            <td class="px-6 py-4">
+            <td class="px-6 py-4 text-center">
               {{ item.fasilitasLain }}
             </td>
-            <td class="px-6 py-4">
+            <td class="px-6 py-4 text-center">
               {{ item.total }}
             </td>
-            <td class="px-6 py-4">
+            <td class="px-6 py-4 text-center">
               {{ item.kualitas }}
             </td>
           </tr>
@@ -181,11 +173,13 @@
       <button (click)="downloadSLIK(); showDownloadModal = true" class="flex px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]" style="padding: 6px 12px;">
         Download SLIK
       </button>
-    </div>
-    <ng-template #noSLIKData>
-      <div class="flex text-xs text-center font-bold text-zinc-800 mb-4">Detail Keterangan SLIK</div>
-    </ng-template>
   </div>
-  
-  
+  <ng-template #noSLIKData>
+    <div class="flex text-xs text-center font-bold text-zinc-800 mb-4">Detail Keterangan SLIK</div>
+  </ng-template>
 </div>
+</div>
+
+
+
+
