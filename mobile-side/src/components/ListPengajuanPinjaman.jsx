@@ -41,38 +41,39 @@ const ListPengajuanPinjaman = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.shadow}>
-        
+    <View style={styles.shadow}>
       {formDetailsState.loading ? (
         <ActivityIndicator size="large" />
       ) : formDetailsState.error ? (
         <Text>Error fetching forms: {formDetailsState.error}</Text>
       ) : (
-        formDetailsState.data?.map((form, index) => (
-          (form.statusPengajuan === "Diproses" || form.statusPengajuan === "Ditolak") && (
-            <TouchableOpacity key={index} style={styles.card} onPress={() => navigation.navigate("Monitoring")}>
-              <View style={{backgroundColor: "green"}}>
-                <Image source={{ uri: form.formToJenis.gambarJenisPinjaman }} style={styles.image} />
-              </View>
-              <View style={styles.infoContainer}>
-                <View style={styles.info}>
-                  <View>
-                    <Text style={styles.textHeader}>{form.formToJenis.nameJenisPinjaman}</Text>
-                  </View>
-                  <Text>Tanggal Pengajuan: {form.tanggalPengajuan}</Text>
-                  <Text>Periode Pinjaman: {form.jangkaWaktu} Bulan</Text>
-                  <Text>Periode Pinjaman: {form.jumlahPinjaman}</Text>
-                  <View style={styles.cardStatus}>
-                    <Text style={styles.textStatus}>{form.statusPengajuan}</Text>
+        formDetailsState.data
+          ?.filter(form => !form.deleted) // Filter out forms where deleted is true
+          .map((form, index) => (
+            (form.statusPengajuan === "Diproses" || form.statusPengajuan === "Ditolak") && (
+              <TouchableOpacity key={index} style={styles.card} onPress={() => navigation.navigate("Monitoring")}>
+                <View style={{ backgroundColor: "green" }}>
+                  <Image source={{ uri: form.formToJenis.gambarJenisPinjaman }} style={styles.image} />
+                </View>
+                <View style={styles.infoContainer}>
+                  <View style={styles.info}>
+                    <View>
+                      <Text style={styles.textHeader}>{form.formToJenis.nameJenisPinjaman}</Text>
+                    </View>
+                    <Text>Tanggal Pengajuan: {form.tanggalPengajuan}</Text>
+                    <Text>Periode Pinjaman: {form.jangkaWaktu} Bulan</Text>
+                    <Text>Periode Pinjaman: {form.jumlahPinjaman}</Text>
+                    <View style={[styles.cardStatus, { backgroundColor: form.statusPengajuan === "Ditolak" ? "#D4352A" : "#757575" }]}>
+                      <Text style={styles.textStatus}>{form.statusPengajuan}</Text>
+                    </View>
                   </View>
                 </View>
-              </View>
-            </TouchableOpacity>
-          )
-        ))
+              </TouchableOpacity>
+            )
+          ))
       )}
-      </View>
     </View>
+  </View>
   );
 };
 export default ListPengajuanPinjaman;

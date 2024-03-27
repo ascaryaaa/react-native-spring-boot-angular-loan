@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     borderRadius: 50,
     width: "35%",
-    backgroundColor: "#D4352A",
+    backgroundColor: "#04C300",
     alignItems: "center",
   }
 });
