@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import axios from 'axios';
 import { User, UserForm } from './auth';
 import { loginAdmin } from '../config/api';
+import { SidebarService } from '../sidebar/sidebar.service';
+
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +12,7 @@ import { loginAdmin } from '../config/api';
 export class AuthService {
   user: User | undefined;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,private sidebarService: SidebarService) {}
 
   async login(form: UserForm): Promise<void> {
     try {
@@ -21,6 +23,7 @@ export class AuthService {
       localStorage.setItem('user', JSON.stringify(response.data));
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('hashedId', response.data.hashedId);
+      this.sidebarService.setActiveButton(1);
       this.router.navigate(['pengajuan-pinjaman/list']);
       return Promise.resolve();
     } catch (error: any) {

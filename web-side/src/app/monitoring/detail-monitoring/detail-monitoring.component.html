@@ -1,17 +1,17 @@
 <div class="modal">
-  <div class="header-bar"></div>
+  <!-- <div class="header-bar"></div> -->
   <div class="layout-container">
     <router-outlet></router-outlet>
   <h1
     id="judul"
-    class="p-4 sm:ml-64 text-left text-2xl mb-4 font-bold"
-    style="color: #e55300; padding-top: 111px;padding-bottom: 1px; margin-bottom: -4px"
-  >
+    class="p-6 sm:ml-64 text-left  mb-4 font-bold"
+    style="color: #e55300;  padding-top: 16px; margin-bottom: -4px ; font-size: 32px;"
+>
   Detail Debitur
 </h1>
 
-<div class="p-4 sm:ml-64">
-<div class="flex flex-col px-6 pt-6 pb-14 bg-white rounded-xl max-md:px-5">
+<div class="p-6 sm:ml-64" style="padding-top: 0%;">
+<div class="flex flex-col px-6 pt-6 pb-14 bg-white rounded-xl border border-solid dark:border-gray-700 max-md:px-5">
   <div class="flex flex-col justify-center bg-white max-md:max-w-full">
     <div *ngIf="pinjamans"></div>
     <div class="py-2.5 max-md:max-w-full">
