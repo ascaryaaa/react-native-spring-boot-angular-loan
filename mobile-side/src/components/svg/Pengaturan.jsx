@@ -11,5 +11,5 @@ const Settings = (props) => (
       d="M16 22a6 6 0 1 1 6-6 5.94 5.94 0 0 1-6 6Zm0-10a3.91 3.91 0 0 0-4 4 3.91 3.91 0 0 0 4 4 3.91 3.91 0 0 0 4-4 3.91 3.91 0 0 0-4-4Z"
     />
   </Svg>
-  );
-export default Settings;
+);
+export default Pengaturan;

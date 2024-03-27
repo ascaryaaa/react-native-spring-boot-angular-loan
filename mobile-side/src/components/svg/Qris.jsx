@@ -1,6 +1,6 @@
 import * as React from "react"
 import Svg, { Path } from "react-native-svg"
-const QrisText = (props) => (
+const Qris = (props) => (
   <Svg
     width={52}
     height={20}
@@ -25,4 +25,4 @@ const QrisText = (props) => (
     />
   </Svg>
 )
-export default QrisText;
+export default Qris;
