@@ -545,6 +545,15 @@ function App() {
 
 ```
 
+### 2. Soft Delete
+
+To implement soft delete functionality, filter the display to exclude deleted items. If an item's deleted property is set to `true`, it should not be shown.
+
+```ruby
+        formDetailsState.data
+          ?.filter(form => !form.deleted)
+```
+
 # Website-Side
 
 ## Reminder
