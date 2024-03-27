@@ -91,6 +91,8 @@ const SimulasiFleksiAktif = ({ navigation }) => {
         console.log(JSON.parse(savedData)); // Make sure to parse the JSON string
         const savedData2 = await AsyncStorage.getItem("jangkaWaktu");
         console.log(JSON.parse(savedData2)); // Make sure to parse the JSON string
+        const savedData3 = await AsyncStorage.getItem("simulasiPinjaman");
+        console.log(JSON.parse(savedData3));
         navigation.navigate("ProfileKeuanganFleksiAktif");
       } catch (error) {
         console.error(
