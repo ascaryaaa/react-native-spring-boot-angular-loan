@@ -22,6 +22,7 @@ export class SidebarComponent implements OnInit {
   
   admin?: AdminDetailResponse;
   showLogoutModal = false;
+  activeButton: number | null = null;
 
   ngOnInit() {
     this.refreshAdminDetail();
@@ -65,27 +66,61 @@ export class SidebarComponent implements OnInit {
       error: (error) => console.error('Error fetching admin data:', error)
     });
   }
-  isActive1: boolean = false;
-  isActive2: boolean = false;
-  isActive3: boolean = false;
+  // isActive1: boolean = false;
+  // isActive2: boolean = false;
+  // isActive3: boolean = false;
 
-  toggleBorder(buttonNumber: number) {
-    if (buttonNumber === 1) {
-     this.isActive1 = !this.isActive1;
-    } else if (buttonNumber === 2) {
-      this.isActive2 = !this.isActive2;
-    } else if (buttonNumber === 3) {
-      this.isActive3 = !this.isActive3;
-    }
-    if(buttonNumber !== 1) {
-      this.isActive1 = false;
+  // toggleBorder(buttonNumber: number) {
+  //   if (buttonNumber === 1) {
+  //     // Jika tombol 1 diklik, toggle isActive1
+  //     this.isActive1 = !this.isActive1;
+  //   } else if (buttonNumber === 2) {
+  //     // Jika tombol 2 diklik, toggle isActive2
+  //     this.isActive2 = !this.isActive2;
+  //   } else if (buttonNumber === 3) {
+  //     // Jika tombol 3 diklik, toggle isActive3
+  //     this.isActive3 = !this.isActive3;
+  //   }
+  
+  //   // Memastikan hanya satu tombol yang aktif
+  //   if (buttonNumber !== 1) {
+  //     this.isActive1 = false; // Jika tombol lain diklik, nonaktifkan tombol 1
+  //   }
+  //   if (buttonNumber !== 2) {
+  //     this.isActive2 = false; // Jika tombol lain diklik, nonaktifkan tombol 2
+  //   }
+  //   if (buttonNumber !== 3) {
+  //     this.isActive3 = false; // Jika tombol lain diklik, nonaktifkan tombol 3
+  //   }
+  
+  //   // Tombol yang aktif tetap aktif jika diklik lagi
+  //   if (buttonNumber === 1 && this.isActive1) {
+  //     this.isActive1 = true;
+  //   }
+  //   if (buttonNumber === 2 && this.isActive2) {
+  //     this.isActive2 = true;
+  //   }
+  //   if (buttonNumber === 3 && this.isActive3) {
+  //     this.isActive3 = true;
+  //   }
+  // }
+  // toggleActiveButton(buttonNumber: number) {
+  //   if (this.activeButton === buttonNumber) {
+  //     // Jika tombol yang sama diklik dua kali, biarkan tombol tetap aktif
+  //     return;
+  //   }
+
+  //   // Toggle tombol yang diklik
+  //   this.activeButton = buttonNumber;
+  // }
+  setActiveButton(buttonNumber: number) {
+    // Set activeButton to the clicked buttonNumber
+    this.activeButton = buttonNumber;
   }
-  if(buttonNumber !== 2) {
-      this.isActive2 = false;
-  }
-  if(buttonNumber !== 3) {
-      this.isActive3 = false;
+
+  isButtonActive(buttonNumber: number): boolean {
+    // Check if the button is active
+    return this.activeButton === buttonNumber;
   }
   
-}
 }
