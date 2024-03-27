@@ -16,8 +16,7 @@ const DataDebitur = () => {
         {viewsData.map(view => (
           <View key={view.id} style={styles.row}>
             <Text style={{flex: 1, textAlign: 'auto'}}>{view.title}</Text>
-            <Text style={{flex: 1, textAlign: 'center'}}>:</Text>
-            <Text style={{flex: 1, textAlign: 'left'}}>{view.content}</Text>
+            <Text style={{flex: 1, textAlign: 'left'}}>: {view.content}</Text>
           </View>
           ))}
       </View>
@@ -37,6 +36,6 @@ row: {
   flexDirection: 'row',
   borderColor: '#000',
   marginBottom: 15,
-  justifyContent: 'space-between',
+  // justifyContent: 'space-between',
 },
 })

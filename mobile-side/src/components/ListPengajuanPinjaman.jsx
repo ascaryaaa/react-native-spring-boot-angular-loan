@@ -17,11 +17,6 @@ import { fetchFormListById } from '../reducers/Form';
 
 
 const ListPengajuanPinjaman = ({ navigation }) => {
-
-
-
-
-
   const dispatch = useDispatch();
   const formDetailsState = useSelector((state) => state.forms);
   const accountState = useSelector((state) => state.account);
@@ -44,56 +39,17 @@ const ListPengajuanPinjaman = ({ navigation }) => {
     }
   }, [dispatch, accountState.data?.accountToUser?.idUser]);
 
-
-
-
-
-
-
-
-  const list = [
-    require("../../../mobile-side/src/assets/ban_kejutan1.png"),
-    require("../../../mobile-side/src/assets/ban_kejutan2.png"),
-  ];
-  // const renderItem = ({ item }) => (
-  //   <Image style={styles.bannerImage} source={item} />
-  // );
-
-  const [modalVisible, setModalVisible] = useState(false);
-  const [deletedId, setDeletedId] = useState(null);
-  const [result, setResult] = useState("");
-
-  const closeModal = () => {
-    setModalVisible(false);
-  };
-
-  const openModal = () => {
-    setDeletedId();
-    setModalVisible(true);
-  };
-
-  const Data = [
-    {
-      id: 1,
-      img: require("../../../mobile-side/src/assets/img_simulasi_pensiun.png"),
-      title: "BNI Fleksi Pensiun",
-      date: "10/03/2024",
-      period: "6 Bulan",
-      amount: "Rp 100.000.000",
-      status: "Ditolak",
-    },
-  ];
-
   return (
     <View style={styles.container}>
       <View style={styles.shadow}>
         
       {formDetailsState.loading ? (
-          <ActivityIndicator size="large" />
-        ) : formDetailsState.error ? (
-          <Text>Error fetching forms: {formDetailsState.error}</Text>
-        ) : (
-          formDetailsState.data?.map((form, index) => (
+        <ActivityIndicator size="large" />
+      ) : formDetailsState.error ? (
+        <Text>Error fetching forms: {formDetailsState.error}</Text>
+      ) : (
+        formDetailsState.data?.map((form, index) => (
+          (form.statusPengajuan === "Diproses" || form.statusPengajuan === "Ditolak") && (
             <TouchableOpacity key={index} style={styles.card} onPress={() => navigation.navigate("Monitoring")}>
               <View style={{backgroundColor: "green"}}>
                 <Image source={{ uri: form.formToJenis.gambarJenisPinjaman }} style={styles.image} />
@@ -106,15 +62,15 @@ const ListPengajuanPinjaman = ({ navigation }) => {
                   <Text>Tanggal Pengajuan: {form.tanggalPengajuan}</Text>
                   <Text>Periode Pinjaman: {form.jangkaWaktu} Bulan</Text>
                   <Text>Periode Pinjaman: {form.jumlahPinjaman}</Text>
-                  <Text>Status: {form.statusPengajuan}</Text>
                   <View style={styles.cardStatus}>
                     <Text style={styles.textStatus}>{form.statusPengajuan}</Text>
                   </View>
                 </View>
               </View>
             </TouchableOpacity>
-          ))
-        )}
+          )
+        ))
+      )}
       </View>
     </View>
   );
@@ -125,6 +81,7 @@ const styles = StyleSheet.create({
   container: {
     flex:1,
     alignItems: "center",
+    //backgroundColor: "green"
   },
   card: {
     flexDirection: "row",
@@ -135,15 +92,15 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     marginBottom: 16,
     // width: "95%",
-    backgroundColor: 'yellow'
+    //backgroundColor: 'yellow'
   },
   infoContainer: {
     flexDirection: "column", 
-    backgroundColor: "cyan",
+    //backgroundColor: "cyan",
     width: "70%",
   },
   info: {
-    backgroundColor: "orange",
+    //backgroundColor: "orange",
     marginHorizontal: 10,
     width:"90%",
   },
@@ -153,18 +110,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.7,
     shadowRadius: 10,
   },
-  bannerImage: {
-    marginTop: 15,
-    marginHorizontal: 5,
-    borderRadius: 10,
-    width: 300,
-    height: 110,
-    resizeMode: "cover",
-  },
   image: {
     width: 120,
     height: 120,
-    backgroundColor: "pink"
+    //backgroundColor: "pink"
   },
   textHeader: {
     fontSize: 14,
@@ -191,3 +140,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
   }
 });
+

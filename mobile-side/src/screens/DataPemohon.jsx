@@ -9,14 +9,13 @@ import {
   Image,
 } from "react-native";
 import Buttonjk from "../components/Buttonjk";
-import Bniaddress from "../components/Bniaddress";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import RNPickerSelect from 'react-native-picker-select';
+
 
 
 const DataPemohon = ({ navigation }) => {
   const [inputData, setInputData] = useState({
-    // nama: " ",
-    // nik: " ",
     tempatLahir: "",
     tanggalLahir: "",
     alamat: "",
@@ -24,7 +23,7 @@ const DataPemohon = ({ navigation }) => {
     kelurahan: "",
     kecamatan: "",
     npwp: "",
-    alamatBni: "",
+    alamatBni: ""
   });
 
   const [inputErrors, setInputErrors] = useState ({
@@ -35,7 +34,7 @@ const DataPemohon = ({ navigation }) => {
     kelurahan: false,
     kecamatan: false,
     npwp: false,
-    alamatBni: false,
+    alamatBni: false
   });
 
   const validateInputs = () => {
@@ -53,6 +52,13 @@ const DataPemohon = ({ navigation }) => {
     } else {
       errors["tanggalLahir"] = false;
     }
+
+    if(!selectedBniAddress){
+      errors["alamatBni"] = true;
+      isValid = false;
+    } else {
+      errors["alamatBni"] = false;
+    }
     setInputErrors(errors);
     return isValid;
   };  
@@ -65,6 +71,11 @@ const DataPemohon = ({ navigation }) => {
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [selectedDate, setSelectedDate] = useState("");
+  const [selectedBniAddress, setSelectedBniAddress] = useState(false); // State untuk menyimpan nilai terpilih
+
+  const handleBniAddressChange = (value) => {
+    setSelectedBniAddress(value); // Perbarui nilai terpilih saat terjadi perubahan
+  };
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -232,31 +243,31 @@ const DataPemohon = ({ navigation }) => {
               <Text style={styles.errorText}>Mohon isikan data dengan benar</Text>
             )}
 
-            <Text style={styles.text}>Unit Kerja BNI Terdekat</Text>
+            {/* <Text style={styles.text}>Unit Kerja BNI Terdekat</Text>
             <View style={[styles.input, inputErrors.alamatBni && styles.inputError]}>
               <Bniaddress />
             </View>
             {inputErrors.alamatBni && (
               <Text style={styles.errorText}>Mohon isikan data dengan benar</Text>
-            )}
+            )} */}
 
-            {/* <Text style={styles.text}>Unit Kerja BNI Terdekat</Text>
-            <View style={[styles.input, !selectedBniAddress && styles.inputError]}>
+            <Text style={styles.text}>Unit Kerja BNI Terdekat</Text>
+            <View style={[styles.input, inputErrors.alamatBni && styles.inputError]}>
 
               <RNPickerSelect
                 onValueChange={handleBniAddressChange}
                 items={[
-                  { label: 'Alamat 1', value: 'Alamat 1' },
-                  { label: 'Alamat 2', value: 'Alamat 2' },
+                  { label: 'Wow', value: "Test" },
+                  { label: 'Alamat 2', value: "res" },
                   // Tambahkan item lainnya sesuai kebutuhan
                 ]}
-                placeholder={{ label: 'Pilih alamat BNI terdekat...', value: null }}
+                placeholder={{ label: 'Pilih alamat BNI terdekat...', value: null}}
                 value={selectedBniAddress}
               />
-            </View> */}
-            {/* {!selectedBniAddress && (
+            </View>
+            {inputErrors.alamatBni && (
               <Text style={styles.errorText}>Mohon pilih alamat BNI terdekat</Text>
-            )} */}
+            )}
 
             <View style={styles.bawah}>
               <TouchableOpacity
