@@ -1,7 +1,14 @@
-import * as React from "react";
-import Svg, { G, Path, Defs, ClipPath } from "react-native-svg";
-const Transfer = (props) => (
-  <Svg width={55} height={55} fill="none" {...props}>
+import * as React from "react"
+import Svg, { Rect, G, Path, Defs, ClipPath } from "react-native-svg"
+const Transferdua = (props) => (
+  <Svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={55}
+    height={55}
+    fill="none"
+    {...props}
+  >
+    <Rect width={55} height={55} fill="#18C1CD" rx={25} />
     <G clipPath="url(#a)">
       <Path
         fill="#fff"
@@ -14,5 +21,5 @@ const Transfer = (props) => (
       </ClipPath>
     </Defs>
   </Svg>
-);
-export default Transfer;
+)
+export default Transferdua;

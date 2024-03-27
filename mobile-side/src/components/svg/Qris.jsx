@@ -2,6 +2,7 @@ import * as React from "react"
 import Svg, { Path } from "react-native-svg"
 const Qris = (props) => (
   <Svg
+    xmlns="http://www.w3.org/2000/svg"
     width={52}
     height={20}
     fill="none"
@@ -25,4 +26,4 @@ const Qris = (props) => (
     />
   </Svg>
 )
-export default Qris;
+export default Qris

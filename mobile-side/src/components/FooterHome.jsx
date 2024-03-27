@@ -1,51 +1,33 @@
 import { StyleSheet, View, Image, TouchableOpacity, Text } from "react-native";
+import Beranda from "./svg/Beranda";
+import Riwayat from "./svg/Riwayat";
+import Favorit from "./svg/Favorit";
+import Settings from "./svg/Settings";
+import QrisLogo from "./svg/QrisLogo";
+import Qris from "./svg/Qris";
 
 const FooterHome = () => {
   return (
     <View style={styles.container}>
       <View style={styles.footer}>
         <TouchableOpacity style={styles.isi}>
-          <Image
-            source={require("../../../mobile-side/src/assets/icon_homeHome.png")}
-            style={{ width: 32, height: 32 }}
-            resizeMode="stretch"
-          />
+         <Beranda></Beranda>
           <Text style={styles.text}>Beranda</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.isi}>
-          <Image
-            source={require("../../../mobile-side/src/assets/icon_riwayat.png")}
-            style={{ width: 32, height: 32 }}
-            resizeMode="stretch"
-          />
+          <Riwayat></Riwayat>
           <Text style={styles.text}>Riwayat</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.qris}>
-          <Image
-            source={require("../../../mobile-side/src/assets/icon_qrisLogo.png")}
-            style={{ width: 70, height: 70 }}
-            resizeMode="stretch"
-          />
-          <Image
-            source={require("../../../mobile-side/src/assets/icon_qrisText.png")}
-            style={{ width: 51, height: 19 }}
-            resizeMode="stretch"
-          />
+          <QrisLogo/>
+          <Qris style={{marginTop:4}}/>
         </TouchableOpacity>
         <TouchableOpacity style={styles.isi}>
-          <Image
-            source={require("../../../mobile-side/src/assets/icon_favorit.png")}
-            style={{ width: 32, height: 32 }}
-            resizeMode="stretch"
-          />
+          <Favorit/>
           <Text style={styles.text}>Favorit</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.isi}>
-          <Image
-            source={require("../../../mobile-side/src/assets/icon_settings.png")}
-            style={{ width: 32, height: 32 }}
-            resizeMode="stretch"
-          />
+          <Settings></Settings>
           <Text style={styles.text}>Pengaturan</Text>
         </TouchableOpacity>
       </View>
