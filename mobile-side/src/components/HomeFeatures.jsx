@@ -1,4 +1,5 @@
 import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
+import Transfer from "./svg/Transfer";
 
 const HomeFeatures = ({ navigation }) => {
   return (
@@ -15,10 +16,10 @@ const HomeFeatures = ({ navigation }) => {
         </View>
         <View style={styles.features}>
           <TouchableOpacity>
-            <Image
+           <Transfer ></Transfer>
+            {/* <Image
               source={require("../../../mobile-side/src/assets/icon_transfer.png")}
-              style={{ width: 55, height: 55 }}
-            />
+            /> */}
           </TouchableOpacity>
           <Text style={{ fontSize: 12 }}>E-Wallet</Text>
         </View>
@@ -143,18 +144,18 @@ const styles = StyleSheet.create({
   },
   featuresKanan: {
     alignItems: "center",
-    paddingLeft:12
+    paddingLeft: 12,
     // backgroundColor: "pink"
   },
   atas: {
     flexDirection: "row",
-    justifyContent: 'space-between',
-    resizeMode: "stretch"
+    justifyContent: "space-between",
+    resizeMode: "stretch",
   },
   tengah: {
     // backgroundColor: "red",
     flexDirection: "row",
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     marginTop: 20,
   },
 });
