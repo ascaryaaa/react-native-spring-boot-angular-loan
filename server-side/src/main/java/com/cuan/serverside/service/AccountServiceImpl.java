@@ -1,7 +1,6 @@
 package com.cuan.serverside.service;
 
 import com.cuan.serverside.model.Account;
-import com.cuan.serverside.model.Admin;
 import com.cuan.serverside.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
