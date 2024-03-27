@@ -1,6 +1,5 @@
 package com.cuan.serverside.service;
 
-import com.cuan.serverside.model.FormPengajuan;
 import com.cuan.serverside.model.User;
 import com.cuan.serverside.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
