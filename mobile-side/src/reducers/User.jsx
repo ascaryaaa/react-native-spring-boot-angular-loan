@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchUserData } from "../utils/apiUtils";
 
 export const getUsers = createAsyncThunk(
-    'promo/getUsers',
+    'user/getUsers',
     async () => {
         return fetchUserData(); // Reuse the API utility function
     }
