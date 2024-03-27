@@ -24,6 +24,12 @@ const SimulasiFleksiPensiun = ({ navigation }) => {
     jangkaWaktu: false,
   });
 
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [hidedButton, setHidedButton] = useState(false);
+
+  const jenisPinjamanState = useSelector((state) => state.jenisPinjaman);
+  const dispatch = useDispatch();
+
   const maksAngsuran = inputData.penghasilan ? inputData.penghasilan / 2 : 0;
   const maksPinjaman = inputData.jangkaWaktu
     ? (maksAngsuran * (1 - Math.pow(1 + 0.1074 / 12, -inputData.jangkaWaktu))) /
@@ -55,12 +61,6 @@ const SimulasiFleksiPensiun = ({ navigation }) => {
     },
   ];
 
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [hidedButton, setHidedButton] = useState(false);
-
-  const jenisPinjamanState = useSelector((state) => state.jenisPinjaman);
-  const dispatch = useDispatch();
-
   const validateInputs = () => {
     const errors = {};
     let isValid = true;
@@ -72,6 +72,15 @@ const SimulasiFleksiPensiun = ({ navigation }) => {
     }
     setInputErrors(errors);
     return isValid;
+  };
+
+  const checkAllInputsFilled = () => {
+    for (const key in inputData) {
+      if (!inputData[key]) {
+        return false; // Jika ada input kosong, kembalikan false
+      }
+    }
+    return true; // Jika semua input terisi, kembalikan true
   };
 
   const idToDisplay = 3;
@@ -86,17 +95,15 @@ const SimulasiFleksiPensiun = ({ navigation }) => {
     if (validateInputs()) {
       try {
         // Stringify and save inputData to AsyncStorage
-        await AsyncStorage.setItem(
-          "inputDataSimulasi",
-          JSON.stringify(inputData)
-        );
+        await AsyncStorage.setItem("penghasilan", inputData.penghasilan);
+        AsyncStorage.setItem("jangkaWaktu", inputData.jangkaWaktu);
         AsyncStorage.setItem("simulasiPinjaman", JSON.stringify(maksPinjaman));
 
         //AsyncStorage.setItem('max', inputData.jangkaWaktu X inputData.penghasilan); gpt help me
         // Retrieve and log the saved item
-        const savedData = await AsyncStorage.getItem("inputDataSimulasi");
+        const savedData = await AsyncStorage.getItem("penghasilan");
         console.log(JSON.parse(savedData)); // Make sure to parse the JSON string
-        const savedData2 = await AsyncStorage.getItem("simulasiPinjaman");
+        const savedData2 = await AsyncStorage.getItem("jangkaWaktu");
         console.log(JSON.parse(savedData2)); // Make sure to parse the JSON string
         navigation.navigate("ProfileKeuanganFleksiPensiun");
       } catch (error) {
@@ -186,7 +193,7 @@ const SimulasiFleksiPensiun = ({ navigation }) => {
             <TextInput
               style={[
                 styles.input,
-                inputErrors.penghasilan && styles.inputError,
+                inputErrors.jangkaWaktu && styles.inputError,
               ]}
               onChangeText={(number) =>
                 setInputData({ ...inputData, jangkaWaktu: number })
@@ -195,7 +202,7 @@ const SimulasiFleksiPensiun = ({ navigation }) => {
               placeholder="bulan"
               keyboardType="numeric"
             ></TextInput>
-            {inputErrors.penghasilan && (
+            {inputErrors.jangkaWaktu && (
               <Text style={styles.errorText}>
                 Mohon isikan data dengan benar
               </Text>

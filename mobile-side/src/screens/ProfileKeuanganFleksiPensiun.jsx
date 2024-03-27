@@ -13,8 +13,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
   const [inputData, setInputData] = useState({
     penghasilan: "",
-    jangkaWaktu: "",
     jumlahPinjaman: "",
+    jangkaWaktu: "",
   });
 
   const [inputErrors, setInputErrors] = useState({
@@ -24,8 +24,8 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
   });
 
   const angsuranPerbulan =
-    (inputData.jumlahPinjaman * (0.1125 / 12)) /
-    (1 - Math.pow(1 + 0.1125 / 12, -inputData.jangkaWaktu));
+    (inputData.jumlahPinjaman * (0.1074 / 12)) /
+    (1 - Math.pow(1 + 0.1074 / 12, -inputData.jangkaWaktu));
 
   const data = [
     {
@@ -36,11 +36,13 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
       })}`,
     },
     { id: 2, title: "Jangka Waktu", content: inputData.jangkaWaktu },
-    { id: 3, title: "Suku Bunga per Tahun", content: "11,25%" },
+    { id: 3, title: "Suku Bunga per Tahun", content: "10,74%" },
     {
       id: 4,
       title: "Total Pinjaman",
-      content: inputData.jumlahPinjaman,
+      content: `Rp ${inputData.jumlahPinjaman.toLocaleString("id-ID", {
+        maximumFractionDigits: 2,
+      })}`,
     },
     {
       id: 5,
@@ -116,12 +118,21 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
     const getData = async () => {
       try {
         // Mengambil data dari AsyncStorage
-        const data = await AsyncStorage.getItem("inputDataSimulasi");
-        console.log("UHUY" + data);
-        if (data !== null) {
-          // Jika data ditemukan, set data ke dalam state lokal
-          setInputData(JSON.parse(data));
-        }
+        const penghasilanData = await AsyncStorage.getItem("penghasilan");
+        const jangkaWaktuData = await AsyncStorage.getItem("jangkaWaktu");
+
+        // Parse the retrieved data
+        const penghasilan =
+          penghasilanData !== null ? JSON.parse(penghasilanData) : "";
+        const jangkaWaktu =
+          jangkaWaktuData !== null ? JSON.parse(jangkaWaktuData) : "";
+
+        // Set the parsed data to the state
+        setInputData({
+          penghasilan: penghasilan,
+          jumlahPinjaman: "",
+          jangkaWaktu: jangkaWaktu,
+        });
       } catch (error) {
         console.error("Failed to fetch data from AsyncStorage", error);
       }
@@ -130,6 +141,18 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
     // Panggil fungsi untuk mengambil data saat komponen dimuat
     getData();
   }, []);
+
+  useEffect(() => {
+    console.log(
+      "////////////////////////////////////////Input Errors:",
+      inputErrors
+    );
+    console.log(
+      "########################################Input Data:",
+      inputData
+    );
+  }, [inputErrors, inputData]);
+
   return (
     <View style={styles.bg}>
       <View style={styles.shadow}>
@@ -155,7 +178,11 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
           <TextInput
             style={[styles.input, inputErrors.penghasilan && styles.inputError]}
             value={inputData.penghasilan}
+            editable={false}
             keyboardType="numeric"
+            placeholder={`Rp ${inputData.penghasilan.toLocaleString("id-ID", {
+              maximumFractionDigits: 2,
+            })}`}
             onChangeText={(number) =>
               setInputData({ ...inputData, penghasilan: number })
             }
@@ -169,6 +196,8 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
             style={[styles.input, inputErrors.jangkaWaktu && styles.inputError]}
             value={inputData.jangkaWaktu}
             keyboardType="numeric"
+            placeholder={inputData.jangkaWaktu.toString()}
+            editable={false}
             onChangeText={(number) =>
               setInputData({ ...inputData, jangkaWaktu: number })
             }
@@ -185,11 +214,19 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
               styles.input,
               inputErrors.jumlahPinjaman && styles.inputError,
             ]}
-            value={inputData.jumlahPinjaman}
-            keyboardType="numeric"
-            onChangeText={(number) =>
-              setInputData({ ...inputData, jumlahPinjaman: number })
+            value={
+              inputData.jumlahPinjaman === ""
+                ? ""
+                : inputData.jumlahPinjaman.toString()
             }
+            keyboardType="numeric"
+            onChangeText={(number) => {
+              const parsedNumber = parseInt(number);
+              setInputData({
+                ...inputData,
+                jumlahPinjaman: isNaN(parsedNumber) ? "" : parsedNumber,
+              });
+            }}
           />
           {inputErrors.jumlahPinjaman && (
             <Text style={styles.errorText}>Field ini wajib diisi</Text>
@@ -198,7 +235,7 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
           <Text style={styles.text}>Bunga Pinjaman</Text>
           <TextInput
             style={styles.input}
-            placeholder="11,25"
+            placeholder="10,74"
             placeholderTextColor="gray"
             editable={false}
           />
