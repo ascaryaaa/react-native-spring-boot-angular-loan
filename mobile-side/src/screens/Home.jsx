@@ -120,6 +120,7 @@ const Home = ({ navigation }) => {
               justifyContent: "space-between",
             }}
           >
+            
             <Image
               style={{ width: 103, height: 30 }}
               source={require("../../../mobile-side/src/assets/icon_poinHome.png")}
