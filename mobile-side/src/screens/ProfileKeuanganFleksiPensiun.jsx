@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -8,30 +8,49 @@ import {
   Image,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
   const [inputData, setInputData] = useState({
-    penghasilanBersih: "",
+    penghasilan: "",
     jumlahPinjaman: "",
     jangkaWaktu: "",
   });
 
   const [inputErrors, setInputErrors] = useState({
-    penghasilanBersih: false,
+    penghasilan: false,
     jumlahPinjaman: false,
     jangkaWaktu: false,
   });
+
+  const angsuranPerbulan =
+    (inputData.jumlahPinjaman * (0.1074 / 12)) /
+    (1 - Math.pow(1 + 0.1074 / 12, -inputData.jangkaWaktu));
 
   const data = [
     {
       id: 1,
       title: "Penghasilan Bersih per Bulan",
-      content: "Rp 5.000.000,00",
+      content: `Rp ${inputData.penghasilan.toLocaleString("id-ID", {
+        maximumFractionDigits: 2,
+      })}`,
     },
-    { id: 2, title: "Jangka Waktu", content: "120 Bulan" },
+    { id: 2, title: "Jangka Waktu", content: inputData.jangkaWaktu },
     { id: 3, title: "Suku Bunga per Tahun", content: "10,74%" },
-    { id: 4, title: "Total Pinjaman", content: "Rp 50.000.000,00" },
-    { id: 5, title: "Angsuran Pinjaman per Bulan", content: "Rp 2.167.445,22" },
+    {
+      id: 4,
+      title: "Total Pinjaman",
+      content: `Rp ${inputData.jumlahPinjaman.toLocaleString("id-ID", {
+        maximumFractionDigits: 2,
+      })}`,
+    },
+    {
+      id: 5,
+      title: "Angsuran Pinjaman per Bulan",
+      content: `Rp ${angsuranPerbulan.toLocaleString("id-ID", {
+        maximumFractionDigits: 2,
+      })}`,
+    },
   ];
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -44,6 +63,8 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
       if (!inputData[key]) {
         errors[key] = true;
         isValid = false;
+      } else {
+        errors[key] = false; // Reset error jika input sudah diisi
       }
     }
     setInputErrors(errors);
@@ -58,12 +79,80 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
     }
   };
 
+  const taruhData = async () => {
+    if (validateInputs()) {
+      try {
+        // Stringify and save inputData to AsyncStorage
+        await AsyncStorage.setItem(
+          "inputDataSimulasi",
+          JSON.stringify(inputData)
+        );
+        AsyncStorage.setItem(
+          "simulasiPinjaman",
+          JSON.stringify(angsuranPerbulan)
+        );
+
+        // Retrieve and log the saved item
+        const savedData = await AsyncStorage.getItem("inputDataSimulasi");
+        console.log(JSON.parse(savedData)); // Make sure to parse the JSON string
+        const savedData2 = await AsyncStorage.getItem("simulasiPinjaman");
+        console.log(JSON.parse(savedData2)); // Make sure to parse the JSON string
+        navigation.navigate("DataPemohon");
+      } catch (error) {
+        console.error(
+          "Failed to save or retrieve the data from AsyncStorage",
+          error
+        );
+      }
+    }
+  };
+
   const toggleDropdown = () => {
     if (validateInputs()) {
       setIsDropdownOpen(!isDropdownOpen);
       setHidedButton(true);
     }
   };
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        // Mengambil data dari AsyncStorage
+        const penghasilanData = await AsyncStorage.getItem("penghasilan");
+        const jangkaWaktuData = await AsyncStorage.getItem("jangkaWaktu");
+
+        // Parse the retrieved data
+        const penghasilan =
+          penghasilanData !== null ? JSON.parse(penghasilanData) : "";
+        const jangkaWaktu =
+          jangkaWaktuData !== null ? JSON.parse(jangkaWaktuData) : "";
+
+        // Set the parsed data to the state
+        setInputData({
+          penghasilan: penghasilan,
+          jumlahPinjaman: "",
+          jangkaWaktu: jangkaWaktu,
+        });
+      } catch (error) {
+        console.error("Failed to fetch data from AsyncStorage", error);
+      }
+    };
+
+    // Panggil fungsi untuk mengambil data saat komponen dimuat
+    getData();
+  }, []);
+
+  useEffect(() => {
+    console.log(
+      "////////////////////////////////////////Input Errors:",
+      inputErrors
+    );
+    console.log(
+      "########################################Input Data:",
+      inputData
+    );
+  }, [inputErrors, inputData]);
+
   return (
     <View style={styles.bg}>
       <View style={styles.shadow}>
@@ -87,33 +176,18 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
 
           <Text style={styles.text}>Penghasilan Bersih per. Bulan</Text>
           <TextInput
-            style={[
-              styles.input,
-              inputErrors.penghasilanBersih && styles.inputError
-            ]}
-            value={inputData.penghasilanBersih}
+            style={[styles.input, inputErrors.penghasilan && styles.inputError]}
+            value={inputData.penghasilan}
+            editable={false}
             keyboardType="numeric"
+            placeholder={`Rp ${inputData.penghasilan.toLocaleString("id-ID", {
+              maximumFractionDigits: 2,
+            })}`}
             onChangeText={(number) =>
-              setInputData({ ...inputData, penghasilanBersih: number })
+              setInputData({ ...inputData, penghasilan: number })
             }
           />
-          {inputErrors.penghasilanBersih && (
-            <Text style={styles.errorText}>Field ini wajib diisi</Text>
-          )}
-
-          <Text style={styles.text}>Jumlah Pinjaman yang Diajukan</Text>
-          <TextInput
-            style={[
-              styles.input,
-              inputErrors.jumlahPinjaman && styles.inputError,
-            ]}
-            value={inputData.jumlahPinjaman}
-            keyboardType="numeric"
-            onChangeText={(number) =>
-              setInputData({ ...inputData, jumlahPinjaman: number })
-            }
-          />
-          {inputErrors.jumlahPinjaman && (
+          {inputErrors.penghasilan && (
             <Text style={styles.errorText}>Field ini wajib diisi</Text>
           )}
 
@@ -122,6 +196,8 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
             style={[styles.input, inputErrors.jangkaWaktu && styles.inputError]}
             value={inputData.jangkaWaktu}
             keyboardType="numeric"
+            placeholder={inputData.jangkaWaktu.toString()}
+            editable={false}
             onChangeText={(number) =>
               setInputData({ ...inputData, jangkaWaktu: number })
             }
@@ -132,11 +208,34 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
           <Text style={{ fontSize: 10, marginBottom: 16 }}>
             *Maksimal 180 Bulan
           </Text>
+          <Text style={styles.text}>Jumlah Pinjaman yang Diajukan</Text>
+          <TextInput
+            style={[
+              styles.input,
+              inputErrors.jumlahPinjaman && styles.inputError,
+            ]}
+            value={
+              inputData.jumlahPinjaman === ""
+                ? ""
+                : inputData.jumlahPinjaman.toString()
+            }
+            keyboardType="numeric"
+            onChangeText={(number) => {
+              const parsedNumber = parseInt(number);
+              setInputData({
+                ...inputData,
+                jumlahPinjaman: isNaN(parsedNumber) ? "" : parsedNumber,
+              });
+            }}
+          />
+          {inputErrors.jumlahPinjaman && (
+            <Text style={styles.errorText}>Field ini wajib diisi</Text>
+          )}
 
           <Text style={styles.text}>Bunga Pinjaman</Text>
           <TextInput
             style={styles.input}
-            placeholder="10,74%"
+            placeholder="10,74"
             placeholderTextColor="gray"
             editable={false}
           />
@@ -183,10 +282,7 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
                 >
                   *Simulasi menggunakan suku bunga yang berlaku saat ini
                 </Text>
-                <TouchableOpacity
-                  style={styles.button1}
-                  onPress={() => navigation.navigate("DataPemohon")}
-                >
+                <TouchableOpacity style={styles.button1} onPress={taruhData}>
                   <Text
                     style={{
                       textAlign: "center",
