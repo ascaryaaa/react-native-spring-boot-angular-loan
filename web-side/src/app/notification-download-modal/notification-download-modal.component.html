@@ -1,7 +1,19 @@
-<section class="flex flex-col items-center justify-between pt-3 pr-20 pb-20 pl-20 text-3xl font-bold tracking-normal leading-10 text-center bg-white rounded-3xl max-w-[702px] text-neutral-950 max-md:pl-5">
-    <div style="margin-left: auto">
-      <img (click)="cancel()" src="https://cdn.builder.io/api/v1/image/assets/TEMP/c77cb862dd0e422c96b3e0caf45e3e25388b9ab36864988859173b2c35092896?apiKey=c7add3469bc04a5f85486a4cfdac2330&" alt="" class="aspect-square w-[38px]" />
-    </div>
-    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/e0a07f593da6fb3355c9c214df7250065a5ecb70249b9f7c4036c9f2925e0bf3?apiKey=c7add3469bc04a5f85486a4cfdac2330&" alt="" class="self-center mt-7 max-w-full aspect-[1.2] w-[278px]" />
-    <p class="mt-6 max-md:max-w-full">Data Berhasil Didownload</p>
-  </section>
+<section
+  class="relative flex flex-col items-center justify-between pt-3 pr-20 pb-20 pl-20 text-3xl font-bold tracking-normal leading-10 text-center bg-white rounded-3xl max-w-[702px] text-neutral-950 max-md:pl-5"
+>
+  <div class="absolute top-0 right-0 mr-4 mt-4">
+    <button type="button" (click)="cancel()" button type="button" title="close">
+      <img
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/c77cb862dd0e422c96b3e0caf45e3e25388b9ab36864988859173b2c35092896?apiKey=c7add3469bc04a5f85486a4cfdac2330&"
+        alt=""
+        class="aspect-square w-[38px] item"
+      />
+    </button>
+  </div>
+  <img
+    src="https://cdn.builder.io/api/v1/image/assets/TEMP/e0a07f593da6fb3355c9c214df7250065a5ecb70249b9f7c4036c9f2925e0bf3?apiKey=c7add3469bc04a5f85486a4cfdac2330&"
+    alt=""
+    class="self-center mt-7 max-w-full aspect-[1.2] w-[278px]"
+  />
+  <p class="mt-6 max-md:max-w-full">Data Berhasil Didownload</p>
+</section>
