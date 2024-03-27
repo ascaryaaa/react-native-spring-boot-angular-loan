@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { getJenisPinjamans } from "../reducers/JenisPinjaman";
 import { useDispatch, useSelector } from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const SimulasiFleksiAktif = ({ navigation }) => {
   const [inputData, setInputData] = useState({
@@ -23,11 +24,6 @@ const SimulasiFleksiAktif = ({ navigation }) => {
     jangkaWaktu: false,
   });
 
-  const data = [
-    { id: 1, title: "Maksimal Pinjaman", content: "Rp 794.993.871,00" },
-    { id: 2, title: "Angsuran Pinjaman per Bulan", content: "Rp 4.554.761,00" },
-  ];
-
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [hidedButton, setHidedButton] = useState(false);
 
@@ -36,6 +32,27 @@ const SimulasiFleksiAktif = ({ navigation }) => {
 
   const idToDisplay = 2;
 
+  const maksAngsuran = inputData.penghasilan / 2;
+  const maksPinjaman =
+    (maksAngsuran * (1 - Math.pow(1 + 0.1275 / 12, -inputData.jangkaWaktu))) /
+    (0.1275 / 12);
+
+  const data = [
+    {
+      id: 1,
+      title: "Maksimal Pinjaman",
+      content: `Rp ${maksPinjaman.toLocaleString("id-ID", {
+        maximumFractionDigits: 2,
+      })}`,
+    },
+    {
+      id: 2,
+      title: "Maksimal Angsuran",
+      content: `Rp ${maksAngsuran.toLocaleString("id-ID", {
+        maximumFractionDigits: 2,
+      })}`,
+    },
+  ];
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
     setHidedButton(true);
@@ -56,8 +73,32 @@ const SimulasiFleksiAktif = ({ navigation }) => {
 
   const handleNext = () => {
     if (validateInputs()) {
-      // Proceed to the next step
       toggleDropdown();
+    }
+  };
+
+  const taruhData = async () => {
+    if (validateInputs()) {
+      try {
+        // Stringify and save inputData to AsyncStorage
+        await AsyncStorage.setItem(
+          "inputDataSimulasi",
+          JSON.stringify(inputData)
+        );
+        AsyncStorage.setItem("simulasiPinjaman", JSON.stringify(maksPinjaman));
+        //AsyncStorage.setItem('max', inputData.jangkaWaktu X inputData.penghasilan); gpt help me
+        // Retrieve and log the saved item
+        const savedData = await AsyncStorage.getItem("inputDataSimulasi");
+        console.log(JSON.parse(savedData)); // Make sure to parse the JSON string
+        const savedData2 = await AsyncStorage.getItem("simulasiPinjaman");
+        console.log(JSON.parse(savedData2)); // Make sure to parse the JSON string
+        navigation.navigate("ProfileKeuanganFleksiAktif");
+      } catch (error) {
+        console.error(
+          "Failed to save or retrieve the data from AsyncStorage",
+          error
+        );
+      }
     }
   };
 
@@ -65,7 +106,6 @@ const SimulasiFleksiAktif = ({ navigation }) => {
     // fetchInfo();
     dispatch(getJenisPinjamans());
   }, [dispatch]);
-
   return (
     <View style={styles.bg}>
       <View style={styles.shadow}>
@@ -162,6 +202,7 @@ const SimulasiFleksiAktif = ({ navigation }) => {
                 }
                 value={setInputData.penghasilan}
                 placeholder="12.75%"
+                editable={false}
                 placeholderTextColor="gray"
               ></TextInput>
             </View>
@@ -203,12 +244,7 @@ const SimulasiFleksiAktif = ({ navigation }) => {
                       ))}
                     </View>
                   </View>
-                  <TouchableOpacity
-                    style={styles.button}
-                    onPress={() =>
-                      navigation.navigate("ProfileKeuanganFleksiAktif")
-                    }
-                  >
+                  <TouchableOpacity style={styles.button} onPress={taruhData}>
                     <Text style={styles.simulasikan}> Selanjutnya</Text>
                   </TouchableOpacity>
                 </View>

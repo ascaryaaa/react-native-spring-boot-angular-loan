@@ -20,6 +20,7 @@ export class ListMonitoringComponent {
   sortDirection: 'asc' | 'desc' = 'asc';
   loading = true;
   
+  
   constructor(private monitoringService: MonitoringService) { }
 
   ngOnInit() {
