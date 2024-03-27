@@ -1,0 +1,10 @@
+/* Atur gaya global untuk semua komponen */
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Workbench', sans-serif;
+  }
+  
+  p, span, a, button {
+    font-family: 'Workbench', sans-serif;
+  }
+  

@@ -24,3 +24,5 @@
   app-notification-download-modal{
     z-index: 10000; /* Ensure it's above the overlay */
   }
+
+  /* Atur gaya global untuk semua komponen */

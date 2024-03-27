@@ -24,9 +24,9 @@
       const headers = this.getHeaders();
       return this.httpClient.get<FormResponse>(listPengajuanPinjaman, { headers });
     }
-    getDetailPengajuanPinjaman(id: number): Observable<FormDetailResponse> {
+    getDetailPengajuanPinjaman(hashedIdForm: string): Observable<FormDetailResponse> {
       const headers = this.getHeaders();
-      return this.httpClient.get<FormDetailResponse>(`${detailPengajuanPinjaman}${id}`, { headers });
+      return this.httpClient.get<FormDetailResponse>(`${detailPengajuanPinjaman}`+'hid/'+`${hashedIdForm}`, { headers });
     }
     updateStatusPengajuanPinjaman(id: number, data: any): Observable<any> {
       const headers = this.getHeaders();

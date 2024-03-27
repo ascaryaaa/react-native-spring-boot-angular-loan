@@ -8,7 +8,6 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const SimulasiGriya = ({ navigation }) => {
   const [inputData, setInputData] = useState({
@@ -42,21 +41,11 @@ const SimulasiGriya = ({ navigation }) => {
     return isValid;
   };
 
-  const handleNext = async () => {
+  const handleNext = () => {
     if (validateInputs()) {
-      try {
-        // Stringify and save inputData to AsyncStorage
-        await AsyncStorage.setItem('inputDataSimulasi', JSON.stringify(inputData));
-        //AsyncStorage.setItem('max', inputData.jangkaWaktu X inputData.penghasilan); gpt help me
-        // Retrieve and log the saved item
-        const savedData = await AsyncStorage.getItem('inputDataSimulasi');
-        console.log(JSON.parse(savedData)); // Make sure to parse the JSON string
-        toggleDropdown();
-      } catch (error) {
-        console.error('Failed to save or retrieve the data from AsyncStorage', error);
-      }
+      toggleDropdown();
     }
-  };
+  }
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);

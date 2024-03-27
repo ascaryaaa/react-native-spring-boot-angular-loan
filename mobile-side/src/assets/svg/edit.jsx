@@ -1,6 +1,6 @@
 import * as React from "react";
 import Svg, { Path } from "react-native-svg";
-const SvgComponent = (props) => (
+const edit = (props) => (
   <Svg width={20} height={20} fill="none" {...props}>
     <Path
       fill="#F9A653"
@@ -8,4 +8,4 @@ const SvgComponent = (props) => (
     />
   </Svg>
 );
-export default SvgComponent;
+export default edit;

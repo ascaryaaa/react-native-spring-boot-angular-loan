@@ -1,0 +1,18 @@
+/* Hide tooltip by default */
+.tooltip {
+    display: none;
+    /* Set the width of the tooltip content */
+    width: 300px; /* Adjust the width as needed */
+  }
+  
+  /* Show the tooltip when hovering over the button */
+  .relative button:hover + .tooltip {
+    display: block;
+  }
+  
+  /* Override text-transform for tooltip content */
+  .tooltip div,
+  .tooltip li {
+    text-transform: none !important;
+  }
+  

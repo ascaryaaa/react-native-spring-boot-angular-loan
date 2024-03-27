@@ -12,7 +12,7 @@ const routes: Routes = [
     path: 'list',
     component: ListMonitoringComponent
   },
-  { path: 'id/:id', 
+  { path: 'id/:hashedId', 
     component: DetailMonitoringComponent
   },
   { path:'**', redirectTo:'..', pathMatch: 'full'},

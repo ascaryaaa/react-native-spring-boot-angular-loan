@@ -47,6 +47,7 @@ public class DetailPinjamanServiceImpl implements DetailPinjamanService{
 
     @Override
     public DetailPinjaman saveDetailPinjaman(DetailPinjaman detailPinjaman) {
+        detailPinjaman.setDeleted(false);
         detailPinjamanRepository.save(detailPinjaman);
         String cif = hashIdWithEpochTime(detailPinjaman.getIdPinjaman());
         detailPinjaman.setHashedIdPinjaman(cif);
@@ -90,5 +91,14 @@ public class DetailPinjamanServiceImpl implements DetailPinjamanService{
     @Override
     public void deleteDetailPinjamanById(Long id) {
         detailPinjamanRepository.deleteById(id);
+    }
+
+    @Override
+    public void softDeleteById(Long id) {
+        DetailPinjaman detailPinjaman = detailPinjamanRepository.findById(id).orElse(null);
+        if (detailPinjaman != null) {
+            detailPinjaman.setDeleted(true);
+            detailPinjamanRepository.save(detailPinjaman);
+        }
     }
 }

@@ -89,12 +89,10 @@ export class ListPengajuanPinjamanComponent {
   
   search(): void {
     if (this.searchText.trim() !== '') {
-      const searchTerm = this.searchText.trim().toLowerCase();
       this.filteredForms = this.forms.filter(form =>
-        form.formToUser.nameUser.toLowerCase().includes(searchTerm) ||
-        form.formToUser.nikUser.toLowerCase().includes(searchTerm)
-      )
-      
+        form.formToUser.nameUser.toLowerCase().includes(this.searchText.trim().toLowerCase()) ||
+        form.formToUser.nikUser.toLowerCase().includes(this.searchText.trim().toLowerCase())
+      );
     } else {
       // Jika input pencarian kosong, tampilkan semua data
       this.filteredForms = this.forms;

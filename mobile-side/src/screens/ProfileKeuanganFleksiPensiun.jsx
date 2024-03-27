@@ -72,6 +72,7 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
   const handleNext = () => {
     if (validateInputs()) {
       // Proceed to the next step
+
       toggleDropdown();
     }
   };
