@@ -1,243 +1,304 @@
 <!-- <p>list-monitoring works!</p> -->
-<h1 id="judul" class="p-4 sm:ml-64 text-left text-2xl mb-4 font-bold"
-  style="color: #e55300; padding-top: 24px; margin-bottom: -4px">
+<div class="modal">
+  <div class="layout-container">
+    <router-outlet></router-outlet>
+  <div class="header-bar"></div>
+  <h1
+    id="judul"
+    class="p-4 sm:ml-64 text-left text-2xl mb-4 font-bold"
+    style="color: #e55300; padding-top: 111px;padding-bottom: 1px; margin-bottom: -4px"
+  >
   Daftar Debitur
 </h1>
 
-
-
 <div class="p-4 sm:ml-64">
-  <div class="p-4 border-2 border-gray-200 rounded-lg dark:border-gray-700">
+  <div class="p-4 border-2 border-gray-200 rounded-lg dark:border-gray-700" style="background-color: #fff;">
     <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
       <label for="table-search" class="sr-only">Search</label>
       <div class="relative">
-        <div class="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none">
-          <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor"
-            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd"
+        <div
+          class="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none"
+        >
+          <svg
+            class="w-5 h-5 text-gray-500 dark:text-gray-400"
+            aria-hidden="true"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
               d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-              clip-rule="evenodd"></path>
+              clip-rule="evenodd"
+            ></path>
           </svg>
         </div>
-        <input type="text" id="table-search"
+        <input
+          type="text"
+          id="table-search"
           class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          [(ngModel)]="searchText" 
-          (ngModelChange)="search()" 
+          [(ngModel)]="searchText"
+          (ngModelChange)="search()"
           (keyup.enter)="search()"
-          placeholder="Cari Data Berdasarkan Nama dan NIK" />
+          placeholder="Cari Data Berdasarkan Nama dan NIK"
+          style="font-family: 'Montserrat', sans-serif; font-size: 12px"
+        />
       </div>
     </div>
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400" style="margin-bottom: 20px">
-      <ng-container *ngIf="loading">
-        <div class="flex justify-center items-center">
-          <div class="loader">Loading...</div>
-        </div>
-      </ng-container>
-      <ng-container *ngIf="!loading">
-      <ng-container *ngIf="!loading && filteredPinjaman.length > 0; else noData">
-       
-          <thead class="text-xs text-gray-700  bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-              <th scope="col" class="px-4 py-2 flex items-center">
-                <div  class="flex items-center">
-                  <span class="mr-1">CIF</span>
-                  <button type="button" (click)="sortData('cif')">
+    <table
+    class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+    style="margin-bottom: 20px"
+  >
+    <ng-container *ngIf="loading">
+      <div class="flex justify-center items-center">
+        <div class="loader">Loading...</div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="!loading">
+      <ng-container
+        *ngIf="!loading && filteredPinjaman.length > 0; else noData"
+      >
+        <thead
+          class="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+        >
+          <tr>
+            <th scope="col" class="px-4 py-2 flex items-center">
+              <div class="flex items-center">
+                <span class="mr-1">CIF</span>
+                <button type="button" (click)="sortData('cif')">
                   <img
                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&"
-                    alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
-                  </button>
-                  </div>
-              </th>
-
-              <th scope="col" class="px-4 py-2">
-                <div class="flex items-center">
-                  <span class="mr-1">Nama</span>
-                  <button type="button" (click)="sortData('name')" >
-                  <img
-                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&"
-                    alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
-                  </button>
-                  </div>
-              </th>
-              <th scope="col" class="px-4 py-2">
-                <div class="flex items-center">
-                  <span class="mr-1">NIK</span>
-                  <button type="button" (click)="sortData('nik')" >
-                  <img
-                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&"
-                    alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
-                  </button>
-                  </div>
-              </th>
-              <div class="relative">
-                <button type="button" (click)="sortData('kolektabilitas')" class="flex items-center">
-                  <span class="mr-1 font-bold">Kolektabilitas</span>
-                  <img
-  
-  src="https://cdn.builder.io/api/v1/image/assets/TEMP/a441188ee5f1abfeed255c690980a8571275bd357621b922dff244ec0c95bcd2?"
-  class="w-full aspect-square fill-neutral-950 max-w-[15px]"
-/>
-
+                    alt="Decorative icon"
+                    class="shrink-0 my-auto aspect-square w-[18px]"
+                  />
                 </button>
-                <div class="tooltip hidden absolute top-0 left-0 mt-8 py-2 px-4 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
-                  <ol class="list-decimal pl-5">
-                    <div class="flexrelative self-stretch font-bold text-left text-black">
-                      Informasi Kolektabilitas
-                    </div>
-                    <li>
-                      <div class="relative mt-1.5">Lancar</div>
-                    </li>
-                    <div class="relative mt-2">Jumlah hari tunggakan 0 hari</div>
-                    <li>
-                      <div class="relative self-stretch mt-4">DPK 1</div>
-                    </li>
-                    <div class="relative self-stretch mt-2">
-                      0 hari &lt; Jumlah hari tunggakan ≥ 30 hari
-                    </div>
-                    <li>
-                      <div class="relative mt-4">DPK 2</div>
-                    </li>
-                    <div class="relative mt-2">
-                      31 hari &lt; Jumlah hari tunggakan ≥ 60 hari
-                    </div>
-                    <li>
-                      <div class="relative mt-4">DPK 3</div>
-                    </li>
-                    <div class="relative mt-2">
-                      61 hari &lt; Jumlah hari tunggakan ≥ 90 hari
-                    </div>
-                    <li>
-                      <div class="relative mt-4">Kurang Lancar</div>
-                    </li>
-                    <div class="relative mt-1.5">
-                      91 hari &lt; Jumlah hari tunggakan ≥ 120 hari
-                    </div>
-                    <li>
-                      <div class="relative mt-4">Diragukan</div>
-                    </li>
-                    <div class="relative mt-1.5">
-                      121 hari &lt; Jumlah hari tunggakan ≥ 150 hari
-                    </div>
-                    <li>
-                      <div class="relative self-stretch mt-4">Macet</div>
-                    </li>
-                    <div class="relative mt-1.5">
-                      Jumlah hari tunggakan &gt; 150
-                    </div>
-                  </ol>
-                </div>
               </div>
-                            
-              <th scope="col" class="px-4 py-2">
-                <div  class="flex items-center">
-                  <span class="mr-1">Jenis Pengajuan</span>
-                  <button type="button" (click)="sortData('jenis_pengajuan')">
+            </th>
+
+            <th scope="col" class="px-4 py-2">
+              <div class="flex items-center">
+                <span class="mr-1">Nama</span>
+                <button type="button" (click)="sortData('name')">
                   <img
                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&"
-                    alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
-                  </button>
-                  </div>
-              </th>
+                    alt="Decorative icon"
+                    class="shrink-0 my-auto aspect-square w-[18px]"
+                  />
+                </button>
+              </div>
+            </th>
+            <th scope="col" class="px-4 py-2">
+              <div class="flex items-center">
+                <span class="mr-1">NIK</span>
+                <button type="button" (click)="sortData('nik')">
+                  <img
+                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&"
+                    alt="Decorative icon"
+                    class="shrink-0 my-auto aspect-square w-[18px]"
+                  />
+                </button>
+              </div>
+            </th>
+            <div class="relative flex items-center" >
+              <span class="mr-1 font-bold">Kolektabilitas</span>
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/a441188ee5f1abfeed255c690980a8571275bd357621b922dff244ec0c95bcd2?"
+                class="w-full aspect-square fill-neutral-950 max-w-[15px] tooltip-trigger"
+                aria-describedby="tooltip-kolektabilitas"
+              />
+              <div
+                id="tooltip-kolektabilitas"
+                class="tooltip hidden absolute top-0 left-0 mt-8 py-2 px-4 bg-white border border-gray-300 rounded-lg shadow-lg z-10"
+              >
+              <ol class="list-decimal pl-5">
+                <div class="flex relative self-stretch font-bold text-left text-black">Informasi Kolektabilitas</div>
+                <li><div class="relative mt-1.5">Lancar</div></li>
+                <div class="relative mt-2">Jumlah hari tunggakan 0 hari</div>
+                <li><div class="relative self-stretch mt-4">DPK 1</div></li>
+                <div class="relative self-stretch mt-2">0 hari &lt; Jumlah hari tunggakan ≥ 30 hari</div>
+                <li><div class="relative mt-4">DPK 2</div></li>
+                <div class="relative mt-2">31 hari &lt; Jumlah hari tunggakan ≥ 60 hari</div>
+                <li><div class="relative mt-4">DPK 3</div></li>
+                <div class="relative mt-2">61 hari &lt; Jumlah hari tunggakan ≥ 90 hari</div>
+                <li><div class="relative mt-4">Kurang Lancar</div></li>
+                <div class="relative mt-1.5">91 hari &lt; Jumlah hari tunggakan ≥ 120 hari</div>
+                <li><div class="relative mt-4">Diragukan</div></li>
+                <div class="relative mt-1.5">121 hari &lt; Jumlah hari tunggakan ≥ 150 hari</div>
+                <li><div class="relative self-stretch mt-4">Macet</div></li>
+                <div class="relative mt-1.5">Jumlah hari tunggakan &gt; 150</div>
+            </ol>
+              </div>
+            </div>
 
-              <th scope="col" class="px-4 py-2">Aksi</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let pinjaman of filteredPinjaman">
-              <td class="px-4 py-2">
-                {{pinjaman.pinjamanToForm?.cif |uppercase }}
-              </td>
-              <td class="px-4 py-2">{{pinjaman.pinjamanToForm?.formToUser?.nameUser}}</td>
-              <td class="px-4 py-2">{{pinjaman.pinjamanToForm?.formToUser?.nikUser}}</td>
-              <td class="px-4 py-2" *ngIf="pinjaman && pinjaman.pinjamanToForm">
-                <ng-container *ngIf="pinjaman.kolektabilitas !== null; else kolektabilitasCheck">
-                  <ng-container *ngIf="pinjaman.kolektabilitas === 0; else kolektabilitasCheck2">
-                    Lancar
-                  </ng-container>
-                  <ng-container *ngIf="pinjaman.kolektabilitas < 30; else kolektabilitasCheck3">
-                    DPK 1
-                  </ng-container>
-                  <ng-container *ngIf="pinjaman.kolektabilitas < 60; else kolektabilitasCheck4">
-                    DPK 2
-                  </ng-container>
-                  <ng-container *ngIf="pinjaman.kolektabilitas < 90; else kolektabilitasCheck5">
-                    DPK 3
-                  </ng-container>
-                  <ng-container *ngIf="pinjaman.kolektabilitas < 120; else kolektabilitasCheck6">
-                    Kurang Lancar
-                  </ng-container>
-                  <ng-container *ngIf="pinjaman.kolektabilitas < 150; else kolektabilitasCheck7">
-                    Diragukan
-                  </ng-container>
-                  <ng-container *ngIf="pinjaman.kolektabilitas >= 150">
-                    Macet
-                  </ng-container>
-                </ng-container>
-                <ng-template #kolektabilitasCheck>
+            <th scope="col" class="px-4 py-2">
+              <div class="flex items-center">
+                <span class="mr-1">Jenis Pengajuan</span>
+                <button type="button" (click)="sortData('jenis_pengajuan')">
+                  <img
+                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&"
+                    alt="Decorative icon"
+                    class="shrink-0 my-auto aspect-square w-[18px]"
+                  />
+                </button>
+              </div>
+            </th>
+
+            <th scope="col" class="px-4 py-2">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pinjaman of filteredPinjaman">
+            <td class="px-4 py-2">
+              {{ pinjaman.pinjamanToForm?.cif | uppercase }}
+            </td>
+            <td class="px-4 py-2">
+              {{ pinjaman.pinjamanToForm?.formToUser?.nameUser }}
+            </td>
+            <td class="px-4 py-2">
+              {{ pinjaman.pinjamanToForm?.formToUser?.nikUser }}
+            </td>
+            <td class="px-4 py-2" *ngIf="pinjaman && pinjaman.pinjamanToForm">
+              <ng-container
+                *ngIf="
+                  pinjaman.kolektabilitas !== null;
+                  else kolektabilitasCheck
+                "
+              >
+                <ng-container
+                  *ngIf="
+                    pinjaman.kolektabilitas === 0;
+                    else kolektabilitasCheck2
+                  "
+                >
                   Lancar
-                </ng-template>
-                <ng-template #kolektabilitasCheck2>
+                </ng-container>
+                <ng-container
+                  *ngIf="
+                    pinjaman.kolektabilitas < 30;
+                    else kolektabilitasCheck3
+                  "
+                >
                   DPK 1
-                </ng-template>
-                <ng-template #kolektabilitasCheck3>
+                </ng-container>
+                <ng-container
+                  *ngIf="
+                    pinjaman.kolektabilitas < 60;
+                    else kolektabilitasCheck4
+                  "
+                >
                   DPK 2
-                </ng-template>
-                <ng-template #kolektabilitasCheck4>
+                </ng-container>
+                <ng-container
+                  *ngIf="
+                    pinjaman.kolektabilitas < 90;
+                    else kolektabilitasCheck5
+                  "
+                >
                   DPK 3
-                </ng-template>
-                <ng-template #kolektabilitasCheck5>
+                </ng-container>
+                <ng-container
+                  *ngIf="
+                    pinjaman.kolektabilitas < 120;
+                    else kolektabilitasCheck6
+                  "
+                >
                   Kurang Lancar
-                </ng-template>
-                <ng-template #kolektabilitasCheck6>
+                </ng-container>
+                <ng-container
+                  *ngIf="
+                    pinjaman.kolektabilitas < 150;
+                    else kolektabilitasCheck7
+                  "
+                >
                   Diragukan
-                </ng-template>
-                <ng-template #kolektabilitasCheck7>
+                </ng-container>
+                <ng-container *ngIf="pinjaman.kolektabilitas >= 150">
                   Macet
-                </ng-template>
-              </td>
+                </ng-container>
+              </ng-container>
+              <ng-template #kolektabilitasCheck> Lancar </ng-template>
+              <ng-template #kolektabilitasCheck2> DPK 1 </ng-template>
+              <ng-template #kolektabilitasCheck3> DPK 2 </ng-template>
+              <ng-template #kolektabilitasCheck4> DPK 3 </ng-template>
+              <ng-template #kolektabilitasCheck5> Kurang Lancar </ng-template>
+              <ng-template #kolektabilitasCheck6> Diragukan </ng-template>
+              <ng-template #kolektabilitasCheck7> Macet </ng-template>
+            </td>
 
-              <!-- <td class="px-4 py-2">{{pinjaman.pinjamanToForm.formToJenis.nameJenisPinjaman}}</td> -->
-              <td class="px-4 py-2">{{pinjaman.pinjamanToForm?.formToJenis?.nameJenisPinjaman}}</td>
+            <!-- <td class="px-4 py-2">{{pinjaman.pinjamanToForm.formToJenis.nameJenisPinjaman}}</td> -->
+            <td class="px-4 py-2">
+              {{ pinjaman.pinjamanToForm?.formToJenis?.nameJenisPinjaman }}
+            </td>
 
-              <td class="px-4 py-2">
-                <a [routerLink]="['../id/', pinjaman.hashedIdPinjaman]" class="text-blue-600 hover:underline">View</a>
-              </td>
-            </tr>
-            
-            <!-- Add more rows here if needed -->
-          </tbody>
-        </ng-container>
+            <td class="px-4 py-2">
+              <a
+                [routerLink]="['../id/', pinjaman.hashedIdPinjaman]"
+                class="text-blue-600 hover:underline"
+                >View</a
+              >
+            </td>
+          </tr>
+
+          <!-- Add more rows here if needed -->
+        </tbody>
       </ng-container>
-    </table>
-    <!-- Pagination -->
-    <nav class="flex items-center justify-between">
-      <div class="flex flex-wrap items-center justify-center">
-        <button class="px-2 py-1 border border-white-300 rounded-lg mr-2" (click)="previousPage()">Previous</button>
-        <!-- Looping untuk tombol halaman -->
-        <ng-container *ngFor="let page of totalPagesArray">
-          <button class="px-2 py-1 border border-white-300 rounded-lg mr-2" [class.bg-blue-500]="page === currentPage" (click)="goToPage(page)">
-            {{ page }}
-          </button>
-        </ng-container>
-        <button class="px-2 py-1 border border-white-300 rounded-lg" (click)="nextPage()">Next</button>
-      </div>
-      <div class="flex flex-wrap items-center justify-center mt-2">
-        <!-- Pilihan jumlah data per halaman -->
-        <select style="background-color: #1F96F9; color: white;" class="px-2 py-1 border border-white-300 rounded-lg" [(ngModel)]="pageSize" (change)="changePageSize()" title="Jumlah Data Per Halaman">
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="100">100</option>
-        </select>
-      </div>
-    </nav>
-   
-  </div>
+    </ng-container>
+  </table>
+  <!-- Pagination -->
+  <nav class="flex items-center justify-between" style="font-family: 'Montserrat', sans-serif; font-size: 12px">
+    <div class="flex flex-wrap items-center justify-center">
+      <button
+        class="px-2 py-1 border border-white-300 rounded-lg mr-2"
+        (click)="previousPage()"
+      >
+        Previous
+      </button>
+      <!-- Looping untuk tombol halaman -->
+      <ng-container *ngFor="let page of totalPagesArray">
+        <button
+          class="px-2 py-1 border border-white-300 rounded-lg mr-2"
+          [class.bg-blue-500]="page === currentPage"
+          (click)="goToPage(page)"
+        >
+          {{ page }}
+        </button>
+      </ng-container>
+      <button
+        class="px-2 py-1 border border-white-300 rounded-lg"
+        (click)="nextPage()"
+      >
+        Next
+      </button>
+    </div>
+    <div class="flex flex-wrap items-center justify-center mt-2">
+      <!-- Pilihan jumlah data per halaman -->
+      <select
+        style="background-color: #1f96f9; color: white; font-family: 'Montserrat', sans-serif; font-size: 12px"
+        class="px-2 py-1 border border-white-300 rounded-lg"
+        [(ngModel)]="pageSize"
+        (change)="changePageSize()"
+        title="Jumlah Data Per Halaman"
+      >
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="100">100</option>
+      </select>
+    </div>
+  </nav>
+</div>
+</div>
 </div>
 
 <ng-template #noData>
-  <div class="flex flex-col items-center justify-center self-center">
-    <img class="w-28 h-28 justify-center" src="../../../assets/img/nodata.png" alt="No Data">
-    <div class="pt-10  w-60 text-center text-2xl text-gray-400">Data Tidak Ditemukan</div>
+<div class="flex flex-col items-center justify-center self-center">
+  <img
+    class="w-28 h-28 justify-center"
+    src="../../../assets/img/nodata.png"
+    alt="No Data"
+  />
+  <div class="pt-10 w-60 text-center text-2xl text-gray-400">
+    Data Tidak Ditemukan
   </div>
+</div>
 </ng-template>

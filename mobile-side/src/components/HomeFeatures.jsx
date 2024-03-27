@@ -1,4 +1,16 @@
 import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
+import Transferdua from "./svg/Transferdua";
+import Ewallet from "./svg/Ewallet";
+import Pembayaran from "./svg/Pembayaran";
+import Pembelian from "./svg/Pembelian";
+import Investasi from "./svg/Investasi";
+import MyCreditCard from "./svg/MyCreditCard";
+import DigitalLoan from "./svg/DigitalLoan";
+import LifeGoals from "./svg/LifeGoals";
+import Dikado from "./svg/Dikado";
+import MobileTunai from "./svg/MobileTunai";
+import Rekeningku from "./svg/Rekeningku";
+import MenuLain from "./svg/MenuLain";
 
 const HomeFeatures = ({ navigation }) => {
   return (
@@ -6,38 +18,25 @@ const HomeFeatures = ({ navigation }) => {
       <View style={styles.atas}>
         <View style={styles.featuresKiri}>
           <TouchableOpacity>
-            <Image
-              source={require("../../../mobile-side/src/assets/icon_ewallet.png")}
-              style={{ width: 55, height: 55 }}
-            />
+            <Transferdua />
           </TouchableOpacity>
           <Text style={{ fontSize: 12 }}>Transfer</Text>
         </View>
         <View style={styles.features}>
           <TouchableOpacity>
-            <Image
-              source={require("../../../mobile-side/src/assets/icon_transfer.png")}
-              style={{ width: 55, height: 55 }}
-            />
+            <Ewallet></Ewallet>
           </TouchableOpacity>
           <Text style={{ fontSize: 12 }}>E-Wallet</Text>
         </View>
         <View style={styles.features}>
           <TouchableOpacity>
-            <Image
-              source={require("../../../mobile-side/src/assets/icon_pembayaran.png")}
-              style={{ width: 55, height: 55 }}
-              resizeMode="stretch"
-            />
+            <Pembayaran></Pembayaran>
           </TouchableOpacity>
           <Text style={{ fontSize: 12 }}>Pembayaran</Text>
         </View>
         <View style={styles.featuresKanan}>
           <TouchableOpacity>
-            <Image
-              source={require("../../../mobile-side/src/assets/icon_pembelian.png")}
-              style={{ width: 55, height: 55 }}
-            />
+            <Pembelian></Pembelian>
           </TouchableOpacity>
           <Text style={{ fontSize: 12 }}>Pembelian</Text>
         </View>
@@ -46,38 +45,25 @@ const HomeFeatures = ({ navigation }) => {
       <View style={styles.tengah}>
         <View style={styles.featuresKiri}>
           <TouchableOpacity>
-            <Image
-              source={require("../../../mobile-side/src/assets/icon_investasi.png")}
-              style={{ width: 55, height: 55 }}
-            />
+            <Investasi></Investasi>
           </TouchableOpacity>
           <Text style={{ fontSize: 12 }}>Investasi</Text>
         </View>
         <View style={styles.features}>
           <TouchableOpacity>
-            <Image
-              source={require("../../../mobile-side/src/assets/icon_myCC.png")}
-              style={{ width: 55, height: 55 }}
-            />
+            <MyCreditCard></MyCreditCard>
           </TouchableOpacity>
           <Text style={{ fontSize: 12 }}>My Credit Card</Text>
         </View>
         <View style={styles.features}>
           <TouchableOpacity onPress={() => navigation.navigate("DigitalLoan")}>
-            <Image
-              source={require("../../../mobile-side/src/assets/icon_digitalLoan.png")}
-              style={{ width: 55, height: 55 }}
-              resizeMode="stretch"
-            />
+            <DigitalLoan></DigitalLoan>
           </TouchableOpacity>
           <Text style={{ fontSize: 12 }}>Digital Loan</Text>
         </View>
         <View style={styles.featuresKanan}>
           <TouchableOpacity>
-            <Image
-              source={require("../../../mobile-side/src/assets/icon_lifeGoals.png")}
-              style={{ width: 55, height: 55 }}
-            />
+            <LifeGoals></LifeGoals>
           </TouchableOpacity>
           <Text style={{ fontSize: 12 }}>Life Goals</Text>
         </View>
@@ -86,38 +72,25 @@ const HomeFeatures = ({ navigation }) => {
       <View style={styles.tengah}>
         <View style={styles.featuresKiri}>
           <TouchableOpacity>
-            <Image
-              source={require("../../../mobile-side/src/assets/icon_dikado.png")}
-              style={{ width: 55, height: 55 }}
-            />
+            <Dikado></Dikado>
           </TouchableOpacity>
           <Text style={{ fontSize: 12 }}>Dikado</Text>
         </View>
         <View style={styles.features}>
           <TouchableOpacity>
-            <Image
-              source={require("../../../mobile-side/src/assets/icon_mobileTunai.png")}
-              style={{ width: 55, height: 55 }}
-            />
+            <MobileTunai></MobileTunai>
           </TouchableOpacity>
           <Text style={{ fontSize: 12 }}>Mobile Tunai</Text>
         </View>
         <View style={styles.features}>
           <TouchableOpacity>
-            <Image
-              source={require("../../../mobile-side/src/assets/icon_rekeningku.png")}
-              style={{ width: 55, height: 55 }}
-              resizeMode="stretch"
-            />
+            <Rekeningku></Rekeningku>
           </TouchableOpacity>
           <Text style={{ fontSize: 12 }}>Rekeningku</Text>
         </View>
         <View style={styles.featuresKanan}>
           <TouchableOpacity onPress={() => navigation.navigate("SANDBOX")}>
-            <Image
-              source={require("../../../mobile-side/src/assets/icon_menuLain.png")}
-              style={{ width: 55, height: 55 }}
-            />
+            <MenuLain></MenuLain>
           </TouchableOpacity>
           <Text style={{ fontSize: 12 }}>Menu Lain</Text>
         </View>
@@ -143,18 +116,18 @@ const styles = StyleSheet.create({
   },
   featuresKanan: {
     alignItems: "center",
-    paddingLeft:12
+    paddingLeft: 12,
     // backgroundColor: "pink"
   },
   atas: {
     flexDirection: "row",
-    justifyContent: 'space-between',
-    resizeMode: "stretch"
+    justifyContent: "space-between",
+    resizeMode: "stretch",
   },
   tengah: {
     // backgroundColor: "red",
     flexDirection: "row",
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     marginTop: 20,
   },
 });
