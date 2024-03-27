@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -7,11 +7,50 @@ import {
   Image,
   Modal,
   Pressable,
+  ActivityIndicator
 } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ModalDelete from "./ModalDelete";
+import { getAccountByHashedId } from '../reducers/Account';
+import { fetchFormListById } from '../reducers/Form';
+
 
 const ListPengajuanPinjaman = ({ navigation }) => {
+
+
+
+
+
+  const dispatch = useDispatch();
+  const formDetailsState = useSelector((state) => state.forms);
+  const accountState = useSelector((state) => state.account);
+
+  useEffect(() => {
+    const initializeData = async () => {
+      const hashedId = await AsyncStorage.getItem("hashedId");
+      if (hashedId) {
+        await dispatch(getAccountByHashedId(hashedId));
+      }
+    };
+    initializeData();
+  }, [dispatch]);
+
+  useEffect(() => {
+    // Once the accountState is updated and contains the user's ID, dispatch the fetchFormListById
+    const userId = accountState.data?.accountToUser?.idUser;
+    if (userId) {
+      dispatch(fetchFormListById(userId));
+    }
+  }, [dispatch, accountState.data?.accountToUser?.idUser]);
+
+
+
+
+
+
+
+
   const list = [
     require("../../../mobile-side/src/assets/ban_kejutan1.png"),
     require("../../../mobile-side/src/assets/ban_kejutan2.png"),
@@ -48,73 +87,35 @@ const ListPengajuanPinjaman = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.shadow}>
-        {Data.map((view) => (
-          <View key={view.id} style={styles.card}>
-            <View style={{ width: "35%" }}>
-              <Image source={view.img} style={styles.image} />
-            </View>
-            <View style={{ flexDirection: "column", width: "70%" }}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={styles.textHeader}>{view.title}</Text>
-                <TouchableOpacity onPress={() => openModal(view.id)}>
-                  <Image
-                    source={require("../../../mobile-side/src/assets/icon_delete.png")}
-                    style={{justifyContent:"flex-start", marginRight: 8}}
-                  />
-                </TouchableOpacity>
+        
+      {formDetailsState.loading ? (
+          <ActivityIndicator size="large" />
+        ) : formDetailsState.error ? (
+          <Text>Error fetching forms: {formDetailsState.error}</Text>
+        ) : (
+          formDetailsState.data?.map((form, index) => (
+            <TouchableOpacity key={index} style={styles.card} onPress={() => navigation.navigate("Monitoring")}>
+              <View style={{backgroundColor: "green"}}>
+                <Image source={{ uri: form.formToJenis.gambarJenisPinjaman }} style={styles.image} />
               </View>
-
-              <Text style={styles.textContent}>
-                Tanggal Pengajuan : {view.date}
-              </Text>
-              <Text style={styles.textContent}>
-                Periode Peminjaman : {view.period}
-              </Text>
-              <Text style={styles.textContent}>
-                Total Pengajuan : {view.amount}
-              </Text>
-              <View style={styles.buttonStatus}>
-                <Text style={styles.textStatus}>{view.status}</Text>
+              <View style={styles.infoContainer}>
+                <View style={styles.info}>
+                  <View>
+                    <Text style={styles.textHeader}>{form.formToJenis.nameJenisPinjaman}</Text>
+                  </View>
+                  <Text>Tanggal Pengajuan: {form.tanggalPengajuan}</Text>
+                  <Text>Periode Pinjaman: {form.jangkaWaktu} Bulan</Text>
+                  <Text>Periode Pinjaman: {form.jumlahPinjaman}</Text>
+                  <Text>Status: {form.statusPengajuan}</Text>
+                  <View style={styles.cardStatus}>
+                    <Text style={styles.textStatus}>{form.statusPengajuan}</Text>
+                  </View>
+                </View>
               </View>
-            </View>
-          </View>
-        ))}
+            </TouchableOpacity>
+          ))
+        )}
       </View>
-
-      <Modal
-        animationType="fade"
-        transparent
-        visible={modalVisible}
-        onRequestClose={closeModal}
-      >
-        <View style={styles.modalContainer}>
-          {/* Pressable di luar modal */}
-          <Pressable
-            style={{
-              flex: 1,
-              position: "absolute",
-              width: "100%",
-              height: "100%",
-              backgroundColor: "rgba(0,0,0,0.5)",
-            }}
-            // onPress={closeModal}
-          >
-            {/* ModalAwal tetap berada di dalam View */}
-          </Pressable>
-          <View>
-            <ModalDelete
-              navigation={navigation}
-              modalVisible={modalVisible}
-              closeModal={closeModal}
-            ></ModalDelete>
-          </View>
-        </View>
-      </Modal>
     </View>
   );
 };
@@ -122,9 +123,8 @@ export default ListPengajuanPinjaman;
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 16,
+    flex:1,
     alignItems: "center",
-    width: "100%",
   },
   card: {
     flexDirection: "row",
@@ -135,7 +135,17 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     marginBottom: 16,
     // width: "95%",
-    // backgroundColor: 'blue'
+    backgroundColor: 'yellow'
+  },
+  infoContainer: {
+    flexDirection: "column", 
+    backgroundColor: "cyan",
+    width: "70%",
+  },
+  info: {
+    backgroundColor: "orange",
+    marginHorizontal: 10,
+    width:"90%",
   },
   shadow: {
     shadowColor: "#ddd",
@@ -152,8 +162,9 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
   },
   image: {
-    width: 95,
-    height: 95,
+    width: 120,
+    height: 120,
+    backgroundColor: "pink"
   },
   textHeader: {
     fontSize: 14,
@@ -171,18 +182,12 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     textAlign: "center",
   },
-  buttonStatus: {
+  cardStatus: {
     paddingVertical: 3,
-    // paddingHorizontal: 16,
+    marginTop: 5,
     borderRadius: 50,
     width: "35%",
     backgroundColor: "#D4352A",
     alignItems: "center",
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: "center", // Pusatkan konten secara horizontal
-    // alignItems: "center", // Pusatkan konten secara vertikal
-    // backgroundColor: "rgba(0, 0, 0, 0.5)", // Atur warna latar belakang
-  },
+  }
 });

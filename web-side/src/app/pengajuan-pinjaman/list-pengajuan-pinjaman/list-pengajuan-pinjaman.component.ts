@@ -15,6 +15,7 @@ export class ListPengajuanPinjamanComponent {
   currentPage: number = 1;
   totalPages: number = 1;
   totalPagesArray: number[] = [];
+  selectedStatus: string = ''; // Properti untuk menyimpan status pengajuan yang dipilih
   sortDirection: 'asc' | 'desc' = 'asc';
   loading = true;
 
@@ -102,6 +103,19 @@ export class ListPengajuanPinjamanComponent {
     this.calculateTotalPages();
     this.searchTopage(1); // Navigasikan ke halaman pertama setelah pencarian
   }
+
+  // Fungsi filter berdasarkan status pengajuan
+filterByStatus(): void {
+  if (this.selectedStatus !== '') {
+    this.filteredForms = this.forms.filter(form => form.statusPengajuan === this.selectedStatus);
+  } else {
+    this.filteredForms = this.forms; // Jika tidak ada status yang dipilih, tampilkan semua data
+  }
+
+  // Setelah memfilter data, perbarui jumlah halaman dan navigasi
+  this.calculateTotalPages();
+  this.searchTopage(1); // Navigasikan ke halaman pertama setelah filtering
+}
 
   changePageSize(): void {
     this.totalPages = Math.ceil(this.filteredForms.length / this.pageSize);
