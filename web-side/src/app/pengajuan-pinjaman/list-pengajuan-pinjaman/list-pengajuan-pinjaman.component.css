@@ -30,4 +30,13 @@
     height: 95px;
     z-index: 1; 
   }
+.body {
+    overflow-y: auto; /* Gunakan auto atau scroll sesuai kebutuhan */
+  }
+  .layout-container {
+    height: 100vh; /* Menentukan ketinggian layout */
+    overflow-y: auto; /* Mengaktifkan gulir jika konten melebihi ketinggian layout */
+  }
+  
+  
   
