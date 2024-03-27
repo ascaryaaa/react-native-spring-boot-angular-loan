@@ -1,8 +1,8 @@
 import * as React from "react"
-import Svg, { Path } from "react-native-svg"
 import Svg, { Circle, Path } from "react-native-svg"
 const QrisLogo = (props) => (
   <Svg
+    xmlns="http://www.w3.org/2000/svg"
     width={70}
     height={70}
     fill="none"
@@ -22,4 +22,4 @@ const QrisLogo = (props) => (
     />
   </Svg>
 )
-export default QrisLogo;
+export default QrisLogo
