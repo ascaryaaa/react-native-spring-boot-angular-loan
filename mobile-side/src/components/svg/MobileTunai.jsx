@@ -1,20 +1,7 @@
-<<<<<<< HEAD:mobile-side/src/components/svg/MobileTunai.jsx
 import * as React from "react";
 import Svg, { Path } from "react-native-svg";
 const MobileTunai = (props) => (
   <Svg width={33} height={33} fill="none" {...props}>
-=======
-import * as React from "react"
-import Svg, { Rect, Path } from "react-native-svg"
-const MobileTunai = (props) => (
-  <Svg
-    width={55}
-    height={55}
-    fill="none"
-    {...props}
-  >
-    <Rect width={55} height={55} fill="#F68310" rx={24} />
->>>>>>> aura:mobile-side/src/assets/svg/mobileTunai.jsx
     <Path
       fill="#fff"
       fillRule="evenodd"
@@ -22,9 +9,5 @@ const MobileTunai = (props) => (
       clipRule="evenodd"
     />
   </Svg>
-<<<<<<< HEAD:mobile-side/src/components/svg/MobileTunai.jsx
 );
-=======
-)
->>>>>>> aura:mobile-side/src/assets/svg/mobileTunai.jsx
 export default MobileTunai;

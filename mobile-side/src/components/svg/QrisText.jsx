@@ -1,10 +1,6 @@
 import * as React from "react"
 import Svg, { Path } from "react-native-svg"
-<<<<<<<< HEAD:mobile-side/src/components/svg/QrisText.jsx
 const QrisText = (props) => (
-========
-const Qris = (props) => (
->>>>>>>> aura:mobile-side/src/components/svg/Qris.jsx
   <Svg
     width={52}
     height={20}
@@ -29,8 +25,4 @@ const Qris = (props) => (
     />
   </Svg>
 )
-<<<<<<<< HEAD:mobile-side/src/components/svg/QrisText.jsx
 export default QrisText;
-========
-export default Qris;
->>>>>>>> aura:mobile-side/src/components/svg/Qris.jsx

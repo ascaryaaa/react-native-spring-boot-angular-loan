@@ -1,10 +1,6 @@
 import * as React from "react"
 import Svg, { Path } from "react-native-svg"
-<<<<<<<< HEAD:mobile-side/src/components/svg/NotificationHome.jsx
 const NotificationHome = (props) => (
-========
-const Notification = (props) => (
->>>>>>>> aura:mobile-side/src/components/svg/Notification.jsx
   <Svg
     width={24}
     height={24}
@@ -17,8 +13,4 @@ const Notification = (props) => (
     />
   </Svg>
 )
-<<<<<<<< HEAD:mobile-side/src/components/svg/NotificationHome.jsx
 export default NotificationHome;
-========
-export default Notification;
->>>>>>>> aura:mobile-side/src/components/svg/Notification.jsx

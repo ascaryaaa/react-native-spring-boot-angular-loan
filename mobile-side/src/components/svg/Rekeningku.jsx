@@ -1,22 +1,8 @@
-<<<<<<< HEAD:mobile-side/src/components/svg/Rekeningku.jsx
 import * as React from "react";
 import Svg, { Rect, Path } from "react-native-svg";
 const Rekeningku = (props) => (
   <Svg width={33} height={33} fill="none" {...props}>
     <Rect width={32} height={32} x={0.5} y={0.5} fill="#fff" rx={3} />
-=======
-import * as React from "react"
-import Svg, { Rect, Path } from "react-native-svg"
-const Rekeningku = (props) => (
-  <Svg
-    width={55}
-    height={55}
-    fill="none"
-    {...props}
-  >
-    <Rect width={55} height={55} fill="#F68310" rx={25} />
-    <Rect width={32} height={32} x={11.5} y={11.5} fill="#fff" rx={3} />
->>>>>>> aura:mobile-side/src/assets/svg/rekeningku.jsx
     <Path
       fill="#F68310"
       fillRule="evenodd"
@@ -24,9 +10,5 @@ const Rekeningku = (props) => (
       clipRule="evenodd"
     />
   </Svg>
-<<<<<<< HEAD:mobile-side/src/components/svg/Rekeningku.jsx
 );
-=======
-)
->>>>>>> aura:mobile-side/src/assets/svg/rekeningku.jsx
 export default Rekeningku;

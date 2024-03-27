@@ -1,19 +1,7 @@
-<<<<<<<< HEAD:mobile-side/src/components/svg/LogoMbanking.jsx
 import * as React from "react";
 import Svg, { Path, Defs, Pattern, Use, Image } from "react-native-svg";
 const LogoMbanking = (props) => (
   <Svg width={66} height={65} fill="none" {...props}>
-========
-import * as React from "react"
-import Svg, { Path, Defs, Pattern, Use, Image } from "react-native-svg"
-const LogoBNIKotak = (props) => (
-  <Svg
-    width={66}
-    height={65}
-    fill="none"
-    {...props}
-  >
->>>>>>>> aura:mobile-side/src/components/svg/LogoBNIKotak.jsx
     <Path fill="url(#a)" d="M.5 0h65v65H.5z" />
     <Defs>
       <Pattern
@@ -32,10 +20,6 @@ const LogoBNIKotak = (props) => (
       />
     </Defs>
   </Svg>
-<<<<<<<< HEAD:mobile-side/src/components/svg/LogoMbanking.jsx
 );
-export default LogoMbanking;
-========
-)
 export default LogoBNIKotak;
->>>>>>>> aura:mobile-side/src/components/svg/LogoBNIKotak.jsx
+

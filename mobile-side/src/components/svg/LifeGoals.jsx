@@ -1,20 +1,7 @@
-<<<<<<< HEAD:mobile-side/src/components/svg/LifeGoals.jsx
 import * as React from "react";
 import Svg, { Path } from "react-native-svg";
 const LifeGoals = (props) => (
   <Svg width={33} height={33} fill="none" {...props}>
-=======
-import * as React from "react"
-import Svg, { Rect, Path } from "react-native-svg"
-const LifeGoals = (props) => (
-  <Svg
-    width={55}
-    height={55}
-    fill="none"
-    {...props}
-  >
-    <Rect width={55} height={55} fill="#18C1CD" rx={24} />
->>>>>>> aura:mobile-side/src/assets/svg/lifeGoals.jsx
     <Path
       stroke="#fff"
       strokeLinecap="round"
@@ -44,9 +31,5 @@ const LifeGoals = (props) => (
       d="m39.42 19.292-4.32.608.608-4.32a.253.253 0 0 0-.417-.215l-2.864 2.85a2.534 2.534 0 0 0-.684 2.293l.456 2.293 2.293.455a2.533 2.533 0 0 0 2.293-.684l2.848-2.863a.254.254 0 0 0-.216-.417"
     />
   </Svg>
-<<<<<<< HEAD:mobile-side/src/components/svg/LifeGoals.jsx
 );
-=======
-)
->>>>>>> aura:mobile-side/src/assets/svg/lifeGoals.jsx
 export default LifeGoals;

@@ -1,20 +1,7 @@
-<<<<<<< HEAD:mobile-side/src/components/svg/Investasi.jsx
 import * as React from "react";
 import Svg, { Path } from "react-native-svg";
 const Investasi = (props) => (
   <Svg width={33} height={33} fill="none" {...props}>
-=======
-import * as React from "react"
-import Svg, { Rect, Path } from "react-native-svg"
-const Investasi = (props) => (
-  <Svg
-    width={55}
-    height={55}
-    fill="none"
-    {...props}
-  >
-    <Rect width={55} height={55} fill="#04A966" rx={25} />
->>>>>>> aura:mobile-side/src/assets/svg/investasi.jsx
     <Path
       fill="#fff"
       fillRule="evenodd"
@@ -22,9 +9,5 @@ const Investasi = (props) => (
       clipRule="evenodd"
     />
   </Svg>
-<<<<<<< HEAD:mobile-side/src/components/svg/Investasi.jsx
 );
-=======
-)
->>>>>>> aura:mobile-side/src/assets/svg/investasi.jsx
 export default Investasi;

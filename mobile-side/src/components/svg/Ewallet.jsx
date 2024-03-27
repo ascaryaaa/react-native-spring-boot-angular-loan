@@ -1,9 +1,5 @@
 import * as React from "react"
-<<<<<<< HEAD:mobile-side/src/components/svg/Ewallet.jsx
 import Svg, { Path } from "react-native-svg"
-=======
-import Svg, { Rect, Path } from "react-native-svg"
->>>>>>> aura:mobile-side/src/assets/svg/ewallet.jsx
 const Ewallet = (props) => (
   <Svg
     width={55}

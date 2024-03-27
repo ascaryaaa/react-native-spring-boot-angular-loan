@@ -1,10 +1,6 @@
 import * as React from "react"
 import Svg, { Path, Defs, Pattern, Use, Image } from "react-native-svg"
-<<<<<<<< HEAD:mobile-side/src/components/svg/PoinMBanking.jsx
-const PoinMBanking = (props) => (
-========
 const Poin = (props) => (
->>>>>>>> aura:mobile-side/src/components/svg/Poin.jsx
   <Svg
     width={32}
     height={15}
@@ -30,8 +26,4 @@ const Poin = (props) => (
     </Defs>
   </Svg>
 )
-<<<<<<<< HEAD:mobile-side/src/components/svg/PoinMBanking.jsx
-export default PoinMBanking;
-========
 export default Poin;
->>>>>>>> aura:mobile-side/src/components/svg/Poin.jsx
