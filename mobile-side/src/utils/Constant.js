@@ -12,7 +12,8 @@ const urls = {
   getAccounts: `${MAIN_URL}accounts/get-accounts`,
   loginAccount: `${LOGIN_URL}login-account`,
   getUserDetailByHashedId: `${MAIN_URL}account/hid/`,
-  getFormListUser: `${MAIN_URL}form/get-user-form/`
+  getFormListUser: `${MAIN_URL}form/get-user-form/`,
+  softDeleteForm: `${MAIN_URL}form/soft-delete-form/`,
 };
 
 export default urls;

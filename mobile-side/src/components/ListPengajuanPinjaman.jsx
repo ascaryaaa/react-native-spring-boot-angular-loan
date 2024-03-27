@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ModalDelete from "./ModalDelete";
 import { getAccountByHashedId } from '../reducers/Account';
-import { fetchFormListById } from '../reducers/Form';
+import { fetchFormListById, softDeleteForm } from '../reducers/Form';
 
 
 const ListPengajuanPinjaman = ({ navigation }) => {
@@ -32,12 +32,16 @@ const ListPengajuanPinjaman = ({ navigation }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    // Once the accountState is updated and contains the user's ID, dispatch the fetchFormListById
     const userId = accountState.data?.accountToUser?.idUser;
     if (userId) {
       dispatch(fetchFormListById(userId));
     }
   }, [dispatch, accountState.data?.accountToUser?.idUser]);
+
+  // Function to handle soft delete
+  const handleSoftDelete = async (formId) => {
+    dispatch(softDeleteForm(formId));
+  };
 
   return (
     <View style={styles.container}>
@@ -66,6 +70,11 @@ const ListPengajuanPinjaman = ({ navigation }) => {
                     <View style={[styles.cardStatus, { backgroundColor: form.statusPengajuan === "Ditolak" ? "#D4352A" : "#757575" }]}>
                       <Text style={styles.textStatus}>{form.statusPengajuan}</Text>
                     </View>
+                    {form.statusPengajuan === "Ditolak" && ( // Render soft delete button if status is Ditolak
+                      <TouchableOpacity onPress={() => handleSoftDelete(form.idFormPengajuanPinjaman)}>
+                        <Text style={styles.softDeleteButton}>Soft Delete</Text>
+                      </TouchableOpacity>
+                    )}
                   </View>
                 </View>
               </TouchableOpacity>
