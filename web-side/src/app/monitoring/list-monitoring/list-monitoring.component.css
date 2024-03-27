@@ -1,23 +1,35 @@
 /* Hide tooltip by default */
 .tooltip {
-    display: none;
-    /* Set the width of the tooltip content */
-    width: 300px; /* Adjust the width as needed */
-  }
-  
-  /* Show the tooltip when hovering over the button */
-  .relative button:hover + .tooltip {
-    display: block;
-  }
-  
-  /* Override text-transform for tooltip content */
-  .tooltip div,
-  .tooltip li {
-    text-transform: none !important;
-  }
+  /* Tambahkan position: relative agar ::before bisa ditempatkan relatif ke tooltip */
+  display: none;
+  width: 300px;
+  padding: 4px; /* Tambahkan padding agar konten tidak terlalu dekat dengan tepi tooltip */
+
+  background-color: #fff;
+}
+
+/* Show the tooltip when hovering over the image */
+.tooltip-trigger:hover + .tooltip {
+  display: block;
+}
+
+.tooltip::before {
+  content: "";
+  position: absolute;
+  top: -20px; /* Sesuaikan posisi segitiga */
+  left: calc(50% - 70px); /* Sesuaikan posisi segitiga */
+  width: 0;
+  height: 0;
+  border: 1px solid #fff;
+  border-width: 10px;
+  border-style: solid; /* Tambahkan ini */
+  border-color: #ccc transparent transparent transparent; /* Border putih */
+
+  transform: rotate(180deg); /* Putar segitiga */
+}
 
 .modal{
-  background-color:#F2F3F2;
+  background-color:#F2F4F8;
   position: fixed;
   top: 0;
   left: 0;

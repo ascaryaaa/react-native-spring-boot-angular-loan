@@ -81,16 +81,15 @@ const SimulasiFleksiAktif = ({ navigation }) => {
     if (validateInputs()) {
       try {
         // Stringify and save inputData to AsyncStorage
-        await AsyncStorage.setItem(
-          "inputDataSimulasi",
-          JSON.stringify(inputData)
-        );
+        await AsyncStorage.setItem("penghasilan", inputData.penghasilan);
+        AsyncStorage.setItem("jangkaWaktu", inputData.jangkaWaktu);
         AsyncStorage.setItem("simulasiPinjaman", JSON.stringify(maksPinjaman));
+
         //AsyncStorage.setItem('max', inputData.jangkaWaktu X inputData.penghasilan); gpt help me
         // Retrieve and log the saved item
-        const savedData = await AsyncStorage.getItem("inputDataSimulasi");
+        const savedData = await AsyncStorage.getItem("penghasilan");
         console.log(JSON.parse(savedData)); // Make sure to parse the JSON string
-        const savedData2 = await AsyncStorage.getItem("simulasiPinjaman");
+        const savedData2 = await AsyncStorage.getItem("jangkaWaktu");
         console.log(JSON.parse(savedData2)); // Make sure to parse the JSON string
         navigation.navigate("ProfileKeuanganFleksiAktif");
       } catch (error) {

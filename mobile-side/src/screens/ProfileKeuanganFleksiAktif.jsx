@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -8,29 +8,49 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ProfileKeuanganFleksiAktif = ({ navigation }) => {
   const [inputData, setInputData] = useState({
-    penghasilanBersih: "",
+    penghasilan: "",
     jumlahPinjaman: "",
     jangkaWaktu: "",
   });
 
   const [inputErrors, setInputErrors] = useState({
-    penghasilanBersih: false,
+    penghasilan: false,
     jumlahPinjaman: false,
     jangkaWaktu: false,
   });
+
+  const angsuranPerbulan =
+    (inputData.jumlahPinjaman * (0.1275 / 12)) /
+    (1 - Math.pow(1 + 0.1275 / 12, -inputData.jangkaWaktu));
+
   const data = [
     {
       id: 1,
       title: "Penghasilan Bersih per Bulan",
-      content: "Rp 8.000.000,00",
+      content: `Rp ${inputData.penghasilan.toLocaleString("id-ID", {
+        maximumFractionDigits: 2,
+      })}`,
     },
-    { id: 2, title: "Jangka Waktu", content: "120 Bulan" },
+    { id: 2, title: "Jangka Waktu", content: inputData.jangkaWaktu },
     { id: 3, title: "Suku Bunga per Tahun", content: "12,75%" },
-    { id: 4, title: "Total Pinjaman", content: "Rp 100.000.000,00" },
-    { id: 5, title: "Angsuran Pinjaman per Bulan", content: "Rp 3.167.445,22" },
+    {
+      id: 4,
+      title: "Total Pinjaman",
+      content: `Rp ${inputData.jumlahPinjaman.toLocaleString("id-ID", {
+        maximumFractionDigits: 2,
+      })}`,
+    },
+    {
+      id: 5,
+      title: "Angsuran Pinjaman per Bulan",
+      content: `Rp ${angsuranPerbulan.toLocaleString("id-ID", {
+        maximumFractionDigits: 2,
+      })}`,
+    },
   ];
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -55,10 +75,79 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
     }
   };
 
+  const taruhData = async () => {
+    if (validateInputs()) {
+      try {
+        // Stringify and save inputData to AsyncStorage
+        await AsyncStorage.setItem(
+          "penghasilan",
+          String(inputData.penghasilan)
+        );
+        await AsyncStorage.setItem(
+          "jangkaWaktu",
+          String(inputData.jangkaWaktu)
+        );
+        await AsyncStorage.setItem(
+          "jumlahPinjaman",
+          String(inputData.jumlahPinjaman)
+        );
+        await AsyncStorage.setItem(
+          "angsuranPerbulan",
+          JSON.stringify(angsuranPerbulan)
+        );
+
+        // Retrieve and log the saved items
+        const savedData = await AsyncStorage.getItem("penghasilan");
+        console.log("Penghasilan:", savedData);
+        const savedData2 = await AsyncStorage.getItem("jangkaWaktu");
+        console.log("Jangka Waktu:", savedData2);
+        const savedData3 = await AsyncStorage.getItem("jumlahPinjaman");
+        console.log("Jumlah Pinjaman:", savedData3);
+        const savedData4 = await AsyncStorage.getItem("angsuranPerbulan");
+        console.log("Angsuran Perbulan:", JSON.parse(savedData4));
+
+        navigation.navigate("DataPemohon");
+      } catch (error) {
+        console.error(
+          "Failed to save or retrieve data from AsyncStorage",
+          error
+        );
+      }
+    }
+  };
+
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
     setHidedButton(true);
   };
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        // Mengambil data dari AsyncStorage
+        const penghasilanData = await AsyncStorage.getItem("penghasilan");
+        const jangkaWaktuData = await AsyncStorage.getItem("jangkaWaktu");
+
+        // Parse the retrieved data
+        const penghasilan =
+          penghasilanData !== null ? JSON.parse(penghasilanData) : "";
+        const jangkaWaktu =
+          jangkaWaktuData !== null ? JSON.parse(jangkaWaktuData) : "";
+
+        // Set the parsed data to the state
+        setInputData({
+          penghasilan: penghasilan,
+          jumlahPinjaman: "",
+          jangkaWaktu: jangkaWaktu,
+        });
+      } catch (error) {
+        console.error("Failed to fetch data from AsyncStorage", error);
+      }
+    };
+
+    // Panggil fungsi untuk mengambil data saat komponen dimuat
+    getData();
+  }, []);
 
   return (
     <View style={styles.bg}>
@@ -84,35 +173,20 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
             <TextInput
               style={[
                 styles.input,
-                inputErrors.penghasilanBersih && styles.inputError,
+                inputErrors.penghasilan && styles.inputError,
               ]}
               // placeholder="Penghasilan Bersih per. Bulan"
               keyboardType="numeric"
-              value={inputData.penghasilanBersih}
+              placeholder={`Rp ${inputData.penghasilan.toLocaleString("id-ID", {
+                maximumFractionDigits: 2,
+              })}`}
+              editable={false}
+              value={inputData.penghasilan}
               onChangeText={(number) =>
-                setInputData({ ...inputData, penghasilanBersih: number })
+                setInputData({ ...inputData, penghasilan: number })
               }
             />
-            {inputErrors.penghasilanBersih && (
-              <Text style={styles.errorText}>
-                Mohon isikan data dengan benar
-              </Text>
-            )}
-
-            <Text style={styles.text}>Jumlah Pinjaman yang Diajukan</Text>
-            <TextInput
-              style={[
-                styles.input,
-                inputErrors.jumlahPinjaman && styles.inputError,
-              ]}
-              // placeholder="Jumlah Pinjaman yang Diajukan"
-              value={inputData.jumlahPinjaman}
-              keyboardType="numeric"
-              onChangeText={(number) =>
-                setInputData({ ...inputData, jumlahPinjaman: number })
-              }
-            />
-            {inputErrors.jumlahPinjaman && (
+            {inputErrors.penghasilan && (
               <Text style={styles.errorText}>
                 Mohon isikan data dengan benar
               </Text>
@@ -126,6 +200,8 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
               ]}
               // placeholder="Jangka Waktu"
               value={inputData.jangkaWaktu}
+              placeholder={inputData.jangkaWaktu.toString()}
+              editable={false}
               keyboardType="numeric"
               onChangeText={(number) =>
                 setInputData({ ...inputData, jangkaWaktu: number })
@@ -139,6 +215,32 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
             <Text style={{ marginBottom: 10, fontSize: 10 }}>
               *Maksimal 360 Bulan
             </Text>
+
+            <Text style={styles.text}>Jumlah Pinjaman yang Diajukan</Text>
+            <TextInput
+              style={[
+                styles.input,
+                inputErrors.jumlahPinjaman && styles.inputError,
+              ]}
+              value={
+                inputData.jumlahPinjaman === ""
+                  ? ""
+                  : inputData.jumlahPinjaman.toString()
+              }
+              keyboardType="numeric"
+              onChangeText={(number) => {
+                const parsedNumber = parseInt(number);
+                setInputData({
+                  ...inputData,
+                  jumlahPinjaman: isNaN(parsedNumber) ? "" : parsedNumber,
+                });
+              }}
+            />
+            {inputErrors.jumlahPinjaman && (
+              <Text style={styles.errorText}>
+                Mohon isikan data dengan benar
+              </Text>
+            )}
             <Text style={styles.text}>Bunga Pinjaman</Text>
             <TextInput
               style={styles.input}
@@ -176,7 +278,7 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
                               flex: 1,
                               textAlign: "right",
                               fontWeight: "600",
-                              fontSize: 14,
+                              fontSize: 12,
                             }}
                           >
                             {view.content}
@@ -188,16 +290,13 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
                   <Text
                     style={{
                       fontWeight: "300",
-                      fontWeight: "500",
+                      // fontWeight: "500",
                       fontSize: 12,
                     }}
                   >
                     *Simulasi menggunakan suku bunga yang berlaku saat ini
                   </Text>
-                  <TouchableOpacity
-                    style={styles.button1}
-                    onPress={() => navigation.navigate("DataPemohon")}
-                  >
+                  <TouchableOpacity style={styles.button1} onPress={taruhData}>
                     <Text
                       style={{
                         textAlign: "center",

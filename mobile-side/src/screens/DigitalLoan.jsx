@@ -33,14 +33,22 @@ const DigitalLoan = ({ navigation }) => {
     );
     setActiveButton("all");
   };
-
+  
   const handleButton1Press = () => {
-    setResult(<ListPengajuanPinjaman navigation={navigation} />);
+    setResult(
+      <View>
+        <ListPengajuanPinjaman navigation={navigation} />
+      </View>
+    );
     setActiveButton("pengajuan");
   };
-
+  
   const handleButton2Press = () => {
-    setResult(<ListPinjaman navigation={navigation} />);
+    setResult(
+      <View>
+        <ListPinjaman navigation={navigation} />
+      </View>
+    );
     setActiveButton("pinjaman");
   };
 
@@ -150,10 +158,7 @@ export default DigitalLoan;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: "center",
-    // alignItems: "left",
     paddingHorizontal: 16,
-    // backgroundColor: "blue",
   },
   bg: {
     backgroundColor: "white",
@@ -163,11 +168,8 @@ const styles = StyleSheet.create({
   containerTengah: {
     justifyContent: "center",
     alignItems: "left",
-    // marginTop: 10,
-    // marginLeft: 30,
-    // marginRight: 30,
     width: "100%",
-    // backgroundColor: "red",
+    //backgroundColor: "red",
   },
   containerBawah: {
     justifyContent: "center",
@@ -192,14 +194,6 @@ const styles = StyleSheet.create({
     height: 45,
     borderRadius: 20,
   },
-  amico: {
-    padding: 5,
-    borderRadius: 5,
-    margin: 5,
-    height: 173,
-    width: 175,
-    marginBottom: 20,
-  },
   ajukan: {
     color: "white",
     textAlign: "center",
@@ -212,7 +206,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     verticalAlign: "top",
-    // height: 48,
     paddingTop: 60,
     padding: 12,
     width: "100%",
@@ -224,17 +217,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.4,
     shadowRadius: 10,
   },
-  texttitle: {
-    fontSize: 18,
-    fontWeight: "600",
-    paddingTop: 20,
-  },
-  textbody: {
-    fontSize: 13,
-    textAlign: "center",
-    // backgroundColor: "red",
-    // width: "100%",
-  },
   bannerImage: {
     marginTop: 15,
     marginHorizontal: 5,
@@ -243,32 +225,13 @@ const styles = StyleSheet.create({
     height: 110,
     resizeMode: "cover",
   },
-  // bannerText: {
-  //   position: "absolute",
-  //   bottom: 10,
-  //   left: 10,
-  //   color: "#fff",
-  //   backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent background over image
-  //   padding: 5,
-  // },
   buttonContainer: {
     flexDirection: "row",
     marginTop: 16,
     paddingHorizontal: 16,
     justifyContent: "flex-start",
-    // backgroundColor: "yellow",
+    // backgroundColor: "grey",
   },
-  // button1: {
-  //   paddingVertical: 10,
-  //   paddingHorizontal: 16,
-  //   // justifyContent: "space-between",
-  //   alignItems: "left",
-  //   // backgroundColor: "pink",
-  //   width: "100%",
-
-  //   //  borderBottomColor:'red',
-  //   //  borderBottomWidth: 4
-  // },
   resultContainer: {
     marginTop: 16,
     borderRadius: 5,

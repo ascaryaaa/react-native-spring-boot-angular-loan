@@ -2,6 +2,8 @@ import * as React from "react"
 import Svg, { Path, Defs, Pattern, Use, Image } from "react-native-svg"
 const Poin = (props) => (
   <Svg
+    xmlns="http://www.w3.org/2000/svg"
+    xmlnsXlink="http://www.w3.org/1999/xlink"
     width={32}
     height={15}
     fill="none"
@@ -26,4 +28,4 @@ const Poin = (props) => (
     </Defs>
   </Svg>
 )
-export default Poin;
+export default Poin
