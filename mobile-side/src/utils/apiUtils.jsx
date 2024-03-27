@@ -96,5 +96,3 @@ export const fetchAccountData = async (hashedId) => {
       return null;
     }
 };
-  
-export default { fetchAccountData };
