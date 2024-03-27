@@ -160,10 +160,10 @@ container1: {
   justifyContent: "center",
 },
 dropdownContent: {
-  backgroundColor: "rgba(0, 0, 0, 0.1)",
+  // backgroundColor: "rgba(0, 0, 0, 0.1)",
   padding: 10,
   borderRadius: 5,
-  marginTop: 10,
+  // marginTop: 10,
   width: '100%',
 },
 infoText: {
