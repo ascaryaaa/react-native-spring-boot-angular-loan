@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
 import {
   View,
@@ -50,17 +51,15 @@ const SimulasiGriya = ({ navigation }) => {
     if (validateInputs()) {
       try {
         // Stringify and save inputData to AsyncStorage
-        await AsyncStorage.setItem('inputDataSimulasi', JSON.stringify(inputData));
+        await AsyncStorage.setItem('penghasilan',(inputData.penghasilan));
+        AsyncStorage.setItem('jangkaWaktu',(inputData.jangkaWaktu));
         AsyncStorage.setItem('simulasiPinjaman', JSON.stringify(maksPinjaman));
         // AsyncStorage.setItem('max', (inputData.penghasilan/2)*((1-((1+(0.0675/12))^(-inputData.jangkaWaktu)))/(0.0675/12)));
         // Retrieve and log the saved item
-        const savedData = await AsyncStorage.getItem('inputDataSimulasi');
+        const savedData = await AsyncStorage.getItem('penghasilan');
         console.log(JSON.parse(savedData)); // Make sure to parse the JSON string
-        const savedData2 = await AsyncStorage.getItem('simulasiPinjaman');
+        const savedData2 = await AsyncStorage.getItem('jangkaWaktu');
         console.log(JSON.parse(savedData2));
-        // console.log(maksPinjaman);
-        // console.log(maksAngsuran);
-        // navigation.navigate("ProfileKeuanganGriya")
         navigation.navigate("ProfileKeuanganGriya");
       } catch (error) {
         console.error('Failed to save or retrieve the data from AsyncStorage', error);
@@ -121,8 +120,8 @@ const SimulasiGriya = ({ navigation }) => {
                 style={[styles.input, inputErrors.penghasilan && styles.inputError]}
                 keyboardType="numeric"
                 placeholder="Rp"
-                onChangeText={(text) =>
-                  setInputData({ ...inputData, penghasilan: text })
+                onChangeText={(number) =>
+                  setInputData({ ...inputData, penghasilan: number })
                 }
                 value={setInputData.penghasilan}
               ></TextInput>

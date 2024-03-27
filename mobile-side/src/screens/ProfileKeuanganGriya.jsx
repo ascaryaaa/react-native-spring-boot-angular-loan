@@ -14,7 +14,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const ProfileKeuanganGriya = ({ navigation }) => {
   const [inputData, setInputData] = useState({
     hargaRumah: "",
-    penghasilanBersih: "",
+    penghasilan: "",
     jangkaWaktu: "",
     uangMuka: "",
   });
@@ -23,7 +23,7 @@ const ProfileKeuanganGriya = ({ navigation }) => {
     hargaRumah: false,
     jangkaWaktu: false,
     uangMuka: false,
-    penghasilanBersih: false,
+    penghasilan: false,
   });
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -58,7 +58,7 @@ const ProfileKeuanganGriya = ({ navigation }) => {
   const angsuranPerbulan = (totalPinjaman*(0.0675/12))/(1-Math.pow(1+(0.0675/12),-inputData.jangkaWaktu));
 
   const data = [
-    { id: 1, title: "Harga Rumah", content: `Rp ${inputData.hargaRumah.toLocaleString('id-ID', {maximumFractionDigits: 2})}` },
+    { id: 1, title: "Harga Rumah", content: `Rp ${inputData.hargaRumah.toLocaleString('id-ID', {maximumFractionDigits:2, })}` },
     { id: 2, title: "Jangka Waktu", content: `${inputData.jangkaWaktu} bulan` },
     { id: 3, title: "Presentase Uang Muka (%)", content: `${inputData.uangMuka}%` },
     { id: 4, title: "Uang Muka", content: `Rp ${jumlahUangMuka.toLocaleString('id-ID', {maximumFractionDigits: 2})}` },
@@ -70,20 +70,65 @@ const ProfileKeuanganGriya = ({ navigation }) => {
   const taruhData = async () => {
     if (validateInputs()) {
       try {
-        // Stringify and save inputData to AsyncStorage
-        await AsyncStorage.setItem('inputDataProfile', JSON.stringify(inputData));
-        // AsyncStorage.setItem('max', (inputData.penghasilan/2)*((1-((1+(0.0675/12))^(-inputData.jangkaWaktu)))/(0.0675/12)));
-        // Retrieve and log the saved item
-        const savedData = await AsyncStorage.getItem('inputDataProfile');
-        console.log(JSON.parse(savedData)); // Make sure to parse the JSON string
-        // console.log(angsuranPerbulan);
-        // console.log(maksAngsuran);
-        navigation.navigate("ProfileKeuanganGriya")
+        await AsyncStorage.setItem('penghasilan',String(inputData.penghasilan));
+        AsyncStorage.setItem('jangkaWaktu',String(inputData.jangkaWaktu));
+        AsyncStorage.setItem('hargaRumah',String(inputData.hargaRumah));
+        AsyncStorage.setItem('uangMuka',String(inputData.uangMuka));
+
+        const savedData = await AsyncStorage.getItem('penghasilan');
+        console.log(JSON.parse(savedData));
+        const savedData1 = await AsyncStorage.getItem('jangkaWaktu');
+        console.log(JSON.parse(savedData1));
+        const savedData2 = await AsyncStorage.getItem('hargaRumah');
+        console.log(JSON.parse(savedData2));
+        const savedData3 = await AsyncStorage.getItem('');
+        console.log(JSON.parse(savedData3));
+        navigation.navigate("DataPemohon")
       } catch (error) {
         console.error('Failed to save or retrieve the data from AsyncStorage', error);
       }
     }
   };
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        // Mengambil data dari AsyncStorage
+        const penghasilanData = await AsyncStorage.getItem("penghasilan");
+        const jangkaWaktuData = await AsyncStorage.getItem("jangkaWaktu");
+
+        //parse the retrieved data
+        const penghasilan =
+          penghasilanData !== null ? JSON.parse(penghasilanData) : "";
+        const jangkaWaktu =
+          jangkaWaktuData !== null ? JSON.parse(jangkaWaktuData) : "";
+
+        //set the parsed data to the state
+        setInputData({
+          penghasilan: penghasilan,
+          jangkaWaktu: jangkaWaktu,
+          hargaRumah: "",
+          uangMuka: "",
+        });
+      } catch (error) {
+        console.error("Failed to fetch data from AsyncStorage", error);
+      }
+    };
+
+    // Panggil fungsi untuk mengambil data saat komponen dimuat
+    getData();
+  },[]);
+
+  useEffect(() => {
+    console.log(
+      "////////////////////////////////////////Input Errors:",
+      inputErrors
+    );
+    console.log(
+      "########################################Input Data:",
+      inputData
+    );
+  }, [inputErrors, inputData]);
 
   return (
     <View style={styles.bg}>
@@ -106,16 +151,18 @@ const ProfileKeuanganGriya = ({ navigation }) => {
         <ScrollView>
           <View>
             <Text style={styles.title}>Profil Keuangan</Text>
-            <Text style={styles.text}>Harga Rumah</Text>
+
+            <Text style={styles.text}>Penghasilan Bersih per. Bulan</Text>
             <TextInput
-              style={[styles.input, inputErrors.hargaRumah && styles.inputError ]}
+              style={[styles.input, inputErrors.penghasilan && styles.inputError]}
               keyboardType="numeric"
-              value={inputData.hargaRumah}
+              placeholder={`Rp ${inputData.penghasilan.toLocaleString('id-ID', {maximumFractionDigits:2, })}`}
+              editable={false}
               onChangeText={(number) =>
-                setInputData({ ...inputData, hargaRumah: number })
+                setInputData({ ...inputData, penghasilan: number })
               }
             />
-            {inputErrors.hargaRumah && (
+            {inputErrors.penghasilan && (
               <Text style={styles.errorText}>Mohon isikan data dengan benar</Text>
             )}
 
@@ -123,7 +170,8 @@ const ProfileKeuanganGriya = ({ navigation }) => {
             <TextInput
               style={[styles.input, inputErrors.jangkaWaktu && styles.inputError ]}
               keyboardType="numeric"
-              value={inputData.jangkaWaktu}
+              editable={false}
+              placeholder={`${inputData.jangkaWaktu}`}
               onChangeText={(number) =>
                 setInputData({ ...inputData, jangkaWaktu: number })
               }
@@ -135,6 +183,27 @@ const ProfileKeuanganGriya = ({ navigation }) => {
               *Maksimal 360 Bulan
             </Text>
 
+            <Text style={styles.text}>Harga Rumah</Text>
+            <TextInput
+              style={[styles.input, inputErrors.hargaRumah && styles.inputError ]}
+              keyboardType="numeric"
+              value={
+                inputData.hargaRumah === ""
+                  ? ""
+                  : inputData.hargaRumah.toString()
+              }
+              onChangeText={(number) => {
+                const parsedNumber = parseInt(number);
+                setInputData({
+                  ...inputData,
+                  hargaRumah: isNaN(parsedNumber) ? "" : parsedNumber,
+                });
+              }}
+            />
+            {inputErrors.hargaRumah && (
+              <Text style={styles.errorText}>Mohon isikan data dengan benar</Text>
+            )}
+
             <Text style={styles.text}>Presentase Uang Muka (%)</Text>
             <TextInput
               style={[styles.input, inputErrors.uangMuka && styles.inputError]}
@@ -145,19 +214,6 @@ const ProfileKeuanganGriya = ({ navigation }) => {
               }
             />
             {inputErrors.uangMuka && (
-              <Text style={styles.errorText}>Mohon isikan data dengan benar</Text>
-            )}
-
-            <Text style={styles.text}>Penghasilan Bersih per. Bulan</Text>
-            <TextInput
-              style={[styles.input, inputErrors.penghasilanBersih && styles.inputError]}
-              keyboardType="numeric"
-              value={inputData.penghasilanBersih}
-              onChangeText={(number) =>
-                setInputData({ ...inputData, penghasilanBersih: number })
-              }
-            />
-            {inputErrors.penghasilanBersih && (
               <Text style={styles.errorText}>Mohon isikan data dengan benar</Text>
             )}
 
@@ -212,7 +268,8 @@ const ProfileKeuanganGriya = ({ navigation }) => {
                   </View>
                   <TouchableOpacity
                     style={styles.button1}
-                    onPress={() => navigation.navigate("DataPemohon")}
+                    onPress={taruhData}
+                    // onPress={() => navigation.navigate("DataPemohon")}
                   >
                     <Text
                       style={{
