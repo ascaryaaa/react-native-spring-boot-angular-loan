@@ -1,202 +1,300 @@
 <div class="modal">
   <div class="layout-container">
     <router-outlet></router-outlet>
-  <div class="header-bar"></div>
-<h1
-  id="judul"
-  class="p-4 sm:ml-64 text-left text-2xl mb-4 font-bold"
-  style="color: #e55300;  padding-top: 111px;padding-bottom: 1px; margin-bottom: -4px"
->
-  Daftar Pengajuan Pinjamann
-</h1>
+    <div class="header-bar"></div>
+    <h1
+      id="judul"
+      class="p-4 sm:ml-64 text-left text-2xl mb-4 font-bold"
+      style="
+        color: #e55300;
+        padding-top: 111px;
+        padding-bottom: 1px;
+        margin-bottom: -4px;
+      "
+    >
+      Daftar Pengajuan Pinjamann
+    </h1>
 
-<!-- <ng-template #noData>
+    <!-- <ng-template #noData>
   <div class="flex flex-col items-center justify-center self-center">
     <img class="w-28 h-28 justify-center" src="../../../assets/img/nodata.png" alt="No Data">
     <div class="pt-10  w-60 text-center text-2xl text-gray-400">Data Tidak Ditemukan</div>
   </div>
 </ng-template> -->
 
-  <div class="p-4 sm:ml-64" style="padding: px;">
-    <div class="p-4 border-2 border-gray-200 rounded-lg dark:border-gray-700" style=" background-color: #fff;">
+    <div class="p-4 sm:ml-64" style="padding: px">
       <div
-        class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4"
+        class="p-4 border-2 border-gray-200 rounded-lg dark:border-gray-700 bg-white"
       >
-        <label for="table-search" class="sr-only">search</label>
-        <div class="relative">
-          <div
-            class="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none"
-          > 
-            <svg
-              class="w-5 h-5 text-gray-500 dark:text-gray-400"
-              aria-hidden="true"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
+        <div
+          class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4"
+        >
+          <div class="relative">
+            <label
+              for="status-pengajuan"
+              style="font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: bold;"
+              >Status Pengajuan</label
             >
-              <path
-                fill-rule="evenodd"
-                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
+            <select
+              id="status-pengajuan"
+              [(ngModel)]="selectedStatus"
+              (change)="filterByStatus()"
+              class="block p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            >
+              <option value="" disabled selected>Pilih Status</option>
+              <option value="Diterima">Diterima</option>
+              <option value="Ditolak">Ditolak</option>
+              <option value="Diproses">Diproses</option>
+            </select>
           </div>
-          <input
-  type="text"
-  id="table-search"
-  class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-  [(ngModel)]="searchText"
-  (ngModelChange)="search()"
-  (keyup.enter)="search()"
-  (keyup)="search()"
-  placeholder="Cari Data Berdasarkan Nama dan NIK"
-/>
+          <div class="relative">
+            <input
+              type="text"
+              id="table-search"
+              class="block p-2 ps-10 text-sm border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              [(ngModel)]="searchText"
+              (ngModelChange)="search()"
+              (keyup.enter)="search()"
+              (keyup)="search()"
+              placeholder="Cari Data Berdasarkan Nama dan NIK"
+            />
+            <div
+              class="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none"
+            >
+              <svg
+                class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                aria-hidden="true"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </div>
+          </div>
         </div>
-      </div>
-      <!-- // Test -->
-      <table
-        class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
-        style="margin-bottom: 20px"
-      >
-      <ng-container *ngIf="loading">
-        <div class="flex justify-center items-center">
-          <div class="loader">Loading...</div>
-        </div>
-      </ng-container>
-      <ng-container *ngIf="!loading">
-        <ng-container *ngIf="filteredForms.length > 0; else noData">
-          <thead
-            class="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-          >
-          <tr>
-            <th scope="col" class="px-4 py-2 flex items-center">
-              <div  class="flex items-center">
-                <span class="mr-1">CIF</span>
-                <button type="button" (click)="sortData('cif')">
-                
-                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&" alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
-              </button>
-              </div>
-            </th>
-           
-            <th scope="col" class="px-4 py-2 ">
-              <div class="flex items-center">
-                <span class="mr-1">Nama</span>
-                <button type="button" (click)="sortData('name')">
-                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&" alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
-              </button>
-              </div>
-            </th>
-            <th scope="col" class="px-4 py-2">
-              <div class="flex items-center">
-                <span class="mr-1">NIK</span>
-                <button type="button" (click)="sortData('nik')" >
-                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&" alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
-              </button>
-              </div>
-            </th>
-            <th scope="col" class="px-4 py-2">
-              <div class="flex items-center">
-                <span class="mr-1">Jenis Pengajuan</span>
-                <button type="button" (click)="sortData('jenis_pengajuan')">
-                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&" alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
-              </button>
-              </div>
-            </th>
-            <th scope="col" class="px-4 py-2">
-              <div  class="flex items-center">
-                <span class="mr-1">Status Pengajuan</span>
-                <button type="button" (click)="sortData('status_pengajuan')">
-                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&" alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
-              </button>
-              </div>
-            </th>
-            <th scope="col" class="px-4 py-2">
-              <div class="flex items-center">
-                <span class="mr-1">Admin</span>
-                <button type="button" (click)="sortData('admin')" >
-                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&" alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
-              </button>
-              </div>
-            </th>
-            <th scope="col" class="px-4 py-2">
-              <div  class="flex items-center">
-                <span class="mr-1">Tanggal Realisasi</span>
-                <button type="button" (click)="sortData('tanggal_realisasi')">
-                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&" alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
-              </button>
-              </div>
-            </th>
-            <th scope="col" class="px-4 py-2">Aksi</th>
-            <!-- <th scope="col" class="px-4 py-2">
+
+        <!-- // Test -->
+        <table
+          class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+          style="margin-bottom: 20px"
+        >
+          <ng-container *ngIf="loading">
+            <div class="flex justify-center items-center">
+              <div class="loader">Loading...</div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="!loading">
+            <ng-container *ngIf="filteredForms.length > 0; else noData">
+              <thead
+                class="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+              >
+                <tr>
+                  <th scope="col" class="px-4 py-2 flex items-center">
+                    <div class="flex items-center">
+                      <span class="mr-1">CIF</span>
+                      <button type="button" (click)="sortData('cif')">
+                        <img
+                          src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&"
+                          alt="Decorative icon"
+                          class="shrink-0 my-auto aspect-square w-[18px]"
+                        />
+                      </button>
+                    </div>
+                  </th>
+
+                  <th scope="col" class="px-4 py-2">
+                    <div class="flex items-center">
+                      <span class="mr-1">Nama</span>
+                      <button type="button" (click)="sortData('name')">
+                        <img
+                          src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&"
+                          alt="Decorative icon"
+                          class="shrink-0 my-auto aspect-square w-[18px]"
+                        />
+                      </button>
+                    </div>
+                  </th>
+                  <th scope="col" class="px-4 py-2">
+                    <div class="flex items-center">
+                      <span class="mr-1">NIK</span>
+                      <button type="button" (click)="sortData('nik')">
+                        <img
+                          src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&"
+                          alt="Decorative icon"
+                          class="shrink-0 my-auto aspect-square w-[18px]"
+                        />
+                      </button>
+                    </div>
+                  </th>
+                  <th scope="col" class="px-4 py-2">
+                    <div class="flex items-center">
+                      <span class="mr-1">Jenis Pengajuan</span>
+                      <button
+                        type="button"
+                        (click)="sortData('jenis_pengajuan')"
+                      >
+                        <img
+                          src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&"
+                          alt="Decorative icon"
+                          class="shrink-0 my-auto aspect-square w-[18px]"
+                        />
+                      </button>
+                    </div>
+                  </th>
+                  <th scope="col" class="px-4 py-2">
+                    <div class="flex items-center">
+                      <span class="mr-1">Status Pengajuan</span>
+                      <button
+                        type="button"
+                        (click)="sortData('status_pengajuan')"
+                      >
+                        <img
+                          src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&"
+                          alt="Decorative icon"
+                          class="shrink-0 my-auto aspect-square w-[18px]"
+                        />
+                      </button>
+                    </div>
+                  </th>
+                  <th scope="col" class="px-4 py-2">
+                    <div class="flex items-center">
+                      <span class="mr-1">Admin</span>
+                      <button type="button" (click)="sortData('admin')">
+                        <img
+                          src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&"
+                          alt="Decorative icon"
+                          class="shrink-0 my-auto aspect-square w-[18px]"
+                        />
+                      </button>
+                    </div>
+                  </th>
+                  <th scope="col" class="px-4 py-2">
+                    <div class="flex items-center">
+                      <span class="mr-1">Tanggal Realisasi</span>
+                      <button
+                        type="button"
+                        (click)="sortData('tanggal_realisasi')"
+                      >
+                        <img
+                          src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&"
+                          alt="Decorative icon"
+                          class="shrink-0 my-auto aspect-square w-[18px]"
+                        />
+                      </button>
+                    </div>
+                  </th>
+                  <th scope="col" class="px-4 py-2">Aksi</th>
+                  <!-- <th scope="col" class="px-4 py-2">
               <button type="button" (click)="sortData('tanggal_realisasi')" class="flex items-center">
                 <span class="mr-1">Aksi</span>
                 <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5de75667b392ca3f56450a552cd4e3f348ae223b411fc55c8249cdf223c6806b?apiKey=656301a5b1d0445cbac7ae26c49e46e5&" alt="Decorative icon" class="shrink-0 my-auto aspect-square w-[18px]" />
               </button>
             </th> -->
-          </tr>
-          
-          </thead>
-        <!-- Loading and Error Handling -->
-          <tbody>
-            <tr *ngFor="let form of filteredForms">
-              <td class="px-4 py-2">{{ form.cif |uppercase }}</td>
-              <td class="px-4 py-2">{{ form.formToUser.nameUser }}</td>
-              <td class="px-4 py-2">{{ form.formToUser.nikUser }}</td>
-              <td class="px-4 py-2">{{ form.formToJenis.nameJenisPinjaman }}</td>
-              <td class="px-4 py-2">
-                <div
-                  class="px-4 py-2 text-white"
-                  [ngClass]="{
-                    'bg-green-500': form.statusPengajuan === 'Diterima',
-                    'bg-red-500': form.statusPengajuan === 'Ditolak',
-                    'bg-gray-500': form.statusPengajuan === 'Diproses'
-                  }"
-                >
-                  {{ form.statusPengajuan }}
+                </tr>
+              </thead>
+              <!-- Loading and Error Handling -->
+              <tbody>
+                <tr *ngFor="let form of filteredForms">
+                  <td class="px-4 py-2">{{ form.cif | uppercase }}</td>
+                  <td class="px-4 py-2">{{ form.formToUser.nameUser }}</td>
+                  <td class="px-4 py-2">{{ form.formToUser.nikUser }}</td>
+                  <td class="px-4 py-2">
+                    {{ form.formToJenis.nameJenisPinjaman }}
+                  </td>
+                  <td class="px-4 py-2">
+                    <div
+                      class="px-4 py-2 text-white"
+                      [ngClass]="{
+                        'bg-green-500': form.statusPengajuan === 'Diterima',
+                        'bg-red-500': form.statusPengajuan === 'Ditolak',
+                        'bg-gray-500': form.statusPengajuan === 'Diproses'
+                      }"
+                    >
+                      {{ form.statusPengajuan }}
+                    </div>
+                  </td>
+                  <td class="px-4 py-2">{{ form.formToAdmin?.nameAdmin }}</td>
+                  <!-- <td class="px-4 py-2">{{ form.tanggalLahir | date: 'longDate' }}</td> -->
+                  <td class="px-4 py-2">
+                    {{ form.tanggalRealisasi | date : "yyyy-MM-dd" }}
+                  </td>
+                  <td class="px-4 py-2">
+                    <a
+                      [routerLink]="['../id/', form.hashedIdForm]"
+                      class="text-blue-600 hover:underline"
+                      >View</a
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </ng-container>
+            <ng-template #noData>
+              <div
+                class="flex flex-col items-center justify-center self-center"
+              >
+                <img
+                  class="w-28 h-28 justify-center"
+                  src="../../../assets/img/nodata.png"
+                  alt="No Data"
+                />
+                <div class="pt-10 w-60 text-center text-2xl text-gray-400">
+                  Data Tidak Ditemukan
                 </div>
-              </td>
-              <td class="px-4 py-2">{{form.formToAdmin?.nameAdmin}}</td>
-              <!-- <td class="px-4 py-2">{{ form.tanggalLahir | date: 'longDate' }}</td> -->
-              <td class="px-4 py-2">{{ form.tanggalRealisasi | date:'yyyy-MM-dd' }}</td>
-              <td class="px-4 py-2">
-                <a [routerLink]="['../id/', form.hashedIdForm]" class="text-blue-600 hover:underline">View</a>
-              </td>
-            </tr>
-          </tbody>
-        </ng-container>
-        <ng-template #noData>
-          <div class="flex flex-col items-center justify-center self-center">
-            <img class="w-28 h-28 justify-center" src="../../../assets/img/nodata.png" alt="No Data">
-            <div class="pt-10  w-60 text-center text-2xl text-gray-400">Data Tidak Ditemukan</div>
-          </div>
-        </ng-template>
-      </ng-container>
-      </table>
+              </div>
+            </ng-template>
+          </ng-container>
+        </table>
 
-      
-     <!-- Pagination -->
-     <nav class="flex items-center justify-between">
-      <div class="flex flex-wrap items-center justify-center">
-        <button class="px-2 py-1 border border-white-300 rounded-lg mr-2" (click)="previousPage()">Previous</button>
-        <!-- Looping untuk tombol halaman -->
-        <ng-container *ngFor="let page of totalPagesArray">
-          <button class="px-2 py-1 border border-white-300 rounded-lg mr-2" [class.bg-blue-500]="page === currentPage" (click)="goToPage(page)">
-            {{ page }}
-          </button>
-        </ng-container>
-        <button class="px-2 py-1 border border-white-300 rounded-lg" (click)="nextPage()">Next</button>
+        <!-- Pagination -->
+        <nav class="flex items-center justify-between">
+          <div class="flex flex-wrap items-center justify-center">
+            <button
+              class="px-2 py-1 border border-white-300 rounded-lg mr-2"
+              (click)="previousPage()"
+            >
+              Previous
+            </button>
+            <!-- Looping untuk tombol halaman -->
+            <ng-container *ngFor="let page of totalPagesArray">
+              <button
+                class="px-2 py-1 border border-white-300 rounded-lg mr-2"
+                [class.bg-blue-500]="page === currentPage"
+                (click)="goToPage(page)"
+              >
+                {{ page }}
+              </button>
+            </ng-container>
+            <button
+              class="px-2 py-1 border border-white-300 rounded-lg"
+              (click)="nextPage()"
+            >
+              Next
+            </button>
+          </div>
+          <div class="flex flex-wrap items-center justify-center mt-2">
+            <!-- Pilihan jumlah data per halaman -->
+            <select
+              style="background-color: #1f96f9; color: white"
+              class="px-2 py-1 border border-white-300 rounded-lg"
+              [(ngModel)]="pageSize"
+              (change)="changePageSize()"
+              title="Jumlah Data Per Halaman"
+            >
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="100">100</option>
+            </select>
+          </div>
+        </nav>
       </div>
-      <div class="flex flex-wrap items-center justify-center mt-2">
-        <!-- Pilihan jumlah data per halaman -->
-        <select style="background-color: #1F96F9; color: white;" class="px-2 py-1 border border-white-300 rounded-lg" [(ngModel)]="pageSize" (change)="changePageSize()" title="Jumlah Data Per Halaman">
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="100">100</option>
-        </select>
-      </div>
-    </nav>
+    </div>
   </div>
 </div>
-</div>
+
+
