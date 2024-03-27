@@ -1,6 +1,6 @@
 import * as React from "react";
 import Svg, { Path } from "react-native-svg";
-const SvgComponent = (props) => (
+const favorit = (props) => (
   <Svg width={33} height={32} fill="none" {...props}>
     <Path
       stroke="#F9A653"
@@ -11,4 +11,4 @@ const SvgComponent = (props) => (
     />
   </Svg>
 );
-export default SvgComponent;
+export default favorit;

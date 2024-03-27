@@ -1,6 +1,6 @@
 import * as React from "react";
 import Svg, { Rect, Path } from "react-native-svg";
-const SvgComponent = (props) => (
+const bniFleksiIcon = (props) => (
   <Svg width={39} height={40} fill="none" {...props}>
     <Rect width={39} height={39} y={0.678} fill="#fff" rx={6} />
     <Path
@@ -9,4 +9,4 @@ const SvgComponent = (props) => (
     />
   </Svg>
 );
-export default SvgComponent;
+export default bniFleksiIcon;

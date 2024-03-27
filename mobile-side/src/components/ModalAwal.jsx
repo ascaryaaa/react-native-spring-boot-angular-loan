@@ -17,6 +17,7 @@ const ModalAwal = ({ onClose, navigation }) => {
   const [password, setPassword] = useState("");
 
   const [checked, setChecked] = useState(false);
+  const [loginFailed, setLoginFailed] = useState(false);
 
   const toggleCheckbox = () => {
     setChecked(!checked);
@@ -29,20 +30,20 @@ const ModalAwal = ({ onClose, navigation }) => {
         username,
         password,
       });
-      await AsyncStorage.setItem('user', JSON.stringify(response.data));
-      AsyncStorage.setItem('token', response.data.token);
-      AsyncStorage.setItem('hashedId', response.data.hashedId);
-      const user = await AsyncStorage.getItem('user');
-      const token = await AsyncStorage.getItem('token');
-      const hashedId = await AsyncStorage.getItem('hashedId');
-      console.log('User:', user);
-      console.log('Token:', token);
-      console.log('HashedId:', hashedId);
+      await AsyncStorage.setItem("user", JSON.stringify(response.data));
+      AsyncStorage.setItem("token", response.data.token);
+      AsyncStorage.setItem("hashedId", response.data.hashedId);
+      const user = await AsyncStorage.getItem("user");
+      const token = await AsyncStorage.getItem("token");
+      const hashedId = await AsyncStorage.getItem("hashedId");
+      console.log("User:", user);
+      console.log("Token:", token);
+      console.log("HashedId:", hashedId);
       if (onClose) onClose();
       navigation.navigate("Home");
     } catch (error) {
       console.error(error);
-      alert("Login failed!");
+      setLoginFailed(true);
     }
   };
 
@@ -64,6 +65,13 @@ const ModalAwal = ({ onClose, navigation }) => {
           <Text style={{ fontWeight: "700", fontSize: 18 }}>
             Selamat datang kembali,
           </Text>
+          {loginFailed && ( // Display login failed message if loginFailed is true
+            <Text style={styles.loginFailedText}>
+              Proses login Anda gagal, karena User ID atau MPIN yang Anda
+              masukan salah. Silahkan gunakan menu Lupa MPIN/Password dilayar
+              login.
+            </Text>
+          )}
           <Text style={{ paddingTop: 33 }}>User ID</Text>
           <TextInput
             style={styles.inputform}
@@ -124,16 +132,15 @@ const styles = StyleSheet.create({
     // justifyContent: "center",
     // alignItems: "center",
     backgroundColor: "white",
-    width: 360,
-    height: 440,
+    width: "95%",
+    height: "53%",
     marginHorizontal: 13,
     borderRadius: 10,
   },
   button: {
     marginVertical: 20,
     padding: 5,
-    margin: 5,
-    alignSelf: "center",
+    justifyContent: "center",
     backgroundColor: "#18C1CD",
     borderRadius: 20,
     width: "100%",
@@ -145,7 +152,7 @@ const styles = StyleSheet.create({
     margin: 12,
   },
   form: {
-    margin: 17,
+    margin: 13,
   },
   inputform: {
     borderBottomWidth: 1.5,
@@ -165,5 +172,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     width: "100%",
+  },
+  loginFailedText: {
+    color: "#D4352A",
+    marginTop: 8
   },
 });

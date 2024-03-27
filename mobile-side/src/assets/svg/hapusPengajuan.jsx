@@ -1,6 +1,6 @@
 import * as React from "react"
 import Svg, { Path } from "react-native-svg"
-const SvgComponent = (props) => (
+const hapusPengajuan = (props) => (
   <Svg
     width={196}
     height={169}
@@ -335,4 +335,4 @@ const SvgComponent = (props) => (
     />
   </Svg>
 )
-export default SvgComponent
+export default hapusPengajuan;
