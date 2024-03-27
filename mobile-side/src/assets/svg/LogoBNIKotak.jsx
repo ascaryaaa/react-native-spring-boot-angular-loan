@@ -1,7 +1,12 @@
-import * as React from "react";
-import Svg, { Path, Defs, Pattern, Use, Image } from "react-native-svg";
-const logoMbanking = (props) => (
-  <Svg width={66} height={65} fill="none" {...props}>
+import * as React from "react"
+import Svg, { Path, Defs, Pattern, Use, Image } from "react-native-svg"
+const LogoBNIKotak = (props) => (
+  <Svg
+    width={66}
+    height={65}
+    fill="none"
+    {...props}
+  >
     <Path fill="url(#a)" d="M.5 0h65v65H.5z" />
     <Defs>
       <Pattern
@@ -20,5 +25,5 @@ const logoMbanking = (props) => (
       />
     </Defs>
   </Svg>
-);
-export default logoMbanking;
+)
+export default LogoBNIKotak;

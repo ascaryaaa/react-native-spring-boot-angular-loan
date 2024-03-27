@@ -1,6 +1,6 @@
 import * as React from "react"
 import Svg, { Path } from "react-native-svg"
-const notificationHome = (props) => (
+const Notification = (props) => (
   <Svg
     width={24}
     height={24}
@@ -13,4 +13,4 @@ const notificationHome = (props) => (
     />
   </Svg>
 )
-export default notificationHome;
+export default Notification;

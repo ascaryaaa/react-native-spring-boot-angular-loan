@@ -1,6 +1,6 @@
 import * as React from "react"
 import Svg, { Path, Defs, Pattern, Use, Image } from "react-native-svg"
-const poinMBanking = (props) => (
+const Poin = (props) => (
   <Svg
     width={32}
     height={15}
@@ -26,4 +26,4 @@ const poinMBanking = (props) => (
     </Defs>
   </Svg>
 )
-export default poinMBanking;
+export default Poin;
