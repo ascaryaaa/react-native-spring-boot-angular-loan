@@ -62,7 +62,7 @@ const ListPengajuanPinjaman = ({ navigation }) => {
                   <Text>Tanggal Pengajuan: {form.tanggalPengajuan}</Text>
                   <Text>Periode Pinjaman: {form.jangkaWaktu} Bulan</Text>
                   <Text>Periode Pinjaman: {form.jumlahPinjaman}</Text>
-                  <View style={styles.cardStatus}>
+                  <View style={[styles.cardStatus, { backgroundColor: form.statusPengajuan === "Ditolak" ? "#D4352A" : "#757575" }]}>
                     <Text style={styles.textStatus}>{form.statusPengajuan}</Text>
                   </View>
                 </View>
