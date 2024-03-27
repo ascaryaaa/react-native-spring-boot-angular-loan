@@ -2,7 +2,6 @@ package com.cuan.serverside.service;
 
 import com.cuan.serverside.model.FormPengajuan;
 import com.cuan.serverside.model.JenisPinjaman;
-import com.cuan.serverside.model.User;
 import com.cuan.serverside.repository.FormPengajuanRepository;
 import com.cuan.serverside.repository.JenisPinjamanRepository;
 import com.cuan.serverside.repository.UserRepository;
