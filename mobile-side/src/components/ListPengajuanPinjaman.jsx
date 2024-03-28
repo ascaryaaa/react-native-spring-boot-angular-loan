@@ -6,20 +6,22 @@ import {
   TouchableOpacity,
   Image,
   Modal,
-  Pressable,
   ActivityIndicator
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ModalDelete from "./ModalDelete";
 import { getAccountByHashedId } from '../reducers/Account';
-import { fetchFormListById } from '../reducers/Form';
-
+import { fetchFormListById, softDeleteForm } from '../reducers/Form';
+import IconDelete from "./svg/IconDelete";
 
 const ListPengajuanPinjaman = ({ navigation }) => {
   const dispatch = useDispatch();
   const formDetailsState = useSelector((state) => state.forms);
   const accountState = useSelector((state) => state.account);
+
+  const [showModal, setShowModal] = useState(false);
+  const [formIdToDelete, setFormIdToDelete] = useState(null);
 
   useEffect(() => {
     const initializeData = async () => {
@@ -32,55 +34,83 @@ const ListPengajuanPinjaman = ({ navigation }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    // Once the accountState is updated and contains the user's ID, dispatch the fetchFormListById
     const userId = accountState.data?.accountToUser?.idUser;
     if (userId) {
       dispatch(fetchFormListById(userId));
     }
   }, [dispatch, accountState.data?.accountToUser?.idUser]);
 
+  const handleSoftDelete = async () => {
+    if (formIdToDelete) {
+      dispatch(softDeleteForm(formIdToDelete));
+    }
+  };
+
+  const openModal = (formId) => {
+    setFormIdToDelete(formId);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <View style={styles.container}>
-    <View style={styles.shadow}>
-      {formDetailsState.loading ? (
-        <ActivityIndicator size="large" />
-      ) : formDetailsState.error ? (
-        <Text>Error fetching forms: {formDetailsState.error}</Text>
-      ) : (
-        formDetailsState.data
-          ?.filter(form => !form.deleted) // Filter out forms where deleted is true
-          .map((form, index) => (
-            (form.statusPengajuan === "Diproses" || form.statusPengajuan === "Ditolak") && (
-              <TouchableOpacity key={index} style={styles.card} onPress={() => navigation.navigate("Monitoring")}>
-                <View style={{ backgroundColor: "green" }}>
-                  <Image source={{ uri: form.formToJenis.gambarJenisPinjaman }} style={styles.image} />
-                </View>
-                <View style={styles.infoContainer}>
-                  <View style={styles.info}>
-                    <View>
-                      <Text style={styles.textHeader}>{form.formToJenis.nameJenisPinjaman}</Text>
-                    </View>
-                    <Text>Tanggal Pengajuan: {form.tanggalPengajuan}</Text>
-                    <Text>Periode Pinjaman: {form.jangkaWaktu} Bulan</Text>
-                    <Text>Periode Pinjaman: {form.jumlahPinjaman}</Text>
-                    <View style={[styles.cardStatus, { backgroundColor: form.statusPengajuan === "Ditolak" ? "#D4352A" : "#757575" }]}>
-                      <Text style={styles.textStatus}>{form.statusPengajuan}</Text>
+      <View style={styles.shadow}>
+        {formDetailsState.loading ? (
+          <ActivityIndicator size="large" />
+        ) : formDetailsState.error ? (
+          <Text>Error fetching forms: {formDetailsState.error}</Text>
+        ) : (
+          formDetailsState.data
+            ?.filter(form => !form.deleted) // Filter out forms where deleted is true
+            .map((form, index) => (
+              (form.statusPengajuan === "Diproses" || form.statusPengajuan === "Ditolak") && (
+                <TouchableOpacity key={index} style={styles.card} onPress={() => navigation.navigate("Monitoring")}>
+                  <View style={{ backgroundColor: "green" }}>
+                    <Image source={{ uri: form.formToJenis.gambarJenisPinjaman }} style={styles.image} />
+                  </View>
+                  <View style={styles.infoContainer}>
+                    <View style={styles.info}>
+                      <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: "90%" }}>
+                        <Text style={styles.textHeader}>{form.formToJenis.nameJenisPinjaman}</Text>
+                        {form.statusPengajuan === "Ditolak" && ( // Render soft delete button if status is Ditolak
+                          <TouchableOpacity onPress={() => openModal(form.idFormPengajuanPinjaman)}>
+                            <IconDelete style={styles.softDeleteButton}/>
+                          </TouchableOpacity>
+                        )}
+                      </View>
+                      <Text>Tanggal Pengajuan: {form.tanggalPengajuan}</Text>
+                      <Text>Periode Pinjaman: {form.jangkaWaktu} Bulan</Text>
+                      <Text>Periode Pinjaman: {form.jumlahPinjaman}</Text>
+                      <View style={[styles.cardStatus, { backgroundColor: form.statusPengajuan === "Ditolak" ? "#D4352A" : "#757575" }]}>
+                        <Text style={styles.textStatus}>{form.statusPengajuan}</Text>
+                      </View>
                     </View>
                   </View>
-                </View>
-              </TouchableOpacity>
-            )
-          ))
-      )}
+                </TouchableOpacity>
+              )
+            ))
+        )}
+      </View>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={showModal}
+        onRequestClose={closeModal}
+      >
+        <ModalDelete closeModal={closeModal} handleSoftDelete={handleSoftDelete} />
+      </Modal>
     </View>
-  </View>
   );
 };
+
 export default ListPengajuanPinjaman;
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
+    flex: 1,
     alignItems: "center",
     //backgroundColor: "green"
   },
@@ -96,14 +126,14 @@ const styles = StyleSheet.create({
     //backgroundColor: 'yellow'
   },
   infoContainer: {
-    flexDirection: "column", 
+    flexDirection: "column",
     //backgroundColor: "cyan",
     width: "70%",
   },
   info: {
     //backgroundColor: "orange",
     marginHorizontal: 10,
-    width:"90%",
+    width: "90%",
   },
   shadow: {
     shadowColor: "#ddd",
@@ -139,6 +169,13 @@ const styles = StyleSheet.create({
     width: "35%",
     backgroundColor: "#D4352A",
     alignItems: "center",
-  }
+  },
+  softDeleteButton: {
+    color: "#D4352A",
+    fontSize: 12,
+    fontWeight: "700",
+    width: 100,
+    height: 100,
+    //backgroundColor: 'red'
+  },
 });
-

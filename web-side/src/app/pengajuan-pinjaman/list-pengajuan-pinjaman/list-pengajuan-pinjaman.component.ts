@@ -17,16 +17,25 @@ export class ListPengajuanPinjamanComponent {
   totalPagesArray: number[] = [];
   selectedStatus: string = ''; // Properti untuk menyimpan status pengajuan yang dipilih
   selectedDate: string = '';
+  selectedDateRange: { start: string | null; end: string | null } = {
+    start: null,
+    end: null,
+  };
   sortDirection: 'asc' | 'desc' = 'asc';
   loading = true;
 
   constructor(private pengajuanPinjamanService: PengajuanPinjamanService) {}
 
   ngOnInit() {
+    const currentDate = new Date();
+    const oneMonthAgo = new Date();
+    // oneMonthAgo.setMonth(currentDate.getMonth() - 1);
+    // this.selectedDateRange.start = this.formatDate(oneMonthAgo);
+    // this.selectedDateRange.end = this.formatDate(currentDate);
+
+    // Panggil metode untuk mengambil data dan menyesuaikan tampilan
     this.refreshFormList();
     this.loadData();
-
-    // Call search() on initialization to ensure proper data display
     this.search();
   }
 
@@ -96,9 +105,48 @@ export class ListPengajuanPinjamanComponent {
   }
 
   search(): void {
+    // Filter data sesuai dengan input search
+    let filteredBySearch = this.forms.filter(
+      (form) =>
+        form.cif.toLowerCase().includes(this.searchText.trim().toLowerCase()) ||
+        form.formToUser.nameUser
+          .toLowerCase()
+          .includes(this.searchText.trim().toLowerCase()) ||
+        form.formToUser.nikUser
+          .toLowerCase()
+          .includes(this.searchText.trim().toLowerCase())
+    );
+
+    // Jika ada status yang dipilih, filter data berdasarkan status pengajuan
+    if (this.selectedStatus !== '') {
+      filteredBySearch = filteredBySearch.filter(
+        (form) => form.statusPengajuan === this.selectedStatus
+      );
+    }
+
+    // Setelah memfilter data, perbarui jumlah halaman dan navigasi
+    this.filteredForms = filteredBySearch;
+    this.calculateTotalPages();
+    this.searchTopage(1); // Navigasikan ke halaman pertama setelah pencarian
+  }
+
+  // Fungsi filter berdasarkan status pengajuan
+  filterByStatus(): void {
+    // Filter data berdasarkan status pengajuan
+    let filteredByStatus = this.forms;
+    if (this.selectedStatus !== '') {
+      filteredByStatus = filteredByStatus.filter(
+        (form) => form.statusPengajuan === this.selectedStatus
+      );
+    }
+
+    // Jika ada input pencarian, filter data berdasarkan pencarian
     if (this.searchText.trim() !== '') {
-      this.filteredForms = this.forms.filter(
+      filteredByStatus = filteredByStatus.filter(
         (form) =>
+          form.cif
+            .toLowerCase()
+            .includes(this.searchText.trim().toLowerCase()) ||
           form.formToUser.nameUser
             .toLowerCase()
             .includes(this.searchText.trim().toLowerCase()) ||
@@ -106,32 +154,82 @@ export class ListPengajuanPinjamanComponent {
             .toLowerCase()
             .includes(this.searchText.trim().toLowerCase())
       );
-    } else {
-      // Jika input pencarian kosong, tampilkan semua data
-      this.filteredForms = this.forms;
     }
 
     // Setelah memfilter data, perbarui jumlah halaman dan navigasi
-    this.calculateTotalPages();
-    this.searchTopage(1); // Navigasikan ke halaman pertama setelah pencarian
-  }
-
-  // Fungsi filter berdasarkan status pengajuan
-  filterByStatus(): void {
-    if (this.selectedStatus !== '') {
-      this.filteredForms = this.forms.filter(
-        (form) => form.statusPengajuan === this.selectedStatus
-      );
-    } else {
-      this.filteredForms = this.forms; // Jika tidak ada status yang dipilih, tampilkan semua data
-    }
-
-    // Setelah memfilter data, perbarui jumlah halaman dan navigasi
+    this.filteredForms = filteredByStatus;
     this.calculateTotalPages();
     this.searchTopage(1); // Navigasikan ke halaman pertama setelah filtering
   }
-  
- 
+
+  // filterByDateRange(): void {
+  //   // Filter data berdasarkan rentang tanggal
+  //   let filteredByDateRange = this.forms;
+  //   if (
+  //     this.selectedDateRange &&
+  //     this.selectedDateRange.start !== null &&
+  //     this.selectedDateRange.end !== null
+  //   ) {
+  //     const startDate = new Date(this.selectedDateRange.start);
+  //     const endDate = new Date(this.selectedDateRange.end);
+
+  //     filteredByDateRange = filteredByDateRange.filter((form) => {
+  //       if (form.tanggalRealisasi) {
+  //         const formDate = new Date(form.tanggalRealisasi);
+  //         return formDate >= startDate && formDate <= endDate;
+  //       }
+  //       return false;
+  //     });
+  //   }
+
+  //   // Jika ada input pencarian, filter data berdasarkan pencarian
+  //   if (this.searchText.trim() !== '') {
+  //     filteredByDateRange = filteredByDateRange.filter(
+  //       (form) =>
+  //         form.cif
+  //           .toLowerCase()
+  //           .includes(this.searchText.trim().toLowerCase()) ||
+  //         form.formToUser.nameUser
+  //           .toLowerCase()
+  //           .includes(this.searchText.trim().toLowerCase()) ||
+  //         form.formToUser.nikUser
+  //           .toLowerCase()
+  //           .includes(this.searchText.trim().toLowerCase())
+  //     );
+  //   }
+
+  //   // Jika ada status yang dipilih, filter data berdasarkan status pengajuan
+  //   if (this.selectedStatus !== '') {
+  //     filteredByDateRange = filteredByDateRange.filter(
+  //       (form) => form.statusPengajuan === this.selectedStatus
+  //     );
+  //   }
+
+  //   // Setelah memfilter data, perbarui jumlah halaman dan navigasi
+  //   this.filteredForms = filteredByDateRange;
+  //   this.calculateTotalPages();
+  //   this.searchTopage(1); // Navigasikan ke halaman pertama setelah filtering
+  // }
+
+  // // Helper function to format date as YYYY-MM-DD
+  // formatDate(date: Date): string {
+  //   const year = date.getFullYear();
+  //   const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  //   const day = date.getDate().toString().padStart(2, '0');
+  //   return `${year}-${month}-${day}`;
+  // }
+
+  // resetFilters(): void {
+  //   // Reset selectedStatus to empty string
+  //   this.selectedStatus = '';
+
+  //   // Reset selectedDateRange to null
+  //   this.selectedDateRange = { start: null, end: null };
+
+  //   // Call filter functions to update data based on reset filters
+  //   this.filterByStatus();
+  //   this.filterByDateRange();
+  // }
 
   changePageSize(): void {
     this.totalPages = Math.ceil(this.filteredForms.length / this.pageSize);
@@ -171,6 +269,7 @@ export class ListPengajuanPinjamanComponent {
   }
 
   sortByName(): void {
+    console.log('Search text:', this.searchText); // Cetak nilai yang dicari
     this.filteredForms.sort((a, b) => {
       const nameA = a.formToUser.nameUser.toLowerCase();
       const nameB = b.formToUser.nameUser.toLowerCase();
@@ -183,84 +282,36 @@ export class ListPengajuanPinjamanComponent {
   }
 
   sortData(column: string): void {
+    this.filteredForms.sort((a, b) => {
+      const valueA = this.getPropertyValue(a, column);
+      const valueB = this.getPropertyValue(b, column);
+
+      if (valueA < valueB) return this.sortDirection === 'asc' ? -1 : 1;
+      if (valueA > valueB) return this.sortDirection === 'asc' ? 1 : -1;
+      return 0;
+    });
+
+    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+  }
+
+  getPropertyValue(item: any, column: string): string {
     switch (column) {
       case 'name':
-        this.filteredForms.sort((a, b) => {
-          const nameA = a.formToUser.nameUser.toLowerCase();
-          const nameB = b.formToUser.nameUser.toLowerCase();
-          if (nameA < nameB) return this.sortDirection === 'asc' ? -1 : 1;
-          if (nameA > nameB) return this.sortDirection === 'asc' ? 1 : -1;
-          return 0;
-        });
-        this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
-        break;
+        return (item.formToUser.nameUser || '').toLowerCase();
       case 'cif':
-        this.filteredForms.sort((a, b) => {
-          const nameA = (a.idFormPengajuanPinjaman || '')
-            .toString()
-            .toLowerCase();
-          const nameB = (b.idFormPengajuanPinjaman || '')
-            .toString()
-            .toLowerCase();
-          if (nameA < nameB) return this.sortDirection === 'asc' ? -1 : 1;
-          if (nameA > nameB) return this.sortDirection === 'asc' ? 1 : -1;
-          return 0;
-        });
-        this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
-        break;
+        return (item.idFormPengajuanPinjaman || '').toString().toLowerCase();
       case 'nik':
-        this.filteredForms.sort((a, b) => {
-          const nameA = a.formToUser.nikUser.toLowerCase();
-          const nameB = b.formToUser.nikUser.toLowerCase();
-          if (nameA < nameB) return this.sortDirection === 'asc' ? -1 : 1;
-          if (nameA > nameB) return this.sortDirection === 'asc' ? 1 : -1;
-          return 0;
-        });
-        this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
-        break;
+        return (item.formToUser.nikUser || '').toLowerCase();
       case 'jenis_pengajuan':
-        this.filteredForms.sort((a, b) => {
-          const nameA = a.formToJenis.nameJenisPinjaman.toLowerCase();
-          const nameB = b.formToJenis.nameJenisPinjaman.toLowerCase();
-          if (nameA < nameB) return this.sortDirection === 'asc' ? -1 : 1;
-          if (nameA > nameB) return this.sortDirection === 'asc' ? 1 : -1;
-          return 0;
-        });
-        this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
-        break;
+        return (item.formToJenis.nameJenisPinjaman || '').toLowerCase();
       case 'status_pengajuan':
-        this.filteredForms.sort((a, b) => {
-          const nameA = a.statusPengajuan.toLowerCase();
-          const nameB = b.statusPengajuan.toLowerCase();
-          if (nameA < nameB) return this.sortDirection === 'asc' ? -1 : 1;
-          if (nameA > nameB) return this.sortDirection === 'asc' ? 1 : -1;
-          return 0;
-        });
-        this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
-        break;
+        return (item.statusPengajuan || '').toLowerCase();
       case 'admin':
-        this.filteredForms.sort((a, b) => {
-          const nameA = (a.formToAdmin?.nameAdmin || '').toLowerCase(); // Use empty string as default value
-          const nameB = (b.formToAdmin?.nameAdmin || '').toLowerCase(); // Use empty string as default value
-          if (nameA < nameB) return this.sortDirection === 'asc' ? -1 : 1;
-          if (nameA > nameB) return this.sortDirection === 'asc' ? 1 : -1;
-          return 0;
-        });
-        this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
-        break;
+        return (item.formToAdmin?.nameAdmin || '').toLowerCase();
       case 'tanggal_realisasi':
-        this.filteredForms.sort((a, b) => {
-          const nameA = (a.tanggalRealisasi || '').toLowerCase(); // Use empty string as default value
-          const nameB = (b.tanggalRealisasi || '').toLowerCase(); // Use empty string as default value
-          if (nameA < nameB) return this.sortDirection === 'asc' ? -1 : 1;
-          if (nameA > nameB) return this.sortDirection === 'asc' ? 1 : -1;
-          return 0;
-        });
-        this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
-        break;
-      // Add cases for other columns if needed
+        return (item.tanggalRealisasi || '').toLowerCase();
       default:
-        break;
+        return '';
     }
   }
 

@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-const ModalDelete = ({ closeModal }) => {
+const ModalDelete = ({ closeModal, handleSoftDelete }) => {
   return (
     <View style={styles.container}>
       <View style={styles.modal}>
@@ -42,6 +42,7 @@ const ModalDelete = ({ closeModal }) => {
                 <TouchableOpacity
                     style={styles.buttonHapus}
                     onPress={() => {
+                        handleSoftDelete();
                         closeModal()
                     }}
                     >
