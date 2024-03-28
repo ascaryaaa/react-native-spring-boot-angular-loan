@@ -52,7 +52,9 @@ const Monitoring = ({ navigation, route }) => {
         </View>
         <View style={styles.table}>
           <Text style={{color: 'white', fontWeight: '700'}}>Sisa Pinjaman</Text>
-          <Text style={{color: 'white', fontSize: 28, fontWeight: '700', marginTop: 5}}>Rp. {monitoringDetailState.data.sisaTagihan}</Text>
+          <Text style={{color: 'white', fontSize: 28, fontWeight: '700', marginTop: 5}}>
+            Rp. {monitoringDetailState.data ? monitoringDetailState.data.sisaTagihan : "-"}
+          </Text>
           <Text style={{color: 'white', marginTop: 8}}>Pembayaran 7 hari lagi</Text>
           <Text style={{color: 'white'}}>- - - - - - - - - - - - - - - - - - - - - - - - - - - </Text>
           <View style={styles.row}>
@@ -62,18 +64,6 @@ const Monitoring = ({ navigation, route }) => {
             </TouchableOpacity>
           </View>
         </View>
-
-        {monitoringDetailState.loading ? (
-          <ActivityIndicator size="large" />
-        ) : monitoringDetailState.error ? (
-          <Text>Error fetching monitoring details: {monitoringDetailState.error}</Text>
-        ) : (
-          <View style={styles.table}>
-            <Text>{monitoringDetailState.data.hashedIdPinjaman}</Text>
-          </View>
-        )}
-
-
         <View style={styles.container1}>
           <TouchableOpacity onPress={toggleDropdown} style={styles.detailButton}>
             <Text style={styles.textButton}>Data Debitur</Text>
@@ -84,7 +74,7 @@ const Monitoring = ({ navigation, route }) => {
           </TouchableOpacity>
           {isDropdownOpen && (
             <View style={styles.dropdownContent}>
-              <DataDebitur />
+              <DataDebitur formId={formId}/>
             </View>
           )}
         </View>
@@ -99,7 +89,7 @@ const Monitoring = ({ navigation, route }) => {
           </TouchableOpacity>
           {isDropdownOpen1 && (
             <View style={styles.dropdownContent}>
-              <DetailPinjaman />
+              <DetailPinjaman formId={formId}/>
             </View>
           )}
         </View>
