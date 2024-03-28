@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FontAwesome } from "@expo/vector-icons"; // Import FontAwesome from @expo/vector-icons
 import {
   View,
@@ -12,6 +12,7 @@ import {
 import { useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import NotificationSuccess from "./NotificationSuccess";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const SyaratKetentuan = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -28,6 +29,49 @@ const SyaratKetentuan = ({ navigation }) => {
   const toggleCheckbox = () => {
     setChecked(!checked);
   };
+
+  useEffect(() => {
+    
+    const getDataAsync = async () =>{
+      try {
+        const penghasilanData = await AsyncStorage.getItem("penghasilan");
+        const jangkaWaktuData = await AsyncStorage.getItem("jangkaWaktu");
+        const simulasiPinjamanData = await AsyncStorage.getItem("simulasiPinjaman");
+        const uangMukaData = await AsyncStorage.getItem("uangMuka");
+        const jenisKelaminData = await AsyncStorage.getItem("jenisKelamin");
+        const tempatLahirData = await AsyncStorage.getItem("tempatLahir");
+        const tanggalLahirData = await AsyncStorage.getItem("tanggalLahir");
+        const alamatData = await AsyncStorage.getItem("alamat");
+        const kodePosData = await AsyncStorage.getItem("kodePos");
+        const kelurahanData = await AsyncStorage.getItem("kelurahan");
+        const kecamatanData = await AsyncStorage.getItem("kecamatan");
+        const npwpData = await AsyncStorage.getItem("npwp");
+        const alamatBni = await AsyncStorage.getItem("alamatBni");
+
+        console.log("==================================================")
+        console.log(penghasilanData)
+        console.log(jangkaWaktuData)
+        console.log(simulasiPinjamanData)
+        console.log(uangMukaData)
+        console.log(jenisKelaminData)
+        console.log(tempatLahirData)
+        console.log(tanggalLahirData)
+        console.log(alamatData)
+        console.log(kodePosData)
+        console.log(kelurahanData)
+        console.log(kecamatanData)
+        console.log(npwpData)
+        console.log(alamatBni)
+        console.log("==================================================")
+  
+      } catch (error) {
+        console.error("Failed to fetch data from AsyncStorage", error);
+      }
+    }
+
+    getDataAsync()
+  }, []);
+
 
   return (
     <View style={styles.bg}>

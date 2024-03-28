@@ -166,6 +166,7 @@ const DataPemohon = ({ navigation }) => {
     }
   };
 
+  
   const fetchHashedId = async () => {
     try {
       const storedHashedId = await AsyncStorage.getItem("hashedId");
