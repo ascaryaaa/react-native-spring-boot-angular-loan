@@ -183,6 +183,7 @@ const SimulasiFleksiPensiun = ({ navigation }) => {
                 }
                 value={inputData.penghasilan}
                 keyboardType="numeric"
+                placeholder="Rp"
               ></TextInput>
               {inputErrors.penghasilan && (
                 <Text style={styles.errorText}>
@@ -210,7 +211,7 @@ const SimulasiFleksiPensiun = ({ navigation }) => {
               )}
               <Text style={styles.textform}>Bunga Pinjaman</Text>
               <TextInput
-                style={styles.input}
+                style={styles.inputFill}
                 placeholder="10.74%"
                 placeholderTextColor="gray"
                 editable={false}
@@ -351,6 +352,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 8,
     borderColor: "#1394AD",
+    borderWidth: 1,
+  },
+  inputFill: {
+    width: "100%",
+    height: 40,
+    borderWidth: 1,
+    marginTop: 8,
+    marginBottom: 16,
+    marginTop: 10,
+    marginBottom: 20,
+    paddingHorizontal: 10,
+    borderRadius: 8,
+    borderColor: "#9E9E9E",
     borderWidth: 1,
   },
   formSimulasi: {
