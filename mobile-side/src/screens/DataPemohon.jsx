@@ -384,7 +384,7 @@ const DataPemohon = ({ navigation }) => {
             <View style={[styles.input, inputErrors.alamatBni && styles.inputError]}>
               <RNPickerSelect
                 onValueChange={handleBniAddressChange}
-                items={cabangState.data.map((cabang) => ({
+                items={cabangState.data?.map((cabang) => ({
                   label: cabang.nameCabang, // Assuming cabang object has namaCabang property
                   value: cabang.kodeCabang, // Assuming cabang object has kodeCabang property
                 }))}

@@ -77,14 +77,21 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
   };
 
    // Handle validasi maksimal jumlah pinjaman
-   const handleNumberChange = (input) => {
-    // Check if the input is within the acceptable range
-    if (parseInt(input) <= maksAngsuran) {
-      setInputData({ ...inputData, jumlahPinjaman: input });
+  const handleNumberChange = (input) => {
+    // Check if the input is not empty
+    if (input !== '') {
+      // Check if the input is within the acceptable range 
+      if (parseInt(input) <= maksAngsuran) {
+        setInputData({ ...inputData, jumlahPinjaman: input });
+      } else {
+        // Display an error message if the input exceeds the maximum allowed value
+        Alert.alert('Error', 'Maximum number allowed is '+`Rp ${maksAngsuran.toLocaleString("id-ID", {maximumFractionDigits: 2,})}`);
+      }
     } else {
-      // Display an error message if the input exceeds the maximum allowed value
-      Alert.alert('Error', 'Maximum number allowed is '+`Rp ${maksAngsuran.toLocaleString("id-ID", {maximumFractionDigits: 2,})}`);
+      // If the input is empty, clear the hargaRumah field
+      setInputData({ ...inputData, jumlahPinjaman: '' });
     }
+    
   };
 
   const handleNext = () => {
@@ -251,9 +258,9 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
             ]}
             value={
               inputData.jumlahPinjaman 
-              // === ""
-              //   ? ""
-              //   : inputData.jumlahPinjaman.toString()
+              === ""
+                ? ""
+                : inputData.jumlahPinjaman.toString()
             }
             keyboardType="numeric"
             onChangeText={handleNumberChange}
