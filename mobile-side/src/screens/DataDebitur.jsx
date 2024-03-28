@@ -10,7 +10,7 @@ const viewsData = [
   { id: 5, title: 'Alamat', content: 'Kras, Kediri' },
 ];
 
-const DataDebitur = () => {
+const DataDebitur = ({formId}) => {
     return (
       <View style={styles.table}>
         {viewsData.map(view => (

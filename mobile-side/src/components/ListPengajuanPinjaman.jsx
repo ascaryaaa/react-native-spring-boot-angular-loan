@@ -15,7 +15,7 @@ import { getAccountByHashedId } from '../reducers/Account';
 import { fetchFormListById, softDeleteForm } from '../reducers/Form';
 import IconDelete from "./svg/IconDelete";
 
-const ListPengajuanPinjaman = ({ navigation }) => {
+const ListPengajuanPinjaman = () => {
   const dispatch = useDispatch();
   const formDetailsState = useSelector((state) => state.forms);
   const accountState = useSelector((state) => state.account);
@@ -67,7 +67,7 @@ const ListPengajuanPinjaman = ({ navigation }) => {
             ?.filter(form => !form.deleted) // Filter out forms where deleted is true
             .map((form, index) => (
               (form.statusPengajuan === "Diproses" || form.statusPengajuan === "Ditolak") && (
-                <TouchableOpacity key={index} style={styles.card} onPress={() => navigation.navigate("Monitoring")}>
+                <TouchableOpacity key={index} style={styles.card}>
                   <View style={{ backgroundColor: "green" }}>
                     <Image source={{ uri: form.formToJenis.gambarJenisPinjaman }} style={styles.image} />
                   </View>
