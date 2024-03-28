@@ -123,7 +123,7 @@
                         class="shrink-0 w-10 aspect-square fill-indigo-50" />
                       <div class="flex flex-col justify-center my-auto">
                         <div class="text-xs text-neutral-500">Total pinjaman</div>
-                        <div class="mt-1 text-xs leading-4 text-center text-zinc-800">
+                        <div class="mt-1 text-xs leading-4  text-zinc-800">
                           <ng-container *ngIf="pinjamans?.pinjamanToForm?.idFormPengajuanPinjaman === 1">
                             {{ pinjamans?.pinjamanToForm?.hargaRumah }}
                           </ng-container>
@@ -138,7 +138,7 @@
                         class="shrink-0 w-10 aspect-square fill-indigo-50" />
                       <div class="flex flex-col justify-center my-auto">
                         <div class="text-xs text-neutral-500">Tanggal Realisasi</div>
-                        <div class="mt-1 text-xs leading-4 text-center text-zinc-800">
+                        <div class="mt-1 text-xs leading-4  text-zinc-800">
                           {{pinjamans?.pinjamanToForm?.tanggalRealisasi | date:'yyyy-MM-dd'}}
                         </div>
                       </div>
@@ -148,7 +148,7 @@
                         class="shrink-0 w-10 aspect-square fill-indigo-50" />
                       <div class="flex flex-col justify-center my-auto">
                         <div class="text-xs text-neutral-500">Kolektabilitas</div>
-                        <div class="mt-1 text-xs leading-4 text-center text-zinc-800" *ngIf="pinjamans && pinjamans.pinjamanToForm">
+                        <div class="mt-1 text-xs leading-4  text-zinc-800" *ngIf="pinjamans && pinjamans.pinjamanToForm">
                           <ng-container *ngIf="pinjamans.kolektabilitas !== null; else kolektabilitasCheck">
                             <ng-container *ngIf="pinjamans.kolektabilitas === 0; else kolektabilitasCheck2">
                               Lancar

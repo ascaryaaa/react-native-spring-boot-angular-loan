@@ -50,7 +50,15 @@ const ListPinjaman = ({ navigation }) => {
       ) : (
         formDetailsState.data?.map((form, index) => (
           form.statusPengajuan === "Diterima" && (
-            <TouchableOpacity key={index} style={styles.card} onPress={() => navigation.navigate("Monitoring")}>
+            <TouchableOpacity 
+              key={index} 
+              style={styles.card} 
+              onPress={() => 
+                navigation.navigate(
+                  "Monitoring", 
+                  {formId: form.idFormPengajuanPinjaman}) //to parsing id to monitoring
+              }
+            >
               <View style={{backgroundColor: "green"}}>
                 <Image source={{ uri: form.formToJenis.gambarJenisPinjaman }} style={styles.image} />
               </View>
