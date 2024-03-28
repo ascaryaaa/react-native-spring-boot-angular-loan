@@ -261,7 +261,7 @@ http://localhost:8083/rest/auth/login-account
 2. Define Model
    Define the model of the REST API, here we use lombok to make things cleaner
 
-```ruby
+```java
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -294,7 +294,7 @@ public class User {
    This is used to store and make functions of the databse
 
 
-```ruby
+```java
 import com.cuan.serverside.model.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -309,7 +309,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 4. Define the interface of service and implementations
 
    Interface of service, this is esnure Service Layer Patter and promotes modularity and testability
-```ruby
+```java
 import com.cuan.serverside.model.User;
 
 public interface UserService {
@@ -326,7 +326,7 @@ public interface UserService {
 ```
 
    This is the implementations of interface, we override the fucntions here 
-```ruby
+```java
 import com.cuan.serverside.model.User;
 import com.cuan.serverside.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -368,13 +368,13 @@ To enable cross-origin requests in a Spring Boot application, you can use the `@
 
 Here's how you can apply it:
 
-```
+```java
     @CrossOrigin(origins = "http://localhost:<port>")
 ```
 
 Replace <port> with the port number your frontend is running on. For instance, if your frontend is on port 4200, the annotation should look like this:
 
-```
+```java
     @CrossOrigin(origins = "http://localhost:4200")
 ```
 
@@ -388,7 +388,7 @@ for images, we upload the image using Imagur, its the image hosting service. the
 
 This is the example of the Promo API-Endpoint
 
-```ruby
+```java
 [
     {
         "idPromo": 1,
@@ -407,20 +407,20 @@ This is the example of the Promo API-Endpoint
 
 For use stack navigation, install
 
-```
+```jsx
 @react-navigation/native
 ```
 
 and
 
-```
+```jsx
 @react-navigation/native-stack
 ```
 
 i install this library because This library provides native components for gesture handling in React Native applications, improving the performance and responsiveness of touch interactions such as swiping, pinching, and rotating.
 
-```
-px expo install react-native-gesture-handler
+```cli
+npx expo install react-native-gesture-handler
 ```
 
 ### 1. Login
@@ -428,7 +428,7 @@ px expo install react-native-gesture-handler
 a. Installing Required Packages
 
 Ensure you have Axios and AsyncStorage installed in your project. If not, you can install them by running:
-```
+```cli
 npm install axios @react-native-async-storage/async-storage
 ```
 
@@ -436,7 +436,7 @@ b. Updating ModalAwal.jsx for Login Implementation
 
 First, import Axios and AsyncStorage at the top of your ModalAwal.jsx file:
 
-```
+```jsx
 import React, { useState } from "react";
 import axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -446,7 +446,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 Next, add state hooks for the username and password, and implement the login function:
 
-```
+```jsx
 const ModalAwal = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -504,7 +504,7 @@ c. Handling Navigation Based on Token Presence
 
 In your App.js or wherever you handle navigation, you should decide whether to show the login screen or navigate directly to the main content based on the presence of a token. This could look something like this:
 
-```
+```jsx
 import React, { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
