@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image} from 'reac
 import DataDebitur from '../components/DataDebitur';
 import DetailPinjaman from '../components/DetailPinjaman';
 
-const Monitoring = ({ navigation}) => {
+const Monitoring = ({ navigation }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownOpen1, setIsDropdownOpen1] = useState(false);
 

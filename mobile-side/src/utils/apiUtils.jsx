@@ -96,5 +96,23 @@ export const fetchAccountData = async (hashedId) => {
       return null;
     }
 };
-  
-export default { fetchAccountData };
+
+export const fetchCabangData = async () => {
+  try {
+    const token = await getToken();
+    if (token) {
+      const response = await axios.get(Constant.getCabang, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } else {
+      console.error("Token not found in AsyncStorage");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching cabang data:", error);
+    return null;
+  }
+};

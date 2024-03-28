@@ -3,6 +3,7 @@ import jenisPinjamanReducer from './JenisPinjaman';
 import accountReducer from "./Account";
 import promoReducer from "./Promos";
 import formsReducer from './Form';
+import cabangReducer from './Cabang';
 
 export default configureStore({
     reducer: {
@@ -10,5 +11,6 @@ export default configureStore({
         jenisPinjaman: jenisPinjamanReducer,
         promo : promoReducer,
         forms: formsReducer,
+        cabang: cabangReducer,
     }
-})
+});
