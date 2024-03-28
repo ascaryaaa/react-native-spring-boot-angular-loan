@@ -13,43 +13,13 @@
 }
 
 /* Modal */
-app-confirmation-modal {
+app-confirmation-modal,
+app-rejecting-modal,
+app-notification-download-modal {
   z-index: 10000; /* Ensure it's above the overlay */
 }
 
-app-rejecting-modal {
-  z-index: 10000; /* Ensure it's above the overlay */
-}
-
-app-notification-download-modal{
-  z-index: 10000; /* Ensure it's above the overlay */
-}
-
-.text-center{
-  align-items: center;
-}
-.modal{
-  background-color:#F2F4F8;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-
-}
-
-.header-bar {
-  background-color:#fff; 
-  height: 2px;
-  position: fixed; 
-  width: 100%;
-  height: 95px;
-  z-index: 1; 
-}
-body {
-  overflow-y: auto; /* Gunakan auto atau scroll sesuai kebutuhan */
-}
-.layout-container {
-  height: 100vh; /* Menentukan ketinggian layout */
-  overflow-y: auto; /* Mengaktifkan gulir jika konten melebihi ketinggian layout */
+/* Sidebar */
+app-sidebar {
+  z-index: 9998; /* Ensure it's below the overlay */
 }
