@@ -243,10 +243,10 @@
                       {{ form.statusPengajuan }}
                     </div>
                   </td>
-                  <td class="px-4 py-2">{{ form.formToAdmin?.nameAdmin }}</td>
+                  <td class="px-4 py-2">{{ form.formToAdmin?.nameAdmin ? form.formToAdmin?.nameAdmin : '-' }}</td>
                   <!-- <td class="px-4 py-2">{{ form.tanggalLahir | date: 'longDate' }}</td> -->
                   <td class="px-4 py-2 text-center">
-                    {{ form.tanggalRealisasi | date : "yyyy/MM/dd" }}
+                    {{ form.tanggalRealisasi ? (form.tanggalRealisasi | date : "yyyy/MM/dd") : '-' }}
                   </td>
                   <td class="px-4 py-2">
                     <a
