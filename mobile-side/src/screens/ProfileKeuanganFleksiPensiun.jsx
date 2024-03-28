@@ -184,7 +184,7 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
           <Text style={styles.title}>Profil Keuangan</Text>
           <Text style={styles.text}>Penghasilan Bersih per. Bulan</Text>
           <TextInput
-            style={[styles.input, inputErrors.penghasilan && styles.inputError]}
+            style={[styles.inputFill, inputErrors.penghasilan && styles.inputError]}
             value={inputData.penghasilan}
             editable={false}
             keyboardType="numeric"
@@ -234,6 +234,7 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
                 : inputData.jumlahPinjaman.toString()
             }
             keyboardType="numeric"
+            placeholder="Rp"
             onChangeText={(number) => {
               const parsedNumber = parseInt(number);
               setInputData({
@@ -248,7 +249,7 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
 
           <Text style={styles.text}>Bunga Pinjaman</Text>
           <TextInput
-            style={styles.input}
+            style={styles.inputFill}
             placeholder="10,74"
             placeholderTextColor="gray"
             editable={false}
@@ -256,7 +257,7 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
           <View>
             {!hidedButton && (
               <TouchableOpacity onPress={handleNext} style={styles.button}>
-                <Text style={styles.textButton}>Simulasikan</Text>
+                <Text style={styles.textButton}>Simulasi Angsuran</Text>
               </TouchableOpacity>
             )}
             {isDropdownOpen && (
@@ -332,17 +333,15 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   button: {
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "row",
-    borderRadius: 20,
-    backgroundColor: "#18C1CD",
+    margin: 5,
     alignSelf: "flex-end",
-    width: "40%",
-    marginBottom: 16,
-    marginTop: 16,
+    marginLeft: 80,
+    backgroundColor: "#18C1CD",
+    justifyContent: "center",
+    borderRadius: 20,
+    width: 160,
+    height: 44,
+    marginTop: 10,
   },
   button1: {
     marginTop: 10,
@@ -376,7 +375,20 @@ const styles = StyleSheet.create({
     marginTop: 10,
     paddingHorizontal: 10,
     borderRadius: 8,
-    borderColor: "#1394AD",
+    borderColor: "#9E9E9E",
+    borderWidth: 1,
+  },
+  inputFill: {
+    width: "100%",
+    height: 40,
+    borderWidth: 1,
+    marginTop: 8,
+    marginBottom: 16,
+    marginTop: 10,
+    marginBottom: 20,
+    paddingHorizontal: 10,
+    borderRadius: 8,
+    borderColor: "#9E9E9E",
     borderWidth: 1,
   },
   inputError: {

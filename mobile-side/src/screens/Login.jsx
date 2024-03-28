@@ -43,6 +43,13 @@ const Login = ({ navigation }) => {
       <TouchableOpacity style={styles.button} onPress={openModal}>
         <Text style={styles.text}>Login</Text>
       </TouchableOpacity>
+      {/* Modal tetap ditampilkan di dalam View utama */}
+      <LoginModal
+        visible={modalVisible}
+        onClose={closeModal}
+        onLoginSuccess={handleSuccessfulLogin}
+        navigation={navigation}
+      />
       <View style={styles.rowFitur}>
         <View style={styles.features}>
           <TouchableOpacity>
@@ -72,14 +79,6 @@ const Login = ({ navigation }) => {
           <Text style={{ fontSize: 12 }}>Transfer</Text>
         </View>
       </View>
-
-      {/* Modal tetap ditampilkan di dalam View utama */}
-      <LoginModal
-        visible={modalVisible}
-        onClose={closeModal}
-        onLoginSuccess={handleSuccessfulLogin}
-        navigation={navigation}
-      />
     </ImageBackground>
   );
 };
@@ -102,7 +101,7 @@ const styles = StyleSheet.create({
     gap: 10,
     borderRadius: 24,
     backgroundColor: "#18C1CD",
-    marginBottom : 28
+    marginBottom: 28,
   },
   text: {
     color: "white",
@@ -111,10 +110,10 @@ const styles = StyleSheet.create({
   },
   rowFitur: {
     flexDirection: "row",
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     width: "60%",
   },
   features: {
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
 });

@@ -11,6 +11,9 @@ import {
 import { ScrollView } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { number } from "yup";
+import BackNavbar from "../components/svg/BackNavbar";
+import HomeNavbar from "../components/svg/HomeNavbar";
+
 
 const ProfileKeuanganFleksiAktif = ({ navigation }) => {
   const [inputData, setInputData] = useState({
@@ -179,14 +182,10 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
       <View style={styles.shadow}>
         <View style={styles.navbar}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Image
-              source={require("../../../mobile-side/src/assets/Icon_leftarrow.png")}
-            />
+            <BackNavbar></BackNavbar>
           </TouchableOpacity>
           <Text style={{ fontSize: 16 }}>Digital Loan</Text>
-          <Image
-            source={require("../../../mobile-side/src/assets/Icon_homeorg.png")}
-          />
+          <HomeNavbar></HomeNavbar>
         </View>
       </View>
       {/* container atas */}
@@ -197,7 +196,7 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
             <Text style={styles.text}>Penghasilan Bersih per. Bulan</Text>
             <TextInput
               style={[
-                styles.input,
+                styles.inputFill,
                 inputErrors.penghasilan && styles.inputError,
               ]}
               // placeholder="Penghasilan Bersih per. Bulan"
@@ -218,9 +217,10 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
             )}
 
             <Text style={styles.text}>Jangka Waktu</Text>
+            <View>
             <TextInput
               style={[
-                styles.input,
+                styles.input2,
                 inputErrors.jangkaWaktu && styles.inputError,
               ]}
               // placeholder="Jangka Waktu"
@@ -240,6 +240,7 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
             <Text style={{ marginBottom: 10, fontSize: 10 }}>
               *Maksimal 360 Bulan
             </Text>
+            </View>
 
             <Text style={styles.text}>Jumlah Pinjaman yang Diajukan</Text>
             <TextInput
@@ -251,6 +252,7 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
                 inputData.jumlahPinjaman
               }
               keyboardType="numeric"
+              placeholder="Rp"
               onChangeText={
                 // (number) => setInputData({ ...inputData, jumlahPinjaman: number })
                 handleNumberChange
@@ -271,7 +273,7 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
             <View>
               {!hidedButton && (
                 <TouchableOpacity onPress={handleNext} style={styles.button}>
-                  <Text style={styles.textButton}>Simulasikan</Text>
+                  <Text style={styles.textButton}>Simulasi Angsuran</Text>
                 </TouchableOpacity>
               )}
               {isDropdownOpen && (
@@ -352,17 +354,15 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   button: {
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "row",
-    borderRadius: 20,
-    backgroundColor: "#18C1CD",
+    margin: 5,
     alignSelf: "flex-end",
-    width: "40%",
-    marginBottom: 16,
-    marginTop: 16,
+    marginLeft: 80,
+    backgroundColor: "#18C1CD",
+    justifyContent: "center",
+    borderRadius: 20,
+    width: 160,
+    height: 44,
+    marginTop: 10,
   },
   shadow: {
     shadowColor: "#ddd",
@@ -408,7 +408,20 @@ const styles = StyleSheet.create({
     marginTop: 10,
     paddingHorizontal: 10,
     borderRadius: 8,
-    borderColor: "#1394AD",
+    borderColor: "#9E9E9E",
+    borderWidth: 1,
+  },
+  inputFill: {
+    width: "100%",
+    height: 40,
+    borderWidth: 1,
+    marginTop: 8,
+    marginBottom: 16,
+    marginTop: 10,
+    marginBottom: 20,
+    paddingHorizontal: 10,
+    borderRadius: 8,
+    borderColor: "#9E9E9E",
     borderWidth: 1,
   },
   title: {
