@@ -4,6 +4,7 @@ import accountReducer from "./Account";
 import promoReducer from "./Promos";
 import formsReducer from './Form';
 import cabangReducer from './Cabang';
+import pinjamanReducer from './Pinjaman';
 
 export default configureStore({
     reducer: {
@@ -12,5 +13,6 @@ export default configureStore({
         promo : promoReducer,
         forms: formsReducer,
         cabang: cabangReducer,
+        pinjaman: pinjamanReducer,
     }
 });

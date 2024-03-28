@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image, ActivityIndicator} from 'react-native';
 import DataDebitur from '../components/DataDebitur';
 import DetailPinjaman from '../components/DetailPinjaman';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchMonitoringDetail } from '../reducers/Pinjaman';
 
-const Monitoring = ({ navigation }) => {
+const Monitoring = ({ navigation, route }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownOpen1, setIsDropdownOpen1] = useState(false);
+  const { formId } = route.params;
+  const dispatch = useDispatch();
+  const monitoringDetailState = useSelector((state) => state.pinjaman);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -13,6 +18,14 @@ const Monitoring = ({ navigation }) => {
   const toggleDropdown1 = () => {
     setIsDropdownOpen1(!isDropdownOpen1);
   };
+
+  useEffect(() => {
+    dispatch(fetchMonitoringDetail(formId));
+  }, [dispatch, formId]);
+
+  useEffect(() => {
+    console.log("##########################",monitoringDetailState);
+  }, [monitoringDetailState]);
 
   return (
     <View style={styles.bg}>
@@ -39,7 +52,7 @@ const Monitoring = ({ navigation }) => {
         </View>
         <View style={styles.table}>
           <Text style={{color: 'white', fontWeight: '700'}}>Sisa Pinjaman</Text>
-          <Text style={{color: 'white', fontSize: 28, fontWeight: '700', marginTop: 5}}>Rp. 248.000.000,00</Text>
+          <Text style={{color: 'white', fontSize: 28, fontWeight: '700', marginTop: 5}}>Rp. {monitoringDetailState.data.sisaTagihan}</Text>
           <Text style={{color: 'white', marginTop: 8}}>Pembayaran 7 hari lagi</Text>
           <Text style={{color: 'white'}}>- - - - - - - - - - - - - - - - - - - - - - - - - - - </Text>
           <View style={styles.row}>
@@ -49,6 +62,18 @@ const Monitoring = ({ navigation }) => {
             </TouchableOpacity>
           </View>
         </View>
+
+        {monitoringDetailState.loading ? (
+          <ActivityIndicator size="large" />
+        ) : monitoringDetailState.error ? (
+          <Text>Error fetching monitoring details: {monitoringDetailState.error}</Text>
+        ) : (
+          <View style={styles.table}>
+            <Text>{monitoringDetailState.data.hashedIdPinjaman}</Text>
+          </View>
+        )}
+
+
         <View style={styles.container1}>
           <TouchableOpacity onPress={toggleDropdown} style={styles.detailButton}>
             <Text style={styles.textButton}>Data Debitur</Text>
