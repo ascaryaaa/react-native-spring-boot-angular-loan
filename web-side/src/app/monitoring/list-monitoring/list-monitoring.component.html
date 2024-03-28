@@ -25,6 +25,7 @@
             fill="currentColor"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
+            opacity ="0.5"
           >
             <path
               fill-rule="evenodd"
@@ -40,8 +41,8 @@
           [(ngModel)]="searchText"
           (ngModelChange)="search()"
           (keyup.enter)="search()"
-          placeholder="Cari Data Berdasarkan Nama dan NIK"
-          style="font-family: 'Montserrat', sans-serif; font-size: 12px"
+          placeholder="Cari data berdasarkan CIF, Nama atau NIK"
+          style="font-family: 'Montserrat', sans-serif; font-size: 12px; opacity: 0.5;"
         />
       </div>
     </div>
