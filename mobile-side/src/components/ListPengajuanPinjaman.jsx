@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   Image,
   Modal,
-  Pressable,
   ActivityIndicator
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,11 +14,13 @@ import ModalDelete from "./ModalDelete";
 import { getAccountByHashedId } from '../reducers/Account';
 import { fetchFormListById, softDeleteForm } from '../reducers/Form';
 
-
 const ListPengajuanPinjaman = ({ navigation }) => {
   const dispatch = useDispatch();
   const formDetailsState = useSelector((state) => state.forms);
   const accountState = useSelector((state) => state.account);
+
+  const [showModal, setShowModal] = useState(false);
+  const [formIdToDelete, setFormIdToDelete] = useState(null);
 
   useEffect(() => {
     const initializeData = async () => {
@@ -38,53 +39,72 @@ const ListPengajuanPinjaman = ({ navigation }) => {
     }
   }, [dispatch, accountState.data?.accountToUser?.idUser]);
 
-  // Function to handle soft delete
-  const handleSoftDelete = async (formId) => {
-    dispatch(softDeleteForm(formId));
+  const handleSoftDelete = async () => {
+    if (formIdToDelete) {
+      dispatch(softDeleteForm(formIdToDelete));
+    }
+  };
+
+  const openModal = (formId) => {
+    setFormIdToDelete(formId);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
   };
 
   return (
     <View style={styles.container}>
-    <View style={styles.shadow}>
-      {formDetailsState.loading ? (
-        <ActivityIndicator size="large" />
-      ) : formDetailsState.error ? (
-        <Text>Error fetching forms: {formDetailsState.error}</Text>
-      ) : (
-        formDetailsState.data
-          ?.filter(form => !form.deleted) // Filter out forms where deleted is true
-          .map((form, index) => (
-            (form.statusPengajuan === "Diproses" || form.statusPengajuan === "Ditolak") && (
-              <TouchableOpacity key={index} style={styles.card} onPress={() => navigation.navigate("Monitoring")}>
-                <View style={{ backgroundColor: "green" }}>
-                  <Image source={{ uri: form.formToJenis.gambarJenisPinjaman }} style={styles.image} />
-                </View>
-                <View style={styles.infoContainer}>
-                  <View style={styles.info}>
-                    <View>
-                      <Text style={styles.textHeader}>{form.formToJenis.nameJenisPinjaman}</Text>
-                    </View>
-                    <Text>Tanggal Pengajuan: {form.tanggalPengajuan}</Text>
-                    <Text>Periode Pinjaman: {form.jangkaWaktu} Bulan</Text>
-                    <Text>Periode Pinjaman: {form.jumlahPinjaman}</Text>
-                    <View style={[styles.cardStatus, { backgroundColor: form.statusPengajuan === "Ditolak" ? "#D4352A" : "#757575" }]}>
-                      <Text style={styles.textStatus}>{form.statusPengajuan}</Text>
-                    </View>
-                    {form.statusPengajuan === "Ditolak" && ( // Render soft delete button if status is Ditolak
-                      <TouchableOpacity onPress={() => handleSoftDelete(form.idFormPengajuanPinjaman)}>
-                        <Text style={styles.softDeleteButton}>Soft Delete</Text>
-                      </TouchableOpacity>
-                    )}
+      <View style={styles.shadow}>
+        {formDetailsState.loading ? (
+          <ActivityIndicator size="large" />
+        ) : formDetailsState.error ? (
+          <Text>Error fetching forms: {formDetailsState.error}</Text>
+        ) : (
+          formDetailsState.data
+            ?.filter(form => !form.deleted) // Filter out forms where deleted is true
+            .map((form, index) => (
+              (form.statusPengajuan === "Diproses" || form.statusPengajuan === "Ditolak") && (
+                <TouchableOpacity key={index} style={styles.card} onPress={() => navigation.navigate("Monitoring")}>
+                  <View style={{ backgroundColor: "green" }}>
+                    <Image source={{ uri: form.formToJenis.gambarJenisPinjaman }} style={styles.image} />
                   </View>
-                </View>
-              </TouchableOpacity>
-            )
-          ))
-      )}
+                  <View style={styles.infoContainer}>
+                    <View style={styles.info}>
+                      <View>
+                        <Text style={styles.textHeader}>{form.formToJenis.nameJenisPinjaman}</Text>
+                      </View>
+                      <Text>Tanggal Pengajuan: {form.tanggalPengajuan}</Text>
+                      <Text>Periode Pinjaman: {form.jangkaWaktu} Bulan</Text>
+                      <Text>Periode Pinjaman: {form.jumlahPinjaman}</Text>
+                      <View style={[styles.cardStatus, { backgroundColor: form.statusPengajuan === "Ditolak" ? "#D4352A" : "#757575" }]}>
+                        <Text style={styles.textStatus}>{form.statusPengajuan}</Text>
+                      </View>
+                      {form.statusPengajuan === "Ditolak" && ( // Render soft delete button if status is Ditolak
+                        <TouchableOpacity onPress={() => openModal(form.idFormPengajuanPinjaman)}>
+                          <Text style={styles.softDeleteButton}>Soft Delete</Text>
+                        </TouchableOpacity>
+                      )}
+                    </View>
+                  </View>
+                </TouchableOpacity>
+              )
+            ))
+        )}
+      </View>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={showModal}
+        onRequestClose={closeModal}
+      >
+        <ModalDelete closeModal={closeModal} handleSoftDelete={handleSoftDelete} />
+      </Modal>
     </View>
-  </View>
   );
 };
+
 export default ListPengajuanPinjaman;
 
 const styles = StyleSheet.create({
