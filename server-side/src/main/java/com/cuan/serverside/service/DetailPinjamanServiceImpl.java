@@ -1,6 +1,7 @@
 package com.cuan.serverside.service;
 
 import com.cuan.serverside.model.DetailPinjaman;
+import com.cuan.serverside.model.FormPengajuan;
 import com.cuan.serverside.repository.DetailPinjamanRepository;
 import com.cuan.serverside.repository.FormPengajuanRepository;
 import com.cuan.serverside.repository.UserRepository;
@@ -98,5 +99,10 @@ public class DetailPinjamanServiceImpl implements DetailPinjamanService{
             detailPinjaman.setDeleted(true);
             detailPinjamanRepository.save(detailPinjaman);
         }
+    }
+
+    @Override
+    public DetailPinjaman getFormByPinjamanId(Long formId) {
+        return detailPinjamanRepository.findByPinjamanToFormIdFormPengajuanPinjaman(formId);
     }
 }
