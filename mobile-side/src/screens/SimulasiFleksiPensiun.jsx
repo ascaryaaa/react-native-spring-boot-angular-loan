@@ -12,6 +12,8 @@ import {
 import { getJenisPinjamans } from "../reducers/JenisPinjaman";
 import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import BackNavbar from "../components/svg/BackNavbar";
+import HomeNavbar from "../components/svg/HomeNavbar";
 
 const SimulasiFleksiPensiun = ({ navigation }) => {
   const [inputData, setInputData] = useState({
@@ -126,145 +128,145 @@ const SimulasiFleksiPensiun = ({ navigation }) => {
   }, [dispatch]);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.navbar}>
-        {/* navbar */}
-        <TouchableOpacity
-          onPress={() => navigation.navigate("PengajuanPinjaman")}
-        >
-          <Image
-            source={require("../../../mobile-side/src/assets/Icon_leftarrow.png")}
-          />
-        </TouchableOpacity>
+    <View style={styles.bg}>
+      <View style={styles.shadow}>
+        <View style={styles.navbar}>
+          {/* navbar */}
+          <TouchableOpacity
+            onPress={() => navigation.navigate("PengajuanPinjaman")}
+          >
+            <BackNavbar></BackNavbar>
+          </TouchableOpacity>
 
-        <Text>Digital Loan</Text>
-        <Image
-          source={require("../../../mobile-side/src/assets/Icon_homeorg.png")}
-        />
+          <Text style={{ fontSize: 16 }}>Digital Loan</Text>
+          <HomeNavbar></HomeNavbar>
+        </View>
       </View>
-      <ScrollView>
-        <View style={styles.bodyContainer}>
-          <View style={{ alignItems: "center" }}>
-            <Text style={styles.texttitle}>Simulasi BNI Fleksi Pensiun</Text>
+      <View style={styles.container}>
+        <ScrollView>
+          <View style={styles.bodyContainer}>
             <View>
-              {jenisPinjamanState.loading ? (
-                <ActivityIndicator />
-              ) : (
-                jenisPinjamanState?.data
-                  // Filter data berdasarkan idJenisPinjaman
-                  .filter(
-                    (jenisPinjaman) =>
-                      jenisPinjaman.idJenisPinjaman === idToDisplay
-                  )
-                  .map((jenisPinjaman, index) => (
-                    <Image
-                      style={styles.imgSimulasi}
-                      source={{ uri: jenisPinjaman.gambarJenisPinjaman }}
-                    />
-                  ))
-              )}
+              <Text style={styles.texttitle}>Simulasi BNI Fleksi Pensiun</Text>
+              <View style={styles.centerred}>
+                {jenisPinjamanState.loading ? (
+                  <ActivityIndicator />
+                ) : (
+                  jenisPinjamanState?.data
+                    // Filter data berdasarkan idJenisPinjaman
+                    .filter(
+                      (jenisPinjaman) =>
+                        jenisPinjaman.idJenisPinjaman === idToDisplay
+                    )
+                    .map((jenisPinjaman, index) => (
+                      <Image
+                        style={styles.imgSimulasi}
+                        source={{ uri: jenisPinjaman.gambarJenisPinjaman }}
+                      />
+                    ))
+                )}
+              </View>
+              <Text>
+                Anda dapat mensimulasikan jenis pinjaman sebelum melakukan
+                pengajuan pada halaman ini
+              </Text>
             </View>
-            <Text>
-              Anda dapat mensimulasikan jenis pinjaman sebelum melakukan
-              pengajuan pada halaman ini
-            </Text>
-          </View>
 
-          <View style={styles.formSimulasi}>
-            <Text style={styles.textform}>Penghasilan Bersih per. Bulan</Text>
-            <TextInput
-              style={[
-                styles.input,
-                inputErrors.penghasilan && styles.inputError,
-              ]}
-              onChangeText={(number) =>
-                setInputData({ ...inputData, penghasilan: number })
-              }
-              value={inputData.penghasilan}
-              keyboardType="numeric"
-            ></TextInput>
-            {inputErrors.penghasilan && (
-              <Text style={styles.errorText}>
-                Mohon isikan data dengan benar
-              </Text>
-            )}
+            <View style={styles.formSimulasi}>
+              <Text style={styles.textform}>Penghasilan Bersih per. Bulan</Text>
+              <TextInput
+                style={[
+                  styles.input,
+                  inputErrors.penghasilan && styles.inputError,
+                ]}
+                onChangeText={(number) =>
+                  setInputData({ ...inputData, penghasilan: number })
+                }
+                value={inputData.penghasilan}
+                keyboardType="numeric"
+              ></TextInput>
+              {inputErrors.penghasilan && (
+                <Text style={styles.errorText}>
+                  Mohon isikan data dengan benar
+                </Text>
+              )}
 
-            <Text style={styles.textform}>Jangka Waktu</Text>
-            <TextInput
-              style={[
-                styles.input,
-                inputErrors.jangkaWaktu && styles.inputError,
-              ]}
-              onChangeText={(number) =>
-                setInputData({ ...inputData, jangkaWaktu: number })
-              }
-              value={inputData.jangkaWaktu}
-              placeholder="bulan"
-              keyboardType="numeric"
-            ></TextInput>
-            {inputErrors.jangkaWaktu && (
-              <Text style={styles.errorText}>
-                Mohon isikan data dengan benar
-              </Text>
-            )}
-            <Text style={styles.textform}>Bunga Pinjaman</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="10.74%"
-              placeholderTextColor="gray"
-              editable={false}
-            ></TextInput>
-          </View>
+              <Text style={styles.textform}>Jangka Waktu</Text>
+              <TextInput
+                style={[
+                  styles.input,
+                  inputErrors.jangkaWaktu && styles.inputError,
+                ]}
+                onChangeText={(number) =>
+                  setInputData({ ...inputData, jangkaWaktu: number })
+                }
+                value={inputData.jangkaWaktu}
+                placeholder="bulan"
+                keyboardType="numeric"
+              ></TextInput>
+              {inputErrors.jangkaWaktu && (
+                <Text style={styles.errorText}>
+                  Mohon isikan data dengan benar
+                </Text>
+              )}
+              <Text style={styles.textform}>Bunga Pinjaman</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="10.74%"
+                placeholderTextColor="gray"
+                editable={false}
+              ></TextInput>
+            </View>
 
-          <View>
-            {!hidedButton && (
-              <TouchableOpacity onPress={handleNext} style={styles.button}>
-                <Text style={styles.textButton}>Simulasikan</Text>
-              </TouchableOpacity>
-            )}
-            {isDropdownOpen && (
-              <View style={styles.show}>
-                <View style={styles.tableShadow}>
-                  <View style={styles.dropdownContent}>
-                    <Text style={styles.text}>Hasil</Text>
-                    {data.map((view) => (
-                      <View key={view.id} style={styles.row}>
-                        <View style={{ width: "60%" }}>
+            <View>
+              {!hidedButton && (
+                <TouchableOpacity onPress={handleNext} style={styles.button}>
+                  <Text style={styles.textButton}>Simulasikan</Text>
+                </TouchableOpacity>
+              )}
+              {isDropdownOpen && (
+                <View style={styles.show}>
+                  <View style={styles.tableShadow}>
+                    <View style={styles.dropdownContent}>
+                      <Text style={styles.text}>Hasil</Text>
+                      {data.map((view) => (
+                        <View key={view.id} style={styles.row}>
+                          <View style={{ width: "60%" }}>
+                            <Text
+                              style={{
+                                flex: 1,
+                                textAlign: "left",
+                                fontWeight: "300",
+                                fontSize: 12,
+                                // backgroundColor:'yellow',
+                              }}
+                            >
+                              {view.title}
+                            </Text>
+                          </View>
+
                           <Text
                             style={{
                               flex: 1,
-                              textAlign: "left",
-                              fontWeight: "300",
-                              fontSize: 12,
-                              // backgroundColor:'yellow',
+                              textAlign: "right",
+                              fontWeight: "500",
+                              fontSize: 14,
                             }}
                           >
-                            {view.title}
+                            {view.content}
                           </Text>
                         </View>
-
-                        <Text
-                          style={{
-                            flex: 1,
-                            textAlign: "right",
-                            fontWeight: "500",
-                            fontSize: 14,
-                          }}
-                        >
-                          {view.content}
-                        </Text>
-                      </View>
-                    ))}
+                      ))}
+                    </View>
                   </View>
+                  <TouchableOpacity style={styles.button} onPress={taruhData}>
+                    <Text style={styles.textButton}> Selanjutnya</Text>
+                  </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={styles.button} onPress={taruhData}>
-                  <Text style={styles.simulasikan}> Selanjutnya</Text>
-                </TouchableOpacity>
-              </View>
-            )}
+              )}
+            </View>
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </View>
     </View>
   );
 };
@@ -288,6 +290,11 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     marginTop: 16,
   },
+  bg: {
+    backgroundColor: "white",
+    height: "100%",
+    width: "100%",
+  },
   navbar: {
     flexDirection: "row",
     alignItems: "center",
@@ -299,9 +306,24 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#FFF",
   },
+  shadow: {
+    shadowColor: "#ddd",
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.4,
+    shadowRadius: 10,
+  },
+  show: {
+    paddingHorizontal: 4,
+    // backgroundColor: "red",
+  },
   texttitle: {
     fontSize: 18,
     fontWeight: "600",
+    paddingTop: 24,
+    textAlign: "center",
+  },
+  centerred: {
+    alignItems: "center",
   },
   bodyContainer: {
     width: "100%",
@@ -313,13 +335,13 @@ const styles = StyleSheet.create({
     marginTop: 16,
     marginBottom: 16,
   },
-  simulasikan: {
-    color: "#fff",
-    textAlign: "center",
-    fontWeight: "800",
-    paddingTop: 6,
-    // marginTop: 24,
-  },
+  // simulasikan: {
+  //   color: "#fff",
+  //   textAlign: "center",
+  //   fontWeight: "800",
+  //   paddingTop: 6,
+  //   // marginTop: 24,
+  // },
   input: {
     width: "100%",
     height: 40,
@@ -332,7 +354,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   formSimulasi: {
-    paddingTop: 40,
+    paddingTop: 16,
   },
   textform: {
     fontWeight: "800",
@@ -343,10 +365,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   textButton: {
-    alignSelf: "center",
-    paddingTop: 8,
+    lignSelf: "center",
     color: "white",
-    fontWeight: "700",
+    fontWeight: "800",
     fontSize: 14,
   },
   dropdownContent: {
@@ -363,16 +384,6 @@ const styles = StyleSheet.create({
     borderColor: "#000",
     marginBottom: 15,
     justifyContent: "space-around",
-  },
-  shadow: {
-    shadowColor: "#ddd",
-    shadowOffset: { width: 0, height: 5 },
-    shadowOpacity: 0.4,
-    shadowRadius: 10,
-  },
-  show: {
-    paddingHorizontal: 4,
-    // backgroundColor: "red",
   },
   tableShadow: {
     backgroundColor: "white",

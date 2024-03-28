@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import LogoBNIKotak from "./svg/LogoBNIKotak"
 
 const ModalLogout = ({ visible, onClose, navigation }) => {
   const handleLogout = () => {
@@ -9,11 +10,7 @@ const ModalLogout = ({ visible, onClose, navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.modal}>
-        <Image
-          source={require("../../../mobile-side/src/assets/logombanking.png")}
-          style={{ width: 65, height: 65 }}
-          resizeMode="stretch"
-        />
+        <LogoBNIKotak></LogoBNIKotak>
         <Text style={styles.teksYakin}>Apakah anda yakin ?</Text>
         <View style={styles.pilihan}>
           <TouchableOpacity style={styles.cancel} onPress={onClose}>
