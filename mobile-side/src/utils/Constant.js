@@ -1,4 +1,4 @@
-const CONNECTION = "192.168.209.110";
+const CONNECTION = "192.168.238.9";
 
 const PORT = "8083";
 const MAIN_URL = `http://${CONNECTION}:${PORT}/loan/v1/`;
@@ -13,6 +13,7 @@ const urls = {
   loginAccount: `${LOGIN_URL}login-account`,
   getUserDetailByHashedId: `${MAIN_URL}account/hid/`,
   getFormListUser: `${MAIN_URL}form/get-user-form/`,
+  postForm : `${MAIN_URL}form/post-form`
 };
 
 export default urls;

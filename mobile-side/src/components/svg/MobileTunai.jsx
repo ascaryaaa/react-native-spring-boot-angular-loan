@@ -1,7 +1,14 @@
-import * as React from "react";
-import Svg, { Path } from "react-native-svg";
+import * as React from "react"
+import Svg, { Rect, Path } from "react-native-svg"
 const MobileTunai = (props) => (
-  <Svg width={33} height={33} fill="none" {...props}>
+  <Svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={55}
+    height={55}
+    fill="none"
+    {...props}
+  >
+    <Rect width={55} height={55} fill="#F68310" rx={24} />
     <Path
       fill="#fff"
       fillRule="evenodd"
@@ -9,5 +16,5 @@ const MobileTunai = (props) => (
       clipRule="evenodd"
     />
   </Svg>
-);
-export default MobileTunai;
+)
+export default MobileTunai

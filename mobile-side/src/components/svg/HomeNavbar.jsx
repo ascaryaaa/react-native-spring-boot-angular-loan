@@ -1,6 +1,6 @@
 import * as React from "react";
 import Svg, { Path } from "react-native-svg";
-const Home = (props) => (
+const HomeNavbar = (props) => (
   <Svg width={20} height={21} fill="none" {...props}>
     <Path
       fill="#F68310"

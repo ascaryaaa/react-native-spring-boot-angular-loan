@@ -1,11 +1,11 @@
 <div class="modal">
   <div class="layout-container">
     <router-outlet></router-outlet>
-  <div class="header-bar"></div>
+  <!-- <div class="header-bar"></div> -->
 <h1
   id="judul"
-  class="p-4 sm:ml-64 text-left text-2xl mb-4 font-bold"
-  style="color: #e55300;  padding-top: 111px;padding-bottom: 1px; margin-bottom: -4px"
+  class="p-6 sm:ml-64 text-left  mb-4 font-bold"
+  style="color: #e55300;  padding-top: 16px; margin-bottom: -4px ; font-size: 32px;"
 >
   Detail Pemohon
 </h1>
@@ -26,8 +26,8 @@
   ></app-notification-download-modal>
 </div>
 <div class="sm:ml-64">  
-  <div *ngIf="form" style="padding: 16px;">
-   <div class="flex flex-col px-6 pt-6 pb-14 bg-white rounded-xl">
+  <div *ngIf="form" style="padding: 24px; padding-top: 0%;">
+   <div class="flex flex-col px-6 pt-6 pb-14 bg-white rounded-xl border border-solid dark:border-gray-700 max-md:px-5">
     
     <a href="#" class="block p-8 flex-1 flex items-center" style="pointer-events: none;">
       <div class="flex flex-col justify-between">
@@ -120,7 +120,7 @@
           <div class="font-bold text-center text-zinc-800">Status Pengajuan</div>
           <!-- Show the status text if 'Diterima' or 'Ditolak' -->
           <div class="font-bold text-center text-zinc-800" style="width: 100%; padding: 6px 12px;" [ngStyle]="{
-              'color': form.statusPengajuan === 'Diterima' ? 'green' : 'red'
+              'color': form.statusPengajuan === 'Diterima' ? '#04C300' : '#D4352A'
             }">
             {{ form.statusPengajuan }}
           </div>
@@ -141,8 +141,9 @@
     </div>
   </div>
 
+
   <div *ngIf="showSLIKTable" >
-    <div class=" bg-white  px-6 pt-6 pb-56 mt-2.5 w-full text-xs leading-5 text-center rounded-2xl border border-solid border-neutral-200 text-zinc-800 max-md:px-5 max-md:pb-10 max-md:max-w-full">
+    <div class=" bg-white  px-6 pt-6 pb-56 mt-2.5 w-full text-xs leading-5 text-center rounded-xl border border-solid dark:border-gray-700 text-zinc-800 max-md:px-5 max-md:pb-10 max-md:max-w-full">
       <div class="flex text-xs text-center font-bold text-zinc-800 mb-4">SLIK Debitur</div>
       <table #slikTable id="slik-debitur" class="w-full text-sm text-left rtl:text-right">
         <thead class="text-xs text-white bg-orange-400">

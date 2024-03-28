@@ -1,7 +1,8 @@
 import * as React from "react"
-import Svg, { Path } from "react-native-svg"
+import Svg, { Rect, Path } from "react-native-svg"
 const Pembayaran = (props) => (
   <Svg
+    xmlns="http://www.w3.org/2000/svg"
     width={55}
     height={55}
     fill="none"
@@ -14,4 +15,4 @@ const Pembayaran = (props) => (
     />
   </Svg>
 )
-export default Pembayaran;
+export default Pembayaran

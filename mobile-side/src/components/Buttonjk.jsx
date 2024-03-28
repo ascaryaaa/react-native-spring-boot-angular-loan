@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
-const Buttonjk = () => {
+const Buttonjk = ({ errorMessage, onOptionChange }) => {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
+    onOptionChange(option);
   };
 
   return (
@@ -39,6 +40,7 @@ const Buttonjk = () => {
           <Text style={styles.text}>Wanita</Text>
         </View>
       </TouchableOpacity>
+      {errorMessage && <Text>{"testing"}</Text>}
     </View>
   );
 };

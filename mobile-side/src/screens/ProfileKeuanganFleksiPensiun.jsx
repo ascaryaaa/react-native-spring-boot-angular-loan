@@ -84,23 +84,36 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
       try {
         // Stringify and save inputData to AsyncStorage
         await AsyncStorage.setItem(
-          "inputDataSimulasi",
-          JSON.stringify(inputData)
+          "penghasilan",
+          String(inputData.penghasilan)
         );
-        AsyncStorage.setItem(
-          "simulasiPinjaman",
+        await AsyncStorage.setItem(
+          "jangkaWaktu",
+          String(inputData.jangkaWaktu)
+        );
+        await AsyncStorage.setItem(
+          "jumlahPinjaman",
+          String(inputData.jumlahPinjaman)
+        );
+        await AsyncStorage.setItem(
+          "angsuranPerbulan",
           JSON.stringify(angsuranPerbulan)
         );
 
-        // Retrieve and log the saved item
-        const savedData = await AsyncStorage.getItem("inputDataSimulasi");
-        console.log(JSON.parse(savedData)); // Make sure to parse the JSON string
-        const savedData2 = await AsyncStorage.getItem("simulasiPinjaman");
-        console.log(JSON.parse(savedData2)); // Make sure to parse the JSON string
+        // Retrieve and log the saved items
+        const savedData = await AsyncStorage.getItem("penghasilan");
+        console.log("Penghasilan:", savedData);
+        const savedData2 = await AsyncStorage.getItem("jangkaWaktu");
+        console.log("Jangka Waktu:", savedData2);
+        const savedData3 = await AsyncStorage.getItem("jumlahPinjaman");
+        console.log("Jumlah Pinjaman:", savedData3);
+        const savedData4 = await AsyncStorage.getItem("angsuranPerbulan");
+        console.log("Angsuran Perbulan:", JSON.parse(savedData4));
+
         navigation.navigate("DataPemohon");
       } catch (error) {
         console.error(
-          "Failed to save or retrieve the data from AsyncStorage",
+          "Failed to save or retrieve data from AsyncStorage",
           error
         );
       }
@@ -142,16 +155,16 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
     getData();
   }, []);
 
-  useEffect(() => {
-    console.log(
-      "////////////////////////////////////////Input Errors:",
-      inputErrors
-    );
-    console.log(
-      "########################################Input Data:",
-      inputData
-    );
-  }, [inputErrors, inputData]);
+  // useEffect(() => {
+  //   console.log(
+  //     "////////////////////////////////////////Input Errors:",
+  //     inputErrors
+  //   );
+  //   console.log(
+  //     "########################################Input Data:",
+  //     inputData
+  //   );
+  // }, [inputErrors, inputData]);
 
   return (
     <View style={styles.bg}>
