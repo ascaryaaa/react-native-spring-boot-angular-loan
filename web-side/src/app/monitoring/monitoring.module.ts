@@ -9,6 +9,7 @@ import { RejectingModalComponent } from '../rejecting-modal/rejecting-modal.comp
 import { NotificationDownloadModalComponent } from '../notification-download-modal/notification-download-modal.component';
 import { FormsModule } from '@angular/forms';
 import { ListPengajuanPinjamanComponent } from '../pengajuan-pinjaman/list-pengajuan-pinjaman/list-pengajuan-pinjaman.component';
+import { SidebarComponent } from '../sidebar/sidebar.component';
 
 
 
@@ -24,7 +25,8 @@ import { ListPengajuanPinjamanComponent } from '../pengajuan-pinjaman/list-penga
     ConfirmationModalComponent,
     RejectingModalComponent,
     NotificationDownloadModalComponent,
-    FormsModule 
+    FormsModule,
+    SidebarComponent 
     ], bootstrap: [ListPengajuanPinjamanComponent]
 })
 export class MonitoringModule { }
