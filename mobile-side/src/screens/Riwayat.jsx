@@ -1,6 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { useState } from "react";
+import { DownloadModal } from "../components/DownloadModal";
+
 const transactionHistory = [
   {
     id: 1,
@@ -51,7 +53,7 @@ const Riwayat = ({ navigation }) => {
         </View>
       </View>
       <View style={styles.container}>
-        <Text style={{ fontWeight: "600", fontSize: 16, marginBottom: 5 }}>
+        <Text style={{ fontWeight: "600", fontSize: 18, marginBottom: 5, marginTop:8 }}>
           Riwayat
         </Text>
         {transactionHistory.map((view) => (
@@ -96,6 +98,11 @@ const Riwayat = ({ navigation }) => {
             Download Riwayat
           </Text>
         </TouchableOpacity>
+        <DownloadModal
+          visible={modalVisible}
+          onClose={closeModal}
+          navigation={navigation}
+        ></DownloadModal>
       </View>
     </View>
   );
