@@ -1,4 +1,6 @@
+
 <div class="modal">
+  <!-- <app-sidebar ></app-sidebar> -->
   <div class="layout-container">
     <router-outlet></router-outlet>
   <!-- <div class="header-bar"></div> -->
@@ -19,9 +21,6 @@
 
   <div class="p-6 sm:ml-64" style="padding-top: 0px;">
     <div class="p-4  rounded-xl border border-solid dark:border-gray-700"  style=" background-color: #fff;">
-      <div
-        class="p-4 border-2 border-gray-200 rounded-lg dark:border-gray-700 bg-white"
-      >
         <div
           class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4"
         >
@@ -229,12 +228,12 @@
                   <td class="px-4 py-2">{{ form.cif | uppercase }}</td>
                   <td class="px-4 py-2">{{ form.formToUser.nameUser }}</td>
                   <td class="px-4 py-2">{{ form.formToUser.nikUser }}</td>
-                  <td class="px-4 py-2">
+                  <td class="px-4 py-2 text-center">
                     {{ form.formToJenis.nameJenisPinjaman }}
                   </td>
                   <td class="px-4 py-2">
                     <div
-                      class="px-4 py-2 text-white"
+                      class="px-4 py-2 text-white text-center"
                       [ngClass]="{
                         'bg-green-500': form.statusPengajuan === 'Diterima',
                         'bg-red-500': form.statusPengajuan === 'Ditolak',
@@ -246,8 +245,8 @@
                   </td>
                   <td class="px-4 py-2">{{ form.formToAdmin?.nameAdmin }}</td>
                   <!-- <td class="px-4 py-2">{{ form.tanggalLahir | date: 'longDate' }}</td> -->
-                  <td class="px-4 py-2">
-                    {{ form.tanggalRealisasi | date : "yyyy-MM-dd" }}
+                  <td class="px-4 py-2 text-center">
+                    {{ form.tanggalRealisasi | date : "yyyy/MM/dd" }}
                   </td>
                   <td class="px-4 py-2">
                     <a

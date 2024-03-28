@@ -261,7 +261,7 @@ http://localhost:8083/rest/auth/login-account
 2. Define Model
    Define the model of the REST API, here we use lombok to make things cleaner
 
-```ruby
+```java
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -294,7 +294,7 @@ public class User {
    This is used to store and make functions of the databse
 
 
-```ruby
+```java
 import com.cuan.serverside.model.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -309,7 +309,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 4. Define the interface of service and implementations
 
    Interface of service, this is esnure Service Layer Patter and promotes modularity and testability
-```ruby
+```java
 import com.cuan.serverside.model.User;
 
 public interface UserService {
@@ -326,7 +326,7 @@ public interface UserService {
 ```
 
    This is the implementations of interface, we override the fucntions here 
-```ruby
+```java
 import com.cuan.serverside.model.User;
 import com.cuan.serverside.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -368,13 +368,13 @@ To enable cross-origin requests in a Spring Boot application, you can use the `@
 
 Here's how you can apply it:
 
-```
+```java
     @CrossOrigin(origins = "http://localhost:<port>")
 ```
 
 Replace <port> with the port number your frontend is running on. For instance, if your frontend is on port 4200, the annotation should look like this:
 
-```
+```java
     @CrossOrigin(origins = "http://localhost:4200")
 ```
 
@@ -388,7 +388,7 @@ for images, we upload the image using Imagur, its the image hosting service. the
 
 This is the example of the Promo API-Endpoint
 
-```ruby
+```java
 [
     {
         "idPromo": 1,
@@ -407,20 +407,20 @@ This is the example of the Promo API-Endpoint
 
 For use stack navigation, install
 
-```
+```jsx
 @react-navigation/native
 ```
 
 and
 
-```
+```jsx
 @react-navigation/native-stack
 ```
 
 i install this library because This library provides native components for gesture handling in React Native applications, improving the performance and responsiveness of touch interactions such as swiping, pinching, and rotating.
 
-```
-px expo install react-native-gesture-handler
+```cli
+npx expo install react-native-gesture-handler
 ```
 
 ### 1. Login
@@ -428,7 +428,7 @@ px expo install react-native-gesture-handler
 a. Installing Required Packages
 
 Ensure you have Axios and AsyncStorage installed in your project. If not, you can install them by running:
-```
+```cli
 npm install axios @react-native-async-storage/async-storage
 ```
 
@@ -436,7 +436,7 @@ b. Updating ModalAwal.jsx for Login Implementation
 
 First, import Axios and AsyncStorage at the top of your ModalAwal.jsx file:
 
-```
+```jsx
 import React, { useState } from "react";
 import axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -446,7 +446,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 Next, add state hooks for the username and password, and implement the login function:
 
-```
+```jsx
 const ModalAwal = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -504,7 +504,7 @@ c. Handling Navigation Based on Token Presence
 
 In your App.js or wherever you handle navigation, you should decide whether to show the login screen or navigate directly to the main content based on the presence of a token. This could look something like this:
 
-```
+```jsx
 import React, { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
@@ -547,12 +547,191 @@ function App() {
 
 ### 2. Soft Delete
 
-To implement soft delete functionality, filter the display to exclude deleted items. If an item's deleted property is set to `true`, it should not be shown.
+a. Filter Deleted Items
+To implement soft delete functionality, it's crucial to filter out deleted items from being displayed in the user interface. This ensures that any items marked as deleted are not visible to the user.
 
-```ruby
-        formDetailsState.data
-          ?.filter(form => !form.deleted)
+```jsx
+formDetailsState.data
+  ?.filter(form => !form.deleted)
 ```
+
+b. Update Redux Actions
+Updating Redux actions involves adding an asynchronous thunk function specifically for soft deleting a form by its ID. This action will be responsible for making the API call to mark the form as deleted on the server.
+
+```jsx
+// form.jsx
+
+// Async thunk to soft delete a form by ID
+export const softDeleteForm = createAsyncThunk(
+  'forms/softDeleteForm',
+  async (formId, thunkAPI) => {
+    try {
+      const token = await getToken(); // Retrieve the token
+      const response = await axios.delete(`${urls.softDeleteForm}${formId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Use bearer token in request headers
+        },
+      });
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+```
+
+c. Implement Soft Delete Functionality
+Now, let's implement the soft delete functionality in the ListPengajuanPinjaman component.
+
+c.1. Import Soft Delete Action
+Import the softDeleteForm action from Redux into the ListPengajuanPinjaman component.
+
+```jsx
+import { useDispatch } from "react-redux";
+import { softDeleteForm } from '../reducers/Form';
+```
+
+c.2. Dispatch Soft Delete Action
+Dispatch the softDeleteForm action when the user initiates a soft delete operation.
+
+```jsx
+const dispatch = useDispatch();
+
+const handleSoftDelete = async (formId) => {
+  dispatch(softDeleteForm(formId));
+};
+```
+
+c.3. Display Soft Delete Button
+Display a button or icon next to each item in the list to allow users to initiate the soft delete operation.
+
+```jsx
+{form.statusPengajuan === "Ditolak" && (
+  <TouchableOpacity onPress={() => handleSoftDelete(form.idFormPengajuanPinjaman)}>
+    {/* Soft delete button/icon */}
+  </TouchableOpacity>
+)}
+```
+
+c.4. Confirm Soft Delete
+Optionally, prompt the user to confirm the soft delete operation using a modal or confirmation dialog.
+
+```jsx
+// Render a modal for confirming soft delete
+<Modal
+  animationType="slide"
+  transparent={true}
+  visible={showModal}
+  onRequestClose={closeModal}
+>
+  {/* Modal content for confirming soft delete */}
+</Modal>
+```
+With these implementation steps, the soft delete functionality is now fully integrated into the ListPengajuanPinjaman component, providing users with the ability to soft delete forms as needed.
+
+### 3. Fetch Cabang Data
+
+a. API Endpoint Configuration
+
+To fetch branch data, we need to define the API endpoint getCabang in the constants.jsx file.
+
+```jsx
+// constants.jsx
+
+const MAIN_URL = 'https://example.com/api/';
+export const Constant = {
+  getCabang: `${MAIN_URL}cabang/get-cabangs`,
+};
+```
+
+b. Cabang Component Implementation
+
+The Cabang component fetches branch data from the server using an asynchronous thunk and updates the Redux store.
+
+```jsx
+// Cabang.jsx
+
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { fetchCabangData } from "../utils/apiUtils";
+
+// Async thunk to fetch branch data
+export const getCabangData = createAsyncThunk(
+  'cabang/fetchCabangData',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetchCabangData();
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.response);
+    }
+  }
+);
+
+// Initial state for cabang slice
+const initialState = {
+  data: [],
+  loading: false,
+  error: null,
+};
+
+// Cabang slice for managing branch data
+const cabangSlice = createSlice({
+  name: 'cabang',
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(getCabangData.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getCabangData.fulfilled, (state, action) => {
+        state.loading = false;
+        state.data = action.payload;
+      })
+      .addCase(getCabangData.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+  },
+});
+
+// Exporting reducer and selectors
+export default cabangSlice.reducer;
+export const selectCabangData = (state) => state.cabang.data;
+export const selectCabangLoading = (state) => state.cabang.loading;
+export const selectCabangError = (state) => state.cabang.error;
+```
+
+c. Integrate Branch Data into DataPemohon Component
+c1. Import Cabang Component
+
+Import the Cabang component into the DataPemohon component to access branch data.
+
+```
+// DataPemohon.jsx
+
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCabangData } from "../reducers/Cabang";
+```
+
+c2. Fetch Branch Data
+
+Fetch branch data when the DataPemohon component mounts using the getCabangData action.
+
+```jsx
+// DataPemohon.jsx
+
+const cabangState = useSelector((state) => state.cabang);
+const dispatch = useDispatch();
+
+// Fetch cabang data when component mounts
+useEffect(() => {
+  dispatch(getCabangData());
+}, [dispatch]);
+```
+
 
 # Website-Side
 
