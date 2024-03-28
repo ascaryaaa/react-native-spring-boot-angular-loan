@@ -60,6 +60,8 @@ const SimulasiGriya = ({ navigation }) => {
         console.log(JSON.parse(savedData)); // Make sure to parse the JSON string
         const savedData2 = await AsyncStorage.getItem('jangkaWaktu');
         console.log(JSON.parse(savedData2));
+        const savedData3 = await AsyncStorage.getItem('simulasiPinjaman');
+        console.log(JSON.parse(savedData3));
         navigation.navigate("ProfileKeuanganGriya");
       } catch (error) {
         console.error('Failed to save or retrieve the data from AsyncStorage', error);

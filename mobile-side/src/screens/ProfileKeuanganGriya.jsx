@@ -7,6 +7,7 @@ import {
   TextInput,
   ScrollView,
   Image,
+  Alert,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -18,6 +19,8 @@ const ProfileKeuanganGriya = ({ navigation }) => {
     jangkaWaktu: "",
     uangMuka: "",
   });
+
+  const [maksAngsuran, setmaksAngsuran] = useState()
 
   const [inputErrors, setInputErrors] = useState({
     hargaRumah: false,
@@ -74,15 +77,25 @@ const ProfileKeuanganGriya = ({ navigation }) => {
         AsyncStorage.setItem('jangkaWaktu',String(inputData.jangkaWaktu));
         AsyncStorage.setItem('hargaRumah',String(inputData.hargaRumah));
         AsyncStorage.setItem('uangMuka',String(inputData.uangMuka));
+        AsyncStorage.setItem('jumlahUangMuka',String(jumlahUangMuka));
+        AsyncStorage.setItem('totalPinjaman',String(totalPinjaman));
+        AsyncStorage.setItem('angsuranPerbulan',String(angsuranPerbulan));
 
-        const savedData = await AsyncStorage.getItem('penghasilan');
-        console.log(JSON.parse(savedData));
-        const savedData1 = await AsyncStorage.getItem('jangkaWaktu');
-        console.log(JSON.parse(savedData1));
-        const savedData2 = await AsyncStorage.getItem('hargaRumah');
-        console.log(JSON.parse(savedData2));
-        const savedData3 = await AsyncStorage.getItem('');
-        console.log(JSON.parse(savedData3));
+        const savedData = await AsyncStorage.getItem("penghasilan");
+        console.log("Penghasilan:", savedData);
+        const savedData2 = await AsyncStorage.getItem("jangkaWaktu");
+        console.log("Jangka Waktu:", savedData2);
+        const savedData3 = await AsyncStorage.getItem("hargaRumah");
+        console.log("Harga Rumah:", savedData3);
+        const savedData4 = await AsyncStorage.getItem("uangMuka");
+        console.log("Uang Muka:", JSON.parse(savedData4));
+        const savedData5 = await AsyncStorage.getItem("jumlahUangMuka");
+        console.log("Jumlah Uang Muka:", JSON.parse(savedData5));
+        const savedData6 = await AsyncStorage.getItem("totalPinjaman");
+        console.log("Total Pinjaman:", JSON.parse(savedData6));
+        const savedData7 = await AsyncStorage.getItem("angsuranPerbulan");
+        console.log("Angsuran Perbulan:", JSON.parse(savedData7));
+
         navigation.navigate("DataPemohon")
       } catch (error) {
         console.error('Failed to save or retrieve the data from AsyncStorage', error);
@@ -96,12 +109,17 @@ const ProfileKeuanganGriya = ({ navigation }) => {
         // Mengambil data dari AsyncStorage
         const penghasilanData = await AsyncStorage.getItem("penghasilan");
         const jangkaWaktuData = await AsyncStorage.getItem("jangkaWaktu");
+        const simulasiPinjamanData = await AsyncStorage.getItem("simulasiPinjaman");
 
         //parse the retrieved data
         const penghasilan =
           penghasilanData !== null ? JSON.parse(penghasilanData) : "";
         const jangkaWaktu =
           jangkaWaktuData !== null ? JSON.parse(jangkaWaktuData) : "";
+        const simulasiPinjaman =
+          simulasiPinjamanData !== null ? parseFloat(simulasiPinjamanData) : "";
+        
+        console.log(simulasiPinjaman);
 
         //set the parsed data to the state
         setInputData({
@@ -110,6 +128,9 @@ const ProfileKeuanganGriya = ({ navigation }) => {
           hargaRumah: "",
           uangMuka: "",
         });
+
+        setmaksAngsuran(simulasiPinjaman)
+
       } catch (error) {
         console.error("Failed to fetch data from AsyncStorage", error);
       }
@@ -117,8 +138,20 @@ const ProfileKeuanganGriya = ({ navigation }) => {
 
     // Panggil fungsi untuk mengambil data saat komponen dimuat
     getData();
-  },[]);
+  },[maksAngsuran]);
 
+  // Handle validasi maksimal jumlah pinjaman
+  const handleNumberChange = (input) => {
+    // Check if the input is within the acceptable range 
+    if (parseInt(input) <= maksAngsuran) {
+      setInputData({ ...inputData, hargaRumah: input });
+    } else {
+      // Display an error message if the input exceeds the maximum allowed value
+      Alert.alert('Error', 'Maximum number allowed is '+`Rp ${maksAngsuran.toLocaleString("id-ID", {maximumFractionDigits: 2,})}`);
+    }
+    
+  };
+  
   useEffect(() => {
     console.log(
       "////////////////////////////////////////Input Errors:",
@@ -186,19 +219,22 @@ const ProfileKeuanganGriya = ({ navigation }) => {
             <Text style={styles.text}>Harga Rumah</Text>
             <TextInput
               style={[styles.input, inputErrors.hargaRumah && styles.inputError ]}
-              keyboardType="numeric"
               value={
-                inputData.hargaRumah === ""
-                  ? ""
-                  : inputData.hargaRumah.toString()
+                inputData.hargaRumah 
+                // === ""
+                //   ? ""
+                //   : inputData.hargaRumah.toString()
               }
-              onChangeText={(number) => {
-                const parsedNumber = parseInt(number);
-                setInputData({
-                  ...inputData,
-                  hargaRumah: isNaN(parsedNumber) ? "" : parsedNumber,
-                });
-              }}
+              keyboardType="numeric"
+              onChangeText={handleNumberChange}
+
+              // onChangeText={(number) => {
+              //   const parsedNumber = parseInt(number);
+              //   setInputData({
+              //     ...inputData,
+              //     hargaRumah: isNaN(parsedNumber) ? "" : parsedNumber,
+              //   });
+              // }}
             />
             {inputErrors.hargaRumah && (
               <Text style={styles.errorText}>Mohon isikan data dengan benar</Text>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import {
   StyleSheet,
+  Alert,
   View,
   Text,
   TextInput,
@@ -18,6 +19,8 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
     jumlahPinjaman: "",
     jangkaWaktu: "",
   });
+
+  const [maksAngsuran, setmaksAngsuran] = useState()
 
   const [inputErrors, setInputErrors] = useState({
     penghasilan: false,
@@ -71,6 +74,17 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
     }
     setInputErrors(errors);
     return isValid;
+  };
+
+   // Handle validasi maksimal jumlah pinjaman
+   const handleNumberChange = (input) => {
+    // Check if the input is within the acceptable range
+    if (parseInt(input) <= maksAngsuran) {
+      setInputData({ ...inputData, jumlahPinjaman: input });
+    } else {
+      // Display an error message if the input exceeds the maximum allowed value
+      Alert.alert('Error', 'Maximum number allowed is '+`Rp ${maksAngsuran.toLocaleString("id-ID", {maximumFractionDigits: 2,})}`);
+    }
   };
 
   const handleNext = () => {
@@ -135,12 +149,15 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
         // Mengambil data dari AsyncStorage
         const penghasilanData = await AsyncStorage.getItem("penghasilan");
         const jangkaWaktuData = await AsyncStorage.getItem("jangkaWaktu");
+        const simulasiPinjamanData = await AsyncStorage.getItem("simulasiPinjaman");
 
         // Parse the retrieved data
         const penghasilan =
           penghasilanData !== null ? JSON.parse(penghasilanData) : "";
         const jangkaWaktu =
           jangkaWaktuData !== null ? JSON.parse(jangkaWaktuData) : "";
+        const simulasiPinjaman =
+          simulasiPinjamanData !== null ? parseFloat(simulasiPinjamanData) : "";
 
         // Set the parsed data to the state
         setInputData({
@@ -148,6 +165,10 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
           jumlahPinjaman: "",
           jangkaWaktu: jangkaWaktu,
         });
+
+        setmaksAngsuran(simulasiPinjaman)
+
+
       } catch (error) {
         console.error("Failed to fetch data from AsyncStorage", error);
       }
@@ -155,7 +176,7 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
 
     // Panggil fungsi untuk mengambil data saat komponen dimuat
     getData();
-  }, []);
+  }, [maksAngsuran]);
 
   // useEffect(() => {
   //   console.log(
@@ -229,18 +250,20 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
               inputErrors.jumlahPinjaman && styles.inputError,
             ]}
             value={
-              inputData.jumlahPinjaman === ""
-                ? ""
-                : inputData.jumlahPinjaman.toString()
+              inputData.jumlahPinjaman 
+              // === ""
+              //   ? ""
+              //   : inputData.jumlahPinjaman.toString()
             }
             keyboardType="numeric"
-            onChangeText={(number) => {
-              const parsedNumber = parseInt(number);
-              setInputData({
-                ...inputData,
-                jumlahPinjaman: isNaN(parsedNumber) ? "" : parsedNumber,
-              });
-            }}
+            onChangeText={handleNumberChange}
+            // onChangeText={(number) => {
+            //   const parsedNumber = parseInt(number);
+            //   setInputData({
+            //     ...inputData,
+            //     jumlahPinjaman: isNaN(parsedNumber) ? "" : parsedNumber,
+            //   });
+            // }}
           />
           {inputErrors.jumlahPinjaman && (
             <Text style={styles.errorText}>Field ini wajib diisi</Text>

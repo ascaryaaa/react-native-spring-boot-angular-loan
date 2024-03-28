@@ -139,7 +139,6 @@ const DataPemohon = ({ navigation }) => {
         AsyncStorage.setItem('npwp',String(inputData.npwp));
         AsyncStorage.setItem('alamatBni',selectedBniAddress);
 
-
         const savedData = await AsyncStorage.getItem('jenisKelamin');
         console.log(savedData);
         const savedData1 = await AsyncStorage.getItem('tempatLahir');
@@ -180,15 +179,8 @@ const DataPemohon = ({ navigation }) => {
     // fetchInfo();
     // dispatch(getPromos());
     fetchHashedId();
-    console.log(
-      "////////////////////////////////////////Input Errors:",
-      inputErrors
-    );
-    console.log(
-      "########################################Input Data:",
-      inputData
-    );
-  }, [dispatch, dispatchAccount],[inputErrors, inputData]);
+    
+  }, [dispatch, dispatchAccount]);
 
   return (
     <View style={styles.bg}>
@@ -389,8 +381,8 @@ const DataPemohon = ({ navigation }) => {
               <RNPickerSelect
                 onValueChange={handleBniAddressChange}
                 items={[
-                  { label: "BNI Kota Tua", value: "007" },
-                  { label: "BNI Head Office", value: "001" },
+                  { label: "BNI Kota Tua", value: "BNI Kota Tua" },
+                  { label: "BNI Head Office", value: "BNI Head Office" },
                   // Tambahkan item lainnya sesuai kebutuhan
                 ]}
                 placeholder={{

@@ -169,9 +169,8 @@ const ProfileKeuanganFleksiAktif = ({ navigation }) => {
       setInputData({ ...inputData, jumlahPinjaman: input });
     } else {
       // Display an error message if the input exceeds the maximum allowed value
-      Alert.alert('Error', 'Maximum number allowed is '+maksAngsuran);
+      Alert.alert('Error', 'Maximum number allowed is '+`Rp ${maksAngsuran.toLocaleString("id-ID", {maximumFractionDigits: 2,})}`);
     }
-    
   };
 
   return (
