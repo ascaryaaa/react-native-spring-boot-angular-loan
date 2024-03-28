@@ -547,12 +547,88 @@ function App() {
 
 ### 2. Soft Delete
 
-To implement soft delete functionality, filter the display to exclude deleted items. If an item's deleted property is set to `true`, it should not be shown.
+a. Filter Deleted Items
+To implement soft delete functionality, it's crucial to filter out deleted items from being displayed in the user interface. This ensures that any items marked as deleted are not visible to the user.
 
-```ruby
-        formDetailsState.data
-          ?.filter(form => !form.deleted)
+```jsx
+formDetailsState.data
+  ?.filter(form => !form.deleted)
 ```
+
+b. Update Redux Actions
+Updating Redux actions involves adding an asynchronous thunk function specifically for soft deleting a form by its ID. This action will be responsible for making the API call to mark the form as deleted on the server.
+
+```jsx
+// form.jsx
+
+// Async thunk to soft delete a form by ID
+export const softDeleteForm = createAsyncThunk(
+  'forms/softDeleteForm',
+  async (formId, thunkAPI) => {
+    try {
+      const token = await getToken(); // Retrieve the token
+      const response = await axios.delete(`${urls.softDeleteForm}${formId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Use bearer token in request headers
+        },
+      });
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+```
+
+c. Implement Soft Delete Functionality
+Now, let's implement the soft delete functionality in the ListPengajuanPinjaman component.
+
+c.1. Import Soft Delete Action
+Import the softDeleteForm action from Redux into the ListPengajuanPinjaman component.
+
+```jsx
+import { useDispatch } from "react-redux";
+import { softDeleteForm } from '../reducers/Form';
+```
+
+c.2. Dispatch Soft Delete Action
+Dispatch the softDeleteForm action when the user initiates a soft delete operation.
+
+```jsx
+const dispatch = useDispatch();
+
+const handleSoftDelete = async (formId) => {
+  dispatch(softDeleteForm(formId));
+};
+```
+
+c.3. Display Soft Delete Button
+Display a button or icon next to each item in the list to allow users to initiate the soft delete operation.
+
+```jsx
+{form.statusPengajuan === "Ditolak" && (
+  <TouchableOpacity onPress={() => handleSoftDelete(form.idFormPengajuanPinjaman)}>
+    {/* Soft delete button/icon */}
+  </TouchableOpacity>
+)}
+```
+
+c.4. Confirm Soft Delete
+Optionally, prompt the user to confirm the soft delete operation using a modal or confirmation dialog.
+
+```jsx
+// Render a modal for confirming soft delete
+<Modal
+  animationType="slide"
+  transparent={true}
+  visible={showModal}
+  onRequestClose={closeModal}
+>
+  {/* Modal content for confirming soft delete */}
+</Modal>
+```
+With these implementation steps, the soft delete functionality is now fully integrated into the ListPengajuanPinjaman component, providing users with the ability to soft delete forms as needed.
+
 
 # Website-Side
 
