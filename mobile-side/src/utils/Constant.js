@@ -15,7 +15,6 @@ const urls = {
   getFormListUser: `${MAIN_URL}form/get-user-form/`,
   postForm : `${MAIN_URL}form/post-form`,
   softDeleteForm: `${MAIN_URL}form/soft-delete-form/`,
-
 };
 
 export default urls;
