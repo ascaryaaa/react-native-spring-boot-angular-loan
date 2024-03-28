@@ -13,9 +13,11 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import RNPickerSelect from "react-native-picker-select";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getAccountByHashedId } from "../reducers/Account";
+import { getCabangData } from "../reducers/Cabang";
 
 const DataPemohon = ({ navigation }) => {
   const accountState = useSelector((state) => state.account);
+  const cabangState = useSelector((state) => state.cabang);
   const dispatchAccount = useDispatch();
   const dispatch = useDispatch();
   const [hashedId, setHashedId] = useState(null);
@@ -181,6 +183,10 @@ const DataPemohon = ({ navigation }) => {
     fetchHashedId();
     
   }, [dispatch, dispatchAccount]);
+
+  useEffect(() => {
+    dispatch(getCabangData());
+  }, [dispatch]);
 
   return (
     <View style={styles.bg}>
@@ -375,16 +381,13 @@ const DataPemohon = ({ navigation }) => {
             )}
 
             <Text style={styles.text}>Unit Kerja BNI Terdekat</Text>
-            <View
-              style={[styles.input, inputErrors.alamatBni && styles.inputError]}
-            >
+            <View style={[styles.input, inputErrors.alamatBni && styles.inputError]}>
               <RNPickerSelect
                 onValueChange={handleBniAddressChange}
-                items={[
-                  { label: "BNI Kota Tua", value: "BNI Kota Tua" },
-                  { label: "BNI Head Office", value: "BNI Head Office" },
-                  // Tambahkan item lainnya sesuai kebutuhan
-                ]}
+                items={cabangState.data.map((cabang) => ({
+                  label: cabang.nameCabang, // Assuming cabang object has namaCabang property
+                  value: cabang.kodeCabang, // Assuming cabang object has kodeCabang property
+                }))}
                 placeholder={{
                   label: "Pilih alamat BNI terdekat...",
                   value: null,

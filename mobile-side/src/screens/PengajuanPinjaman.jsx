@@ -9,6 +9,8 @@ import {
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { getJenisPinjamans } from "../reducers/JenisPinjaman";
+import BackNavbar from "../components/svg/BackNavbar";
+import HomeNavbar from "../components/svg/HomeNavbar";
 
 const PengajuanPinjaman = ({ navigation }) => {
   const jenisPinjamanState = useSelector((state) => state.jenisPinjaman);
@@ -24,14 +26,10 @@ const PengajuanPinjaman = ({ navigation }) => {
       <View style={styles.shadow}>
         <View style={styles.navbar}>
           <TouchableOpacity onPress={() => navigation.navigate("DigitalLoan")}>
-            <Image
-              source={require("../../../mobile-side/src/assets/Icon_leftarrow.png")}
-            />
+            <BackNavbar></BackNavbar>
           </TouchableOpacity>
           <Text style={{ fontSize: 16 }}>Digital Loan</Text>
-          <Image
-            source={require("../../../mobile-side/src/assets/Icon_homeorg.png")}
-          />
+          <HomeNavbar></HomeNavbar>
         </View>
       </View>
 

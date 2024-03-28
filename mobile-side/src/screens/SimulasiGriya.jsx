@@ -9,6 +9,8 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
+import BackNavbar from "../components/svg/BackNavbar";
+import HomeNavbar from "../components/svg/HomeNavbar";
 
 const SimulasiGriya = ({ navigation }) => {
   const [inputData, setInputData] = useState({
@@ -19,16 +21,28 @@ const SimulasiGriya = ({ navigation }) => {
   const [inputErrors, setInputErrors] = useState({
     penghasilan: false,
     jangkaWaktu: false,
-  })
+  });
 
-  const maksAngsuran = (inputData.penghasilan/2)
-  const maksPinjaman = maksAngsuran*(1-Math.pow(1+(0.0675/12),-inputData.jangkaWaktu))/(0.0675/12);
+  const maksAngsuran = inputData.penghasilan / 2;
+  const maksPinjaman =
+    (maksAngsuran * (1 - Math.pow(1 + 0.0675 / 12, -inputData.jangkaWaktu))) /
+    (0.0675 / 12);
 
   const data = [
-    { id: 1, title: "Maksimal Pinjaman", content: `Rp ${maksPinjaman.toLocaleString('id-ID', {
-      maximumFractionDigits: 2})}`},
-    { id: 2, title: "Angsuran Pinjaman per Bulan", content: `Rp ${maksAngsuran.toLocaleString('id-ID', {
-      maximumFractionDigits: 2})}`},
+    {
+      id: 1,
+      title: "Maksimal Pinjaman",
+      content: `Rp ${maksPinjaman.toLocaleString("id-ID", {
+        maximumFractionDigits: 2,
+      })}`,
+    },
+    {
+      id: 2,
+      title: "Angsuran Pinjaman per Bulan",
+      content: `Rp ${maksAngsuran.toLocaleString("id-ID", {
+        maximumFractionDigits: 2,
+      })}`,
+    },
   ];
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -51,23 +65,26 @@ const SimulasiGriya = ({ navigation }) => {
     if (validateInputs()) {
       try {
         // Stringify and save inputData to AsyncStorage
-        await AsyncStorage.setItem('penghasilan',(inputData.penghasilan));
-        AsyncStorage.setItem('jangkaWaktu',(inputData.jangkaWaktu));
-        AsyncStorage.setItem('simulasiPinjaman', JSON.stringify(maksPinjaman));
+        await AsyncStorage.setItem("penghasilan", inputData.penghasilan);
+        AsyncStorage.setItem("jangkaWaktu", inputData.jangkaWaktu);
+        AsyncStorage.setItem("simulasiPinjaman", JSON.stringify(maksPinjaman));
         // AsyncStorage.setItem('max', (inputData.penghasilan/2)*((1-((1+(0.0675/12))^(-inputData.jangkaWaktu)))/(0.0675/12)));
         // Retrieve and log the saved item
-        const savedData = await AsyncStorage.getItem('penghasilan');
+        const savedData = await AsyncStorage.getItem("penghasilan");
         console.log(JSON.parse(savedData)); // Make sure to parse the JSON string
-        const savedData2 = await AsyncStorage.getItem('jangkaWaktu');
+        const savedData2 = await AsyncStorage.getItem("jangkaWaktu");
         console.log(JSON.parse(savedData2));
         const savedData3 = await AsyncStorage.getItem('simulasiPinjaman');
         console.log(JSON.parse(savedData3));
         navigation.navigate("ProfileKeuanganGriya");
       } catch (error) {
-        console.error('Failed to save or retrieve the data from AsyncStorage', error);
+        console.error(
+          "Failed to save or retrieve the data from AsyncStorage",
+          error
+        );
       }
     }
-  }
+  };
 
   const handleNext = async () => {
     if (validateInputs()) {
@@ -88,15 +105,10 @@ const SimulasiGriya = ({ navigation }) => {
           <TouchableOpacity
             onPress={() => navigation.navigate("PengajuanPinjaman")}
           >
-            <Image
-              source={require("../../../mobile-side/src/assets/Icon_leftarrow.png")}
-            />
+            <BackNavbar></BackNavbar>
           </TouchableOpacity>
-
           <Text style={{ fontSize: 16 }}>Digital Loan</Text>
-          <Image
-            source={require("../../../mobile-side/src/assets/Icon_homeorg.png")}
-          />
+          <HomeNavbar></HomeNavbar>
         </View>
       </View>
       <View style={styles.container}>
@@ -119,7 +131,10 @@ const SimulasiGriya = ({ navigation }) => {
             <View style={styles.formSimulasi}>
               <Text style={styles.textform}>Penghasilan Bersih per. Bulan</Text>
               <TextInput
-                style={[styles.input, inputErrors.penghasilan && styles.inputError]}
+                style={[
+                  styles.input,
+                  inputErrors.penghasilan && styles.inputError,
+                ]}
                 keyboardType="numeric"
                 placeholder="Rp"
                 onChangeText={(number) =>
@@ -128,12 +143,17 @@ const SimulasiGriya = ({ navigation }) => {
                 value={setInputData.penghasilan}
               ></TextInput>
               {inputErrors.penghasilan && (
-                <Text style={styles.errorText}>Mohon isikan data dengan benar</Text>
+                <Text style={styles.errorText}>
+                  Mohon isikan data dengan benar
+                </Text>
               )}
 
               <Text style={styles.textform}>Jangka Waktu</Text>
               <TextInput
-                style={[styles.input, inputErrors.jangkaWaktu && styles.inputError]}
+                style={[
+                  styles.input,
+                  inputErrors.jangkaWaktu && styles.inputError,
+                ]}
                 onChangeText={(number) =>
                   setInputData({ ...inputData, jangkaWaktu: number })
                 }
@@ -142,12 +162,14 @@ const SimulasiGriya = ({ navigation }) => {
                 keyboardType="numeric"
               ></TextInput>
               {inputErrors.jangkaWaktu && (
-                <Text style={styles.errorText}>Mohon isikan data dengan benar</Text>
+                <Text style={styles.errorText}>
+                  Mohon isikan data dengan benar
+                </Text>
               )}
 
               <Text style={styles.textform}>Bunga Pinjaman</Text>
               <TextInput
-                style={styles.input}
+                style={styles.inputFill}
                 placeholder="6.75%"
                 placeholderTextColor="gray"
                 editable={false}
@@ -156,10 +178,7 @@ const SimulasiGriya = ({ navigation }) => {
 
             <View>
               {!hidedButton && (
-                <TouchableOpacity
-                  onPress={handleNext}
-                  style={styles.button}
-                >
+                <TouchableOpacity onPress={handleNext} style={styles.button}>
                   <Text style={styles.textButton}>Simulasikan</Text>
                 </TouchableOpacity>
               )}
@@ -198,10 +217,7 @@ const SimulasiGriya = ({ navigation }) => {
                       ))}
                     </View>
                   </View>
-                  <TouchableOpacity
-                    style={styles.button}
-                    onPress={taruhData}
-                  >
+                  <TouchableOpacity style={styles.button} onPress={taruhData}>
                     <Text style={styles.simulasikan}> Selanjutnya</Text>
                   </TouchableOpacity>
                 </View>
@@ -306,6 +322,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 8,
     borderColor: "#1394AD",
+    borderWidth: 1,
+  },
+  inputFill: {
+    width: "100%",
+    height: 40,
+    borderWidth: 1,
+    marginTop: 8,
+    marginBottom: 16,
+    marginTop: 10,
+    marginBottom: 20,
+    paddingHorizontal: 10,
+    borderRadius: 8,
+    borderColor: "#9E9E9E",
     borderWidth: 1,
   },
   formSimulasi: {

@@ -10,6 +10,8 @@ import {
   Alert,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import BackNavbar from "../components/svg/BackNavbar";
+import HomeNavbar from "../components/svg/HomeNavbar";
 
 
 const ProfileKeuanganGriya = ({ navigation }) => {
@@ -170,14 +172,10 @@ const ProfileKeuanganGriya = ({ navigation }) => {
           <TouchableOpacity
             onPress={() => navigation.navigate("SimulasiGriya")}
           >
-            <Image
-              source={require("../../../mobile-side/src/assets/Icon_leftarrow.png")}
-            />
+            <BackNavbar/>
           </TouchableOpacity>
           <Text style={{ fontSize: 16 }}>Digital Loan</Text>
-          <Image
-            source={require("../../../mobile-side/src/assets/Icon_homeorg.png")}
-          />
+          <HomeNavbar></HomeNavbar>
         </View>
       </View>
       <View style={styles.container}>
@@ -187,7 +185,7 @@ const ProfileKeuanganGriya = ({ navigation }) => {
 
             <Text style={styles.text}>Penghasilan Bersih per. Bulan</Text>
             <TextInput
-              style={[styles.input, inputErrors.penghasilan && styles.inputError]}
+              style={[styles.inputFill, inputErrors.penghasilan && styles.inputError]}
               keyboardType="numeric"
               placeholder={`Rp ${inputData.penghasilan.toLocaleString('id-ID', {maximumFractionDigits:2, })}`}
               editable={false}
@@ -200,8 +198,9 @@ const ProfileKeuanganGriya = ({ navigation }) => {
             )}
 
             <Text style={styles.text}>Jangka Waktu</Text>
+            <View>
             <TextInput
-              style={[styles.input, inputErrors.jangkaWaktu && styles.inputError ]}
+              style={[styles.input2, inputErrors.jangkaWaktu && styles.inputError ]}
               keyboardType="numeric"
               editable={false}
               placeholder={`${inputData.jangkaWaktu}`}
@@ -215,10 +214,12 @@ const ProfileKeuanganGriya = ({ navigation }) => {
             <Text style={{ marginBottom: 10, fontSize: 10 }}>
               *Maksimal 360 Bulan
             </Text>
+            </View>
 
             <Text style={styles.text}>Harga Rumah</Text>
             <TextInput
               style={[styles.input, inputErrors.hargaRumah && styles.inputError ]}
+              placeholder="Rp"
               value={
                 inputData.hargaRumah 
                 // === ""
@@ -255,7 +256,7 @@ const ProfileKeuanganGriya = ({ navigation }) => {
 
             <Text style={styles.text}>Bunga Pinjaman</Text>
             <TextInput
-              style={styles.input}
+              style={styles.inputFill}
               placeholder="6,75"
               placeholderTextColor="gray"
               editable={false}
@@ -378,6 +379,19 @@ const styles = StyleSheet.create({
     borderColor: "#1394AD",
     borderWidth: 1,
   },
+  inputFill: {
+    width: "100%",
+    height: 40,
+    borderWidth: 1,
+    marginTop: 8,
+    marginBottom: 16,
+    marginTop: 10,
+    marginBottom: 20,
+    paddingHorizontal: 10,
+    borderRadius: 8,
+    borderColor: "#9E9E9E",
+    borderWidth: 1,
+  },
   input2: {
     width: "100%",
     height: 40,
@@ -385,7 +399,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     paddingHorizontal: 10,
     borderRadius: 8,
-    borderColor: "#1394AD",
+    borderColor: "#9E9E9E",
     borderWidth: 1,
   },
   title: {

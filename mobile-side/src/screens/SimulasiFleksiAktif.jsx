@@ -12,6 +12,8 @@ import {
 import { getJenisPinjamans } from "../reducers/JenisPinjaman";
 import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import BackNavbar from "../components/svg/BackNavbar";
+import HomeNavbar from "../components/svg/HomeNavbar";
 
 const SimulasiFleksiAktif = ({ navigation }) => {
   const [inputData, setInputData] = useState({
@@ -115,15 +117,10 @@ const SimulasiFleksiAktif = ({ navigation }) => {
           <TouchableOpacity
             onPress={() => navigation.navigate("PengajuanPinjaman")}
           >
-            <Image
-              source={require("../../../mobile-side/src/assets/Icon_leftarrow.png")}
-            />
+            <BackNavbar></BackNavbar>
           </TouchableOpacity>
-
           <Text style={{ fontSize: 16 }}>Digital Loan</Text>
-          <Image
-            source={require("../../../mobile-side/src/assets/Icon_homeorg.png")}
-          />
+          <HomeNavbar></HomeNavbar>
         </View>
       </View>
       <View style={styles.container}>
@@ -165,6 +162,7 @@ const SimulasiFleksiAktif = ({ navigation }) => {
                   inputErrors.penghasilan && styles.inputError,
                 ]}
                 keyboardType="numeric"
+                placeholder="Rp"
                 onChangeText={(number) =>
                   setInputData({ ...inputData, penghasilan: number })
                 }
@@ -197,7 +195,7 @@ const SimulasiFleksiAktif = ({ navigation }) => {
               )}
               <Text style={styles.textform}>Bunga Pinjaman</Text>
               <TextInput
-                style={styles.input}
+                style={styles.inputFill}
                 onChangeText={(text) =>
                   setInputData({ ...inputData, penghasilan: text })
                 }
@@ -349,6 +347,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 8,
     borderColor: "#1394AD",
+    borderWidth: 1,
+  },
+  inputFill: {
+    width: "100%",
+    height: 40,
+    borderWidth: 1,
+    marginTop: 8,
+    marginBottom: 16,
+    marginTop: 10,
+    marginBottom: 20,
+    paddingHorizontal: 10,
+    borderRadius: 8,
+    borderColor: "#9E9E9E",
     borderWidth: 1,
   },
   formSimulasi: {

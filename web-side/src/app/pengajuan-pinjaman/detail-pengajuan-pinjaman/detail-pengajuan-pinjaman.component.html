@@ -1,14 +1,12 @@
+
 <div class="modal">
   <div class="layout-container">
     <router-outlet></router-outlet>
-  <!-- <div class="header-bar"></div> -->
-<h1
-  id="judul"
-  class="p-6 sm:ml-64 text-left  mb-4 font-bold"
-  style="color: #e55300;  padding-top: 16px; margin-bottom: -4px ; font-size: 32px;"
->
-  Detail Pemohon
-</h1>
+    <!-- <div class="header-bar"></div> -->
+    <h1 id="judul" class="p-6 sm:ml-64 text-left  mb-4 font-bold"
+      style="color: #e55300;  padding-top: 16px; margin-bottom: -4px ; font-size: 32px;">
+      Detail Pemohon
+    </h1>
 
 <div class="modal-container" *ngIf="showConfirmationModalTerima">
   <app-confirmation-modal 
@@ -29,7 +27,7 @@
   <div *ngIf="form" style="padding: 24px; padding-top: 0%;">
    <div class="flex flex-col px-6 pt-6 pb-14 bg-white rounded-xl border border-solid dark:border-gray-700 max-md:px-5">
     
-    <a href="#" class="block p-8 flex-1 flex items-center" style="pointer-events: none;">
+    <a href="#" class="block pb-7 flex-1 flex items-center " style="pointer-events: none;">
       <div class="flex flex-col justify-between">
       <div>
         <h5 id="nama" class="text-xl font-bold tracking-normal leading-6 text-zinc-800">
@@ -37,7 +35,7 @@
         </h5>
         <div class="flex gap-1 mt-2">
           <img id="alamat" src="https://cdn.builder.io/api/v1/image/assets/TEMP/6f97584209bb4e19cde38f704f49cebe787e69b77c2eec4ef56c6320264d07a7?" class="shrink-0 w-5 aspect-square" />
-          <div class="flex-auto">
+          <div class="flex-auto" style="color: #757575;">
             {{ form.alamatKtp }} 
             {{ form.kelurahan }}, 
             {{ form.kecamatan }}, 
@@ -46,7 +44,7 @@
         </div>
         <div class="flex gap-1 mt-2">
           <img id="kantor" loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/d09122466aea09fa7e57204962507c6c35c995a041d6e7c5c729816a253cb76b?" class="shrink-0 w-5 aspect-square" />
-          <div class="flex-auto">Kantor Cabang Terdekat : {{form.formToCabang.nameCabang}}</div>
+          <div class="flex-auto" style="color: #757575;">Kantor Cabang Terdekat : {{form.formToCabang.nameCabang}}</div>
         </div>
       </div>
     </div>
@@ -122,74 +120,79 @@
           <div class="font-bold text-center text-zinc-800" style="width: 100%; padding: 6px 12px;" [ngStyle]="{
               'color': form.statusPengajuan === 'Diterima' ? '#04C300' : '#D4352A'
             }">
-            {{ form.statusPengajuan }}
+                    {{ form.statusPengajuan }}
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="form.statusPengajuan !== 'Diterima' && form.statusPengajuan !== 'Ditolak'">
+                  <div class="font-bold text-center text-zinc-800">Aksi</div>
+                  <!-- Show the 'Diterima' button -->
+                  <button (click)="showConfirmationModalTerima = true"
+                    class="justify-center px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]"
+                    style="width: 100%; padding: 6px 12px; background: #29CC6A;">Diterima</button>
+                  <!-- Show the 'Ditolak' button -->
+                  <button (click)="showConfirmationModalTolak = true"
+                    class="justify-center px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]"
+                    style="width: 100%; padding: 6px 12px;background: #D4352A;">Ditolak</button>
+                </ng-container>
+              </div>
+            </div>
+
+
+
           </div>
-        </ng-container>
-        <ng-container *ngIf="form.statusPengajuan !== 'Diterima' && form.statusPengajuan !== 'Ditolak'">
-          <div class="font-bold text-center text-zinc-800">Aksi</div>
-          <!-- Show the 'Diterima' button -->
-          <button (click)="showConfirmationModalTerima = true" class="justify-center px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]" style="width: 100%; padding: 6px 12px; background: #29CC6A;">Diterima</button>
-          <!-- Show the 'Ditolak' button -->
-          
-          <button (click)="showConfirmationModalTolak = true" class="justify-center px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]" style="width: 100%; padding: 6px 12px;background: #D4352A;">Ditolak</button>
-        </ng-container>
+        </div>
+
+
+        <div *ngIf="showSLIKTable; else noSLIKData">
+          <div
+            class=" bg-white  px-6 pt-6 pb-56 mt-2.5 w-full text-xs leading-5 text-center rounded-xl border border-solid dark:border-gray-700 text-zinc-800 max-md:px-5 max-md:pb-10 max-md:max-w-full">
+            <div class="flex text-xs text-center font-bold text-zinc-800 mb-4">SLIK Debitur</div>
+            <table #slikTable id="slik-debitur" class="w-full text-sm text-left rtl:text-right">
+              <thead class="text-xs text-white bg-orange-400">
+                <tr>
+                  <th scope="col" class="px-3 py-6">Fasilitas</th>
+                  <th scope="col" class="px-3 py-6">Kredit/Pembayaran (Dalam IDR)</th>
+                  <th scope="col" class="px-3 py-6">Irrevocable L/C (Dalam IDR)</th>
+                  <th scope="col" class="px-3 py-6">Fasilitas Lain (Dalam IDR)</th>
+                  <th scope="col" class="px-3 py-6">Total (Dalam IDR)</th>
+                  <th scope="col" class="px-3 py-6">Kualitas Terburuk / Bulan Data</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="bg-orange-50 border-b" *ngFor="let item of slikData">
+                  <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
+                    {{ item.fasilitas }}
+                  </th>
+                  <td class="px-6 py-4">
+                    {{ item.kredit }}
+                  </td>
+                  <td class="px-6 py-4">
+                    {{ item.lc }}
+                  </td>
+                  <td class="px-6 py-4">
+                    {{ item.fasilitasLain }}
+                  </td>
+                  <td class="px-6 py-4">
+                    {{ item.total }}
+                  </td>
+                  <td class="px-6 py-4">
+                    {{ item.kualitas }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <button (click)="downloadSLIK(); showDownloadModal = true"
+              class="flex px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]"
+              style="padding: 6px 12px;">
+              Download SLIK
+            </button>
+          </div>
+        </div>
+        <ng-template #noSLIKData>
+          <div
+            class=" bg-white  px-6 pt-6 pb-56 mt-2.5 w-full text-xs leading-5 text-center rounded-xl border border-solid dark:border-gray-700 text-zinc-800 max-md:px-5 max-md:pb-10 max-md:max-w-full">
+            <div class="flex text-xs text-center font-bold text-zinc-800 mb-4">Detail Keterangan SLIK</div>
+          </div>
+        </ng-template>
       </div>
     </div>
-    
-    
-      
-    </div>
-  </div>
-
-
-  <div *ngIf="showSLIKTable; else noSLIKData" >
-    <div class=" bg-white  px-6 pt-6 pb-56 mt-2.5 w-full text-xs leading-5 text-center rounded-xl border border-solid dark:border-gray-700 text-zinc-800 max-md:px-5 max-md:pb-10 max-md:max-w-full">
-      <div class="flex text-xs text-center font-bold text-zinc-800 mb-4">SLIK Debitur</div>
-      <table #slikTable id="slik-debitur" class="w-full text-sm text-left rtl:text-right">
-        <thead class="text-xs text-white bg-orange-400">
-          <tr>
-            <th scope="col" class="px-3 py-6">Fasilitas</th>
-            <th scope="col" class="px-3 py-6">Kredit/Pembayaran (Dalam IDR)</th>
-            <th scope="col" class="px-3 py-6">Irrevocable L/C (Dalam IDR)</th>
-            <th scope="col" class="px-3 py-6">Fasilitas Lain (Dalam IDR)</th>
-            <th scope="col" class="px-3 py-6">Total (Dalam IDR)</th>
-            <th scope="col" class="px-3 py-6">Kualitas Terburuk / Bulan Data</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="bg-orange-50 border-b" *ngFor="let item of slikData">
-            <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
-              {{ item.fasilitas }}
-            </th>
-            <td class="px-6 py-4">
-              {{ item.kredit }}
-            </td>
-            <td class="px-6 py-4">
-              {{ item.lc }}
-            </td>
-            <td class="px-6 py-4">
-              {{ item.fasilitasLain }}
-            </td>
-            <td class="px-6 py-4">
-              {{ item.total }}
-            </td>
-            <td class="px-6 py-4">
-              {{ item.kualitas }}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <button (click)="downloadSLIK(); showDownloadModal = true" class="flex px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]" style="padding: 6px 12px;">
-        Download SLIK
-      </button>
-  </div> 
-</div>
-<ng-template #noSLIKData>
-  <div class=" bg-white  px-6 pt-6 pb-56 mt-2.5 w-full text-xs leading-5 text-center rounded-xl border border-solid dark:border-gray-700 text-zinc-800 max-md:px-5 max-md:pb-10 max-md:max-w-full">
-    <div class="flex text-xs text-center font-bold text-zinc-800 mb-4">Detail Keterangan SLIK</div>
-  </div>
-</ng-template>
-</div>
-</div>
-
-
