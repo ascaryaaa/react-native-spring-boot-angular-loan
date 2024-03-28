@@ -239,7 +239,7 @@ const DataPemohon = ({ navigation }) => {
               style={{ flexDirection: "row", justifyContent: "space-between" }}
             >
               <View
-                style={{
+                style={{x,
                   flexDirection: "column",
                   // backgroundColor: "red",
                   width: "47%",
@@ -364,7 +364,7 @@ const DataPemohon = ({ navigation }) => {
             />
             {inputErrors.npwp && (
               <Text style={styles.errorText}>
-                Mohon isikan data dengan benar
+                Mohon isikan data dengan benars
               </Text>
             )}
 
@@ -399,7 +399,9 @@ const DataPemohon = ({ navigation }) => {
               >
                 <Text style={styles.sebelumnya}>Sebelumnya</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.button} onPress={taruhData}>
+              <TouchableOpacity style={styles.button} onPress={
+                  taruhData
+                }>
                 <Text
                   style={{
                     alignSelf: "center",
