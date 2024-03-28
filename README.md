@@ -629,6 +629,109 @@ Optionally, prompt the user to confirm the soft delete operation using a modal o
 ```
 With these implementation steps, the soft delete functionality is now fully integrated into the ListPengajuanPinjaman component, providing users with the ability to soft delete forms as needed.
 
+### 3. Fetch Cabang Data
+
+a. API Endpoint Configuration
+
+To fetch branch data, we need to define the API endpoint getCabang in the constants.jsx file.
+
+```jsx
+// constants.jsx
+
+const MAIN_URL = 'https://example.com/api/';
+export const Constant = {
+  getCabang: `${MAIN_URL}cabang/get-cabangs`,
+};
+```
+
+b. Cabang Component Implementation
+
+The Cabang component fetches branch data from the server using an asynchronous thunk and updates the Redux store.
+
+```jsx
+// Cabang.jsx
+
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { fetchCabangData } from "../utils/apiUtils";
+
+// Async thunk to fetch branch data
+export const getCabangData = createAsyncThunk(
+  'cabang/fetchCabangData',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetchCabangData();
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.response);
+    }
+  }
+);
+
+// Initial state for cabang slice
+const initialState = {
+  data: [],
+  loading: false,
+  error: null,
+};
+
+// Cabang slice for managing branch data
+const cabangSlice = createSlice({
+  name: 'cabang',
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(getCabangData.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getCabangData.fulfilled, (state, action) => {
+        state.loading = false;
+        state.data = action.payload;
+      })
+      .addCase(getCabangData.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+  },
+});
+
+// Exporting reducer and selectors
+export default cabangSlice.reducer;
+export const selectCabangData = (state) => state.cabang.data;
+export const selectCabangLoading = (state) => state.cabang.loading;
+export const selectCabangError = (state) => state.cabang.error;
+```
+
+c. Integrate Branch Data into DataPemohon Component
+c1. Import Cabang Component
+
+Import the Cabang component into the DataPemohon component to access branch data.
+
+```
+// DataPemohon.jsx
+
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCabangData } from "../reducers/Cabang";
+```
+
+c2. Fetch Branch Data
+
+Fetch branch data when the DataPemohon component mounts using the getCabangData action.
+
+```jsx
+// DataPemohon.jsx
+
+const cabangState = useSelector((state) => state.cabang);
+const dispatch = useDispatch();
+
+// Fetch cabang data when component mounts
+useEffect(() => {
+  dispatch(getCabangData());
+}, [dispatch]);
+```
+
 
 # Website-Side
 
