@@ -58,9 +58,17 @@ public class DetailPinjamanController {
         detailPinjamanService.softDeleteById(id);
     }
 
+    // GET Function of API, Reads detail pinjaman data from 'pengajuan' database by hashed id
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/hid/{hashedId}")
     public DetailPinjaman getDetailPinjamanByHashedId(@PathVariable String hashedId){
         return detailPinjamanService.getDetailPinjamanByHashedId(hashedId);
+    }
+
+    // GET Function of API, Reads detail pinjaman data from 'pengajuan' database by form id it is related to
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/get-pinjaman-form/{formId}")
+    public DetailPinjaman getDetailPinjamanByFormPengajuanId(@PathVariable Long formId) {
+        return detailPinjamanService.getFormByPinjamanId(formId);
     }
 }

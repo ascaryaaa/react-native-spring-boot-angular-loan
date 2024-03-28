@@ -1,6 +1,7 @@
 package com.cuan.serverside.service;
 
 import com.cuan.serverside.model.DetailPinjaman;
+import com.cuan.serverside.model.FormPengajuan;
 
 public interface DetailPinjamanService {
     // Define GET all detail pinjaman in service
@@ -20,4 +21,6 @@ public interface DetailPinjamanService {
 
     // Define Soft Delete status in form service
     public void softDeleteById(Long id);
+
+    public DetailPinjaman getFormByPinjamanId(Long formId);
 }
