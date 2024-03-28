@@ -13,6 +13,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import ModalDelete from "./ModalDelete";
 import { getAccountByHashedId } from '../reducers/Account';
 import { fetchFormListById, softDeleteForm } from '../reducers/Form';
+import IconDelete from "./svg/IconDelete";
 
 const ListPengajuanPinjaman = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -72,8 +73,13 @@ const ListPengajuanPinjaman = ({ navigation }) => {
                   </View>
                   <View style={styles.infoContainer}>
                     <View style={styles.info}>
-                      <View>
+                      <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: "90%" }}>
                         <Text style={styles.textHeader}>{form.formToJenis.nameJenisPinjaman}</Text>
+                        {form.statusPengajuan === "Ditolak" && ( // Render soft delete button if status is Ditolak
+                          <TouchableOpacity onPress={() => openModal(form.idFormPengajuanPinjaman)}>
+                            <IconDelete style={styles.softDeleteButton}/>
+                          </TouchableOpacity>
+                        )}
                       </View>
                       <Text>Tanggal Pengajuan: {form.tanggalPengajuan}</Text>
                       <Text>Periode Pinjaman: {form.jangkaWaktu} Bulan</Text>
@@ -81,11 +87,6 @@ const ListPengajuanPinjaman = ({ navigation }) => {
                       <View style={[styles.cardStatus, { backgroundColor: form.statusPengajuan === "Ditolak" ? "#D4352A" : "#757575" }]}>
                         <Text style={styles.textStatus}>{form.statusPengajuan}</Text>
                       </View>
-                      {form.statusPengajuan === "Ditolak" && ( // Render soft delete button if status is Ditolak
-                        <TouchableOpacity onPress={() => openModal(form.idFormPengajuanPinjaman)}>
-                          <Text style={styles.softDeleteButton}>Soft Delete</Text>
-                        </TouchableOpacity>
-                      )}
                     </View>
                   </View>
                 </TouchableOpacity>
@@ -109,7 +110,7 @@ export default ListPengajuanPinjaman;
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
+    flex: 1,
     alignItems: "center",
     //backgroundColor: "green"
   },
@@ -125,14 +126,14 @@ const styles = StyleSheet.create({
     //backgroundColor: 'yellow'
   },
   infoContainer: {
-    flexDirection: "column", 
+    flexDirection: "column",
     //backgroundColor: "cyan",
     width: "70%",
   },
   info: {
     //backgroundColor: "orange",
     marginHorizontal: 10,
-    width:"90%",
+    width: "90%",
   },
   shadow: {
     shadowColor: "#ddd",
@@ -168,6 +169,13 @@ const styles = StyleSheet.create({
     width: "35%",
     backgroundColor: "#D4352A",
     alignItems: "center",
-  }
+  },
+  softDeleteButton: {
+    color: "#D4352A",
+    fontSize: 12,
+    fontWeight: "700",
+    width: 100,
+    height: 100,
+    //backgroundColor: 'red'
+  },
 });
-
