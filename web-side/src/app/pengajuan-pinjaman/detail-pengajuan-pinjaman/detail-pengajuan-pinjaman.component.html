@@ -142,7 +142,7 @@
   </div>
 
 
-  <div *ngIf="showSLIKTable" >
+  <div *ngIf="showSLIKTable; else noSLIKData" >
     <div class=" bg-white  px-6 pt-6 pb-56 mt-2.5 w-full text-xs leading-5 text-center rounded-xl border border-solid dark:border-gray-700 text-zinc-800 max-md:px-5 max-md:pb-10 max-md:max-w-full">
       <div class="flex text-xs text-center font-bold text-zinc-800 mb-4">SLIK Debitur</div>
       <table #slikTable id="slik-debitur" class="w-full text-sm text-left rtl:text-right">
@@ -182,11 +182,13 @@
       <button (click)="downloadSLIK(); showDownloadModal = true" class="flex px-3 py-1.5 mt-2.5 text-white bg-cyan-500 rounded-lg leading-[133%]" style="padding: 6px 12px;">
         Download SLIK
       </button>
-  </div>
-  <ng-template #noSLIKData>
-    <div class="flex text-xs text-center font-bold text-zinc-800 mb-4">Detail Keterangan SLIK</div>
-  </ng-template>
+  </div> 
 </div>
+<ng-template #noSLIKData>
+  <div class=" bg-white  px-6 pt-6 pb-56 mt-2.5 w-full text-xs leading-5 text-center rounded-xl border border-solid dark:border-gray-700 text-zinc-800 max-md:px-5 max-md:pb-10 max-md:max-w-full">
+    <div class="flex text-xs text-center font-bold text-zinc-800 mb-4">Detail Keterangan SLIK</div>
+  </div>
+</ng-template>
 </div>
 </div>
 
