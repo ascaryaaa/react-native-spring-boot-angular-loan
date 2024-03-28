@@ -25,31 +25,51 @@
         <div
           class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4"
         >
-        <div class="relative">
-          <label
-            for="status-pengajuan"
-            style="font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: bold; display: block; margin-bottom: 4px;"
-            >Status Pengajuan</label
-          >
-          
-          <select
-            id="status-pengajuan"
-            [(ngModel)]="selectedStatus"
-            (change)="filterByStatus()"
-            class="block p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            style="font-family: 'Montserrat', sans-serif; font-size: 12px"
-          >
-            <!-- <option value="" disabled selected>Pilih Status</option> -->
-            <option value="">Semua</option>
-            <option value="Diterima">Diterima</option>
-            <option value="Ditolak">Ditolak</option>
-            <option value="Diproses">Diproses</option>
-          </select>
+          <div class="relative">
+            <label
+              for="status-pengajuan"
+              style="
+                font-family: 'Montserrat', sans-serif;
+                font-size: 14px;
+                font-weight: bold;
+                display: block;
+                margin-bottom: 4px;
+              "
+              >Status Pengajuan</label
+            >
+            <select
+              id="status-pengajuan"
+              [(ngModel)]="selectedStatus"
+              (change)="filterByStatus()"
+              class="block p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              style="font-family: 'Montserrat', sans-serif; font-size: 12px"
+            >
+              <!-- <option value="" disabled selected>Pilih Status</option> -->
+              <option value="">Semua</option>
+              <option value="Diterima">Diterima</option>
+              <option value="Ditolak">Ditolak</option>
+              <option value="Diproses">Diproses</option>
+            </select>
+          </div>
 
-        
-          
-        </div>
-        
+          <!-- Filter rentang tanggal
+  <div class="relative pr-60">
+    <div style="
+        font-family: 'Montserrat', sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+        display: block;
+        margin-bottom: 4px;
+         margin-right: 8%;
+    ">Rentang Tanggal</div>
+    <div class="flex items-center">
+      <input type="date" id="filter-tanggal" [(ngModel)]="selectedDateRange.start" (change)="filterByDateRange()" class="block p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" style="font-family: 'Montserrat', sans-serif; font-size: 12px" aria-label="Tanggal Awal" />
+      <span class="mx-2" style="font-size: 12px;">-</span>
+      <input type="date" id="filter-tanggal-end" [(ngModel)]="selectedDateRange.end" (change)="filterByDateRange()" class="block p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" style="font-family: 'Montserrat', sans-serif; font-size: 12px" aria-label="Tanggal Akhir" />
+    </div>
+  </div> -->
+
+          <!-- Search -->
           <div class="relative">
             <input
               type="text"
@@ -59,12 +79,14 @@
               (ngModelChange)="search()"
               (keyup.enter)="search()"
               (keyup)="search()"
-              style="font-family: 'Montserrat', sans-serif; font-size: 12px"
-              placeholder="Cari Data Berdasarkan Nama dan NIK"
+              style="
+                font-family: 'Montserrat', sans-serif;
+                font-size: 12px;
+                opacity: 0.5;
+              "
+              placeholder="Cari data berdasarkan CIF, Nama, atau NIK"
             />
-            <div
-              class="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none"
-            >
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3">
               <svg
                 class="w-5 h-5 text-gray-500 dark:text-gray-400"
                 aria-hidden="true"
@@ -82,7 +104,7 @@
           </div>
         </div>
 
-        <!-- // Test -->
+        <!-- // Table -->
         <table
           class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
           style="margin-bottom: 20px"
@@ -255,8 +277,10 @@
         </table>
 
         <!-- Pagination -->
-        <nav class="flex items-center justify-between"
-        style="font-family: 'Montserrat', sans-serif; font-size: 12px">
+        <nav
+          class="flex items-center justify-between"
+          style="font-family: 'Montserrat', sans-serif; font-size: 12px"
+        >
           <div class="flex flex-wrap items-center justify-center">
             <button
               class="px-2 py-1 border border-white-300 rounded-lg mr-2"
@@ -284,12 +308,16 @@
           <div class="flex flex-wrap items-center justify-center mt-2">
             <!-- Pilihan jumlah data per halaman -->
             <select
-              style="background-color: #1f96f9; color: white; font-family: 'Montserrat', sans-serif; font-size: 12px"
+              style="
+                background-color: #1f96f9;
+                color: white;
+                font-family: 'Montserrat', sans-serif;
+                font-size: 12px;
+              "
               class="px-2 py-1 border border-white-300 rounded-lg"
               [(ngModel)]="pageSize"
               (change)="changePageSize()"
               title="Jumlah Data Per Halaman"
-            
             >
               <option value="5">5</option>
               <option value="10">10</option>
