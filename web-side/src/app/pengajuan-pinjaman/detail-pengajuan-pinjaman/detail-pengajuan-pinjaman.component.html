@@ -29,7 +29,7 @@
   <div *ngIf="form" style="padding: 24px; padding-top: 0%;">
    <div class="flex flex-col px-6 pt-6 pb-14 bg-white rounded-xl border border-solid dark:border-gray-700 max-md:px-5">
     
-    <a href="#" class="block p-8 flex-1 flex items-center" style="pointer-events: none;">
+    <a href="#" class="block pb-7 flex-1 flex items-center " style="pointer-events: none;">
       <div class="flex flex-col justify-between">
       <div>
         <h5 id="nama" class="text-xl font-bold tracking-normal leading-6 text-zinc-800">
@@ -37,7 +37,7 @@
         </h5>
         <div class="flex gap-1 mt-2">
           <img id="alamat" src="https://cdn.builder.io/api/v1/image/assets/TEMP/6f97584209bb4e19cde38f704f49cebe787e69b77c2eec4ef56c6320264d07a7?" class="shrink-0 w-5 aspect-square" />
-          <div class="flex-auto">
+          <div class="flex-auto" style="color: #757575;">
             {{ form.alamatKtp }} 
             {{ form.kelurahan }}, 
             {{ form.kecamatan }}, 
@@ -46,7 +46,7 @@
         </div>
         <div class="flex gap-1 mt-2">
           <img id="kantor" loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/d09122466aea09fa7e57204962507c6c35c995a041d6e7c5c729816a253cb76b?" class="shrink-0 w-5 aspect-square" />
-          <div class="flex-auto">Kantor Cabang Terdekat : {{form.formToCabang.nameCabang}}</div>
+          <div class="flex-auto" style="color: #757575;">Kantor Cabang Terdekat : {{form.formToCabang.nameCabang}}</div>
         </div>
       </div>
     </div>
