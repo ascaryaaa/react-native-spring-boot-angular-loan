@@ -8,9 +8,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Image,
-  ActivityIndicator,
 } from "react-native";
-import Buttonjk from "../components/Buttonjk";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import RNPickerSelect from "react-native-picker-select";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -23,15 +21,12 @@ const DataPemohon = ({ navigation }) => {
   const [hashedId, setHashedId] = useState(null);
 
   const [inputData, setInputData] = useState({
-    jenisKelamin: "",
     tempatLahir: "",
-    tanggalLahir: "",
     alamat: "",
     kodePos: "",
     kelurahan: "",
     kecamatan: "",
     npwp: "",
-    alamatBni: "",
   });
 
   const [inputErrors, setInputErrors] = useState({
@@ -50,29 +45,43 @@ const DataPemohon = ({ navigation }) => {
     const errors = {};
     let isValid = true;
     for (const key in inputData) {
-      if (!inputData[key]) {
-        errors[key] = true;
-        isValid = false;
-      }
+      console.log(inputData[key],"<<<<<<<<<<<<<<<<<<<<", key)
+      if (key !== "tanggalLahir" && key !== "jenisKelamin" && key !== "alamatBni") // Extra validation exception for bottom row
+        if (!inputData[key]) {
+          errors[key] = true;
+          isValid = false;
+          console.log(isValid, "11111111/....................................", key)
+        }
     }
     if (!selectedDate) {
       errors["tanggalLahir"] = true;
       isValid = false;
+      console.log(isValid, "22222/....................................")
     } else {
       errors["tanggalLahir"] = false;
+      console.log(isValid, "33333333/....................................")
     }
     if (!selectedBniAddress) {
       errors["alamatBni"] = true;
       isValid = false;
+      console.log(isValid, "444444444/....................................")
     } else {
       errors["alamatBni"] = false;
+      console.log(isValid, "555555555/....................................")
     }
     if (!selectedGender) {
       errors["jenisKelamin"] = true;
       isValid = false;
+      console.log(isValid, "66666666666/....................................")
     } else {
       errors["jenisKelamin"] = false;
+      console.log(isValid, "77777777777/....................................")
     }
+    console.log(isValid, "888888888888/....................................")
+    // console.log(errors["tanggalLahir"],"yoooo")
+    // console.log(errors["alamatBni"], "alamatBni")
+    // console.log(errors["jenisKelamin"], "jenisKelamin")
+    console.log("All the errors: ",errors)
     setInputErrors(errors);
     return isValid;
   };
@@ -90,6 +99,7 @@ const DataPemohon = ({ navigation }) => {
 
   const handleGenderSelect = (option) => {
     setSelectedGender(option);
+    // console.log(typeof(selectedGender))
   };
 
   const handleBniAddressChange = (value) => {
@@ -109,41 +119,45 @@ const DataPemohon = ({ navigation }) => {
     const month = String(date.getMonth() + 1).padStart(2, "0"); // Menambahkan '0' di depan jika hanya satu digit
     const day = String(date.getDate()).padStart(2, "0"); // Menambahkan '0' di depan jika hanya satu digit
 
-    setSelectedDate(`${year}/${month}/${day}`);
+    setSelectedDate(`${year}-${month}-${day}`);
     hideDatePicker();
+    // console.log(selectedDate)
   };
 
   const taruhData = async () => {
+    console.log(validateInputs())
     if (validateInputs()) {
+      
       try {
-        await AsyncStorage.setItem('jenisKelamin',String(inputData.jenisKelamin));
+        await AsyncStorage.setItem('jenisKelamin',selectedGender);
         AsyncStorage.setItem('tempatLahir',String(inputData.tempatLahir));
-        AsyncStorage.setItem('tanggalLahir',String(inputData.tanggalLahir));
+        AsyncStorage.setItem('tanggalLahir',selectedDate);
         AsyncStorage.setItem('alamat',String(inputData.alamat));
         AsyncStorage.setItem('kodePos',String(inputData.kodePos));
         AsyncStorage.setItem('kelurahan',String(inputData.kelurahan));
         AsyncStorage.setItem('kecamatan',String(inputData.kecamatan));
         AsyncStorage.setItem('npwp',String(inputData.npwp));
-        AsyncStorage.setItem('alamatBni',String(inputData.alamatBni));
+        AsyncStorage.setItem('alamatBni',selectedBniAddress);
+
 
         const savedData = await AsyncStorage.getItem('jenisKelamin');
-        console.log(JSON.parse(savedData));
+        console.log(savedData);
         const savedData1 = await AsyncStorage.getItem('tempatLahir');
-        console.log(JSON.parse(savedData1));
+        console.log(savedData1);
         const savedData2 = await AsyncStorage.getItem('tanggalLahir');
-        console.log(JSON.parse(savedData2));
+        console.log(savedData2);
         const savedData3 = await AsyncStorage.getItem('alamat');
-        console.log(JSON.parse(savedData3));
+        console.log(savedData3);
         const savedData4 = await AsyncStorage.getItem('kodePos');
-        console.log(JSON.parse(savedData4));
+        console.log(savedData4);
         const savedData5 = await AsyncStorage.getItem('kelurahan');
-        console.log(JSON.parse(savedData5));
+        console.log(savedData5);
         const savedData6 = await AsyncStorage.getItem('kecamatan');
-        console.log(JSON.parse(savedData6));
+        console.log(savedData6);
         const savedData7 = await AsyncStorage.getItem('npwp');
-        console.log(JSON.parse(savedData7));
+        console.log(savedData7);
         const savedData8 = await AsyncStorage.getItem('alamatBni');
-        console.log(JSON.parse(savedData8));
+        console.log(savedData8);
         navigation.navigate("KetentuanGriya")
       } catch (error) {
         console.error('Failed to save or retrieve the data from AsyncStorage', error);
@@ -239,7 +253,7 @@ const DataPemohon = ({ navigation }) => {
               style={{ flexDirection: "row", justifyContent: "space-between" }}
             >
               <View
-                style={{x,
+                style={{
                   flexDirection: "column",
                   // backgroundColor: "red",
                   width: "47%",
@@ -522,10 +536,6 @@ const styles = StyleSheet.create({
     paddingTop: 8,
     color: "white",
     fontWeight: "900",
-  },
-  inputError: {
-    borderColor: "red",
-    marginBottom: 8,
   },
   errorText: {
     color: "red",
