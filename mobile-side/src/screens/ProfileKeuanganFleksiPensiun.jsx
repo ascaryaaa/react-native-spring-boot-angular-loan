@@ -9,6 +9,8 @@ import {
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import BackNavbar from "../components/svg/BackNavbar";
+import HomeNavbar from "../components/svg/HomeNavbar";
 
 const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
   const [inputData, setInputData] = useState({
@@ -171,22 +173,15 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
       <View style={styles.shadow}>
         <View style={styles.navbar}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Image
-              source={require("../../../mobile-side/src/assets/Icon_leftarrow.png")}
-            />
+            <BackNavbar />
           </TouchableOpacity>
           <Text style={{ fontSize: 16 }}>Digital Loan</Text>
-          <Image
-            source={require("../../../mobile-side/src/assets/Icon_homeorg.png")}
-          />
+          <HomeNavbar></HomeNavbar>
         </View>
       </View>
       <View style={styles.container}>
         <ScrollView>
-          <Text style={{ fontWeight: "600", fontSize: 16, marginBottom: 16 }}>
-            Profil Keuangan
-          </Text>
-
+          <Text style={styles.title}>Profil Keuangan</Text>
           <Text style={styles.text}>Penghasilan Bersih per. Bulan</Text>
           <TextInput
             style={[styles.input, inputErrors.penghasilan && styles.inputError]}
@@ -205,22 +200,28 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
           )}
 
           <Text style={styles.text}>Jangka Waktu</Text>
-          <TextInput
-            style={[styles.input, inputErrors.jangkaWaktu && styles.inputError]}
-            value={inputData.jangkaWaktu}
-            keyboardType="numeric"
-            placeholder={inputData.jangkaWaktu.toString()}
-            editable={false}
-            onChangeText={(number) =>
-              setInputData({ ...inputData, jangkaWaktu: number })
-            }
-          />
-          {inputErrors.jangkaWaktu && (
-            <Text style={styles.errorText}>Field ini wajib diisi</Text>
-          )}
-          <Text style={{ fontSize: 10, marginBottom: 16 }}>
-            *Maksimal 180 Bulan
-          </Text>
+          <View>
+            <TextInput
+              style={[
+                styles.input2,
+                inputErrors.jangkaWaktu && styles.inputError,
+              ]}
+              value={inputData.jangkaWaktu}
+              keyboardType="numeric"
+              placeholder={inputData.jangkaWaktu.toString()}
+              editable={false}
+              onChangeText={(number) =>
+                setInputData({ ...inputData, jangkaWaktu: number })
+              }
+            />
+            {inputErrors.jangkaWaktu && (
+              <Text style={styles.errorText}>Field ini wajib diisi</Text>
+            )}
+            <Text style={{ fontSize: 10, marginBottom: 10 }}>
+              *Maksimal 180 Bulan
+            </Text>
+          </View>
+
           <Text style={styles.text}>Jumlah Pinjaman yang Diajukan</Text>
           <TextInput
             style={[
@@ -252,39 +253,45 @@ const ProfileKeuanganFleksiPensiun = ({ navigation }) => {
             placeholderTextColor="gray"
             editable={false}
           />
-          <View style={styles.container1}>
+          <View>
             {!hidedButton && (
               <TouchableOpacity onPress={handleNext} style={styles.button}>
-                <Text style={styles.textButton}>Simulasi Angsuran</Text>
+                <Text style={styles.textButton}>Simulasikan</Text>
               </TouchableOpacity>
             )}
             {isDropdownOpen && (
-              <View style={styles.dropdownContent}>
-                <Text style={[styles.text, { marginBottom: 8 }]}>Hasil</Text>
-                {data.map((view) => (
-                  <View key={view.id} style={styles.row}>
-                    <Text
-                      style={{
-                        flex: 1,
-                        textAlign: "left",
-                        fontWeight: "300",
-                        fontSize: 12,
-                      }}
-                    >
-                      {view.title}
-                    </Text>
-                    <Text
-                      style={{
-                        flex: 1,
-                        textAlign: "right",
-                        fontWeight: "600",
-                        fontSize: 12,
-                      }}
-                    >
-                      {view.content}
-                    </Text>
+              <View style={styles.show}>
+                <View style={styles.tableShadow}>
+                  <View style={styles.dropdownContent}>
+                    <Text style={styles.textTable}>Hasil</Text>
+                    {data.map((view) => (
+                      <View key={view.id} style={styles.row}>
+                        <View style={{ width: "60%" }}>
+                          <Text
+                            style={{
+                              flex: 1,
+                              textAlign: "left",
+                              fontWeight: "300",
+                              fontSize: 12,
+                            }}
+                          >
+                            {view.title}
+                          </Text>
+                        </View>
+                        <Text
+                          style={{
+                            flex: 1,
+                            textAlign: "right",
+                            fontWeight: "600",
+                            fontSize: 14,
+                          }}
+                        >
+                          {view.content}
+                        </Text>
+                      </View>
+                    ))}
                   </View>
-                ))}
+                </View>
                 <Text
                   style={{
                     fontWeight: "300",
@@ -324,35 +331,49 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 16,
   },
-  container1: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
   button: {
-    padding: 5,
-    margin: 5,
-    alignSelf: "flex-end",
-    marginLeft: 80,
-    backgroundColor: "#18C1CD",
+    paddingVertical: 8,
+    paddingHorizontal: 12,
     justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
     borderRadius: 20,
-    width: 160,
-    height: 44,
-    marginTop: 10,
+    backgroundColor: "#18C1CD",
+    alignSelf: "flex-end",
+    width: "40%",
+    marginBottom: 16,
+    marginTop: 16,
   },
   button1: {
     marginTop: 10,
+    marginBottom: 30,
     backgroundColor: "#18C1CD",
     borderRadius: 20,
     width: "100%",
     height: 44,
+  },
+  title: {
+    fontWeight: "600",
+    marginTop: 24,
+    marginBottom: 20,
+    fontSize: 18,
   },
   input: {
     width: "100%",
     height: 40,
     borderWidth: 1,
-    marginTop: 8,
+    marginTop: 10,
     marginBottom: 16,
+    paddingHorizontal: 10,
+    borderRadius: 8,
+    borderColor: "#1394AD",
+    borderWidth: 1,
+  },
+  input2: {
+    width: "100%",
+    height: 40,
+    borderWidth: 1,
+    marginTop: 10,
     paddingHorizontal: 10,
     borderRadius: 8,
     borderColor: "#1394AD",
@@ -363,28 +384,43 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   dropdownContent: {
-    // backgroundColor: "rgba(0, 0, 0, 0.1)",
     padding: 10,
     marginTop: 10,
     width: "100%",
-    borderWidth: 1,
   },
   textButton: {
     alignSelf: "center",
-    justifyContent: "center",
-    textAlign: "center",
     color: "white",
-    fontWeight: "700",
-    fontSize: 14,
+    fontWeight: "800",
   },
   text: {
     fontWeight: "700",
   },
   row: {
     flexDirection: "row",
-    borderColor: "#000",
-    marginBottom: 20,
-    justifyContent: "space-between",
+    marginBottom: 15,
+    justifyContent: "space-around",
+  },
+  show: {
+    paddingHorizontal: 4,
+    // backgroundColor: "red",
+  },
+  tableShadow: {
+    backgroundColor: "white",
+    // marginBottom: 16,
+    padding: 4,
+    borderRadius: 5,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+  },
+  textTable: {
+    fontWeight: "700",
+    paddingBottom: 8,
   },
   shadow: {
     shadowColor: "#ddd",
@@ -407,7 +443,7 @@ const styles = StyleSheet.create({
     padding: 12,
     width: "100%",
     backgroundColor: "#FFF",
-    marginBottom: 24,
+    // marginBottom: 24,
   },
   errorText: {
     color: "red",
